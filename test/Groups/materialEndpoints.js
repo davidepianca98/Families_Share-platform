@@ -79,3 +79,77 @@ describe('/Get/api/groups/id/materialOffers', () => {
     })
   })
 })
+
+describe('/Post/api/groups/id/materialRequests', () => {
+  it('it should post a new material request when user is authenticated and group member', done => {
+    User.findOne({ email: 'test@email.com' }, (error, user) => {
+      Group.findOne({ name: 'Test Group Edit' }, (err, group) => {
+        const materialRequest = {
+          material_name: 'PlayStation'
+        }
+        chai
+          .request(server)
+          .post(`/api/groups/${group.group_id}/activities`)
+          .set('Authorization', user.token)
+          .send(materialRequest)
+          .end((err, res) => {
+            res.should.have.status(200)
+            done()
+          })
+      })
+    })
+  })
+})
+
+describe('/Get/api/groups/id/materialRequests', () => {
+  it('it should fetch a groups material requests when user is authenticated and group member', done => {
+    User.findOne({ email: 'test@email.com' }, (error, user) => {
+      Group.findOne({ name: 'Test Group Edit' }, (err, group) => {
+        chai
+          .request(server)
+          .get(`/api/groups/${group.group_id}/materialRequests`)
+          .set('Authorization', user.token)
+          .end((err, res) => {
+            res.should.have.status(200)
+            res.body.should.be.a('array').with.lengthOf(1)
+            done()
+          })
+      })
+    })
+  })
+})
+
+describe('/Get/api/groups/id/materialRequests', () => {
+  it('it should fetch a groups material requests filtered by keywords when user is authenticated and group member', done => {
+    User.findOne({ email: 'test@email.com' }, (error, user) => {
+      Group.findOne({ name: 'Test Group Edit' }, (err, group) => {
+        chai
+          .request(server)
+          .get(`/api/groups/${group.group_id}/materialRequests?filter=Play`)
+          .set('Authorization', user.token)
+          .end((err, res) => {
+            res.should.have.status(200)
+            res.body.should.be.a('array').with.lengthOf(1)
+            done()
+          })
+      })
+    })
+  })
+})
+
+describe('/Get/api/groups/id/materialRequests', () => {
+  it('it should fail fetching a groups material requests filtered by keywords when user is authenticated and group member', done => {
+    User.findOne({ email: 'test@email.com' }, (error, user) => {
+      Group.findOne({ name: 'Test Group Edit' }, (err, group) => {
+        chai
+          .request(server)
+          .get(`/api/groups/${group.group_id}/materialRequests?filter=Xbox`)
+          .set('Authorization', user.token)
+          .end((err, res) => {
+            res.should.have.status(404)
+            done()
+          })
+      })
+    })
+  })
+})
