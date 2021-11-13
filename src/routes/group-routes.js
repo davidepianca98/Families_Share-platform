@@ -1906,7 +1906,7 @@ router.get('/:id/materialOffers', (req, res, next) => {
   // Get query params
   let filter = req.query.filter
   if (filter === undefined) {
-    filter = '*'
+    filter = ''
   }
   // Get user id from the cookie
   const user_id = req.user_id
@@ -1946,7 +1946,7 @@ router.post('/:id/materialOffers', async (req, res, next) => {
   const user_id = req.user_id
   const group_id = req.params.id
   try {
-    const { materialOffer } = req.body
+    const materialOffer = req.body
     const member = await Member.findOne({
       group_id,
       user_id,
@@ -1965,7 +1965,7 @@ router.post('/:id/materialOffers', async (req, res, next) => {
 
     await MaterialOffer.create(materialOffer)
 
-    res.json({ materialOffer: materialOffer })
+    res.json(materialOffer)
   } catch (error) {
     next(error)
   }
@@ -1981,7 +1981,7 @@ router.get('/:id/materialRequests', (req, res, next) => {
   // Get query params
   let filter = req.query.filter
   if (filter === undefined) {
-    filter = '*'
+    filter = ''
   }
   // Get user id from the cookie
   const user_id = req.user_id
@@ -2021,7 +2021,7 @@ router.post('/:id/materialRequests', async (req, res, next) => {
   const user_id = req.user_id
   const group_id = req.params.id
   try {
-    const { materialRequest } = req.body
+    const materialRequest = req.body
     const member = await Member.findOne({
       group_id,
       user_id,
@@ -2040,7 +2040,7 @@ router.post('/:id/materialRequests', async (req, res, next) => {
 
     await MaterialRequest.create(materialRequest)
 
-    res.json({ materialRequest: materialRequest })
+    res.json(materialRequest)
   } catch (error) {
     next(error)
   }

@@ -15,8 +15,7 @@ const materialRequestSchema = new mongoose.Schema({
     required: true
   },
   satisfied_by: {
-    type: String,
-    required: true
+    type: String
   },
   group_id: {
     type: String,

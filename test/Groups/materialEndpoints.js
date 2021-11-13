@@ -15,7 +15,7 @@ describe('/Post/api/groups/id/materialOffers', () => {
         }
         chai
           .request(server)
-          .post(`/api/groups/${group.group_id}/activities`)
+          .post(`/api/groups/${group.group_id}/materialOffers`)
           .set('Authorization', user.token)
           .send(materialOffer)
           .end((err, res) => {
@@ -89,7 +89,7 @@ describe('/Post/api/groups/id/materialRequests', () => {
         }
         chai
           .request(server)
-          .post(`/api/groups/${group.group_id}/activities`)
+          .post(`/api/groups/${group.group_id}/materialRequests`)
           .set('Authorization', user.token)
           .send(materialRequest)
           .end((err, res) => {
