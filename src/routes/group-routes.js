@@ -1902,6 +1902,11 @@ router.get('/:id/materialOffers', (req, res, next) => {
   }
   // Get url params
   const group_id = req.params.id
+  // Get query params
+  let filter = req.query.filter
+  if (filter === undefined) {
+    filter = '*'
+  }
   // Get user id from the cookie
   const user_id = req.user_id
 
@@ -1919,7 +1924,7 @@ router.get('/:id/materialOffers', (req, res, next) => {
       }
 
       // Get all the offers from this group
-      return MaterialOffer.find({ group_id })
+      return MaterialOffer.find({ group_id: group_id, material_name: { $regex: '.*' + filter + '.*', $options: 'i' } })
         .sort({ createdAt: -1 }) // sort by descending date
         .lean() // remove Mongoose info
         .exec()
@@ -1940,7 +1945,7 @@ router.post('/:id/materialOffers', async (req, res, next) => {
   const user_id = req.user_id
   const group_id = req.params.id
   try {
-    const materialOffer = req.body
+    const { materialOffer } = req.body
     const member = await Member.findOne({
       group_id,
       user_id,

@@ -207,7 +207,7 @@ const initializeDB = async () => {
   }
   await chai.request(server).post(`/api/users/${user.user_id}/children`).send(child).set('Authorization', user.token)
   const materialOffer = {
-    material_name: 'Test'
+    material_name: 'PlayStation'
   }
   await chai.request(server).post(`/api/groups/${group.group_id}/materialOffers`).send(materialOffer).set('Authorization', user.token)
 }
