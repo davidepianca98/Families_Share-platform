@@ -77,7 +77,7 @@ profileSchema.post('find', (profiles, next) => {
 profileSchema.post('findOne', (profile, next) => {
   if (profile !== null) {
     if (profile.suspended) {
-      if (profile.image !== null) {
+      if (profile.image !== null && profile.image !== undefined) {
         profile.image.path = '/images/profiles/user_default_photo.png'
         profile.image.thumbnail_path = '/images/profiles/user_default_photo.png'
       }

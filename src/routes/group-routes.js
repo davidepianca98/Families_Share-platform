@@ -102,6 +102,7 @@ const Child = require('../models/child')
 const Profile = require('../models/profile')
 const Community = require('../models/community')
 const User = require('../models/user')
+const MaterialOffer = require('../models/material-offer')
 
 router.get('/', (req, res, next) => {
   if (!req.user_id) return res.status(401).send('Not authenticated')
@@ -1893,5 +1894,75 @@ router.delete(
     }
   }
 )
+
+router.get('/:id/materialOffers', (req, res, next) => {
+  // Check authentication
+  if (!req.user_id) {
+    return res.status(401).send('Not authenticated')
+  }
+  // Get url params
+  const group_id = req.params.id
+  // Get user id from the cookie
+  const user_id = req.user_id
+
+  // Check if current user is a member of the group
+  Member.findOne({
+    group_id,
+    user_id,
+    group_accepted: true,
+    user_accepted: true
+  })
+    .then(member => {
+      // If member is not valid
+      if (!member) {
+        return res.status(401).send('Unauthorized')
+      }
+
+      // Get all the offers from this group
+      return MaterialOffer.find({ group_id })
+        .sort({ createdAt: -1 }) // sort by descending date
+        .lean() // remove Mongoose info
+        .exec()
+        .then(offers => {
+          if (offers.length === 0) {
+            return res.status(404).send('Group has no activities')
+          }
+          res.json(offers) // Send back the response
+        })
+    })
+    .catch(next)
+})
+
+router.post('/:id/materialOffers', async (req, res, next) => {
+  if (!req.user_id) {
+    return res.status(401).send('Not authenticated')
+  }
+  const user_id = req.user_id
+  const group_id = req.params.id
+  try {
+    const materialOffer = req.body
+    const member = await Member.findOne({
+      group_id,
+      user_id,
+      group_accepted: true,
+      user_accepted: true
+    })
+    if (!member) {
+      return res.status(401).send('Unauthorized')
+    }
+    if (!materialOffer) {
+      return res.status(400).send('Bad Request')
+    }
+    materialOffer.material_offer_id = objectid()
+    materialOffer.group_id = group_id
+    materialOffer.created_by = user_id
+
+    await MaterialOffer.create(materialOffer)
+
+    res.json({ materialOffer: materialOffer })
+  } catch (error) {
+    next(error)
+  }
+})
 
 module.exports = router

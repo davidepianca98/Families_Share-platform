@@ -19,6 +19,7 @@ const Child = require('../src/models/child')
 const Activity = require('../src/models/activity')
 const Announcement = require('../src/models/announcement')
 const Reply = require('../src/models/reply')
+const MaterialOffers = require('../src/models/material-offer')
 
 const importTest = (name, path) => {
   describe(name, () => {
@@ -205,6 +206,10 @@ const initializeDB = async () => {
     image: '/images/profiles/child_default_photo.jpg'
   }
   await chai.request(server).post(`/api/users/${user.user_id}/children`).send(child).set('Authorization', user.token)
+  const materialOffer = {
+    material_name: 'Test'
+  }
+  await chai.request(server).post(`/api/groups/${group.group_id}/materialOffers`).send(materialOffer).set('Authorization', user.token)
 }
 describe('Test', () => {
   before('Initializing DB', async () => {
@@ -219,6 +224,7 @@ describe('Test', () => {
   importTest('Group Members Endpoints Test', './Groups/memberEndpoints')
   importTest('Group Various Endpoints Test', './Groups/variousEndpoints')
   importTest('Group Various Endpoints Test', './Groups/activityEndpoints')
+  importTest('Group Material Endpoints Test', './Groups/materialEndpoints')
   importTest('Group Announcement Endpoints Test', './Groups/announcementEndpoints')
   importTest('User Various Endpoints Test', './Users/variousEndpoints')
   importTest('Child Endpoints Test', './Children/childEndpoints')
@@ -242,5 +248,6 @@ describe('Test', () => {
     await Activity.deleteMany({})
     await Reply.deleteMany({})
     await Announcement.deleteMany({})
+    await MaterialOffers.deleteMany({})
   })
 })
