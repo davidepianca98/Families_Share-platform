@@ -10,6 +10,7 @@ import ActivityListItem from "./ActivityListItem";
 import PlanListItem from "./PlanListItem";
 import ConfirmDialog from "./ConfirmDialog";
 import Log from "./Log";
+import { Button } from "@material-ui/core";
 
 const styles = {
   add: {
@@ -22,7 +23,7 @@ const styles = {
     border: "solid 0.5px #999",
     backgroundColor: "#ff6f00",
     zIndex: 100,
-    fontSize: "2rem"
+    fontSize: "2rem",
   },
   addPlan: {
     right: "0.5rem",
@@ -32,7 +33,7 @@ const styles = {
     border: "solid 0.5px #999",
     backgroundColor: "#ff6f00",
     zIndex: 100,
-    fontSize: "2rem"
+    fontSize: "2rem",
   },
   addActivity: {
     right: "0.5rem",
@@ -42,29 +43,29 @@ const styles = {
     border: "solid 0.5px #999",
     backgroundColor: "#ff6f00",
     zIndex: 100,
-    fontSize: "2rem"
-  }
+    fontSize: "2rem",
+  },
 };
 
-const fetchActivites = groupId => {
+const fetchActivites = (groupId) => {
   return axios
     .get(`/api/groups/${groupId}/activities`)
-    .then(response => {
+    .then((response) => {
       return response.data;
     })
-    .catch(error => {
+    .catch((error) => {
       Log.error(error);
       return [];
     });
 };
 
-const fetchPlans = groupId => {
+const fetchPlans = (groupId) => {
   return axios
     .get(`/api/groups/${groupId}/plans`)
-    .then(response => {
+    .then((response) => {
       return response.data;
     })
-    .catch(error => {
+    .catch((error) => {
       Log.error(error);
       return [];
     });
@@ -78,7 +79,7 @@ class GroupActivities extends React.Component {
       group,
       showAddOptions: false,
       fetchedData: false,
-      optionsModalIsOpen: false
+      optionsModalIsOpen: false,
     };
   }
 
@@ -88,7 +89,7 @@ class GroupActivities extends React.Component {
     const activities = await fetchActivites(groupId);
     const plans = await fetchPlans(groupId);
     const acceptedActivities = activities.filter(
-      activity => activity.status === "accepted"
+      (activity) => activity.status === "accepted"
     );
     const pendingActivities = activities.length - acceptedActivities.length;
     this.setState({
@@ -96,14 +97,14 @@ class GroupActivities extends React.Component {
       fetchedData: true,
       activities: acceptedActivities,
       pendingActivities,
-      plans
+      plans,
     });
   }
 
-  add = type => {
+  add = (type) => {
     const { history } = this.props;
     const {
-      group: { group_id: groupId }
+      group: { group_id: groupId },
     } = this.state;
     const path = `/groups/${groupId}/${type}/create`;
     history.push(path);
@@ -156,10 +157,10 @@ class GroupActivities extends React.Component {
     this.setState({ optionsModalIsOpen: false });
     axios
       .post(`/api/groups/${groupId}/agenda/export`)
-      .then(response => {
+      .then((response) => {
         Log.info(response);
       })
-      .catch(error => {
+      .catch((error) => {
         Log.error(error);
       });
   };
@@ -175,7 +176,7 @@ class GroupActivities extends React.Component {
     this.setState({ confirmDialogIsOpen: true, optionsModalIsOpen: false });
   };
 
-  handleConfirmDialogClose = choice => {
+  handleConfirmDialogClose = (choice) => {
     if (choice === "agree") {
       this.handleExport();
     }
@@ -191,7 +192,7 @@ class GroupActivities extends React.Component {
       pendingActivities,
       showAddOptions,
       fetchedData,
-      plans
+      plans,
     } = this.state;
     const { name } = group;
     const texts = Texts[language].groupActivities;
@@ -199,8 +200,8 @@ class GroupActivities extends React.Component {
       {
         label: texts.export,
         style: "optionsModalButton",
-        handle: this.handleConfirmDialogOpen
-      }
+        handle: this.handleConfirmDialogOpen,
+      },
     ];
     return (
       <div style={{ paddingBottom: "6rem" }}>
@@ -260,7 +261,7 @@ class GroupActivities extends React.Component {
             bottom: "8rem",
             right: "7%",
             zIndex: 100,
-            position: "fixed"
+            position: "fixed",
           }}
         >
           <Fab
@@ -283,7 +284,7 @@ class GroupActivities extends React.Component {
                 right: "7%",
                 zIndex: 100,
                 position: "fixed",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <div className=" activitiesFabLabel">{texts.newActivity}</div>
@@ -303,7 +304,7 @@ class GroupActivities extends React.Component {
                 zIndex: 100,
                 position: "fixed",
                 right: "7%",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <div className=" activitiesFabLabel">{texts.newPlan}</div>
@@ -318,6 +319,17 @@ class GroupActivities extends React.Component {
             </div>
           </React.Fragment>
         )}
+        {/* materials offer and request button */}
+        <div id="groupMaterialsContainer" className="horizontalCenter">
+          {/* il testo andrebbe scritto nella veriabile texts*/}
+          <h1 className="">Prestito e offerta materiali</h1>
+          <div className="text-center">
+            <Button variant="contained" color="primary">
+              Offerta e richiesta materiali
+            </Button>
+          </div>
+        </div>
+        {/* END materials offer and request button */}
         <div style={{ paddingBottom: "6rem" }}>
           {fetchedData && (
             <div id="groupActivitiesContainer" className="horizontalCenter">
@@ -342,7 +354,7 @@ GroupActivities.propTypes = {
   userIsAdmin: PropTypes.bool,
   classes: PropTypes.object,
   language: PropTypes.string,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 export default withStyles(styles)(withLanguage(GroupActivities));
