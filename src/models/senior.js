@@ -11,10 +11,6 @@ const seniorSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    family_name: {
-      type: String,
-      required: true
-    },
     gender: {
       type: String,
       required: true
@@ -23,13 +19,31 @@ const seniorSchema = new mongoose.Schema(
       type: Date,
       required: true
     },
-    special_needs: String,
-    other_info: String
+    image_id: {
+      type: String,
+      required: true
+    },
+    background: {
+      type: String,
+      required: true
+    },
+    other_info: String,
+    user_id: {
+      type: String,
+      required: true
+    }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
 
+seniorSchema.virtual('image', {
+  ref: 'Image',
+  localField: 'image_id',
+  foreignField: 'image_id',
+  justOne: true
+})
+
 mongoose.pluralize(null)
-const model = mongoose.model('senior', seniorSchema)
+const model = mongoose.model('Senior', seniorSchema)
 
 module.exports = model

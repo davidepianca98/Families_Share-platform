@@ -40,10 +40,10 @@ const transporter = nodemailer.createTransport({
 })
 
 const profileStorage = multer.diskStorage({
-  destination(req, file, cb) {
+  destination (req, file, cb) {
     cb(null, path.join(__dirname, '../../images/profiles'))
   },
-  filename(req, file, cb) {
+  filename (req, file, cb) {
     fr(path.join(__dirname, '../../images/profiles'), { prefix: req.params.id })
     cb(null, `${req.params.id}-${Date.now()}.${file.mimetype.slice(file.mimetype.indexOf('/') + 1, file.mimetype.length)}`)
   }
@@ -51,10 +51,10 @@ const profileStorage = multer.diskStorage({
 const profileUpload = multer({ storage: profileStorage, limits: { fieldSize: 52428800 } })
 
 const childProfileStorage = multer.diskStorage({
-  destination(req, file, cb) {
+  destination (req, file, cb) {
     cb(null, path.join(__dirname, '../../images/profiles'))
   },
-  filename(req, file, cb) {
+  filename (req, file, cb) {
     fr(path.join(__dirname, '../../images/profiles'), { prefix: req.params.childId })
     cb(null, `${req.params.childId}-${Date.now()}.${file.mimetype.slice(file.mimetype.indexOf('/') + 1, file.mimetype.length)}`)
   }
@@ -77,6 +77,7 @@ const Password_Reset = require('../models/password-reset')
 const Device = require('../models/device')
 const Rating = require('../models/rating')
 const Community = require('../models/community')
+const Senior = require('../models/senior')
 
 router.post('/', async (req, res, next) => {
   const {
@@ -1063,8 +1064,6 @@ router.delete('/:userId/children/:childId/parents/:parentId', (req, res, next) =
   }).catch(next)
 })
 
-module.exports = router
-
 router.post('/:userId/sendmenotification', async (req, res, next) => {
   try {
     const devices = await Device.find({ user_id: req.params.userId })
@@ -1100,3 +1099,65 @@ router.post('/:userId/sendmenotification', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:userId/seniors', (req, res, next) => {
+  if (!req.user_id || req.user_id !== req.params.userId) {
+    return res.status(401).send('Not authenticated')
+  }
+
+  Senior.find({ user_id: req.user_id }).exec().then(seniors => {
+    if (seniors.length === 0) {
+      return res.status(404).send('User has no senior associated')
+    }
+    res.json(seniors)
+  }).catch(next)
+})
+
+router.post('/:userId/seniors', async (req, res, next) => {
+  if (!req.user_id || req.user_id !== req.params.userId) {
+    return res.status(401).send('Not authenticated')
+  }
+
+  const senior = req.body
+  const { file } = req
+  if (!(senior.birthdate && senior.given_name && senior.gender && senior.background)) {
+    return res.status(400).send('Bad Request')
+  }
+  senior.senior_id = objectid()
+  senior.user_id = req.user_id
+
+  const image_id = objectid()
+  const image = {
+    image_id,
+    owner_type: 'senior',
+    owner_id: senior.senior_id
+  }
+
+  if (file) {
+    const fileName = file.filename.split('.')
+    image.path = `/images/profiles/${file.filename}`
+    image.thumbnail_path = `/images/profiles/${fileName[0]}_t.${fileName[1]}`
+    await sharp(path.join(__dirname, `../../images/profiles/${file.filename}`))
+      .resize({
+        height: 200,
+        fit: sharp.fit.cover
+      })
+      .toFile(path.join(__dirname, `../../images/profiles/${fileName[0]}_t.${fileName[1]}`))
+  } else {
+    image.path = senior.image
+    image.thumbnail_path = senior.image
+  }
+  senior.image_id = image_id
+
+  delete senior.image
+
+  try {
+    await Image.create(image)
+    await Senior.create(senior)
+    res.status(200).send(senior)
+  } catch (error) {
+    next(error)
+  }
+})
+
+module.exports = router

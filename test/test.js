@@ -21,6 +21,7 @@ const Announcement = require('../src/models/announcement')
 const Reply = require('../src/models/reply')
 const MaterialOffers = require('../src/models/material-offer')
 const MaterialRequests = require('../src/models/material-request')
+const Senior = require('../src/models/senior')
 
 const importTest = (name, path) => {
   describe(name, () => {
@@ -225,6 +226,7 @@ describe('Test', () => {
   importTest('Group Material Endpoints Test', './Groups/materialEndpoints')
   importTest('Material Requests Endpoints Test', './Materials/materialRequestEndpoints')
   importTest('User Various Endpoints Test', './Users/variousEndpoints')
+  importTest('Senior Endpoints Test', './Users/seniorEndpoints')
   importTest('Child Endpoints Test', './Children/childEndpoints')
   importTest('Profile Endpoints Test', './Profiles/profileEndpoints')
   importTest('Community Endpoints Test', './Community/communityEndpoints')
@@ -248,5 +250,6 @@ describe('Test', () => {
     await Announcement.deleteMany({})
     await MaterialOffers.deleteMany({})
     await MaterialRequests.deleteMany({})
+    await Senior.deleteMany({})
   })
 })
