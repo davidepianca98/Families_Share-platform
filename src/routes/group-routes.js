@@ -104,6 +104,7 @@ const Community = require('../models/community')
 const User = require('../models/user')
 const MaterialOffer = require('../models/material-offer')
 const MaterialRequest = require('../models/material-request')
+const Senior = require('../models/senior')
 
 router.get('/', (req, res, next) => {
   if (!req.user_id) return res.status(401).send('Not authenticated')
@@ -1508,6 +1509,25 @@ router.patch(
       const oldChildren = JSON.parse(event.data.extendedProperties.shared.children)
       const parents = JSON.parse(extendedProperties.shared.parents)
       const children = JSON.parse(extendedProperties.shared.children)
+      const seniors = JSON.parse(extendedProperties.shared.seniors || '[]')
+
+      // Check if seniors are available during the timeslot
+      for (let senior of seniors) {
+        let s = await Senior.findOne({ senior_id: senior })
+        let found = false
+        for (let availability of s.availabilities) {
+          let startDateTime = new Date(start.dateTime)
+          let endDateTime = new Date(end.dateTime)
+          if (startDateTime.getDay() === availability.weekDay && startDateTime.getHours() >= availability.startTime && endDateTime.getHours() <= availability.endTime) {
+            // TODO handle minutes and events that last many days
+            found = true
+          }
+        }
+        if (!found) {
+          return res.status(400).send('Senior not available during the event time range')
+        }
+      }
+
       if (!member.admin) {
         if (parents.includes(req.user_id)) {
           extendedProperties.shared.parents = JSON.stringify([...new Set([...oldParents, req.user_id])])
@@ -1522,6 +1542,7 @@ router.patch(
           }
         })
         extendedProperties.shared.children = JSON.stringify(oldChildren)
+        extendedProperties.shared.seniors = JSON.stringify(seniors)
       } else {
         if (adminChanges) {
           if (Object.keys(adminChanges).length > 0) {
@@ -1540,7 +1561,7 @@ router.patch(
       }
       const externals = JSON.parse(extendedProperties.shared.externals || '[]')
       const volunteersReq =
-        (parents.length + externals.length) >= extendedProperties.shared.requiredParents
+        (parents.length + externals.length + seniors.length) >= extendedProperties.shared.requiredParents
       const childrenReq =
         children.length >= extendedProperties.shared.requiredChildren
       if (event.data.extendedProperties.shared.status !== extendedProperties.shared.status) {
@@ -1550,6 +1571,7 @@ router.patch(
         extendedProperties.shared.parents = JSON.stringify([])
         extendedProperties.shared.children = JSON.stringify([])
         extendedProperties.shared.externals = JSON.stringify([])
+        extendedProperties.shared.seniors = JSON.stringify([])
         await nh.timeslotMajorChangeNotification(summary, oldParents, group_id, activity_id, timeslot_id)
       } else if (volunteersReq && childrenReq) {
         await nh.timeslotRequirementsNotification(summary, parents, group_id, activity_id, timeslot_id)
