@@ -41,7 +41,9 @@ router.delete('/:id', (req, res, next) => {
     return res.status(401).send('Unauthorized')
   }
   const id = req.params.id
-  MaterialRequest.deleteOne({ material_request_id: id, created_by: req.user_id }).then(result => {
+  MaterialRequest.deleteOne(
+    { material_request_id: id, created_by: req.user_id }
+  ).then(result => {
     if (!result.deletedCount) {
       return res.status(404).send("Request doesn't exist")
     }
@@ -54,7 +56,10 @@ router.post('/:id/satisfy', (req, res, next) => {
     return res.status(401).send('Unauthorized')
   }
   const id = req.params.id
-  MaterialRequest.findOneAndUpdate({ material_request_id: id, created_by: { '$ne': req.user_id } }, { satisfied_by: req.user_id }).then(request => {
+  MaterialRequest.findOneAndUpdate(
+    { material_request_id: id, created_by: { '$ne': req.user_id } },
+    { satisfied_by: req.user_id }
+  ).then(request => {
     if (!request) {
       return res.status(404).send("Request doesn't exist")
     }
