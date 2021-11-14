@@ -8,6 +8,7 @@ const Group = require('../../src/models/group')
 const Activity = require('../../src/models/activity')
 const Parent = require('../../src/models/parent')
 const Child = require('../../src/models/child')
+const Senior = require('../../src/models/senior')
 
 describe('/Post/api/groups/id/activities', () => {
   it('it should post a new activity when user is authenticated and group member', done => {
@@ -710,6 +711,38 @@ describe('/Patch/api/groups/groupId/activities/activityId/timeslots/timeslotId',
     children.push(child.child_id)
     timeslots[0].extendedProperties.shared.parents = JSON.stringify(parents)
     timeslots[0].extendedProperties.shared.children = JSON.stringify(children)
+    const res = await chai
+      .request(server)
+      .patch(
+        `/api/groups/${group.group_id}/activities/${
+          activity.activity_id
+        }/timeslots/${timeslots[0].id}`
+      )
+      .set('Authorization', user.token)
+      .send(timeslots[0])
+    res.should.have.status(200)
+  })
+})
+describe('/Patch/api/groups/groupId/activities/activityId/timeslots/timeslotId', () => {
+  it('it should edit seniors in the timeslot of an activity when user is authenticated and group member', async () => {
+    const user = await User.findOne({ email: 'test@email.com' })
+    const group = await Group.findOne({ name: 'Test Group Edit' })
+    const activity = await Activity.findOne({ group_id: group.group_id })
+    const senior = await Senior.findOne({ user_id: user.user_id })
+    const timeslotResp = await chai
+      .request(server)
+      .get(
+        `/api/groups/${group.group_id}/activities/${
+          activity.activity_id
+        }/timeslots`
+      )
+      .set('Authorization', user.token)
+
+    const timeslots = timeslotResp.body
+    const seniors = JSON.parse(timeslots[0].extendedProperties.shared.seniors || '[]')
+    seniors.push(senior.senior_id)
+    timeslots[0].extendedProperties.shared.seniors = JSON.stringify(seniors)
+
     const res = await chai
       .request(server)
       .patch(

@@ -15,7 +15,14 @@ describe('/Post/api/users/userId/seniors', () => {
         birthdate: new Date(),
         other_info: 'no',
         background: '#00838F',
-        image: '/images/profiles/child_default_photo.jpg'
+        image: '/images/profiles/child_default_photo.jpg',
+        availabilities: [
+          {
+            weekDay: 3,
+            startTime: 21,
+            endTime: 24
+          }
+        ]
       }
       chai
         .request(server)

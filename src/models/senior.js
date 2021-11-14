@@ -1,5 +1,22 @@
 const mongoose = require('mongoose')
 
+const seniorAvailabilitySchema = new mongoose.Schema(
+  {
+    weekDay: {
+      type: Number,
+      required: true
+    },
+    startTime: {
+      type: Number,
+      required: true
+    },
+    endTime: {
+      type: Number,
+      required: true
+    }
+  }
+)
+
 const seniorSchema = new mongoose.Schema(
   {
     senior_id: {
@@ -31,6 +48,9 @@ const seniorSchema = new mongoose.Schema(
     user_id: {
       type: String,
       required: true
+    },
+    availabilities: {
+      type: [seniorAvailabilitySchema]
     }
   },
   { timestamps: true, toJSON: { virtuals: true } }
