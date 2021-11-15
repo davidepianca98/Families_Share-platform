@@ -10,7 +10,7 @@ const MaterialBooking = require('../../src/models/material-booking')
 
 describe('/Get/api/materials/bookings/id', () => {
   it('it should fetch a material booking when the user is authenticated and group member', done => {
-    User.findOne({ email: 'test@email.com' }, (error, user) => {
+    User.findOne({ email: 'test3@email.com' }, (error, user) => {
       MaterialBooking.findOne({ user: user.user_id }, (err, booking) => {
         chai
           .request(server)
@@ -27,8 +27,8 @@ describe('/Get/api/materials/bookings/id', () => {
 
 describe('/Delete/api/materials/bookings/id', () => {
   it('it should delete a material booking when the user is authenticated and the creator of the booking', done => {
-    User.findOne({ email: 'test@email.com' }, (error, user) => {
-      MaterialBooking.findOne({  user: user.user_id }, (err, booking) => {
+    User.findOne({ email: 'test3@email.com' }, (error, user) => {
+      MaterialBooking.findOne({ user: user.user_id }, (err, booking) => {
         chai
           .request(server)
           .delete(`/api/materials/bookings/${booking.material_booking_id}`)

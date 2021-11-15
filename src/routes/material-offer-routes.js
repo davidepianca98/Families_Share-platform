@@ -1,5 +1,6 @@
 const express = require('express')
 const router = new express.Router()
+const objectid = require('objectid')
 
 const MaterialOffer = require('../models/material-offer')
 const MaterialBooking = require('../models/material-booking')
@@ -48,7 +49,7 @@ router.delete('/:id', (req, res, next) => {
     return res.status(401).send('Unauthorized')
   }
   const id = req.params.id
-  MaterialOffer.deleteOne(
+  MaterialOffer.deleteOne( // TODO delete bookings also
     { material_offer_id: id, created_by: req.user_id })
     .then(result => {
       if (!result.deletedCount) {
@@ -65,15 +66,24 @@ router.post('/:id/book', (req, res, next) => {
   }
   const id = req.params.id
   const filter = { material_offer_id: id, created_by: { '$ne': req.user_id } }
-  const update = { booked_by: req.user_id, start: req.start, end: req.end }
 
-  MaterialBooking.findOneAndUpdate(filter, update)
-    .then(booking => {
-      if (!booking) {
-        return res.status(404).send("Booking doesn't exist")
-      }
-      res.json(booking)
-    }).catch(next)
+  MaterialOffer.findOne(filter).then((offer) => {
+    const booking = {
+      material_booking_id: objectid(),
+      start: req.start,
+      end: req.end,
+      user: req.user_id,
+      offer_id: offer.material_offer_id
+    }
+
+    MaterialBooking.create(booking)
+      .then(booking => {
+        if (!booking) {
+          return res.status(404).send("Booking doesn't exist")
+        }
+        res.json(booking)
+      }).catch(next)
+  }).catch(next)
 })
 
 // S-10b Cambia lo stato da “in prestito” a “disponibile” e viceversa
