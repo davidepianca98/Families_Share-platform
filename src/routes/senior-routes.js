@@ -31,14 +31,15 @@ router.put('/:id', async (req, res, next) => {
   }
   const id = req.params.id
   const senior = req.body
-  Senior.findOneAndUpdate(
-    { senior_id: id, user_id: req.user_id },
-    { given_name: senior.given_name,
-      gender: senior.gender,
-      birthdate: senior.birthdate,
-      background: senior.background,
-      other_info: senior.other_info
-    })
+  const filter = { senior_id: id, user_id: req.user_id }
+  const update = {
+    given_name: senior.given_name,
+    gender: senior.gender,
+    birthdate: senior.birthdate,
+    background: senior.background,
+    other_info: senior.other_info
+  }
+  Senior.findOneAndUpdate(filter, update)
     .then(senior => {
       if (!senior) {
         return res.status(404).send("Senior doesn't exist")
@@ -54,7 +55,7 @@ router.delete('/:id', (req, res, next) => {
   }
   const id = req.params.id
   Senior.deleteOne(
-    { senior_id: id, created_by: req.user_id })
+    { senior_id: id, user_id: req.user_id })
     .then(result => {
       if (!result.deletedCount) {
         return res.status(404).send("Senior doesn't exist")
