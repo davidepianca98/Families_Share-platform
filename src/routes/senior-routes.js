@@ -10,12 +10,12 @@ router.get('/:id', (req, res, next) => {
     return res.status(401).send('Unauthorized')
   }
   const id = req.params.id
-  Senior.findOne({ senior_id: id }).then(senior => {
+  Senior.findOne({ senior_id: id }).then(senior => { // TODO dovrebbe controllare che l'utente sia giusto
     if (!senior) {
       return res.status(404).send("Senior doesn't exist")
     }
 
-    Member.findOne({ user_id: req.user_id })
+    Member.findOne({ user_id: req.user_id }) // TODO probabilmente sbagliato
       .then(() => {
         res.json(senior)
       }).catch((error) => {
@@ -63,3 +63,5 @@ router.delete('/:id', (req, res, next) => {
       res.json(true)
     }).catch(next)
 })
+
+module.exports = router
