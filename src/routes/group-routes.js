@@ -1918,6 +1918,7 @@ router.delete(
   }
 )
 
+// S-01b, S-12a
 router.get('/:id/materialOffers', (req, res, next) => {
   // Check authentication
   if (!req.user_id) {
@@ -1961,6 +1962,7 @@ router.get('/:id/materialOffers', (req, res, next) => {
     .catch(next)
 })
 
+// S-02c
 router.post('/:id/materialOffers', async (req, res, next) => {
   if (!req.user_id) {
     return res.status(401).send('Not authenticated')
@@ -1993,6 +1995,7 @@ router.post('/:id/materialOffers', async (req, res, next) => {
   }
 })
 
+// S-13b, S-12a
 router.get('/:id/materialRequests', (req, res, next) => {
   // Check authentication
   if (!req.user_id) {
@@ -2036,6 +2039,7 @@ router.get('/:id/materialRequests', (req, res, next) => {
     .catch(next)
 })
 
+// S-14c
 router.post('/:id/materialRequests', async (req, res, next) => {
   if (!req.user_id) {
     return res.status(401).send('Not authenticated')

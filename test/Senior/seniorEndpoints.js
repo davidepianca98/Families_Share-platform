@@ -11,7 +11,7 @@ const Senior = require('../../src/models/senior')
 describe('/Get/api/seniors/id', () => {
   it('it should fetch a senior when the user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
-      Senior.findOne({ given_name: 'Agostino' }, (err, senior) => {
+      Senior.findOne({ given_name: 'Test' }, (err, senior) => {
         chai
           .request(server)
           .get(`/api/seniors/${senior.senior_id}`)
@@ -28,8 +28,8 @@ describe('/Get/api/seniors/id', () => {
 describe('/Put/api/seniors/id', () => {
   it('it should update a senior when the user is authenticated and in relationship with the senior', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
-      Senior.findOne({ given_name: 'Agostino' }, (err, senior) => {
-        senior.given_name = 'Alvise'
+      Senior.findOne({ given_name: 'Test' }, (err, senior) => {
+        senior.given_name = 'Test2'
         chai
           .request(server)
           .put(`/api/seniors/${senior.senior_id}`)
@@ -47,7 +47,7 @@ describe('/Put/api/seniors/id', () => {
 describe('/Delete/api/seniors/id', () => {
   it('it should delete a senior when the user is authenticated and in relationship with the senior', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
-      Senior.findOne({ given_name: 'Alvise' }, (err, senior) => {
+      Senior.findOne({ given_name: 'Test2' }, (err, senior) => {
         chai
           .request(server)
           .delete(`/api/seniors/${senior.senior_id}`)

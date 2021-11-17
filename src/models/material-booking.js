@@ -11,14 +11,12 @@ const materialBookingSchema = new mongoose.Schema({
     required: true
   },
   start: {
-    type: Boolean,
-    required: true,
-    default: false
+    type: Date,
+    required: true
   },
   end: {
-    type: Boolean,
-    required: true,
-    default: false
+    type: Date,
+    required: true
   },
   offer_id: {
     type: String,

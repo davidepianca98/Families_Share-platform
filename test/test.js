@@ -49,8 +49,18 @@ const initializeDB = async () => {
     visible: true,
     language: 'en'
   }
+  const user5 = {
+    given_name: 'Test',
+    family_name: 'User5',
+    number: '0123546879',
+    email: 'test5@email.com',
+    password: 'password',
+    visible: true,
+    language: 'en'
+  }
   await chai.request(server).post('/api/users').send(user2)
   await chai.request(server).post('/api/users').send(user3)
+  await chai.request(server).post('/api/users').send(user5)
   const user = await User.findOne({ email: 'test3@email.com' })
   const group2 = {
     name: 'Test Group 2',
