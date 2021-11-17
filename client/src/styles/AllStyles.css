@@ -1629,33 +1629,6 @@
   border-radius: 0.5rem;
   box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.4);
 }
-/*section for materials offer and request*/
-#groupMaterialsContainer {
-  width: 94%;
-  top: 6rem;
-  padding-bottom: 1rem;
-}
-#groupMaterialsContainer h1 {
-  font-size: 1.6rem;
-  color: rgba(0, 0, 0, 0.9);
-  line-height: 1.5;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-#groupMaterialsContainer button {
-  background-color: #0a848f;
-  padding: 0 0;
-  font-size: 1.2rem;
-  text-align: center;
-  color: #ffffff;
-  height: 3.6rem;
-  min-width: 22rem;
-  padding-left: 0;
-  border-radius: 3px;
-  border: none;
-}
 #groupActivitiesContainer {
   width: 94%;
   top: 6rem;
@@ -1693,6 +1666,33 @@
 #groupActivitiesContainer button {
   width: 4rem;
   height: 4rem;
+}
+/*button for materials offer and request*/
+#groupMaterialsContainer {
+  width: 94%;
+  top: 6rem;
+  padding-bottom: 1rem;
+}
+#groupMaterialsContainer h1 {
+  font-size: 1.6rem;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 1.5;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#groupMaterialsContainer button {
+  background-color: #0a848f;
+  padding: 0 0;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #ffffff;
+  height: 3.6rem;
+  min-width: 22rem;
+  padding-left: 0;
+  border-radius: 3px;
+  border: none;
 }
 /*GROUP ACTIVITIES END*/
 
@@ -1843,6 +1843,14 @@
   margin-bottom: 0.5rem;
 }
 /*GROUP MAIN END*/
+
+/*GROUP MATERIALS*/
+#groupMaterialsTextContainer {
+  width: 94%;
+  top: 10rem;
+  padding-bottom: 1rem;
+}
+/*GROUP MATERIALS END*/
 
 /*GROUP MEMBERS*/
 #groupMembersHeaderContainer {
@@ -2543,6 +2551,10 @@ a:active {
   max-width: 45rem;
 }
 /*LOGGING SCREEN END*/
+
+/*MATERIALS SCREEN*/
+
+/*MATERIAL SCREEN END*/
 
 /*MY FAMILIES SHARE SCREEN */
 #drawerContainer {

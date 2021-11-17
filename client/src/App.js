@@ -157,6 +157,14 @@ const SignUpScreen = Loadable({
   loader: () => import("./components/SignUpScreen"),
   loading: () => Loading
 });
+const MaterialScreen = Loadable({
+  loader: () => import("./components/MaterialScreen"),
+  loading: () => Loading
+});
+const GroupMaterials = Loadable({
+  loader: () => import("./components/GroupMaterials"),
+  loading: () => Loading
+}) 
 
 axios.interceptors.request.use(
   config => {
@@ -194,6 +202,8 @@ class App extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log("DEBUG-------------")
+    console.log(classes)
     return (
       <LanguageProvider>
         <SnackbarProvider
@@ -367,6 +377,26 @@ class App extends React.Component {
                 exact
                 path="/groups/:groupId/info/start-up-guide"
                 component={StartUpGuide}
+              />
+              {/*<PrivateRoute
+                path="/groups/:groupId/materials/requests/create"
+                component={CreateMaterialScreen}
+              />*/}
+              {/*<PrivateRoute
+                path="/groups/:groupId/materials/offers/create"
+                component={CreateMaterialScreen}
+              />*/}
+              {/*<PrivateRoute
+                path="/groups/:groupId/materials/:materialId/edit"
+                component={EditMaterialScreen}
+              />*/}
+              {/*<PrivateRoute
+                path="/groups/:groupId/materials/:materialId"
+                component={MaterialScreen}
+              />*/}
+              <PrivateRoute
+                path="/groups/:groupId/materials"
+                component={GroupMaterials}
               />
               <PrivateRoute
                 exact
