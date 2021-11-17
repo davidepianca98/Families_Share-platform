@@ -157,10 +157,10 @@ const SignUpScreen = Loadable({
   loader: () => import("./components/SignUpScreen"),
   loading: () => Loading
 });
-const MaterialScreen = Loadable({
+{/*const MaterialScreen = Loadable({
   loader: () => import("./components/MaterialScreen"),
   loading: () => Loading
-});
+});*/}
 const GroupMaterials = Loadable({
   loader: () => import("./components/GroupMaterials"),
   loading: () => Loading
