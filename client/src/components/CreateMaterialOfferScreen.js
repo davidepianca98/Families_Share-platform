@@ -10,7 +10,7 @@ const CreateMaterialOfferScreen = ({ language, history }) => {
   return (
     <div id="createActivityContainer">
       <BackNavigation
-        title={texts.backNavTitle}
+        title="Crea nuova offerta materiale"
         onClick={() => history.goBack()}
       />
       <CreateMaterialOfferStepper />

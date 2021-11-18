@@ -60,7 +60,7 @@ class CreateMaterialOfferInformation extends React.Component {
             <input
               type="text"
               name="name"
-              placeholder="Nome dell'oggetto"
+              placeholder="Nome del materiale"
               value={name}
               className="center"
               onChange={this.handleChange}

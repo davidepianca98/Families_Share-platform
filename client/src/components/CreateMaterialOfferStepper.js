@@ -17,7 +17,7 @@ import axios from "axios";
 import withLanguage from "./LanguageContext";
 import CreateMaterialOfferInformation from "./CreateMaterialOfferInformation"
 import CreateMaterialOfferDates from "./CreateMaterialOfferDates";
-import CreateActivityTimeslots from "./CreateActivityTimeslots";
+import CreateMaterialOfferTimeslots from "./CreateMaterialOfferTimeslots";
 import Texts from "../Constants/Texts";
 import Log from "./Log";
 import LoadingSpinner from "./LoadingSpinner";
@@ -147,12 +147,10 @@ class CreateMaterialOfferStepper extends React.Component {
       },
       dates: {
         selectedDays: [],
-        repetition: false,
-        repetitionType: "",
         lastSelect: new Date()
       },
       timeslots: {
-        activityTimeslots: [],
+        materialTimeslots: [],
         differentTimeslots: false
       },
       stepWasValidated: false,
@@ -187,7 +185,7 @@ class CreateMaterialOfferStepper extends React.Component {
     const { groupId } = match.params;
     const { information, dates, timeslots } = this.state;
     const userId = JSON.parse(localStorage.getItem("user")).id;
-    const materialOffer = this.formatDataToActivity(
+    const materialOffer = this.formatDataToMaterial(
       information,
       dates,
       timeslots,
@@ -218,7 +216,7 @@ class CreateMaterialOfferStepper extends React.Component {
       });
   };
 
-  formatDataToActivity = (information, dates, timeslots, groupId, userId) => {
+  formatDataToMaterial = (information, dates, timeslots, groupId, userId) => {
     return {
       group_id: groupId,
       creator_id: userId,
@@ -226,8 +224,6 @@ class CreateMaterialOfferStepper extends React.Component {
       color: information.color,
       description: information.description,
       location: information.location,
-      repetition: dates.repetition,
-      repetition_type: dates.repetitionType,
       different_timeslots: timeslots.differentTimeslots
     };
   };
@@ -235,7 +231,7 @@ class CreateMaterialOfferStepper extends React.Component {
   formatDataToEvents = (information, dates, timeslots, groupId) => {
     const events = [];
     dates.selectedDays.forEach((date, index) => {
-      timeslots.activityTimeslots[index].forEach(timeslot => {
+      timeslots.materialTimeslots[index].forEach(timeslot => {
         const dstart = new Date(date);
         const dend = new Date(date);
         const { startTime, endTime } = timeslot;
@@ -254,9 +250,6 @@ class CreateMaterialOfferStepper extends React.Component {
           dend.setDate(dend.getDate() + 1);
         }
         const event = {
-          description: timeslot.description,
-          location: timeslot.location,
-          summary: timeslot.name,
           start: {
             dateTime: dstart,
             date: null
@@ -267,18 +260,9 @@ class CreateMaterialOfferStepper extends React.Component {
           },
           extendedProperties: {
             shared: {
-              requiredParents: timeslot.requiredParents,
-              requiredChildren: timeslot.requiredChildren,
-              cost: timeslot.cost,
-              parents: JSON.stringify([]),
-              children: JSON.stringify([]),
-              externals: JSON.stringify([]),
               status: "ongoing",
-              link: timeslot.link,
-              activityColor: information.color,
-              category: timeslot.category,
+              // activityColor: information.color,
               groupId,
-              repetition: dates.repetition ? dates.repetitionType : "none",
               start: startTime.substr(0, startTime.indexOf(":")),
               end: endTime.substr(0, startTime.indexOf(":"))
             }
@@ -339,10 +323,9 @@ class CreateMaterialOfferStepper extends React.Component {
         );
       case 2:
         return (
-          <CreateActivityTimeslots
-            activityName={information.name}
-            activityLocation={information.location}
-            activityLink={information.link}
+          <CreateMaterialOfferTimeslots
+            materialName={information.name}
+            materialLocation={information.location}
             dates={dates.selectedDays}
             {...timeslots}
             handleSubmit={this.handleTimeslotsSubmit}
@@ -384,34 +367,29 @@ class CreateMaterialOfferStepper extends React.Component {
 
   getDatesCompletedLabel = label => {
     const { dates: days } = this.state;
-    const { selectedDays, repetitionType } = days;
+    const { selectedDays } = days;
     let completedLabel = "";
-    if (repetitionType === "monthly") {
-      const selectedDay = moment(selectedDays[0]);
-      completedLabel = `Every ${selectedDay.format("Do ")}`;
-    } else {
-      const eachMonthsDates = {};
-      selectedDays.forEach(selectedDay => {
-        const key = moment(selectedDay).format("MMMM YYYY");
-        if (eachMonthsDates[key] === undefined) {
-          eachMonthsDates[key] = [selectedDay];
-        } else {
-          eachMonthsDates[key].push(selectedDay);
-        }
-      });
-      const months = Object.keys(eachMonthsDates);
-      const dates = Object.values(eachMonthsDates);
-      for (let i = 0; i < months.length; i += 1) {
-        let monthString = "";
-        dates[i].forEach(date => {
-          monthString += ` ${moment(date).format("DD")},`;
-        });
-        monthString = monthString.substr(0, monthString.length - 1);
-        monthString += ` ${months[i]}`;
-        completedLabel += ` ${monthString}, `;
+    const eachMonthsDates = {};
+    selectedDays.forEach(selectedDay => {
+      const key = moment(selectedDay).format("MMMM YYYY");
+      if (eachMonthsDates[key] === undefined) {
+        eachMonthsDates[key] = [selectedDay];
+      } else {
+        eachMonthsDates[key].push(selectedDay);
       }
-      completedLabel = completedLabel.substr(0, completedLabel.length - 2);
+    });
+    const months = Object.keys(eachMonthsDates);
+    const dates = Object.values(eachMonthsDates);
+    for (let i = 0; i < months.length; i += 1) {
+      let monthString = "";
+      dates[i].forEach(date => {
+        monthString += ` ${moment(date).format("DD")},`;
+      });
+      monthString = monthString.substr(0, monthString.length - 1);
+      monthString += ` ${months[i]}`;
+      completedLabel += ` ${monthString}, `;
     }
+    completedLabel = completedLabel.substr(0, completedLabel.length - 2);
     return (
       <div style={{ paddingTop: "2 rem" }}>
         <div className="row-nogutters">{label}</div>
