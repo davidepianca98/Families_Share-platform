@@ -157,10 +157,14 @@ const SignUpScreen = Loadable({
   loader: () => import("./components/SignUpScreen"),
   loading: () => Loading
 });
-{/*const MaterialScreen = Loadable({
-  loader: () => import("./components/MaterialScreen"),
+const CreateMaterialOfferScreen = Loadable({
+  loader: () => import("./components/CreateMaterialOfferScreen"),
   loading: () => Loading
-});*/}
+});
+const CreateMaterialRequestScreen = Loadable({
+  loader: () => import("./components/CreateMaterialRequestScreen"),
+  loading: () => Loading
+});
 const GroupMaterials = Loadable({
   loader: () => import("./components/GroupMaterials"),
   loading: () => Loading
@@ -378,14 +382,14 @@ class App extends React.Component {
                 path="/groups/:groupId/info/start-up-guide"
                 component={StartUpGuide}
               />
-              {/*<PrivateRoute
+              <PrivateRoute
                 path="/groups/:groupId/materials/requests/create"
-                component={CreateMaterialScreen}
-              />*/}
-              {/*<PrivateRoute
+                component={CreateMaterialRequestScreen}
+              />
+              <PrivateRoute
                 path="/groups/:groupId/materials/offers/create"
-                component={CreateMaterialScreen}
-              />*/}
+                component={CreateMaterialOfferScreen}
+              />
               {/*<PrivateRoute
                 path="/groups/:groupId/materials/:materialId/edit"
                 component={EditMaterialScreen}
