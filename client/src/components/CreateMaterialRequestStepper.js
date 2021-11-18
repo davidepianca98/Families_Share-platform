@@ -15,9 +15,9 @@ import Button from "@material-ui/core/Button";
 import moment from "moment";
 import axios from "axios";
 import withLanguage from "./LanguageContext";
-import CreateActivityInformation from "./CreateActivityInformation";
-import CreateActivityDates from "./CreateActivityDates";
-import CreateActivityTimeslots from "./CreateActivityTimeslots";
+import CreateMaterialRequestInformation from "./CreateMaterialRequestInformation";
+import CreateMaterialRequestDates from "./CreateMaterialRequestDates";
+import CreateMaterialOfferTimeslots from "./CreateMaterialOfferTimeslots";
 import Texts from "../Constants/Texts";
 import Log from "./Log";
 import LoadingSpinner from "./LoadingSpinner";
@@ -114,7 +114,7 @@ const styles = theme => ({
   }
 });
 
-class CreateActivityStepper extends React.Component {
+class CreateMaterialRequestStepper extends React.Component {
   constructor(props) {
     super(props);
     const colors = [
@@ -148,8 +148,8 @@ class CreateActivityStepper extends React.Component {
       },
       dates: {
         selectedDays: [],
-        repetition: false,
-        repetitionType: "",
+        /*repetition: false,
+        repetitionType: "",*/
         lastSelect: new Date()
       },
       timeslots: {
@@ -227,8 +227,8 @@ class CreateActivityStepper extends React.Component {
       color: information.color,
       description: information.description,
       location: information.location,
-      repetition: dates.repetition,
-      repetition_type: dates.repetitionType,
+      /*repetition: dates.repetition,
+      repetition_type: dates.repetitionType,*/
       different_timeslots: timeslots.differentTimeslots
     };
   };
@@ -268,18 +268,19 @@ class CreateActivityStepper extends React.Component {
           },
           extendedProperties: {
             shared: {
-              requiredParents: timeslot.requiredParents,
+              /*requiredParents: timeslot.requiredParents,
               requiredChildren: timeslot.requiredChildren,
               cost: timeslot.cost,
               parents: JSON.stringify([]),
               children: JSON.stringify([]),
-              externals: JSON.stringify([]),
+              externals: JSON.stringify([]),*/
               status: "ongoing",
-              link: timeslot.link,
+              /*link: timeslot.link,
+              category: timeslot.category,*/
               activityColor: information.color,
-              category: timeslot.category,
+
               groupId,
-              repetition: dates.repetition ? dates.repetitionType : "none",
+              /*repetition: dates.repetition ? dates.repetitionType : "none",*/
               start: startTime.substr(0, startTime.indexOf(":")),
               end: endTime.substr(0, startTime.indexOf(":"))
             }
@@ -326,24 +327,24 @@ class CreateActivityStepper extends React.Component {
     switch (activeStep) {
       case 0:
         return (
-          <CreateActivityInformation
+          <CreateMaterialRequestInformation
             {...information}
             handleSubmit={this.handleInformationSubmit}
           />
         );
       case 1:
         return (
-          <CreateActivityDates
+          <CreateMaterialRequestDates
             {...dates}
             handleSubmit={this.handleDatesSubmit}
           />
         );
       case 2:
         return (
-          <CreateActivityTimeslots
-            activityName={information.name}
-            activityLocation={information.location}
-            activityLink={information.link}
+          <CreateMaterialOfferTimeslots
+            materialName={information.name}
+            materialLocation={information.location}
+            /*activityLink={information.link}*/
             dates={dates.selectedDays}
             {...timeslots}
             handleSubmit={this.handleTimeslotsSubmit}
@@ -485,13 +486,11 @@ class CreateActivityStepper extends React.Component {
   }
 }
 
-CreateActivityStepper.propTypes = {
+CreateMaterialRequestStepper.propTypes = {
   classes: PropTypes.object,
   match: PropTypes.object,
   history: PropTypes.object,
   language: PropTypes.string,
   enqueueSnackbar: PropTypes.func
 };
-export default withSnackbar(
-  withRouter(withLanguage(withStyles(styles)(CreateActivityStepper)))
-);
+export default withSnackbar(withRouter(withLanguage(withStyles(styles)(CreateMaterialRequestStepper))));

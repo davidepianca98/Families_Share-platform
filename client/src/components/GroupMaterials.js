@@ -200,3 +200,5 @@ GroupMaterials.propTypes = {
 };
 
 export default withRouter(withLanguage(withStyles(styles)(GroupMaterials)));
+//export default (withStyles(styles),withRouter)(withLanguage(GroupMaterials));
+//export default withStyles(styles)(withRouter(withLanguage(GroupMaterials)));
