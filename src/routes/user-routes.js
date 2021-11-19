@@ -472,6 +472,8 @@ router.delete('/:id', async (req, res, next) => {
     await Parent.deleteMany({ parent_id: user_id })
     await Child.deleteMany({ child_id: { $in: childDeleteIds } })
     await Image.deleteMany({ owner_id: { $in: childDeleteIds } })
+    const userSeniors = (await Senior.find({ user_id: user_id })).map(senior => senior.senior_id)
+    await Senior.deleteMany({ user_id: user_id })
     // await Framily.deleteMany({ user_id});
     // await Framily.deleteMany({ framily_id: user_id });
     const announcements = await Announcement.find({ user_id })
@@ -488,14 +490,17 @@ router.delete('/:id', async (req, res, next) => {
       await Promise.all(groupEvents.map(async (event) => {
         const parentParticipants = JSON.parse(event.extendedProperties.shared.parents)
         const childParticipants = JSON.parse(event.extendedProperties.shared.children)
+        const seniorParticipants = JSON.parse(event.extendedProperties.shared.seniors)
         const filteredParents = parentParticipants.filter(id => id !== user_id)
         const filteredChildren = childParticipants.filter(id => childDeleteIds.indexOf(id) === -1)
+        const filteredSeniors = seniorParticipants.filter(id => !userSeniors.includes(id))
         if (filteredParents.length !== parentParticipants.length || filteredChildren.length !== childParticipants.length) {
           const timeslotPatch = {
             extendedProperties: {
               shared: {
                 parents: JSON.stringify(filteredParents),
-                children: JSON.stringify(filteredChildren)
+                children: JSON.stringify(filteredChildren),
+                seniors: JSON.stringify(filteredSeniors)
               }
             }
           }
