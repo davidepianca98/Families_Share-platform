@@ -1171,6 +1171,20 @@ const en = {
     sameTimeslots: "SAME TIMESLOTS FOR EACH DAY?",
     selected: "dates selected"
   },
+  createMaterialRequestDates: {
+    header: "Select one or more days",
+    repetition: "Repetition",
+    weekly: "Weekly",
+    monthly: "Monthly",
+    datesError: "Repetition isn't available when multiple days are selected"
+  },
+  createMaterialRequestInformation: {
+    //link: "Link (optional)",
+    color: "Color of the material", //TODO
+    description: "Description (optional)", //TODO
+    name: "Name of the material",//TODO
+    location: "Location (optional)"//TODO
+  },
   timeslotsContainer: {
     addTimeslot: "ADD TIMESLOT",
     timeslot: "timeslot",
@@ -2460,6 +2474,20 @@ const nl = {
     sameTimeslots: "Zelfde timeslots voor iedere dag?",
     selected: "datums geselecteerd"
   },
+  createMaterialRequestDates: { //TODO
+    header: "Select one or more days",
+    repetition: "Repetition",
+    weekly: "Weekly",
+    monthly: "Monthly",
+    datesError: "Repetition isn't available when multiple days are selected"
+  },
+  createMaterialRequestInformation: {
+    //link: "Koppeling (optioneel)",
+    color: "Kleur van de activiteit",//TODO
+    description: "Beschrijving (optioneel)",//TODO
+    name: "Naam van de activiteit",//TODO
+    location: "Plaats (optioneel)" //TODO
+  },
   timeslotsContainer: {
     addTimeslot: "Voeg timeslot toe",
     timeslot: "timeslot",
@@ -3748,6 +3776,21 @@ const it = {
     differentTimeslots: "AGGIUNGERE ORARI DIFFERENTI PER OGNI GIORNATA?",
     sameTimeslots: "STESSI ORARI PER OGNI GIORNATA?",
     selected: "date selezionate"
+  },
+  createMaterialRequestDates: {
+    header: "Seleziona uno o più giorni",
+    repetition: "Ripetizione",
+    weekly: "Settimanale",
+    monthly: "Mensile",
+    datesError:
+        "La ripetizione non è disponibile quando sono selezionati più giorni"
+  },
+  createMaterialRequestInformation: {
+    //link: "Link (optional)",
+    color: "Colore del materiale", //TODO
+    description: "Descrizione (opzionale)", //TODO
+    name: "Nome del materiale",//TODO
+    location: "Posizione (opzionale)"//TODO
   },
   timeslotsContainer: {
     addTimeslot: "AGGIUNGI ORARI",
@@ -5039,6 +5082,20 @@ const el = {
     differentTimeslots: "ΔΙΑΦΟΡΕΤΙΚΗ ΧΡΟΝΙΚΗ ΠΕΡΙΟΔΟΣ ΓΙΑ ΚΑΘΕ ΗΜΕΡΑ;",
     sameTimeslots: "ΙΔΙΑ ΧΡΟΝΙΚΗ ΠΕΡΙΟΔΟΣ ΓΙΑ ΚΆΘΕ ΗΜΕΡΑ;",
     selected: "ημερομηνίες επιλέχθηκαν"
+  },
+  createMaterialRequestDates: { //TODO
+    header: "Select one or more days",
+    repetition: "Repetition",
+    weekly: "Weekly",
+    monthly: "Monthly",
+    datesError: "Repetition isn't available when multiple days are selected"
+  },
+  createMaterialRequestInformation: {
+    //link: "Link (optional)",
+    color: "Color of the material", //TODO
+    description: "Description (optional)", //TODO
+    name: "Name of the material",//TODO
+    location: "Location (optional)"//TODO
   },
   timeslotsContainer: {
     addTimeslot: "Προσθήκη χρονικής περιόδου",
@@ -6374,6 +6431,20 @@ const hu = {
     sameTimeslots: "Ugyanazon időpontok minden nap?",
     selected: "dátumok kiválasztása"
   },
+  createMaterialRequestDates: { //TODO
+    header: "Select one or more days",
+    repetition: "Repetition",
+    weekly: "Weekly",
+    monthly: "Monthly",
+    datesError: "Repetition isn't available when multiple days are selected"
+  },
+  createMaterialRequestInformation: {
+    //link: "Link (optional)",
+    color: "Color of the material", //TODO
+    description: "Description (optional)", //TODO
+    name: "Name of the material",//TODO
+    location: "Location (optional)"//TODO
+  },
   timeslotsContainer: {
     addTimeslot: "Időpont hozzáadása",
     timeslot: "Időpont",
@@ -7459,6 +7530,20 @@ const fr = {
     "differentTimeslots": "DIFFÉRENTS CRÉNEAUX HORAIRES POUR CHAQUE JOUR ?",
     "sameTimeslots": "MÊMES CRÉNEAUX HORAIRES POUR CHAQUE JOUR ?",
     "selected": "dates sélectionnées"
+  },
+  "createMaterialRequestDates": { //TODO
+    "header": "Select one or more days",
+    "repetition": "Repetition",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "datesError": "Repetition isn't available when multiple days are selected"
+  },
+  "createMaterialRequestInformation": {
+    //link: "Link (optional)",
+    "color": "Color of the material", //TODO
+    "description": "Description (optional)", //TODO
+    "name": "Name of the material",//TODO
+    "location": "Location (optional)"//TODO
   },
   "timeslotsContainer": {
     "addTimeslot": "AJOUTER UN CRÉNEAU HORAIRE",
