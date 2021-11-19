@@ -6,11 +6,19 @@ const seniorAvailabilitySchema = new mongoose.Schema(
       type: Number,
       required: true
     },
-    startTime: {
+    startTimeHour: {
       type: Number,
       required: true
     },
-    endTime: {
+    startTimeMinute: {
+      type: Number,
+      required: true
+    },
+    endTimeHour: {
+      type: Number,
+      required: true
+    },
+    endTimeMinute: {
       type: Number,
       required: true
     }

@@ -756,6 +756,38 @@ describe('/Patch/api/groups/groupId/activities/activityId/timeslots/timeslotId',
   })
 })
 describe('/Patch/api/groups/groupId/activities/activityId/timeslots/timeslotId', () => {
+  it('it should not add senior in the timeslot of an activity when user is authenticated and group member but the senior is not available during that time', async () => {
+    const user = await User.findOne({ email: 'test@email.com' })
+    const group = await Group.findOne({ name: 'Test Group Edit' })
+    const activity = await Activity.findOne({ group_id: group.group_id })
+    const senior = await Senior.findOne({ user_id: user.user_id, given_name: 'Test 2' })
+    const timeslotResp = await chai
+      .request(server)
+      .get(
+        `/api/groups/${group.group_id}/activities/${
+          activity.activity_id
+        }/timeslots`
+      )
+      .set('Authorization', user.token)
+
+    const timeslots = timeslotResp.body
+    const seniors = JSON.parse(timeslots[0].extendedProperties.shared.seniors || '[]')
+    seniors.push(senior.senior_id)
+    timeslots[0].extendedProperties.shared.seniors = JSON.stringify(seniors)
+
+    const res = await chai
+      .request(server)
+      .patch(
+        `/api/groups/${group.group_id}/activities/${
+          activity.activity_id
+        }/timeslots/${timeslots[0].id}`
+      )
+      .set('Authorization', user.token)
+      .send(timeslots[0])
+    res.should.have.status(400)
+  })
+})
+describe('/Patch/api/groups/groupId/activities/activityId/timeslots/timeslotId', () => {
   it('it should not edit a timeslot of an activity when user isnt authenticated', async () => {
     const user = await User.findOne({ email: 'test@email.com' })
     const group = await Group.findOne({ name: 'Test Group Edit' })

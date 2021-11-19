@@ -1509,17 +1509,20 @@ router.patch(
       const oldChildren = JSON.parse(event.data.extendedProperties.shared.children)
       const parents = JSON.parse(extendedProperties.shared.parents)
       const children = JSON.parse(extendedProperties.shared.children)
-      const seniors = JSON.parse(extendedProperties.shared.seniors || '[]')
+      const seniorsIds = JSON.parse(extendedProperties.shared.seniors || '[]')
 
       // Check if seniors are available during the timeslot
+      const seniors = await Senior.find({ senior_id: { $in: seniorsIds } })
       for (let senior of seniors) {
-        let s = await Senior.findOne({ senior_id: senior })
         let found = false
-        for (let availability of s.availabilities) {
+        for (let availability of senior.availabilities) {
           let startDateTime = new Date(start.dateTime)
           let endDateTime = new Date(end.dateTime)
-          if (startDateTime.getDay() === availability.weekDay && startDateTime.getHours() >= availability.startTime && endDateTime.getHours() <= availability.endTime) {
-            // TODO handle minutes and events that last many days
+          if (startDateTime.getDay() === availability.weekDay &&
+            startDateTime.getHours() >= availability.startTimeHour &&
+            startDateTime.getMinutes() >= availability.startTimeMinute &&
+            endDateTime.getHours() <= availability.endTimeHour &&
+            endDateTime.getMinutes() <= availability.endTimeMinute) {
             found = true
           }
         }
@@ -1542,7 +1545,7 @@ router.patch(
           }
         })
         extendedProperties.shared.children = JSON.stringify(oldChildren)
-        extendedProperties.shared.seniors = JSON.stringify(seniors)
+        extendedProperties.shared.seniors = JSON.stringify(seniorsIds)
       } else {
         if (adminChanges) {
           if (Object.keys(adminChanges).length > 0) {
@@ -1561,7 +1564,7 @@ router.patch(
       }
       const externals = JSON.parse(extendedProperties.shared.externals || '[]')
       const volunteersReq =
-        (parents.length + externals.length + seniors.length) >= extendedProperties.shared.requiredParents
+        (parents.length + externals.length + seniorsIds.length) >= extendedProperties.shared.requiredParents
       const childrenReq =
         children.length >= extendedProperties.shared.requiredChildren
       if (event.data.extendedProperties.shared.status !== extendedProperties.shared.status) {
