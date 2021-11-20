@@ -710,9 +710,10 @@ router.post('/:id/export', async (req, res, next) => {
     const usersChildren = await Parent.find({ parent_id: user_id })
     const childIds = usersChildren.map(child => child.child_id)
     const children = await Child.find({ child_id: { $in: childIds } }).populate('image').lean().exec()
+    const seniors = await Senior.find({ user_id: user_id }).populate('image').lean().exec()
     const responses = await Promise.all(groups.map(group => uh.getUsersGroupEvents(group.calendar_id, user_id, childIds)))
     const events = [].concat(...responses)
-    uh.createPdf(profile, groups, children, events, () => {
+    uh.createPdf(profile, groups, children, seniors, events, () => {
       const mailOptions = {
         from: process.env.SERVER_MAIL,
         to: email,

@@ -1,6 +1,7 @@
 const Excel = require('exceljs')
 const Profile = require('../models/profile')
 const Child = require('../models/child')
+const Senior = require('../models/senior')
 const path = require('path')
 const emergencyNumbers = require('../constants/emergency-numbers')
 const citylab = process.env.CITYLAB
@@ -113,6 +114,10 @@ async function createExcel (activity, timeslots, cb) {
       key: 'children'
     },
     {
+      header: 'Seniors',
+      key: 'senior'
+    },
+    {
       header: 'Children with special needs',
       key: 'specialNeeds'
     },
@@ -131,9 +136,11 @@ async function createExcel (activity, timeslots, cb) {
     const requiredChildren = additionalInfo.requiredChildren
     const parents = JSON.parse(additionalInfo.parents)
     const children = JSON.parse(additionalInfo.children)
+    const seniors = JSON.parse(additionalInfo.seniors || '[]')
     const externals = JSON.parse(additionalInfo.externals || '[]')
     const parentProfiles = await Profile.find({ user_id: { $in: parents } })
     const childrenProfiles = await Child.find({ child_id: { $in: children } })
+    const seniorProfiles = await Senior.find({ senior_id: { $in: seniors } })
     const childrenWithSpecialNeeds = childrenProfiles.filter(
       c => c.allergies || c.special_needs || c.other_info
     )
@@ -172,6 +179,9 @@ async function createExcel (activity, timeslots, cb) {
         .toString(),
       children: childrenProfiles
         .map(c => `${c.given_name} ${c.family_name}`)
+        .toString(),
+      senior: seniorProfiles
+        .map(s => `${s.given_name}`)
         .toString(),
       specialNeeds: childrenWithSpecialNeeds
         .map(c => `${c.given_name} ${c.family_name}`)
@@ -260,9 +270,11 @@ async function createPdf (activity, timeslots, cb) {
     const requiredChildren = additionalInfo.requiredChildren
     const parents = JSON.parse(additionalInfo.parents)
     const children = JSON.parse(additionalInfo.children)
+    const seniors = JSON.parse(additionalInfo.seniors || '[]')
     const externals = JSON.parse(additionalInfo.externals || '[]')
     const parentProfiles = await Profile.find({ user_id: { $in: parents } })
     const childrenProfiles = await Child.find({ child_id: { $in: children } })
+    const seniorProfiles = await Senior.find({ senior_id: { $in: seniors } })
     const childrenWithSpecialNeeds = childrenProfiles.filter(
       c => c.allergies || c.special_needs || c.other_info
     )
@@ -290,7 +302,8 @@ async function createPdf (activity, timeslots, cb) {
       additionalInfo.status,
       parentProfiles.map(p => `${p.given_name} ${p.family_name}`).toString() || '-',
       externals.toString(),
-      childrenProfiles.map(c => `${c.given_name} ${c.family_name}`).toString() || '-'
+      childrenProfiles.map(c => `${c.given_name} ${c.family_name}`).toString() || '-',
+      seniorProfiles.map(s => `${s.given_name}`).toString() || '-'
     ])
   }
   specialNeedsProfiles
@@ -373,6 +386,7 @@ async function createPdf (activity, timeslots, cb) {
             60,
             60,
             60,
+            60,
             60
           ],
           body: [
@@ -389,7 +403,8 @@ async function createPdf (activity, timeslots, cb) {
               'Status',
               'Participating Parents',
               'Participating Externals',
-              'Participating Children'
+              'Participating Children',
+              'Participating Seniors'
             ],
             ...values
           ]

@@ -809,13 +809,18 @@ router.post('/:id/agenda/export', async (req, res, next) => {
     for (const event of events) {
       const parentIds = JSON.parse(event.extendedProperties.shared.parents)
       const childIds = JSON.parse(event.extendedProperties.shared.children)
+      const seniorIds = JSON.parse(event.extendedProperties.shared.seniors || '[]')
       const parents = await Profile.find({ user_id: { $in: parentIds } })
       const children = await Child.find({ child_id: { $in: childIds } })
+      const seniors = await Senior.find({ senior_id: { $in: seniorIds } })
       event.extendedProperties.shared.parents = JSON.stringify(
         parents.map(parent => `${parent.given_name} ${parent.family_name}`)
       )
       event.extendedProperties.shared.children = JSON.stringify(
         children.map(child => `${child.given_name} ${child.family_name}`)
+      )
+      event.extendedProperties.shared.seniors = JSON.stringify(
+        seniors.map(senior => `${senior.given_name}`)
       )
     }
     groupAgenda.createExcel(group, activities, events, () => {

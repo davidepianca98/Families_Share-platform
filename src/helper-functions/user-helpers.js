@@ -106,7 +106,7 @@ function newExportEmail (given_name) {
   )
 }
 
-function createPdf (profile, groups, children, events, cb) {
+function createPdf (profile, groups, children, seniors, events, cb) {
   const fonts = {
     Roboto: {
       normal: path.join(__dirname, '../fonts', 'Roboto-Regular.ttf'),
@@ -202,6 +202,27 @@ function createPdf (profile, groups, children, events, cb) {
               `Allergies: ${child.allergies ? child.allergies : '-'}`,
               `Special Needs: ${child.special_needs ? child.special_needs : '-'}`,
               `Other Info: ${child.other_info ? child.other_info : '-'}`
+            ],
+            fontSize: 14
+          }
+        ]
+      })),
+      ...seniors.map(senior => ({
+        margin: [0, 0, 0, 20],
+        columns: [
+          {
+            width: '40%',
+            image: path.join(__dirname, `../..${senior.image.path}`),
+            fit: [170, 170]
+          },
+          {
+            width: '60%',
+            stack: [
+              `Given name: ${senior.given_name}`,
+              `Gender: ${senior.gender}`,
+              `Email: ${profile.email}`,
+              `Birthday: ${moment(senior.birthdate).format('DD MMMM YYYY')}`,
+              `Other Info: ${senior.other_info ? senior.other_info : '-'}`
             ],
             fontSize: 14
           }
