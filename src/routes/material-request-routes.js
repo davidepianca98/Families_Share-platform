@@ -1,6 +1,4 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable indent */
-
+/* eslint-disable handle-callback-err */
 const express = require('express')
 const router = new express.Router()
 
