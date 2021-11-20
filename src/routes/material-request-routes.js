@@ -1,3 +1,6 @@
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable indent */
+
 const express = require('express')
 const router = new express.Router()
 
@@ -28,12 +31,15 @@ router.put('/:id', async (req, res, next) => {
   }
   const id = req.params.id
   const materialRequest = req.body
-  MaterialRequest.findOneAndUpdate({ material_request_id: id, created_by: req.user_id }, { material_name: materialRequest.material_name }).then(request => {
-    if (!request) {
-      return res.status(404).send("Request doesn't exist")
-    }
-    res.json(request)
-  }).catch(next)
+  MaterialRequest.findOneAndUpdate(
+    { material_request_id: id, created_by: req.user_id },
+    { material_name: materialRequest.material_name })
+    .then(request => {
+      if (!request) {
+        return res.status(404).send("Request doesn't exist")
+      }
+      res.json(request)
+    }).catch(next)
 })
 
 router.delete('/:id', (req, res, next) => {
