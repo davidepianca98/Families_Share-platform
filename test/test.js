@@ -62,6 +62,7 @@ const initializeDB = async () => {
   await chai.request(server).post('/api/users').send(user3)
   await chai.request(server).post('/api/users').send(user5)
   const user = await User.findOne({ email: 'test3@email.com' })
+  const otherUser = await User.findOne({ email: 'test5@email.com' })
   const group2 = {
     name: 'Test Group 2',
     description: 'Also awesome group',
@@ -223,16 +224,25 @@ const initializeDB = async () => {
   await chai.request(server).post(`/api/users/${user.user_id}/children`).send(child).set('Authorization', user.token)
 
   const offer2 = {
-    material_name: 'offro libro'
+    material_name: 'offro libro',
+    description: 'libro di fantascienza',
+    color: 'nero',
+    location: 'Mestre'
   }
-  await chai.request(server).post(`/api/groups/${group.group_id}/materialOffers`).send(offer2).set('Authorization', user.token)
-  const offer = await MaterialOffer.findOne({ material_name: 'offro libro' })
+  await chai.request(server)
+    .post(`/api/groups/${group.group_id}/materialOffers`)
+    .send(offer2)
+    .set('Authorization', user.token)
+  const offer = await MaterialOffer.findOne({ group_id: group.group_id, material_name: 'offro libro' })
 
   const booking2 = {
     start: '2019-03-27T22:00:00.000Z',
     end: '2019-04-27T23:00:00.000Z'
   }
-  await chai.request(server).post(`/api/materials/offers/${offer.offer_id}/book`).send(booking2).set('Authorization', user.token)
+  await chai.request(server)
+    .post(`/api/materials/offers/${offer.material_offer_id}/book`)
+    .send(booking2)
+    .set('Authorization', otherUser.token)
 }
 
 describe('Test', () => {

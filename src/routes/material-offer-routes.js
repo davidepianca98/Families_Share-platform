@@ -55,10 +55,10 @@ router.delete('/:id', async (req, res, next) => {
     return res.status(404).send("Offer doesn't exist")
   }
 
-  let futureBookings = await MaterialBooking.find({ offer_id: id, start: { '$gte': Date.now() } })
+  let futureBookings = await MaterialBooking.find({  material_offer_id: id, start: { '$gte': Date.now() } })
   await nh.materialOfferDeletedNotification(offer, futureBookings)
 
-  MaterialBooking.deleteMany({ offer_id: id }).then(() => {
+  MaterialBooking.deleteMany({ material_offer_id: id }).then(() => {
     res.json(true)
   }).catch(next)
 })
@@ -81,7 +81,7 @@ router.post('/:id/book', (req, res, next) => {
       start: bookingReq.start,
       end: bookingReq.end,
       user: req.user_id,
-      offer_id: offer.material_offer_id
+      material_offer_id: offer.material_offer_id
     }
 
     MaterialBooking.create(booking)
@@ -122,13 +122,13 @@ router.get('/:id/bookings', (req, res, next) => {
     return res.status(401).send('Unauthorized')
   }
 
-  const offer_id = req.params.id
-  MaterialOffer.findOne({ material_offer_id: offer_id, created_by: { '$eq': req.user_id } })
+  const material_offer_id = req.params.id
+  MaterialOffer.findOne({ material_offer_id: material_offer_id, created_by: { '$eq': req.user_id } })
     .then(offer => {
       if (!offer) {
         return res.status(404).send('Offer not found')
       }
-      MaterialBooking.find({ offer_id: offer_id })
+      MaterialBooking.find({ material_offer_id: material_offer_id })
         .lean()
         .exec()
         .then(bookings => {

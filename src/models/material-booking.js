@@ -18,13 +18,13 @@ const materialBookingSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  offer_id: {
+  material_offer_id: {
     type: String,
     required: true
   }
 }, { timestamps: true, toJSON: { virtuals: true } })
 
-materialBookingSchema.index({ offer_id: 1, createdAt: -1 })
+materialBookingSchema.index({ material_offer_id: 1, createdAt: -1 })
 
 mongoose.pluralize(null)
 const model = mongoose.model('MaterialBooking', materialBookingSchema)

@@ -490,7 +490,7 @@ router.delete('/:id', async (req, res, next) => {
 
     // Delete materials
     const offerIds = await MaterialOffer.find({ created_by: user_id }).map(offer => offer.material_offer_id)
-    await MaterialBooking.deleteMany({ offer_id: { $in: offerIds } })
+    await MaterialBooking.deleteMany({ material_offer_id: { $in: offerIds } })
     await MaterialOffer.deleteMany({ created_by: user_id })
     await MaterialRequest.deleteMany({ created_by: user_id })
 

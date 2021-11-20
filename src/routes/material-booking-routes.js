@@ -16,11 +16,12 @@ router.get('/:id', (req, res, next) => {
     if (!booking) {
       return res.status(404).send("Booking doesn't exist")
     }
-    MaterialOffer.findOne({ offer_id: booking.offer_id }, (err1, offer) => {
-      Member.findOne({ user_id: req.user_id, group_id: booking.group_id }).then(() => {
+    MaterialOffer.findOne({ material_offer_id: booking.material_offer_id }, (err1, offer) => {
+      Member.findOne({ user_id: req.user_id, group_id: offer.group_id }).then((member) => {
+        if (!member) {
+          return res.status(401).send('Unauthorized')
+        }
         res.json(booking)
-      }).catch((error) => {
-        return res.status(404).send("Booking doesn't exist")
       })
     })
   }).catch(next)
@@ -36,18 +37,16 @@ router.delete('/:id', (req, res, next) => {
     if (!booking) {
       return res.status(404).send("Booking doesn't exist")
     }
-    MaterialOffer.findOne({ offer_id: booking.offer_id }, (err1, offer) => {
-      Member.findOne({ user_id: req.user_id, group_id: booking.group_id }).then(() => {
+    MaterialOffer.findOne({ material_offer_id: booking.material_offer_id }, (err1, offer) => {
+      Member.findOne({ user_id: req.user_id, group_id: offer.group_id }).then((member) => {
+        if (!member) {
+          return res.status(401).send('Unauthorized')
+        }
         MaterialBooking.deleteOne(
           { material_booking_id: id }
         ).then(result => {
-          if (!result.deletedCount) {
-            return res.status(404).send("Booking doesn't exist")
-          }
           res.json(true)
-        }).catch(next)
-      }).catch((error) => {
-        return res.status(404).send("Booking doesn't exist")
+        })
       })
     })
   }).catch(next)
