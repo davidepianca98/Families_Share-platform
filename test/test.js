@@ -232,14 +232,8 @@ const initializeDB = async () => {
 
   const booking2 = {
     user: user.user_id,
-    start: {
-      dateTime: '2019-03-27T22:00:00.000Z',
-      date: null
-    },
-    end: {
-      dateTime: '2019-04-27T23:00:00.000Z',
-      date: null
-    },
+    start: '2019-03-27T22:00:00.000Z',
+    end: '2019-04-27T23:00:00.000Z',
     offer_id: offer.offer_id
   }
   await chai.request(server).post(`/api/materials/offers/${offer.offer_id}/book`).send(booking2).set('Authorization', user.token)
