@@ -10,6 +10,7 @@ import Log from "./Log";
 import withLanguage from "./LanguageContext";
 import GroupMaterialsNavbar from "./GroupMaterialsNavbar";
 import DisplayText from "./GroupMaterialNotFound";
+import GroupMaterialOffersList from "./GroupMaterialOffersList";
 
 const styles = {
   add: {
@@ -173,7 +174,16 @@ class GroupMaterials extends React.Component {
                       {...props}
                     />
                   ) : (
-                    <Componente />
+                    <div
+                      style={{ top: "11rem" }}
+                      id="groupActivitiesContainer"
+                      className="horizontalCenter"
+                    >
+                      <GroupMaterialOffersList
+                        materials={materialOffers}
+                        group={this.state.groupId}
+                      />
+                    </div>
                   )}
                 </React.Fragment>
               )}
@@ -200,5 +210,3 @@ GroupMaterials.propTypes = {
 };
 
 export default withRouter(withLanguage(withStyles(styles)(GroupMaterials)));
-//export default (withStyles(styles),withRouter)(withLanguage(GroupMaterials));
-//export default withStyles(styles)(withRouter(withLanguage(GroupMaterials)));
