@@ -45,6 +45,7 @@ describe('/Put/api/materials/offers/id', () => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
       MaterialOffer.findOne({ material_name: 'PlayStation' }, (err, offer) => {
         offer.material_name = 'PlayStation 2'
+        offer.description = 'Test desc'
         chai
           .request(server)
           .put(`/api/materials/offers/${offer.material_offer_id}`)

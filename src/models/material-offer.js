@@ -10,6 +10,15 @@ const materialOfferSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  description: {
+    type: String
+  },
+  color: {
+    type: String
+  },
+  location: {
+    type: String
+  },
   created_by: {
     type: String,
     required: true

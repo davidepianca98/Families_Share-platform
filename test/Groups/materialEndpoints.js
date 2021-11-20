@@ -11,7 +11,10 @@ describe('/Post/api/groups/id/materialOffers', () => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
       Group.findOne({ name: 'Test Group Edit' }, (err, group) => {
         const materialOffer = {
-          material_name: 'PlayStation'
+          material_name: 'PlayStation',
+          description: 'Console',
+          color: '#00FF00',
+          location: 'Milan'
         }
         chai
           .request(server)

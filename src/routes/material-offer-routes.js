@@ -33,9 +33,7 @@ router.put('/:id', async (req, res, next) => {
   }
   const id = req.params.id
   const offer = req.body
-  MaterialOffer.findOneAndUpdate(
-    { material_offer_id: id, created_by: req.user_id },
-    { material_name: offer.material_name })
+  MaterialOffer.findOneAndUpdate({ material_offer_id: id, created_by: req.user_id }, offer)
     .then(offer => {
       if (!offer) {
         return res.status(404).send("Offer doesn't exist")
