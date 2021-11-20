@@ -29,6 +29,8 @@ const schedule = require('node-schedule')
 if (process.env.NODE_APP_INSTANCE === 0) {
   schedule.scheduleJob(process.env.CRONJOB, () => {
     ah.checkCompletedTimeslots()
+    // TODO controlla se date di restituzione vicine e manda notifiche
+    // TODO controlla se è arrivata data di nuova prenotazione ma non è ancora stato restituito e manda notifica
   })
 }
 
