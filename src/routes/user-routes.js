@@ -78,6 +78,9 @@ const Device = require('../models/device')
 const Rating = require('../models/rating')
 const Community = require('../models/community')
 const Senior = require('../models/senior')
+const MaterialOffer = require('../models/material-offer')
+const MaterialRequest = require('../models/material-request')
+const MaterialBooking = require('../models/material-booking')
 
 router.post('/', async (req, res, next) => {
   const {
@@ -484,6 +487,13 @@ router.delete('/:id', async (req, res, next) => {
     const memberships = await Member.find({ user_id, group_accepted: true, user_accepted: true })
     const groupIds = memberships.map(membership => membership.group_id)
     const groups = await Group.find({ group_id: { $in: groupIds } })
+
+    // Delete materials
+    const offerIds = await MaterialOffer.find({ created_by: user_id }).map(offer => offer.material_offer_id)
+    await MaterialBooking.deleteMany({ offer_id: { $in: offerIds } })
+    await MaterialOffer.deleteMany({ created_by: user_id })
+    await MaterialRequest.deleteMany({ created_by: user_id })
+
     await Promise.all(groups.map(async (group) => {
       const response = await calendar.events.list({ calendarId: group.calendar_id })
       const groupEvents = response.data.items
