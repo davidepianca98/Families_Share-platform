@@ -258,7 +258,7 @@ describe('Test', () => {
   importTest('Senior Endpoints Test', './Users/seniorEndpoints')
   importTest('Group Members Endpoints Test', './Groups/memberEndpoints')
   importTest('Group Various Endpoints Test', './Groups/variousEndpoints')
-  importTest('Group Various Endpoints Test', './Groups/activityEndpoints')
+  importTest('Group Activity Endpoints Test', './Groups/activityEndpoints')
   importTest('Group Announcement Endpoints Test', './Groups/announcementEndpoints')
   importTest('Group Material Endpoints Test', './Groups/materialEndpoints')
   importTest('Material Requests Endpoints Test', './Materials/materialRequestEndpoints')
