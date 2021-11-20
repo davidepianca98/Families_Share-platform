@@ -1,3 +1,4 @@
+/* eslint-disable handle-callback-err */
 const common = require('../common')
 
 const { server } = common

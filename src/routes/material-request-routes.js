@@ -1,5 +1,7 @@
+/* eslint-disable handle-callback-err */
 const express = require('express')
 const router = new express.Router()
+const nh = require('../helper-functions/notification-helpers')
 
 const MaterialRequest = require('../models/material-request')
 const Member = require('../models/member')
@@ -28,12 +30,15 @@ router.put('/:id', async (req, res, next) => {
   }
   const id = req.params.id
   const materialRequest = req.body
-  MaterialRequest.findOneAndUpdate({ material_request_id: id, created_by: req.user_id }, { material_name: materialRequest.material_name }).then(request => {
-    if (!request) {
-      return res.status(404).send("Request doesn't exist")
-    }
-    res.json(request)
-  }).catch(next)
+  MaterialRequest.findOneAndUpdate(
+    { material_request_id: id, created_by: req.user_id },
+    { material_name: materialRequest.material_name })
+    .then(request => {
+      if (!request) {
+        return res.status(404).send("Request doesn't exist")
+      }
+      res.json(request)
+    }).catch(next)
 })
 
 router.delete('/:id', (req, res, next) => {
@@ -59,10 +64,11 @@ router.post('/:id/satisfy', (req, res, next) => {
   MaterialRequest.findOneAndUpdate(
     { material_request_id: id, created_by: { '$ne': req.user_id } },
     { satisfied_by: req.user_id }
-  ).then(request => {
+  ).then(async request => {
     if (!request) {
       return res.status(404).send("Request doesn't exist")
     }
+    await nh.materialRequestSatisfiedNotification(request.created_by, req.user_id, request)
     res.json(true)
   }).catch(next)
 })

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const objectid = require('objectid')
+const nh = require('../helper-functions/notification-helpers')
 
 const MaterialOffer = require('../models/material-offer')
 const MaterialBooking = require('../models/material-booking')
@@ -43,20 +44,23 @@ router.put('/:id', async (req, res, next) => {
 })
 
 // S-05b
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   if (!req.user_id) {
     return res.status(401).send('Unauthorized')
   }
   const id = req.params.id
-  MaterialOffer.deleteOne({ material_offer_id: id, created_by: req.user_id })
-    .then(result => {
-      if (!result.deletedCount) {
-        return res.status(404).send("Offer doesn't exist")
-      }
-      MaterialBooking.deleteMany({ offer_id: id }).then(() => {
-        res.json(true)
-      }).catch(next)
-    }).catch(next)
+  let offer = await MaterialOffer.findOne({ material_offer_id: id, created_by: req.user_id })
+  let result = await MaterialOffer.deleteOne({ material_offer_id: id, created_by: req.user_id })
+  if (!result.deletedCount) {
+    return res.status(404).send("Offer doesn't exist")
+  }
+
+  let futureBookings = await MaterialBooking.find({ offer_id: id, start: { '$gte': Date.now() } })
+  await nh.materialOfferDeletedNotification(offer, futureBookings)
+
+  MaterialBooking.deleteMany({ offer_id: id }).then(() => {
+    res.json(true)
+  }).catch(next)
 })
 
 // S-08b

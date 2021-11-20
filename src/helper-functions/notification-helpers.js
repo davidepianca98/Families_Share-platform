@@ -476,6 +476,58 @@ async function planStateNotification (planName, participants, state, groupId, pl
   await sendPushNotifications(messages)
 }
 
+async function materialRequestSatisfiedNotification (created_by, satisfied_by, request) {
+  const subject = await Profile.findOne({ user_id: satisfied_by })
+  const user = await User.findOne({ user_id: satisfied_by })
+  const device = await Device.findOne({ user_id: created_by })
+
+  const notifications = [{
+    owner_type: 'user',
+    owner_id: created_by,
+    type: 'materials',
+    code: 0,
+    read: false,
+    subject: `${subject.given_name} ${subject.family_name}`,
+    object: `${request.material_name}`
+  }]
+  await Notification.create(notifications)
+  const language = user.language
+  if (device) {
+    await sendPushNotifications([{
+      to: device.device_id,
+      sound: 'default',
+      title: texts[language]['materials'][0]['header'],
+      body: `${subject.given_name} ${subject.family_name} ${texts[language]['materials'][0]['description']} ${request.material_name}`
+    }])
+  }
+}
+
+async function materialOfferDeletedNotification (offer, bookings) {
+  let user_ids = bookings.map(b => b.user)
+  const devices = await Device.find({ user_id: { $in: user_ids } })
+  const users = await User.find({ user_id: { $in: user_ids } })
+  const notifications = users.map(user => ({
+    owner_type: 'user',
+    owner_id: user.user_id,
+    type: 'materials',
+    code: 1,
+    read: false,
+    subject: offer.material_name
+  }))
+  await Notification.create(notifications)
+  const messages = []
+  devices.forEach(device => {
+    const language = users.find(user => user.user_id === device.user_id).language
+    messages.push({
+      to: device.device_id,
+      sound: 'default',
+      title: texts[language]['materials'][1]['header'],
+      body: `${texts[language]['materials'][1]['description']} ${offer.material_name}`
+    })
+  })
+  await sendPushNotifications(messages)
+}
+
 function getNotificationDescription (notification, language) {
   const {
     type, code, subject, object
@@ -550,6 +602,15 @@ function getNotificationDescription (notification, language) {
         default:
           return ''
       }
+    case 'materials':
+      switch (code) {
+        case 0:
+          return `${subject} ${description} ${object}.`
+        case 1:
+          return `${subject} ${description}`
+        default:
+          return ''
+      }
     default:
       return ''
   }
@@ -597,5 +658,7 @@ module.exports = {
   deleteTimeslotNotification,
   timeslotAdminChangesNotification,
   newRequestNotification,
-  newReplyNotification
+  newReplyNotification,
+  materialRequestSatisfiedNotification,
+  materialOfferDeletedNotification
 }

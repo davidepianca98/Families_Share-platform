@@ -69,6 +69,7 @@ app.use('/api/github', require('./routes/github-routes'))
 app.use('/api/community', require('./routes/community-routes'))
 app.use('/api/materials/requests', require('./routes/material-request-routes'))
 app.use('/api/materials/offers', require('./routes/material-offer-routes'))
+app.use('/api/materials/bookings', require('./routes/material-booking-routes'))
 app.use('/api/seniors', require('./routes/senior-routes'))
 
 if (config.util.getEnv('NODE_ENV') === 'production') {

@@ -84,7 +84,9 @@ const initializeDB = async () => {
   }
   await chai.request(server).post('/api/groups').send(group2).set('Authorization', user.token)
   await chai.request(server).post('/api/groups').send(group3).set('Authorization', user.token)
+
   const group = await Group.findOne({ name: 'Test Group 2' })
+
   const activity = {
     group_id: group.group_id,
     creator_id: user.user_id,
@@ -219,7 +221,20 @@ const initializeDB = async () => {
     image: '/images/profiles/child_default_photo.jpg'
   }
   await chai.request(server).post(`/api/users/${user.user_id}/children`).send(child).set('Authorization', user.token)
+
+  const offer2 = {
+    material_name: 'offro libro'
+  }
+  await chai.request(server).post(`/api/groups/${group.group_id}/materialOffers`).send(offer2).set('Authorization', user.token)
+  const offer = await MaterialOffer.findOne({ material_name: 'offro libro' })
+
+  const booking2 = {
+    start: '2019-03-27T22:00:00.000Z',
+    end: '2019-04-27T23:00:00.000Z'
+  }
+  await chai.request(server).post(`/api/materials/offers/${offer.offer_id}/book`).send(booking2).set('Authorization', user.token)
 }
+
 describe('Test', () => {
   before('Initializing DB', async () => {
     await initializeDB()

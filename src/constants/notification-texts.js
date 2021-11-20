@@ -100,6 +100,16 @@ const en = {
       header: 'Group Announcements',
       description: ' posted a new reply in group '
     }
+  ],
+  materials: [
+    {
+      header: 'Material request satisfied',
+      description: ' satisfied your material request: '
+    },
+    {
+      header: 'Material offer deleted',
+      description: 'The following material offer is not available anymore: '
+    }
   ]
 }
 const it = {
