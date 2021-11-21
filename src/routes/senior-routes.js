@@ -2,7 +2,6 @@ const express = require('express')
 const router = new express.Router()
 
 const Senior = require('../models/senior')
-const Member = require('../models/member')
 
 // S-21b
 router.get('/:id', (req, res, next) => {
@@ -10,17 +9,12 @@ router.get('/:id', (req, res, next) => {
     return res.status(401).send('Unauthorized')
   }
   const id = req.params.id
-  Senior.findOne({ senior_id: id }).then(senior => { // TODO dovrebbe controllare che l'utente sia giusto
+  Senior.findOne({ senior_id: id, user_id: req.user_id }).then(senior => {
     if (!senior) {
       return res.status(404).send("Senior doesn't exist")
     }
 
-    Member.findOne({ user_id: req.user_id }) // TODO probabilmente sbagliato
-      .then(() => {
-        res.json(senior)
-      }).catch((error) => {
-        return res.status(404).send("Senior doesn't exist")
-      })
+    res.json(senior)
   }).catch(next)
 })
 
