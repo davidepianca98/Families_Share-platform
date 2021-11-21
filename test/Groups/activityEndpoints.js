@@ -728,7 +728,7 @@ describe('/Patch/api/groups/groupId/activities/activityId/timeslots/timeslotId',
     const user = await User.findOne({ email: 'test@email.com' })
     const group = await Group.findOne({ name: 'Test Group Edit' })
     const activity = await Activity.findOne({ group_id: group.group_id })
-    const senior = await Senior.findOne({ user_id: user.user_id })
+    const senior = await Senior.findOne({ user_id: user.user_id, given_name: 'Test 3' })
     const timeslotResp = await chai
       .request(server)
       .get(

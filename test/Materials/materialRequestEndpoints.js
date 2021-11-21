@@ -90,7 +90,7 @@ describe('/Put/api/materials/requests/id', () => {
           .set('Authorization', user.token)
           .send(request)
           .end((err, res) => {
-            res.should.have.status(401)
+            res.should.have.status(404)
             done()
           })
       })
@@ -158,7 +158,7 @@ describe('/Delete/api/materials/requests/id', () => {
           .delete(`/api/materials/requests/${request.material_request_id}`)
           .set('Authorization', user.token)
           .end((err, res) => {
-            res.should.have.status(401)
+            res.should.have.status(404)
             done()
           })
       })

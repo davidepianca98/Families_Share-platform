@@ -86,6 +86,39 @@ describe('/Post/api/users/userId/seniors', () => {
   })
 })
 
+describe('/Post/api/users/userId/seniors', () => {
+  it('it should create a senior for a given user when request user_id matches token user_id', (done) => {
+    User.findOne({ email: 'test@email.com' }, (err, user) => {
+      const senior = {
+        given_name: 'Test 3',
+        gender: 'male',
+        birthdate: new Date(),
+        other_info: 'no',
+        background: '#00838F',
+        image: '/images/profiles/child_default_photo.jpg',
+        availabilities: [
+          {
+            weekDay: 3,
+            startTimeHour: 21,
+            startTimeMinute: 0,
+            endTimeHour: 24,
+            endTimeMinute: 0
+          }
+        ]
+      }
+      chai
+        .request(server)
+        .post(`/api/users/${user.user_id}/seniors`)
+        .set('Authorization', user.token)
+        .send(senior)
+        .end((err, res) => {
+          res.should.have.status(200)
+          done()
+        })
+    })
+  })
+})
+
 describe('/Get/api/users/userId/seniors', () => {
   it('it should fetch the seniors of a user when he is authenticated', (done) => {
     User.findOne({ email: 'test@email.com' }, (err, user) => {

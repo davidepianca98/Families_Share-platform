@@ -31,14 +31,6 @@ router.put('/:id', async (req, res, next) => {
   const id = req.params.id
   const materialRequest = req.body
 
-  MaterialRequest.findOne({ material_request_id: id }).then(request => {
-    if (request) {
-      if (req.user_id !== request.created_by) {
-        return res.status(401).send('Unauthorized')
-      }
-    }
-  })
-
   MaterialRequest.findOneAndUpdate(
     { material_request_id: id, created_by: req.user_id },
     { material_name: materialRequest.material_name })
@@ -55,13 +47,6 @@ router.delete('/:id', (req, res, next) => {
     return res.status(401).send('Unauthorized')
   }
   const id = req.params.id
-  MaterialRequest.findOne({ material_request_id: id }).then(request => {
-    if (request) {
-      if (req.user_id !== request.created_by) {
-        return res.status(401).send('Unauthorized')
-      }
-    }
-  })
 
   MaterialRequest.deleteOne(
     { material_request_id: id, created_by: req.user_id }

@@ -29,7 +29,7 @@ describe('/Put/api/seniors/id', () => {
 })
 
 describe('/Put/api/seniors/id', () => {
-  it('it should update a senior when the user is authenticated and in relationship with the senior', done => {
+  it('it should not update a senior when the user is authenticated and not in relationship with the senior', done => {
     User.findOne({ email: 'test3@email.com' }, (error, user) => {
       Senior.findOne({ given_name: 'My Grandpa' }, (err, senior) => {
         senior.given_name = 'Granny'
