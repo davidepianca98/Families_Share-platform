@@ -7,8 +7,6 @@ const { chai } = common
 const User = require('../../src/models/user')
 const Senior = require('../../src/models/senior')
 
-// TODO test more edge cases
-
 describe('/Put/api/seniors/id', () => {
   it('it should update a senior when the user is authenticated and in relationship with the senior', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {

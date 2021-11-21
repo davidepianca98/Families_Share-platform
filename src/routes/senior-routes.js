@@ -4,7 +4,7 @@ const router = new express.Router()
 const Senior = require('../models/senior')
 const Member = require('../models/member')
 
-// S-21b 
+// S-21b
 router.get('/:id', (req, res, next) => {
   if (!req.user_id) {
     return res.status(401).send('Unauthorized')
@@ -24,7 +24,7 @@ router.get('/:id', (req, res, next) => {
   }).catch(next)
 })
 
-// S-22c 
+// S-22c
 router.put('/:id', async (req, res, next) => {
   if (!req.user_id) {
     return res.status(401).send('Unauthorized')
@@ -53,7 +53,7 @@ router.put('/:id', async (req, res, next) => {
     }).catch(next)
 })
 
-// S-23b 
+// S-23b
 router.delete('/:id', (req, res, next) => {
   if (!req.user_id) {
     return res.status(401).send('Unauthorized')

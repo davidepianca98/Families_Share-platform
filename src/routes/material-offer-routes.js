@@ -55,7 +55,7 @@ router.delete('/:id', async (req, res, next) => {
     return res.status(404).send("Offer doesn't exist")
   }
 
-  let futureBookings = await MaterialBooking.find({  material_offer_id: id, start: { '$gte': Date.now() } })
+  let futureBookings = await MaterialBooking.find({ material_offer_id: id, start: { '$gte': Date.now() } })
   await nh.materialOfferDeletedNotification(offer, futureBookings)
 
   MaterialBooking.deleteMany({ material_offer_id: id }).then(() => {

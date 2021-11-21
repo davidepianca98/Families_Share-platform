@@ -5,6 +5,8 @@ const Member = require('../models/member')
 const Group = require('../models/group')
 const Device = require('../models/device')
 const User = require('../models/user')
+const MaterialBooking = require('../models/material-booking')
+const MaterialOffer = require('../models/material-offer')
 const texts = require('../constants/notification-texts')
 
 const { Expo } = require('expo-server-sdk')
@@ -528,6 +530,80 @@ async function materialOfferDeletedNotification (offer, bookings) {
   await sendPushNotifications(messages)
 }
 
+async function sendMaterialNotifications (id, user_id, offer) {
+  const subject = await Profile.findOne({ user_id: user_id })
+  const user = await User.findOne({ user_id: user_id })
+  const device = await Device.findOne({ user_id: user_id })
+
+  const notifications = [{
+    owner_type: 'user',
+    owner_id: user_id,
+    type: 'materials',
+    code: id,
+    read: false,
+    subject: `${subject.given_name} ${subject.family_name}`,
+    object: `${offer.material_name}`
+  }]
+  await Notification.create(notifications)
+  const language = user.language
+  if (device) {
+    await sendPushNotifications([{
+      to: device.device_id,
+      sound: 'default',
+      title: texts[language]['materials'][id]['header'],
+      body: `${texts[language]['materials'][id]['description']} ${offer.material_name}`
+    }])
+  }
+}
+
+async function materialOfferExpiringNotifications () {
+  // Check if the booking is about to expire
+  let now = Date.now()
+  let tomorrow = new Date(now)
+  tomorrow.setDate(now.getDate() + 1)
+
+  // Get bookings still in act and withing a day of expiration
+  let bookings = await MaterialBooking.find({
+    $and: [
+      { start: { '$lte': now } },
+      { end: { '$gte': now } },
+      { end: { '$lte': tomorrow } }
+    ]
+  })
+  // Get relative offers if the material is still borrowed
+  let offers = await MaterialOffer.find({ material_offer_id: { '$in': bookings.map(b => b.material_offer_id) }, borrowed: true })
+  for (let booking of bookings) {
+    if (booking.material_offer_id in offers.map(b => b.material_offer_id)) {
+      let offer = offers.find(o => o.material_offer_id === booking.material_offer_id)
+      await sendMaterialNotifications(2, booking.user, offer)
+    }
+  }
+}
+
+// S-10c
+async function materialOfferBorrowedNotifications () {
+  // TODO check it's correct
+  let now = Date.now()
+  let yesterday = new Date(now)
+  yesterday.setDate(now.getDate() - 1)
+
+  // Get bookings still in act and withing a day of expiration
+  let bookings = await MaterialBooking.find({
+    $and: [
+      { start: { '$lte': now } },
+      { start: { '$gte': yesterday } }
+    ]
+  })
+  // Get relative offers if the material is still borrowed
+  let offers = await MaterialOffer.find({ material_offer_id: { '$in': bookings.map(b => b.material_offer_id) }, borrowed: true })
+  for (let booking of bookings) {
+    if (booking.material_offer_id in offers.map(b => b.material_offer_id)) {
+      let offer = offers.find(o => o.material_offer_id === booking.material_offer_id)
+      await sendMaterialNotifications(3, booking.user, offer)
+    }
+  }
+}
+
 function getNotificationDescription (notification, language) {
   const {
     type, code, subject, object
@@ -608,6 +684,10 @@ function getNotificationDescription (notification, language) {
           return `${subject} ${description} ${object}.`
         case 1:
           return `${subject} ${description}`
+        case 2:
+          return `${subject} ${description} ${object}.`
+        case 3:
+          return `${subject} ${description} ${object}.`
         default:
           return ''
       }
@@ -660,5 +740,7 @@ module.exports = {
   newRequestNotification,
   newReplyNotification,
   materialRequestSatisfiedNotification,
-  materialOfferDeletedNotification
+  materialOfferDeletedNotification,
+  materialOfferExpiringNotifications,
+  materialOfferBorrowedNotifications
 }

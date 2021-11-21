@@ -7,8 +7,6 @@ const { chai } = common
 const User = require('../../src/models/user')
 const MaterialRequest = require('../../src/models/material-request')
 
-// TODO test more edge cases
-
 describe('/Get/api/materials/requests/id', () => {
   it('it should NOT fetch a material request when the user is NOT group member', done => {
     User.findOne({ email: 'test5@email.com' }, (error, user) => {

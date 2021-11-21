@@ -109,6 +109,14 @@ const en = {
     {
       header: 'Material offer deleted',
       description: 'The following material offer is not available anymore: '
+    },
+    {
+      header: 'It\'s time to give back the material',
+      description: 'The following material booking is about to expire: '
+    },
+    {
+      header: 'The material you booked is not yet available',
+      description: 'The following material is still borrowed: '
     }
   ]
 }
