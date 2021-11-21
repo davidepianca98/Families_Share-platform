@@ -4,7 +4,7 @@ const router = new express.Router()
 const Senior = require('../models/senior')
 const Member = require('../models/member')
 
-// S-21b Ritorna i dettagli dell’istanza
+// S-21b 
 router.get('/:id', (req, res, next) => {
   if (!req.user_id) {
     return res.status(401).send('Unauthorized')
@@ -24,7 +24,7 @@ router.get('/:id', (req, res, next) => {
   }).catch(next)
 })
 
-// S-22c Aggiorna l’istanza
+// S-22c 
 router.put('/:id', async (req, res, next) => {
   if (!req.user_id) {
     return res.status(401).send('Unauthorized')
@@ -32,6 +32,11 @@ router.put('/:id', async (req, res, next) => {
   const id = req.params.id
   const senior = req.body
   const filter = { senior_id: id, user_id: req.user_id }
+  if (senior) {
+    if (senior.user_id !== req.user_id) {
+      return res.status(401).send('Unauthorized')
+    }
+  }
   const update = {
     given_name: senior.given_name,
     gender: senior.gender,
@@ -48,7 +53,7 @@ router.put('/:id', async (req, res, next) => {
     }).catch(next)
 })
 
-// S-23b Elimina l’istanza
+// S-23b 
 router.delete('/:id', (req, res, next) => {
   if (!req.user_id) {
     return res.status(401).send('Unauthorized')
