@@ -11,6 +11,7 @@ import withLanguage from "./LanguageContext";
 import GroupMaterialsNavbar from "./GroupMaterialsNavbar";
 import DisplayText from "./GroupMaterialNotFound";
 import GroupMaterialOffersList from "./GroupMaterialOffersList";
+import MaterialRequestListItem from "./MaterialRequestListItem";
 
 const styles = {
   add: {
@@ -107,7 +108,7 @@ class GroupMaterials extends React.Component {
   };
 
   render() {
-    const { materialOffers, materialRequests, fetchedData } = this.state;
+    const { materialOffers, materialRequests, fetchedData, groupId } = this.state;
     const { language, history, classes } = this.props;
     const texts = Texts[language].groupMembers;
     const materialsPath = `/groups/${this.state.groupId}/materials`;
@@ -159,7 +160,24 @@ class GroupMaterials extends React.Component {
                       {...props}
                     />
                   ) : (
-                    <Componente />
+                    <div
+                        style={{ top: "11rem" }}
+                        id="groupMaterialsRequestContainer"
+                        className="horizontalCenter"
+                    >
+                      <ul>
+                        {materialRequests.map((material) => (
+                          <li key={material.material_request_id}>
+                            <MaterialRequestListItem
+                                materialRequest={material}
+                                groupId={groupId}
+                                history={history}
+                                language={language}
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                 </React.Fragment>
               )}
@@ -181,7 +199,7 @@ class GroupMaterials extends React.Component {
                     >
                       <GroupMaterialOffersList
                         materials={materialOffers}
-                        group={this.state.groupId}
+                        group={groupId}
                       />
                     </div>
                   )}

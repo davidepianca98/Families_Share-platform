@@ -21,6 +21,7 @@ const materialRequestSchema = new mongoose.Schema({
     type: String,
     required: true
   }
+  //manca color, description, location
 }, { timestamps: true, toJSON: { virtuals: true } })
 
 materialRequestSchema.index({ group_id: 1, createdAt: -1 })

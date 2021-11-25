@@ -1634,6 +1634,16 @@
   top: 6rem;
   padding-bottom: 1rem;
 }
+#groupMaterialsOfferContainer {
+  width: 94%;
+  top: 6rem;
+  padding-bottom: 1rem;
+}
+#groupMaterialsRequestContainer {
+  width: 94%;
+  top: 6rem;
+  padding-bottom: 1rem;
+}
 #groupActivitiesContainer h1 {
   font-size: 1.6rem;
   color: rgba(0, 0, 0, 0.9);
