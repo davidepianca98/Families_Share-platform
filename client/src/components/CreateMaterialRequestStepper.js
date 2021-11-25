@@ -144,16 +144,13 @@ class CreateMaterialRequestStepper extends React.Component {
         color: colors[Math.floor(Math.random() * colors.length)],
         description: "",
         location: "",
-        link: ""
       },
       dates: {
         selectedDays: [],
-        /*repetition: false,
-        repetitionType: "",*/
         lastSelect: new Date()
       },
       timeslots: {
-        activityTimeslots: [],
+        materialTimeslots: [],
         differentTimeslots: false
       },
       stepWasValidated: false,
@@ -182,13 +179,13 @@ class CreateMaterialRequestStepper extends React.Component {
     }
   };
 
-  createActivity = () => {
+  createMaterialRequest = () => {
     const { match, history, enqueueSnackbar, language } = this.props;
-    const texts = Texts[language].createActivityStepper;
+    const texts = Texts[language].createMaterialRequestStepper;
     const { groupId } = match.params;
     const { information, dates, timeslots } = this.state;
     const userId = JSON.parse(localStorage.getItem("user")).id;
-    const activity = this.formatDataToActivity(
+    const materialRequest = this.formatDataToMaterialRequest(
       information,
       dates,
       timeslots,
@@ -203,7 +200,7 @@ class CreateMaterialRequestStepper extends React.Component {
     );
     this.setState({ creating: true });
     axios
-      .post(`/api/groups/${groupId}/activities`, { activity, events })
+      .post(`/api/groups/${groupId}/materialRequests`,  materialRequest) //TODO
       .then(response => {
         if (response.data.status === "pending") {
           enqueueSnackbar(texts.pendingMessage, {
@@ -219,16 +216,14 @@ class CreateMaterialRequestStepper extends React.Component {
       });
   };
 
-  formatDataToActivity = (information, dates, timeslots, groupId, userId) => {
+  formatDataToMaterialRequest = (information, dates, timeslots, groupId, userId) => { /*prevoius function name: formatDataToActivity*/
     return {
       group_id: groupId,
       creator_id: userId,
-      name: information.name,
+      material_name: information.name,
       color: information.color,
       description: information.description,
       location: information.location,
-      /*repetition: dates.repetition,
-      repetition_type: dates.repetitionType,*/
       different_timeslots: timeslots.differentTimeslots
     };
   };
@@ -236,7 +231,7 @@ class CreateMaterialRequestStepper extends React.Component {
   formatDataToEvents = (information, dates, timeslots, groupId) => {
     const events = [];
     dates.selectedDays.forEach((date, index) => {
-      timeslots.activityTimeslots[index].forEach(timeslot => {
+      timeslots.materialTimeslots[index].forEach(timeslot => {
         const dstart = new Date(date);
         const dend = new Date(date);
         const { startTime, endTime } = timeslot;
@@ -255,9 +250,9 @@ class CreateMaterialRequestStepper extends React.Component {
           dend.setDate(dend.getDate() + 1);
         }
         const event = {
-          description: timeslot.description,
+          /*description: timeslot.description,
           location: timeslot.location,
-          summary: timeslot.name,
+          summary: timeslot.name,*/
           start: {
             dateTime: dstart,
             date: null
@@ -268,19 +263,9 @@ class CreateMaterialRequestStepper extends React.Component {
           },
           extendedProperties: {
             shared: {
-              /*requiredParents: timeslot.requiredParents,
-              requiredChildren: timeslot.requiredChildren,
-              cost: timeslot.cost,
-              parents: JSON.stringify([]),
-              children: JSON.stringify([]),
-              externals: JSON.stringify([]),*/
               status: "ongoing",
-              /*link: timeslot.link,
-              category: timeslot.category,*/
-              activityColor: information.color,
-
+              //activityColor: information.color,
               groupId,
-              /*repetition: dates.repetition ? dates.repetitionType : "none",*/
               start: startTime.substr(0, startTime.indexOf(":")),
               end: endTime.substr(0, startTime.indexOf(":"))
             }
@@ -295,7 +280,7 @@ class CreateMaterialRequestStepper extends React.Component {
   handleContinue = () => {
     const { activeStep } = this.state;
     if (activeStep === 2) {
-      this.createActivity();
+      this.createMaterialRequest();
     } else {
       this.setState({
         activeStep: activeStep + 1
@@ -344,7 +329,6 @@ class CreateMaterialRequestStepper extends React.Component {
           <CreateMaterialOfferTimeslots
             materialName={information.name}
             materialLocation={information.location}
-            /*activityLink={information.link}*/
             dates={dates.selectedDays}
             {...timeslots}
             handleSubmit={this.handleTimeslotsSubmit}
@@ -388,32 +372,27 @@ class CreateMaterialRequestStepper extends React.Component {
     const { dates: days } = this.state;
     const { selectedDays, repetitionType } = days;
     let completedLabel = "";
-    if (repetitionType === "monthly") {
-      const selectedDay = moment(selectedDays[0]);
-      completedLabel = `Every ${selectedDay.format("Do ")}`;
-    } else {
-      const eachMonthsDates = {};
-      selectedDays.forEach(selectedDay => {
-        const key = moment(selectedDay).format("MMMM YYYY");
-        if (eachMonthsDates[key] === undefined) {
-          eachMonthsDates[key] = [selectedDay];
-        } else {
-          eachMonthsDates[key].push(selectedDay);
-        }
-      });
-      const months = Object.keys(eachMonthsDates);
-      const dates = Object.values(eachMonthsDates);
-      for (let i = 0; i < months.length; i += 1) {
-        let monthString = "";
-        dates[i].forEach(date => {
-          monthString += ` ${moment(date).format("DD")},`;
-        });
-        monthString = monthString.substr(0, monthString.length - 1);
-        monthString += ` ${months[i]}`;
-        completedLabel += ` ${monthString}, `;
+    const eachMonthsDates = {};
+    selectedDays.forEach(selectedDay => {
+      const key = moment(selectedDay).format("MMMM YYYY");
+      if (eachMonthsDates[key] === undefined) {
+        eachMonthsDates[key] = [selectedDay];
+      } else {
+        eachMonthsDates[key].push(selectedDay);
       }
-      completedLabel = completedLabel.substr(0, completedLabel.length - 2);
+    });
+    const months = Object.keys(eachMonthsDates);
+    const dates = Object.values(eachMonthsDates);
+    for (let i = 0; i < months.length; i += 1) {
+      let monthString = "";
+      dates[i].forEach(date => {
+        monthString += ` ${moment(date).format("DD")},`;
+      });
+      monthString = monthString.substr(0, monthString.length - 1);
+      monthString += ` ${months[i]}`;
+      completedLabel += ` ${monthString}, `;
     }
+    completedLabel = completedLabel.substr(0, completedLabel.length - 2);
     return (
       <div style={{ paddingTop: "2 rem" }}>
         <div className="row-nogutters">{label}</div>
@@ -426,7 +405,7 @@ class CreateMaterialRequestStepper extends React.Component {
 
   render() {
     const { language, classes } = this.props;
-    const texts = Texts[language].createActivityStepper;
+    const texts = Texts[language].createMaterialRequestStepper;
     const steps = texts.stepLabels;
     const { activeStep, stepWasValidated, creating } = this.state;
     return (

@@ -1185,6 +1185,14 @@ const en = {
     name: "Name of the material",//TODO
     location: "Location (optional)"//TODO
   },
+  createMaterialRequestStepper: { //TODO
+    pendingMessage: "The material request is pending confirmation from an admin",
+    continue: "Continue",
+    cancel: "Cancel",
+    finish: "Create",
+    save: "Save",
+    stepLabels: ["Information", "Dates", "Timeslots"]
+  },
   timeslotsContainer: {
     addTimeslot: "ADD TIMESLOT",
     timeslot: "timeslot",
@@ -2487,6 +2495,14 @@ const nl = {
     description: "Beschrijving (optioneel)",//TODO
     name: "Naam van de activiteit",//TODO
     location: "Plaats (optioneel)" //TODO
+  },
+  createMaterialRequestStepper: { //TODO
+    pendingMessage: "The material request is pending confirmation from an admin",
+    continue: "Continue",
+    cancel: "Cancel",
+    finish: "Create",
+    save: "Save",
+    stepLabels: ["Information", "Dates", "Timeslots"]
   },
   timeslotsContainer: {
     addTimeslot: "Voeg timeslot toe",
@@ -3792,6 +3808,14 @@ const it = {
     name: "Nome del materiale",//TODO
     location: "Posizione (opzionale)"//TODO
   },
+  createMaterialRequestStepper: { //TODO
+    pendingMessage:"La richiesta di materiale è in attesa di conferma da parte di un amministratore",
+    continue: "Continua",
+    cancel: "Cancella",
+    finish: "Crea",
+    save: "Salva",
+    stepLabels: ["Informazioni", "Date", "Orari"]
+  },
   timeslotsContainer: {
     addTimeslot: "AGGIUNGI ORARI",
     timeslot: "orario",
@@ -5096,6 +5120,14 @@ const el = {
     description: "Description (optional)", //TODO
     name: "Name of the material",//TODO
     location: "Location (optional)"//TODO
+  },
+  createMaterialRequestStepper: { //TODO
+    pendingMessage: "The material request is pending confirmation from an admin",
+    continue: "Continue",
+    cancel: "Cancel",
+    finish: "Create",
+    save: "Save",
+    stepLabels: ["Information", "Dates", "Timeslots"]
   },
   timeslotsContainer: {
     addTimeslot: "Προσθήκη χρονικής περιόδου",
@@ -6445,6 +6477,14 @@ const hu = {
     name: "Name of the material",//TODO
     location: "Location (optional)"//TODO
   },
+  createMaterialRequestStepper: { //TODO
+    pendingMessage: "The material request is pending confirmation from an admin",
+    continue: "Continue",
+    cancel: "Cancel",
+    finish: "Create",
+    save: "Save",
+    stepLabels: ["Information", "Dates", "Timeslots"]
+  },
   timeslotsContainer: {
     addTimeslot: "Időpont hozzáadása",
     timeslot: "Időpont",
@@ -7510,6 +7550,14 @@ const fr = {
       "Dates",
       "Créneaux horaires"
     ]
+  },
+  "createMaterialRequestStepper": { //TODO
+    "pendingMessage": "The material request is pending confirmation from an admin",
+    "continue": "Continue",
+    "cancel": "Cancel",
+    "finish": "Create",
+    "save": "Save",
+    "stepLabels": ["Information", "Dates", "Timeslots"]
   },
   "createActivityInformation": {
     "link": "Lien (facultatif)",

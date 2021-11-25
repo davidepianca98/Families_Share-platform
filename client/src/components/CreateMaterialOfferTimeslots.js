@@ -9,6 +9,7 @@ class CreateMaterialOfferTimeslots extends React.Component {
   constructor(props) {
     super(props);
     const { materialTimeslots, dates, differentTimeslots } = this.props;
+    console.log(materialTimeslots);
     for (let i = 0; i < dates.length; i += 1) {
       if (materialTimeslots[i] === undefined) materialTimeslots.push([]);
     }
