@@ -1644,15 +1644,6 @@
   top: 6rem;
   padding-bottom: 1rem;
 }
-#groupActivitiesContainer h1 {
-  font-size: 1.6rem;
-  color: rgba(0, 0, 0, 0.9);
-  line-height: 1.5;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .activityListItemIcon {
   position: absolute;
   right: 0;
@@ -1667,6 +1658,15 @@
   left: -1.8rem;
   color: #ffffff;
   font-size: 1.3rem;
+}
+#groupActivitiesContainer h1 {
+  font-size: 1.6rem;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 1.5;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #groupActivitiesContainer h2 {
   font-size: 1.4rem;
@@ -1691,6 +1691,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+#groupMaterialsContainer h2 {
+  font-size: 1.4rem;
+  color: rgba(0, 0, 0, 0.54);
+  display: inline-block;
 }
 #groupMaterialsContainer button {
   background-color: #0a848f;

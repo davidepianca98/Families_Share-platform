@@ -84,7 +84,7 @@ class MaterialRequestListItem extends React.Component {
         const { materialRequest } = this.state;
         const selectedDates = materialRequest.dates;
         console.log("material request list item: " + selectedDates)
-        const texts = Texts[language].activityListItem;
+        //const texts = Texts[language].activityListItem;
         let datesString = "";
         /*if (materialRequest.repetition_type === "monthly") {
             datesString = `${texts.every} ${moment(selectedDates[0]).format("Do")}`;
@@ -144,13 +144,13 @@ class MaterialRequestListItem extends React.Component {
                             <div className="row no-gutters">
                                 <h1>{materialRequest.material_name}</h1>
                             </div>
-                            {/*<div className="row no-gutters">
+                            {<div className="row no-gutters">
                                 <i
                                     className="far fa-calendar-alt"
                                     style={{ marginRight: "1rem" }}
                                 />
-                                <h2>{this.getDatesString()}</h2>
-                            </div>*/}
+                                <h2>{materialRequest.createdAt}</h2>
+                            </div>}
                         </div>
                     </div>
                     <div

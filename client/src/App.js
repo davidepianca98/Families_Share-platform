@@ -169,6 +169,10 @@ const GroupMaterials = Loadable({
   loader: () => import("./components/GroupMaterials"),
   loading: () => Loading,
 });
+const MaterialRequestScreen = Loadable({
+  loader: () => import("./components/MaterialRequestScreen"),
+  loading: () => Loading,
+});
 
 axios.interceptors.request.use(
   (config) => {
@@ -392,10 +396,10 @@ class App extends React.Component {
                 path="/groups/:groupId/materials/:materialId/edit"
                 component={EditMaterialScreen}
               />*/}
-              {/*<PrivateRoute
-                path="/groups/:groupId/materials/:materialId"
-                component={MaterialScreen}
-              />*/}
+              <PrivateRoute
+                path="/groups/:groupId/materials/requests/:materialId"
+                component={MaterialRequestScreen}
+              />
               <PrivateRoute
                 path="/groups/:groupId/materials"
                 component={GroupMaterials}

@@ -185,7 +185,6 @@ class GroupActivities extends React.Component {
 
   render() {
     const { classes, language, history, userIsAdmin } = this.props;
-    console.log(classes);
     const {
       optionsModalIsOpen,
       confirmDialogIsOpen,
