@@ -8,7 +8,6 @@ import * as path from "lodash.get";
 import { withSnackbar } from "notistack";
 import Texts from "../Constants/Texts";
 import withLanguage from "./LanguageContext";
-import TimeslotsList from "./TimeslotsList";
 import ConfirmDialog from "./ConfirmDialog";
 import OptionsModal from "./OptionsModal";
 import LoadingSpinner from "./LoadingSpinner";
@@ -53,6 +52,18 @@ const getMaterialRequest = (materialRequestId) => {
         });
 };
 
+const getGroupMembers = (groupId) => {
+    return axios
+        .get(`/api/groups/${groupId}/members`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            Log.error(error);
+            return [];
+        });
+};
+
 class MaterialRequestScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -77,56 +88,17 @@ class MaterialRequestScreen extends React.Component {
         const userId = JSON.parse(localStorage.getItem("user")).id;
         const materialRequest = await getMaterialRequest(materialId, groupId);
         console.log("---------" + Object.keys(materialRequest));
-        const temp = [];
-        /*const groupMembers = await getGroupMembers(groupId);
+        const groupMembers = await getGroupMembers(groupId);
         const userIsAdmin = groupMembers.filter(
             (member) =>
                 member.user_id === userId &&
                 member.group_accepted &&
                 member.user_accepted
-        )[0].admin;*/
-        const userIsCreator = userId === materialRequest.creator_id;
-        const userCanEdit = /*userIsAdmin ||*/ userIsCreator;
+        )[0].admin;
+        const userIsCreator = userId === materialRequest.created_by;
+        const userCanEdit = userIsAdmin || userIsCreator;
         this.setState({ materialRequest, fetchedMaterialRequestData: true, userCanEdit });
-    }
-
-    handleRedirect = (suspended, child_id) => {
-        const { history } = this.props;
-        if (!suspended) {
-            history.push(`/profiles/groupmember/children/${child_id}`);
-        }
     };
-
-    renderList = (list, type) => {
-        const { classes } = this.props;
-        return list.map((profile, index) => (
-            <li key={index} style={{ display: "block" }}>
-                <div className="row" style={{ margin: "1rem 0" }}>
-                    <Avatar
-                        route={
-                            type === "parents"
-                                ? `/profiles/groupmember/children/${profile.child_id}`
-                                : `/profiles/${profile.user_id}/info`
-                        }
-                        className={classes.avatar}
-                        thumbnail={path(profile, ["image", "path"])}
-                        disabled={profile.suspended}
-                    />
-                    <div
-                        role="button"
-                        tabIndex={-42}
-                        className="participantsText"
-                        onClick={() =>
-                            this.handleRedirect(profile.suspended, profile.child_id)
-                        }
-                    >
-                        {`${profile.given_name} ${profile.family_name}`}
-                    </div>
-                </div>
-            </li>
-        ));
-    };
-
 
     handleEdit = () => {
         const { history } = this.props;
@@ -176,7 +148,7 @@ class MaterialRequestScreen extends React.Component {
         const { groupId, materialId } = match.params;
         this.setState({ pendingRequest: true });
         axios
-            .delete(`/api/groups/${groupId}/activities/${materialId}`)
+            .delete(`/api/groups/${groupId}/activities/${materialId}`)//todo
             .then((response) => {
                 Log.info(response);
                 history.goBack();

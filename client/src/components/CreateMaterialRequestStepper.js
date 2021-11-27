@@ -224,7 +224,6 @@ class CreateMaterialRequestStepper extends React.Component {
       color: information.color,
       description: information.description,
       location: information.location,
-      different_timeslots: timeslots.differentTimeslots
     };
   };
 
