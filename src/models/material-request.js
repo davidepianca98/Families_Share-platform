@@ -14,6 +14,15 @@ const materialRequestSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  location: {
+    type: String
+  },
+  color: {
+    type: String
+  },
+  description: {
+    type: String
+  },
   satisfied_by: {
     type: String
   },
@@ -21,7 +30,6 @@ const materialRequestSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-  //manca color, description, location
 }, { timestamps: true, toJSON: { virtuals: true } })
 
 materialRequestSchema.index({ group_id: 1, createdAt: -1 })
