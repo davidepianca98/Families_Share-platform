@@ -21,14 +21,14 @@ class GroupMaterialsNavbar extends React.Component {
     this.setState({ activeTab: event.target.id });
     const { history } = this.props;
     const { pathname } = history.location;
-    const parentPath = pathname.slice(0, pathname.lastIndexOf("/"));  
+    const parentPath = pathname.slice(0, pathname.lastIndexOf("/"));
     history.replace(`${parentPath}/${event.target.id}`);
   }
 
   render() {
     const { language } = this.props;
     const { activeTab } = this.state;
-    const texts = Texts[language].groupNewsNavbar;
+    const texts = Texts[language].groupMaterialsNavbar;
     return (
       <div
         role="button"
@@ -42,7 +42,7 @@ class GroupMaterialsNavbar extends React.Component {
             id="requests"
             className={activeTab === "requests" ? "groupNewsNavTabActive" : ""}
           >
-            RICHIESTE
+            {texts.requests}
           </h1>
         </div>
         <div className="col-5-10">
@@ -50,7 +50,7 @@ class GroupMaterialsNavbar extends React.Component {
             id="offers"
             className={activeTab === "offers" ? "groupNewsNavTabActive" : ""}
           >
-            OFFERTE
+            {texts.offers}
           </h1>
         </div>
       </div>
@@ -62,5 +62,5 @@ export default withRouter(withLanguage(GroupMaterialsNavbar));
 
 GroupMaterialsNavbar.propTypes = {
   language: PropTypes.string,
-  history: PropTypes.object
+  history: PropTypes.object,
 };

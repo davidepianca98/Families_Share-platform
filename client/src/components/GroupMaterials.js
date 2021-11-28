@@ -108,9 +108,10 @@ class GroupMaterials extends React.Component {
   };
 
   render() {
-    const { materialOffers, materialRequests, fetchedData, groupId } = this.state;
+    const { materialOffers, materialRequests, fetchedData, groupId } =
+      this.state;
     const { language, history, classes } = this.props;
-    const texts = Texts[language].groupMembers;
+    const texts = Texts[language].groupMaterials;
     const materialsPath = `/groups/${this.state.groupId}/materials`;
     return fetchedData ? (
       <React.Fragment>
@@ -145,8 +146,7 @@ class GroupMaterials extends React.Component {
               </button>
             </div>
             <div className="col-7-10 ">
-              {/*sposta il testo in texts metti group.name?*/}
-              <h1 className="verticalCenter">Offerta e richiesta materiali</h1>
+              <h1 className="verticalCenter">{texts.header}</h1>
             </div>
           </div>
           <Switch>
@@ -155,24 +155,21 @@ class GroupMaterials extends React.Component {
               render={(props) => (
                 <React.Fragment>
                   {materialRequests.length === 0 ? (
-                    <DisplayText
-                      text="Non ci sono richieste da mostrare"
-                      {...props}
-                    />
+                    <DisplayText text={texts.noRequests} {...props} />
                   ) : (
                     <div
-                        style={{ top: "11rem" }}
-                        id="groupMaterialsRequestContainer"
-                        className="horizontalCenter"
+                      style={{ top: "11rem" }}
+                      id="groupMaterialsRequestContainer"
+                      className="horizontalCenter"
                     >
                       <ul>
                         {materialRequests.map((material) => (
                           <li key={material.material_request_id}>
                             <MaterialRequestListItem
-                                materialRequest={material}
-                                groupId={groupId}
-                                history={history}
-                                language={language}
+                              materialRequest={material}
+                              groupId={groupId}
+                              history={history}
+                              language={language}
                             />
                           </li>
                         ))}
@@ -187,10 +184,7 @@ class GroupMaterials extends React.Component {
               render={(props) => (
                 <React.Fragment>
                   {materialOffers.length === 0 ? (
-                    <DisplayText
-                      text="Non ci sono offerte da mostrare"
-                      {...props}
-                    />
+                    <DisplayText text={texts.noOffers} {...props} />
                   ) : (
                     <div
                       style={{ top: "11rem" }}
@@ -214,10 +208,6 @@ class GroupMaterials extends React.Component {
     );
   }
 }
-
-const Componente = () => {
-  return <div>testo</div>;
-};
 
 GroupMaterials.propTypes = {
   group: PropTypes.object,

@@ -1,12 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
-import { Skeleton } from "antd";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
-import Texts from "../Constants/Texts";
 import withLanguage from "./LanguageContext";
-import Log from "./Log";
 
 class MaterialOfferListItem extends React.Component {
   constructor(props) {
@@ -17,10 +13,7 @@ class MaterialOfferListItem extends React.Component {
 
   async componentDidMount() {
     const { material } = this.state;
-    const userId = JSON.parse(localStorage.getItem("user")).id;
-    const { groupId } = this.props;
-    const materialId = material.material_offer_id;
-    this.setState({ fetchedTimeslots: true, material });
+    this.setState({ material });
   }
 
   handleMaterialClick = (event) => {
@@ -29,9 +22,13 @@ class MaterialOfferListItem extends React.Component {
     history.push(`${pathname}/${event.currentTarget.id}`);
   };
 
+  getDatesString = (date) => {
+    return moment(date).format("ll");
+  };
+
   render() {
-    const { material, fetchedTimeslots } = this.state;
-    return fetchedTimeslots ? (
+    const { material } = this.state;
+    return (
       <React.Fragment>
         <div
           role="button"
@@ -67,6 +64,7 @@ class MaterialOfferListItem extends React.Component {
                 </h2>
               </div>
               <div className="row no-gutters">
+                {/* TODO: controllare perchè chrome non fa vedere l'icona della */}
                 <i
                   className="far fa-map-marker-alt"
                   style={{ marginRight: "1rem" }}
@@ -90,8 +88,6 @@ class MaterialOfferListItem extends React.Component {
           </div>
         </div>
       </React.Fragment>
-    ) : (
-      <Skeleton avatar active paragraph={{ rows: 1 }} />
     );
   }
 }
