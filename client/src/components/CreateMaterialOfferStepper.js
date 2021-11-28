@@ -12,12 +12,9 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
-import moment from "moment";
 import axios from "axios";
 import withLanguage from "./LanguageContext";
 import CreateMaterialOfferInformation from "./CreateMaterialOfferInformation";
-import CreateMaterialOfferDates from "./CreateMaterialOfferDates";
-import CreateMaterialOfferTimeslots from "./CreateMaterialOfferTimeslots";
 import Texts from "../Constants/Texts";
 import Log from "./Log";
 import LoadingSpinner from "./LoadingSpinner";
@@ -145,14 +142,6 @@ class CreateMaterialOfferStepper extends React.Component {
         description: "",
         location: "",
       },
-      dates: {
-        selectedDays: [],
-        lastSelect: new Date(),
-      },
-      timeslots: {
-        materialTimeslots: [],
-        differentTimeslots: false,
-      },
       stepWasValidated: false,
       creating: false,
     };
@@ -183,24 +172,16 @@ class CreateMaterialOfferStepper extends React.Component {
     const { match, history, enqueueSnackbar, language } = this.props;
     const texts = Texts[language].createActivityStepper;
     const { groupId } = match.params;
-    const { information, dates, timeslots } = this.state;
+    const { information } = this.state;
     const userId = JSON.parse(localStorage.getItem("user")).id;
     const materialOffer = this.formatDataToMaterial(
       information,
-      dates,
-      timeslots,
       groupId,
       userId
     );
-    const events = this.formatDataToEvents(
-      information,
-      dates,
-      timeslots,
-      groupId
-    );
     this.setState({ creating: true });
     axios
-      .post(`/api/groups/${groupId}/materialOffers`, materialOffer) //, events})
+      .post(`/api/groups/${groupId}/materialOffers`, materialOffer)
       .then((response) => {
         if (response.data.status === "pending") {
           enqueueSnackbar(texts.pendingMessage, {
@@ -216,7 +197,7 @@ class CreateMaterialOfferStepper extends React.Component {
       });
   };
 
-  formatDataToMaterial = (information, dates, timeslots, groupId, userId) => {
+  formatDataToMaterial = (information, groupId, userId) => {
     return {
       group_id: groupId,
       creator_id: userId,
@@ -224,116 +205,21 @@ class CreateMaterialOfferStepper extends React.Component {
       color: information.color,
       description: information.description,
       location: information.location,
-      different_timeslots: timeslots.differentTimeslots,
     };
-  };
-
-  formatDataToEvents = (information, dates, timeslots, groupId) => {
-    const events = [];
-    dates.selectedDays.forEach((date, index) => {
-      timeslots.materialTimeslots[index].forEach((timeslot) => {
-        const dstart = new Date(date);
-        const dend = new Date(date);
-        const { startTime, endTime } = timeslot;
-        dstart.setHours(startTime.substr(0, startTime.indexOf(":")));
-        dstart.setMinutes(
-          startTime.substr(startTime.indexOf(":") + 1, startTime.length - 1)
-        );
-        dend.setHours(endTime.substr(0, endTime.indexOf(":")));
-        dend.setMinutes(
-          endTime.substr(endTime.indexOf(":") + 1, endTime.length - 1)
-        );
-        if (
-          startTime.substr(0, startTime.indexOf(":")) >
-          endTime.substr(0, endTime.indexOf(":"))
-        ) {
-          dend.setDate(dend.getDate() + 1);
-        }
-        const event = {
-          start: {
-            dateTime: dstart,
-            date: null,
-          },
-          end: {
-            dateTime: dend,
-            date: null,
-          },
-          extendedProperties: {
-            shared: {
-              status: "ongoing",
-              // activityColor: information.color,
-              groupId,
-              start: startTime.substr(0, startTime.indexOf(":")),
-              end: endTime.substr(0, startTime.indexOf(":")),
-            },
-          },
-        };
-        events.push(event);
-      });
-    });
-    return events;
-  };
-
-  handleContinue = () => {
-    const { activeStep } = this.state;
-    if (activeStep === 2) {
-      this.createMaterialOffer();
-    } else {
-      this.setState({
-        activeStep: activeStep + 1,
-      });
-    }
-  };
-
-  handleCancel = () => {
-    const { activeStep } = this.state;
-    this.setState({
-      activeStep: activeStep - 1,
-    });
   };
 
   handleInformationSubmit = (information, wasValidated) => {
     this.setState({ information, stepWasValidated: wasValidated });
   };
 
-  handleDatesSubmit = (dates, wasValidated) => {
-    this.setState({ dates, stepWasValidated: wasValidated });
-  };
-
-  handleTimeslotsSubmit = (timeslots, wasValidated) => {
-    this.setState({ timeslots, stepWasValidated: wasValidated });
-  };
-
   getStepContent = () => {
-    const { activeStep, information, dates, timeslots } = this.state;
-    switch (activeStep) {
-      case 0:
-        return (
-          <CreateMaterialOfferInformation
-            {...information}
-            handleSubmit={this.handleInformationSubmit}
-          />
-        );
-      case 1:
-        return (
-          <CreateMaterialOfferDates
-            {...dates}
-            handleSubmit={this.handleDatesSubmit}
-          />
-        );
-      case 2:
-        return (
-          <CreateMaterialOfferTimeslots
-            materialName={information.name}
-            materialLocation={information.location}
-            dates={dates.selectedDays}
-            {...timeslots}
-            handleSubmit={this.handleTimeslotsSubmit}
-          />
-        );
-      default:
-        return <div>Lorem Ipsum</div>;
-    }
+    const { information } = this.state;
+    return (
+      <CreateMaterialOfferInformation
+        {...information}
+        handleSubmit={this.handleInformationSubmit}
+      />
+    );
   };
 
   getStepLabel = (label, index) => {
@@ -343,12 +229,6 @@ class CreateMaterialOfferStepper extends React.Component {
     switch (index) {
       case 0:
         icon = "fas fa-info-circle";
-        break;
-      case 1:
-        icon = "fas fa-calendar-alt";
-        break;
-      case 2:
-        icon = "fas fa-clock";
         break;
       default:
         icon = "fas fa-exclamation";
@@ -365,44 +245,9 @@ class CreateMaterialOfferStepper extends React.Component {
     );
   };
 
-  getDatesCompletedLabel = (label) => {
-    const { dates: days } = this.state;
-    const { selectedDays } = days;
-    let completedLabel = "";
-    const eachMonthsDates = {};
-    selectedDays.forEach((selectedDay) => {
-      const key = moment(selectedDay).format("MMMM YYYY");
-      if (eachMonthsDates[key] === undefined) {
-        eachMonthsDates[key] = [selectedDay];
-      } else {
-        eachMonthsDates[key].push(selectedDay);
-      }
-    });
-    const months = Object.keys(eachMonthsDates);
-    const dates = Object.values(eachMonthsDates);
-    for (let i = 0; i < months.length; i += 1) {
-      let monthString = "";
-      dates[i].forEach((date) => {
-        monthString += ` ${moment(date).format("DD")},`;
-      });
-      monthString = monthString.substr(0, monthString.length - 1);
-      monthString += ` ${months[i]}`;
-      completedLabel += ` ${monthString}, `;
-    }
-    completedLabel = completedLabel.substr(0, completedLabel.length - 2);
-    return (
-      <div style={{ paddingTop: "2 rem" }}>
-        <div className="row-nogutters">{label}</div>
-        <div className="row-nogutters" style={{ opacity: 0.54 }}>
-          {completedLabel}
-        </div>
-      </div>
-    );
-  };
-
   render() {
     const { language, classes } = this.props;
-    const texts = Texts[language].createActivityStepper;
+    const texts = Texts[language].createMaterialOfferStepper;
     const steps = texts.stepLabels;
     const { activeStep, stepWasValidated, creating } = this.state;
     return (
@@ -417,11 +262,7 @@ class CreateMaterialOfferStepper extends React.Component {
                     icon={this.getStepLabel(label, index)}
                     className={classes.stepLabel}
                   >
-                    {activeStep > index && index === 1 ? (
-                      <div>{this.getDatesCompletedLabel(label)}</div>
-                    ) : (
-                      label
-                    )}
+                    {label}
                   </StepLabel>
                   <StepContent>
                     {this.getStepContent()}
@@ -431,7 +272,7 @@ class CreateMaterialOfferStepper extends React.Component {
                           disabled={!stepWasValidated}
                           variant="contained"
                           color="primary"
-                          onClick={this.handleContinue}
+                          onClick={this.createMaterialOffer}
                           className={
                             activeStep === steps.length - 1
                               ? classes.createButton
@@ -441,13 +282,6 @@ class CreateMaterialOfferStepper extends React.Component {
                           {activeStep === steps.length - 1
                             ? texts.finish
                             : texts.continue}
-                        </Button>
-                        <Button
-                          disabled={activeStep === 0}
-                          onClick={this.handleCancel}
-                          className={classes.cancelButton}
-                        >
-                          {texts.cancel}
                         </Button>
                       </div>
                     </div>

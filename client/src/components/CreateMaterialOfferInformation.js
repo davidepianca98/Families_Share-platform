@@ -8,27 +8,21 @@ import Texts from "../Constants/Texts";
 class CreateMaterialOfferInformation extends React.Component {
   constructor(props) {
     super(props);
-    const {
-      handleSubmit,
-      name,
-      location,
-      description,
-      cost,
-      color,
-    } = this.props;
+    const { handleSubmit, name, location, description, cost, color } =
+      this.props;
     this.state = { color, cost, description, location, name };
     handleSubmit(this.state, this.validate(this.state));
     autosize(document.querySelectorAll("textarea"));
   }
 
-  validate = state => {
+  validate = (state) => {
     if (state.color && state.name) {
       return true;
     }
     return false;
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const state = Object.assign({}, this.state);
     const { name, value } = event.target;
     const { handleSubmit } = this.props;
@@ -37,7 +31,7 @@ class CreateMaterialOfferInformation extends React.Component {
     this.setState(state);
   };
 
-  handleColorChange = color => {
+  handleColorChange = (color) => {
     const { handleSubmit } = this.props;
     const state = Object.assign({}, this.state);
     state.color = color.hex;
@@ -48,7 +42,7 @@ class CreateMaterialOfferInformation extends React.Component {
   render() {
     const { language } = this.props;
     const { name, color, description, location } = this.state;
-    const texts = Texts[language].createActivityInformation;
+    const texts = Texts[language].createMaterialOfferInformation;
     const rowStyle = { minHeight: "7rem" };
     return (
       <div id="createActivityInformationContainer">
@@ -60,7 +54,7 @@ class CreateMaterialOfferInformation extends React.Component {
             <input
               type="text"
               name="name"
-              placeholder="Nome del materiale"
+              placeholder={texts.name}
               value={name}
               className="center"
               onChange={this.handleChange}
@@ -78,7 +72,7 @@ class CreateMaterialOfferInformation extends React.Component {
               className="center"
               placeholder={texts.description}
               value={description}
-              onChange={event => {
+              onChange={(event) => {
                 this.handleChange(event);
                 autosize(document.querySelectorAll("textarea"));
               }}
@@ -110,7 +104,7 @@ class CreateMaterialOfferInformation extends React.Component {
           </div>
           <div className="col-8-10">
             <h1 className="verticalCenter" style={{ color }}>
-              Colore del materiale
+              {texts.color}
             </h1>
           </div>
         </div>

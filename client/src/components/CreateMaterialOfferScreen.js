@@ -6,11 +6,11 @@ import BackNavigation from "./BackNavigation";
 import CreateMaterialOfferStepper from "./CreateMaterialOfferStepper";
 
 const CreateMaterialOfferScreen = ({ language, history }) => {
-  const texts = Texts[language].createActivityScreen;
+  const texts = Texts[language].createMaterialOfferScreen;
   return (
     <div id="createActivityContainer">
       <BackNavigation
-        title="Crea nuova offerta materiale"
+        title={texts.backNavTitle}
         onClick={() => history.goBack()}
       />
       <CreateMaterialOfferStepper />
@@ -20,7 +20,7 @@ const CreateMaterialOfferScreen = ({ language, history }) => {
 
 CreateMaterialOfferScreen.propTypes = {
   language: PropTypes.string,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 export default withLanguage(CreateMaterialOfferScreen);

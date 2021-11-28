@@ -6,7 +6,7 @@ import BackNavigation from "./BackNavigation";
 import CreateMaterialRequestStepper from "./CreateMaterialRequestStepper";
 
 const CreateMaterialRequestScreen = ({ language, history }) => {
-  const texts = Texts[language].createActivityScreen;
+  const texts = Texts[language].createMaterialRequestScreen;
   return (
     <div id="createActivityContainer">
       <BackNavigation
@@ -20,7 +20,7 @@ const CreateMaterialRequestScreen = ({ language, history }) => {
 
 CreateMaterialRequestScreen.propTypes = {
   language: PropTypes.string,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 export default withLanguage(CreateMaterialRequestScreen);
