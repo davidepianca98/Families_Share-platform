@@ -4,18 +4,18 @@ const React = require("react");
 
 const en = {
   groupMembers: {
-    export: "Export contacts"
+    export: "Export contacts",
   },
   participantsModal: {
     header: "Participants",
-    cancel: "Close"
+    cancel: "Close",
   },
   managePlanSolution: {
     needsHeader: "SLOT NEEDS",
     selectFrom: "Select availabilities from",
     participating: "Plan participating members",
     available: "Slot available members",
-    all: "All group members"
+    all: "All group members",
   },
   createPlanScreen: { backNavTitle: "New Planning" },
   groupManagementScreen: {
@@ -27,7 +27,7 @@ const en = {
     metricsHeader: "Group Metrics",
     metricsColumn: "Metric",
     valuesColumn: "Value",
-    chartHeader: "Total contribution per user"
+    chartHeader: "Total contribution per user",
   },
   timeslotEmergencyScreen: {
     copy: "Copied emergency number to clipboard",
@@ -37,8 +37,8 @@ const en = {
       general: "General Emergency",
       ambulance: "Ambulance",
       police: "Police",
-      fire: "Fire Department"
-    }
+      fire: "Fire Department",
+    },
   },
   editPlanScreen: {
     requiredErr: "Please fill out this field.",
@@ -68,7 +68,7 @@ const en = {
     planningStateHelper:
       "In planning phase the Families Share Algorithm creates an optimal plan based on the given needs and availabilities.",
     creationStateHelper:
-      "In creation phase the optimal plan gets transformed into activities."
+      "In creation phase the optimal plan gets transformed into activities.",
   },
   createPlanStepper: {
     name: "Name",
@@ -87,8 +87,8 @@ const en = {
       "Provide a title for the planned activity",
       "Set date range",
       "Provide needs deadline",
-      "Provide the location"
-    ]
+      "Provide the location",
+    ],
   },
   managePlanScreen: {
     export: "Export plan",
@@ -98,7 +98,7 @@ const en = {
     exportToaster:
       "The plan is being exported in xls format. You will shorty receive it via e-mail",
     backNavTitle: "Manage Planning",
-    deleteConfirm: "Are you sure you want to delete this plan?"
+    deleteConfirm: "Are you sure you want to delete this plan?",
   },
   managePlanStepper: {
     pmTimeslotFrom: "PM timeslot from",
@@ -131,14 +131,14 @@ const en = {
       "Add availabilities",
       "Customize availabilities",
       "Manage Solution",
-      "Manage activity details"
+      "Manage activity details",
     ],
     needsDeadline: "You have to provide your needs until",
     availabilitiesDeadline: "You have to provide your availabilities until",
     availabilityError: "Missing availability for date",
     needError: "Missing child assignemnt for date",
     needsSuccess: "You have successfully added your needs",
-    availabilitiesSuccess: "You have successfully added your availabilities"
+    availabilitiesSuccess: "You have successfully added your availabilities",
   },
   planListItem: {
     participantsNeeds: "members have specified needs",
@@ -148,7 +148,7 @@ const en = {
     needsPhase: "Declaring needs",
     availabilitiesPhase: "Declaring availabilities",
     planningPhase: "Finding optimal solution",
-    creationPhase: "Transforming plan to activities"
+    creationPhase: "Transforming plan to activities",
   },
   communityInterface: {
     backNavTitle: "Community Interface",
@@ -176,15 +176,15 @@ const en = {
       "Total number of children",
       "Total number of groups",
       "Average number of group members",
-      "Average number of group activities"
-    ]
+      "Average number of group activities",
+    ],
   },
   profileChildren: {
     addChildPrompt:
-      "You haven't added any children yet. Click the child icon to add a new child"
+      "You haven't added any children yet. Click the child icon to add a new child",
   },
   myCalendarScreen: {
-    backNavTitle: "My Calendar"
+    backNavTitle: "My Calendar",
   },
   editTimeslotScreen: {
     link: "Link",
@@ -218,7 +218,7 @@ const en = {
     editConfirm: "Confirm edits?",
     crucialChangeConfirm:
       "If you save these edits all participants will be unsubscribed. Confirm edits?",
-    deleteConfirm: "Are you sure you want to delete this timeslot?"
+    deleteConfirm: "Are you sure you want to delete this timeslot?",
   },
   timeslotScreen: {
     ongoing: "Ongoing",
@@ -269,27 +269,27 @@ const en = {
     userSubscribeConfirm:
       "Are you sure you want to add yourself to the activity?",
     userUnsubscribeConfirm:
-      "Are you sure you want to remove yourself from the activity?"
+      "Are you sure you want to remove yourself from the activity?",
   },
   timeslotPreview: {
     confirmed: "Confirmed",
     pending: "Waiting for confirmation",
     participating: "You and your children will participate",
     parentParticipating: "You will participate",
-    notParticipating: "Available for new inscriptions"
+    notParticipating: "Available for new inscriptions",
   },
   ratingModal: {
     title: "How would you like to rate Families Share?",
     rate: "Rate",
     rateInstruction:
-      "Tap the number of stars you would like to give us on a scale from 1-5."
+      "Tap the number of stars you would like to give us on a scale from 1-5.",
   },
   landingHeader: {
-    communityName: "De Stuyverij"
+    communityName: "De Stuyverij",
   },
   landingNavbar: {
     logIn: "LOG IN",
-    signUp: "SIGN UP"
+    signUp: "SIGN UP",
   },
   aboutScreen: {
     findOutMore: "FIND OUT MORE ON THE WEBSITE",
@@ -352,14 +352,14 @@ const en = {
       "This project has received funding from the Europian " +
       "Union's Horizon 2020 CAPS Topic: ICT-11-2017 Type of " +
       "action: IA, Grant agreement No 780783",
-    backNavTitle: "About"
+    backNavTitle: "About",
   },
   landingScreen: {
     suggestionsHeader: "Groups in the Community",
     cardHeader: "About the Project",
     cardInfo:
       "  The Families_Share project is developing a social networking and awareness-raising " +
-      "platform dedicated to encouraging childcare and work/life balance."
+      "platform dedicated to encouraging childcare and work/life balance.",
   },
   logInScreen: {
     backNavTitle: "Log In",
@@ -370,7 +370,7 @@ const en = {
     dontHaveAccount: "Don't have an account?",
     signUp: "Sign Up",
     agreeWithTerms:
-      "By logging in you agree with our Terms of Service and Privacy Policy"
+      "By logging in you agree with our Terms of Service and Privacy Policy",
   },
   logInForm: {
     password: "Password",
@@ -379,12 +379,12 @@ const en = {
     authenticationErr: "Invalid email or password",
     requiredErr: "Please fill out this field",
     tooShortErr: "Please use at least 8 characters.",
-    typeMismatchErr: "Please enter an email address."
+    typeMismatchErr: "Please enter an email address.",
   },
   signUpScreen: {
     backNavTitle: "Sign Up",
     accountQuestion: "Do you already have an account?",
-    logIn: "Log In"
+    logIn: "Log In",
   },
   signUpForm: {
     email: "Email",
@@ -404,7 +404,7 @@ const en = {
     tooShortErr: "Please use at least 8 characters.",
     typeMismatchErr: "Please enter an email address.",
     visibilityPrompt:
-      "Users will be able to search for my profile inside the app"
+      "Users will be able to search for my profile inside the app",
   },
   privacyPolicyModal: {
     privacyPolicy: (
@@ -823,11 +823,11 @@ const en = {
         </p>
       </div>
     ),
-    accept: "ACCEPT"
+    accept: "ACCEPT",
   },
   groupAbout: {
     header: "About the group",
-    memberHeader: "About"
+    memberHeader: "About",
   },
   groupActivities: {
     exportConfirm: "Are you sure you want to export the group agenda?",
@@ -835,17 +835,17 @@ const en = {
     plansHeader: "Pending plans",
     export: "Export agenda",
     newPlan: "Advanced planning",
-    newActivity: "New activity"
+    newActivity: "New activity",
   },
   activityListItem: {
     every: "Every",
-    of: "of"
+    of: "of",
   },
   groupListItem: {
     open: "Participation to the group is open.",
     closed: "Participation to the group is closed.",
     members: "Members",
-    kids: "Kids"
+    kids: "Kids",
   },
   groupInfo: {
     contact: "CONTACT GROUP",
@@ -855,21 +855,21 @@ const en = {
     join: "JOIN GROUP",
     leave: "LEAVE GROUP",
     pending: "CANCEL REQUEST",
-    confirm: "Are you sure you want to leave the group?"
+    confirm: "Are you sure you want to leave the group?",
   },
   groupNavbar: {
     chatTab: "Chat",
     activitiesTab: "Activities",
     membersTab: "Members",
     infoTab: "About",
-    calendarTab: "Calendar"
+    calendarTab: "Calendar",
   },
   groupMembersAdminOptions: {
     invite: "Invite people",
     groupIsOpen: "The group is open",
     groupIsClosed: "The group is closed",
     requestsOpen: "Requests to join are welcome",
-    requestsClosed: "Full capacity has been reached"
+    requestsClosed: "Full capacity has been reached",
   },
   inviteModal: {
     memberHeader: "Invite people",
@@ -878,21 +878,21 @@ const en = {
     invite: "INVITE",
     add: "ADD",
     cancel: "CANCEL",
-    search: "Search"
+    search: "Search",
   },
 
   groupNewsNavbar: {
     parents: "PARENTS",
-    children: "CHILDREN"
+    children: "CHILDREN",
   },
   cardWithLink: {
-    learnMore: "LEARN MORE"
+    learnMore: "LEARN MORE",
   },
   memberContact: {
     administrator: "Group Administrator",
     addAdmin: "Add admin",
     removeAdmin: "Remove admin",
-    removeUser: "Remove User"
+    removeUser: "Remove User",
   },
   startUpGuide: {
     backNavTitle: "Start up guide",
@@ -903,11 +903,11 @@ const en = {
       { main: "Make internal appointments", secondary: "" },
       { main: "Close the agenda", secondary: "" },
       { main: "Kick-off!", secondary: "" },
-      { main: "Welcome", secondary: "" }
-    ]
+      { main: "Welcome", secondary: "" },
+    ],
   },
   notificationScreen: {
-    backNavTitle: "Notification"
+    backNavTitle: "Notification",
   },
   myFamiliesShareHeader: {
     confirmDialogTitle:
@@ -926,7 +926,7 @@ const en = {
     signOut: "Sign out",
     language: "Language",
     export: "Export my data",
-    community: "Community"
+    community: "Community",
   },
   myFamiliesShareScreen: {
     myGroups: "My groups",
@@ -937,18 +937,18 @@ const en = {
     myActivitiesPrompt:
       "Here you will see your future activities after you have signed up for one or more groups",
     joinPrompt: "JOIN GROUP",
-    createPrompt: "CREATE GROUP"
+    createPrompt: "CREATE GROUP",
   },
   faqsScreen: {
-    backNavTitle: "FAQs"
+    backNavTitle: "FAQs",
   },
   searchGroupModal: {
     search: "Search group",
     example: "e.g. After school activities",
-    results: "Results"
+    results: "Results",
   },
   createGroup: {
-    backNavTitle: "Create group"
+    backNavTitle: "Create group",
   },
   createGroupStepper: {
     continue: "Continue",
@@ -959,12 +959,12 @@ const en = {
       "Set the visibility",
       "Provide the area",
       "Provide contact information",
-      "Invite people"
+      "Invite people",
     ],
     contactTypes: {
       phone: "Phone",
       email: "E-mail",
-      none: " - "
+      none: " - ",
     },
     contactInfo: "Please fill your contact information",
     name: "Name",
@@ -974,12 +974,13 @@ const en = {
     area: "Area",
     invite: "Add members",
     nameErr: "Group name already exists",
-    requiredErr: "Please fill out this field."
+    requiredErr: "Please fill out this field.",
   },
   profileNavbar: {
     framily: "FRAMILY",
     info: "INFO",
-    children: "CHILDREN"
+    children: "CHILDREN",
+    senior: "SENIOR",
   },
   profileInfo: {
     adress: "Address",
@@ -987,10 +988,10 @@ const en = {
     email: "Personal",
     mobile: "Mobile",
     home: "Home",
-    unspecified: "Unspecified"
+    unspecified: "Unspecified",
   },
   profileScreen: {
-    privateProfile: "Profile is private"
+    privateProfile: "Profile is private",
   },
   editProfileScreen: {
     whatsappOption: "WhatsApp",
@@ -1014,7 +1015,7 @@ const en = {
     visible: "Visible profile",
     invisible: "Invisible Profile",
     cityErr: "City doesn't exist",
-    requiredErr: "Please fill out this field."
+    requiredErr: "Please fill out this field.",
   },
   editGroupScreen: {
     phone: "Phone",
@@ -1029,7 +1030,7 @@ const en = {
     nameErr: "Group name already exists",
     visible: "Visible group",
     invisible: "Invisible group",
-    requiredErr: "Please fill out this field."
+    requiredErr: "Please fill out this field.",
   },
   profileHeader: {
     export: "Export",
@@ -1046,33 +1047,33 @@ const en = {
       "Your account has been suspended temporarily. Next time you log in your account will be reactivated.",
     exportSuccess:
       "You will soon receive an e-mail with all your personal information",
-    error: "Something went wrong."
+    error: "Something went wrong.",
   },
   replyBar: {
     new: "New message",
-    maxFilesError: "You can upload a maximum of 3 files."
+    maxFilesError: "You can upload a maximum of 3 files.",
   },
   announcementReplies: {
-    new: "Your comment..."
+    new: "Your comment...",
   },
   reply: {
-    confirmDialogTitle: "Are you sure you want to delete your reply?"
+    confirmDialogTitle: "Are you sure you want to delete your reply?",
   },
   groupHeader: {
-    confirmDialogTitle: "Are you sure you want to delete the group?"
+    confirmDialogTitle: "Are you sure you want to delete the group?",
   },
   announcementHeader: {
-    confirmDialogTitle: "Are you sure you want to delete this?"
+    confirmDialogTitle: "Are you sure you want to delete this?",
   },
   childListItem: {
     boy: "Boy",
     girl: "Girl",
-    age: "years old"
+    age: "years old",
   },
   childProfileHeader: {
     delete: "Delete child",
     confirmDialogTitle:
-      "Are you sure you want to delete the child and remove all its data?"
+      "Are you sure you want to delete the child and remove all its data?",
   },
   childProfileInfo: {
     boy: "Boy",
@@ -1085,7 +1086,7 @@ const en = {
     specialNeeds: "Special needs",
     addAdditional: "ADD",
     addParent: "ADD PARENT",
-    confirmDialogTitle: "Are you sure you want to delete this parent?"
+    confirmDialogTitle: "Are you sure you want to delete this parent?",
   },
   editChildProfileScreen: {
     backNavTitle: "Edit profile",
@@ -1104,7 +1105,7 @@ const en = {
     year: "Year",
     file: "Choose File",
     unspecified: "Unspecified",
-    requiredErrr: "Please fill out this field."
+    requiredErrr: "Please fill out this field.",
   },
   createChildScreen: {
     backNavTitle: "Add child",
@@ -1128,7 +1129,7 @@ const en = {
       "and use of my data.",
     acceptTermsErr: "Please accept the terms",
     unspecified: "Unspecified",
-    requiredErr: "Please fill out this field."
+    requiredErr: "Please fill out this field.",
   },
   additionalInfoScreen: {
     backNavTitle: "Information",
@@ -1138,10 +1139,10 @@ const en = {
     others: "Others",
     acceptTerms:
       "I acknowledge that this information will be disclosed with the group members " +
-      "directly involved in the childcare activities."
+      "directly involved in the childcare activities.",
   },
   createActivityScreen: {
-    backNavTitle: "New activity"
+    backNavTitle: "New activity",
   },
   createActivityStepper: {
     pendingMessage: "The activity is pending confirmation from an admin",
@@ -1149,56 +1150,58 @@ const en = {
     cancel: "Cancel",
     finish: "Create",
     save: "Save",
-    stepLabels: ["Information", "Dates", "Timeslots"]
+    stepLabels: ["Information", "Dates", "Timeslots"],
   },
   createActivityInformation: {
     link: "Link (optional)",
     color: "Color of the activity",
     description: "Description (optional)",
     name: "Name of the activity",
-    location: "Location (optional)"
+    location: "Location (optional)",
   },
   createActivityDates: {
     header: "Select one or more days",
     repetition: "Repetition",
     weekly: "Weekly",
     monthly: "Monthly",
-    datesError: "Repetition isn't available when multiple days are selected"
+    datesError: "Repetition isn't available when multiple days are selected",
   },
   createActivityTimeslots: {
     header: "Add time slots to the selected days",
     differentTimeslots: "DIFFERENT TIMESLOTS FOR EACH DAY?",
     sameTimeslots: "SAME TIMESLOTS FOR EACH DAY?",
-    selected: "dates selected"
+    selected: "dates selected",
   },
   createMaterialRequestDates: {
     header: "Select one or more days",
     repetition: "Repetition",
     weekly: "Weekly",
     monthly: "Monthly",
-    datesError: "Repetition isn't available when multiple days are selected"
+    datesError: "Repetition isn't available when multiple days are selected",
   },
   createMaterialRequestInformation: {
     //link: "Link (optional)",
     color: "Color of the material", //TODO
     description: "Description (optional)", //TODO
-    name: "Name of the material",//TODO
-    location: "Location (optional)"//TODO
+    name: "Name of the material", //TODO
+    location: "Location (optional)", //TODO
   },
-  createMaterialRequestStepper: { //TODO
-    pendingMessage: "The material request is pending confirmation from an admin",
+  createMaterialRequestStepper: {
+    //TODO
+    pendingMessage:
+      "The material request is pending confirmation from an admin",
     continue: "Continue",
     cancel: "Cancel",
     finish: "Create",
     save: "Save",
-    stepLabels: ["Information", "Dates", "Timeslots"]
+    stepLabels: ["Information", "Dates", "Timeslots"],
   },
   timeslotsContainer: {
     addTimeslot: "ADD TIMESLOT",
     timeslot: "timeslot",
     timeslots: "timeslots",
     confirmDialogTitle: "Are you sure you want to delete this timeslot?",
-    timeRangeError: "Invalid start and end time combination"
+    timeRangeError: "Invalid start and end time combination",
   },
   clockModal: {
     am: "AM",
@@ -1206,7 +1209,7 @@ const en = {
     start: "START",
     end: "END",
     confirm: "OK",
-    cancel: "CANCEL"
+    cancel: "CANCEL",
   },
   activityScreen: {
     pdfToaster:
@@ -1226,7 +1229,7 @@ const en = {
     exportExcel: "Export Excel",
     every: "Every",
     of: "of",
-    infoHeader: "Activity Info:"
+    infoHeader: "Activity Info:",
   },
   timeslotsList: {
     fixed: "fixed",
@@ -1238,7 +1241,7 @@ const en = {
     mySigned: "My signed up",
     myChildrenSigned: "My children signed up",
     enough: "With enough participants",
-    notEnough: "Without enough participants"
+    notEnough: "Without enough participants",
   },
   filterTimeslotsDrawer: {
     header: "Filter timeslots",
@@ -1246,7 +1249,7 @@ const en = {
     mySigned: "My signed up",
     myChildrenSigned: "My children signed up",
     enough: "With enough participants",
-    notEnough: "Without enough participants"
+    notEnough: "Without enough participants",
   },
   expandedTimeslot: {
     signup: "Sign up:",
@@ -1255,7 +1258,7 @@ const en = {
     parent: " parent signed up",
     child: " child signed up",
     fixed: "Fixed",
-    completed: "Completed"
+    completed: "Completed",
   },
   expandedTimeslotEdit: {
     link: "Link",
@@ -1285,7 +1288,7 @@ const en = {
     parties: "parties or events",
     coplaying: "co-playing day(s)",
     other: "other",
-    category: "Type of activity"
+    category: "Type of activity",
   },
   editActivityScreen: {
     backNavTitle: "Edit activity",
@@ -1293,7 +1296,7 @@ const en = {
     description: "Description (optional)",
     name: "Name of the activity",
     save: "SAVE",
-    location: "Location (optional)"
+    location: "Location (optional)",
   },
   agendaView: {
     timeslots: "Timeslots",
@@ -1302,18 +1305,18 @@ const en = {
     signed: "My signed up",
     enough: "With enough participants",
     notEnough: "Without enough participants",
-    notEnoughParticipants: "Not enough participants"
+    notEnoughParticipants: "Not enough participants",
   },
   confirmDialog: {
     agree: "Ok",
-    disagree: "Cancel"
+    disagree: "Cancel",
   },
   pendingRequestsScreen: {
     requests: "Pending Requests",
     invites: "Pending Invites",
     activities: "Pending Activities",
     confirm: "CONFIRM",
-    delete: "DELETE"
+    delete: "DELETE",
   },
   forgotPasswordScreen: {
     prompt: "Please enter your email to receive a link to change your password",
@@ -1323,7 +1326,7 @@ const en = {
     notExistErr: "User doesn't exist",
     err: "Something went wrong",
     success: "Email sent",
-    requiredErrr: "Please fill out this field."
+    requiredErrr: "Please fill out this field.",
   },
   changePasswordScreen: {
     prompt: "Please enter your new password",
@@ -1333,24 +1336,24 @@ const en = {
     err: "Passwords don't match",
     badRequest: "Bad Request",
     requiredErr: "Please fill out this field",
-    tooShortErr: "Please use at least 8 characters."
+    tooShortErr: "Please use at least 8 characters.",
   },
   calendar: {
     userCalendar: "My Calendar",
-    groupCalendar: "Group Calendar"
+    groupCalendar: "Group Calendar",
   },
   framilyListItem: {
-    delete: "Delete framily"
-  }
+    delete: "Delete framily",
+  },
 };
 
 const nl = {
   groupMembers: {
-    export: "Exporteer contacten"
+    export: "Exporteer contacten",
   },
   participantsModal: {
     header: "Deelnemers",
-    cancel: "Sluiten"
+    cancel: "Sluiten",
   },
   managePlanSolution: {
     needsHeader: "SLOT BEHOEFTEN",
@@ -1360,7 +1363,7 @@ const nl = {
     all: "Alle groepsleden",
     automaticSuccess: "Plan is met succes omgezet in activiteiten",
     manualSuccess:
-      "U ontvangt binnenkort de definitieve oplossing van het plan via e-mail"
+      "U ontvangt binnenkort de definitieve oplossing van het plan via e-mail",
   },
   groupManagementScreen: {
     backNavTitle: "Groepsbeheer",
@@ -1371,7 +1374,7 @@ const nl = {
     metricsHeader: "Groepsstatistieken ",
     metricsColumn: "Statistieken",
     valuesColumn: "Waarden",
-    chartHeader: "Totaal van deelname per gebruiker"
+    chartHeader: "Totaal van deelname per gebruiker",
   },
   timeslotEmergencyScreen: {
     copy: "Noodnummer naar klembord gekopieerd",
@@ -1381,8 +1384,8 @@ const nl = {
       general: "Algemene noodsituatie",
       ambulance: "Ambulance",
       police: "Politie",
-      fire: "Brandweer"
-    }
+      fire: "Brandweer",
+    },
   },
   editPlanScreen: {
     requiredErr: "Vul alstublieft dit veld in.",
@@ -1412,7 +1415,7 @@ const nl = {
     planningStateHelper:
       "In de planningsfase creëert het Families Share-algoritme een optimaal plan op basis van de gegeven behoeften en beschikbaarheid.",
     creationStateHelper:
-      "In de aanmaakfase wordt het optimale plan omgezet in activiteiten."
+      "In de aanmaakfase wordt het optimale plan omgezet in activiteiten.",
   },
   createPlanStepper: {
     name: "Naam",
@@ -1431,8 +1434,8 @@ const nl = {
       "Geef een titel op voor de geplande activiteit",
       "Stel datumbereik in",
       "Zorg voor een deadline",
-      "Geef de locatie op"
-    ]
+      "Geef de locatie op",
+    ],
   },
   managePlanScreen: {
     export: "Exportplan",
@@ -1442,7 +1445,7 @@ const nl = {
     exportToaster:
       "Het plan wordt geëxporteerd in xls-formaat. U ontvangt het binnenkort via e-mail",
     backNavTitle: "Planning beheren",
-    deleteConfirm: "Weet u zeker dat u dit plan wilt verwijderen?"
+    deleteConfirm: "Weet u zeker dat u dit plan wilt verwijderen?",
   },
   managePlanStepper: {
     pmTimeslotFrom: "PM tijdslot van",
@@ -1474,14 +1477,14 @@ const nl = {
       "Beschikbaarheid toevoegen",
       "Beschikbaarheden aanpassen",
       "Beheer oplossing",
-      "Beheer activiteitsgegevens"
+      "Beheer activiteitsgegevens",
     ],
     needsDeadline: "Geef je opvangnoden aan voor",
     availabilitiesDeadline: "U moet uw beschikbaarheden opgeven tot",
     availabilityError: "Beschikbaarheid ontbreekt voor datum",
     needError: "Ontbrekende kindopdracht voor datum",
     needsSuccess: "U hebt met succes uw behoeften toegevoegd",
-    availabilitiesSuccess: "U hebt met succes uw beschikbaarheden toegevoegd"
+    availabilitiesSuccess: "U hebt met succes uw beschikbaarheden toegevoegd",
   },
   planListItem: {
     participantsNeeds: "leden hebben hun behoeften aangegeven",
@@ -1491,7 +1494,7 @@ const nl = {
     needsPhase: "Behoeften aangeven",
     availabilitiesPhase: "Beschikbaarheden aangeven",
     planningPhase: "Optimale oplossing vinden",
-    creationPhase: "Plan omzetten in activiteiten"
+    creationPhase: "Plan omzetten in activiteiten",
   },
   communityInterface: {
     backNavTitle: "Gemeenschaps interface",
@@ -1519,15 +1522,15 @@ const nl = {
       "Totaal aantal kinderen",
       "Totaal aantal groepen",
       "Gemiddeld aantal groepsleden",
-      "Gemiddeld aantal groepsactiviteiten"
-    ]
+      "Gemiddeld aantal groepsactiviteiten",
+    ],
   },
   profileChildren: {
     addChildPrompt:
-      "Je hebt nog geen kinderen toegevoegd. Klik op het kindpictogram om een ​​nieuw kind toe te voegen"
+      "Je hebt nog geen kinderen toegevoegd. Klik op het kindpictogram om een ​​nieuw kind toe te voegen",
   },
   myCalendarScreen: {
-    backNavTitle: "Mijn Kalender"
+    backNavTitle: "Mijn Kalender",
   },
   editTimeslotScreen: {
     link: "Koppeling",
@@ -1561,7 +1564,7 @@ const nl = {
     editConfirm: "Bewerkingen bevestigen?",
     crucialChangeConfirm:
       "Als u deze bewerkingen opslaat, worden alle deelnemers afgemeld. Bevestig bewerkingen?",
-    deleteConfirm: "Weet je zeker dat je dit tijdslot wilt verwijderen?"
+    deleteConfirm: "Weet je zeker dat je dit tijdslot wilt verwijderen?",
   },
   timeslotScreen: {
     ongoing: "Bezig",
@@ -1611,27 +1614,27 @@ const nl = {
       "Weet je zeker dat je jezelf wilt toevoegen aan de activiteit?",
     userUnsubscribeConfirm:
       "Weet u zeker dat u uzelf uit de activiteit wilt verwijderen?",
-    admins: "Groep admins"
+    admins: "Groep admins",
   },
   timeslotPreview: {
     confirmed: "Bevestigd",
     pending: "Wachten op bevestiging",
     participating: "Jij en je kinderen zullen deelnemen",
     parentParticipating: "Je zult deelnemen",
-    notParticipating: "Beschikbaar voor nieuwe inscripties"
+    notParticipating: "Beschikbaar voor nieuwe inscripties",
   },
   ratingModal: {
     title: "Hoe zou je willen beoordelen Families Share?",
     rate: "Tarief",
     rateInstruction:
-      "Tik op het aantal sterren dat u ons wilt geven op een schaal van 1-5."
+      "Tik op het aantal sterren dat u ons wilt geven op een schaal van 1-5.",
   },
   landingHeader: {
-    communityName: "De Stuyverij"
+    communityName: "De Stuyverij",
   },
   landingNavbar: {
     logIn: "Log in",
-    signUp: "Registreer"
+    signUp: "Registreer",
   },
   aboutScreen: {
     findOutMore: "LEES MEER OP DE WEBSITE",
@@ -1647,13 +1650,13 @@ const nl = {
       "Het Families Share project biedt een bottom-up oplossing aan in de vorm van een co-ontworpen platform dat families ondersteund in het delen van tijd inzake kinderopvang, opvoeden, naschoolse activieiten en andere huishoudelijke taken. Om deze doelstelling te bereiken, doet  het project beroep op de bestaande kennis inzake digitale sociale innovaties  van de leden van het consortium. Ookwordt er gebruik gemaakt van het potentieel van ICT netwerken om  participatieve inovatie binnen zichzelf organiserende buurten te verhogen.",
     europeanUnionText:
       "Dit project kreeg subsidies van het Horizon 2020 project van de Europese unie. CAPS Topic: ICT-11-2017 Type ofaction: IA, Grant agreement No 780783 ",
-    backNavTitle: "Over"
+    backNavTitle: "Over",
   },
   landingScreen: {
     suggestionsHeader: "Groepen binnen de community",
     cardHeader: "Over het project",
     cardInfo:
-      " Het Families Share project creëert een sociaal netwerk en bewustzijns platform dat zich toelegt op het aanmoedigen van gedeelde kinderopvang en work/life balance."
+      " Het Families Share project creëert een sociaal netwerk en bewustzijns platform dat zich toelegt op het aanmoedigen van gedeelde kinderopvang en work/life balance.",
   },
   logInScreen: {
     backNavTitle: "Log in",
@@ -1664,7 +1667,7 @@ const nl = {
     dontHaveAccount: "Je hebt nog geen account?",
     signUp: "Registreer",
     agreeWithTerms:
-      "Door u aan te melden, gaat u akkoord met onze Servicevoorwaarden en ons Privacybeleid"
+      "Door u aan te melden, gaat u akkoord met onze Servicevoorwaarden en ons Privacybeleid",
   },
   logInForm: {
     password: "Wachtwoord",
@@ -1673,12 +1676,12 @@ const nl = {
     authenticationErr: "Ongeldige login of paswoord",
     requiredErr: "Vul alstublieft dit veld in.",
     tooShortErr: "Gebruik ten minste 8 tekens.",
-    typeMismatchErr: "Vul een geldig e-mailadres in."
+    typeMismatchErr: "Vul een geldig e-mailadres in.",
   },
   signUpScreen: {
     backNavTitle: "Registreer",
     accountQuestion: "Heb je al een account?",
-    logIn: "Log in"
+    logIn: "Log in",
   },
   signUpForm: {
     email: "Email",
@@ -1698,7 +1701,7 @@ const nl = {
     requiredErr: "Vul alstublieft dit veld in.",
     tooShortErr: "Gebruik ten minste 8 tekens.",
     typeMismatchErr: "Vul een geldig e-mailadres in.",
-    visibilityPrompt: "Gebruikers kunnen in de app naar mijn profiel zoeken"
+    visibilityPrompt: "Gebruikers kunnen in de app naar mijn profiel zoeken",
   },
   privacyPolicyModal: {
     privacyPolicy: (
@@ -2155,11 +2158,11 @@ const nl = {
         </p>
       </div>
     ),
-    accept: "ACCEPTEER"
+    accept: "ACCEPTEER",
   },
   groupAbout: {
     header: "Over de groep",
-    memberHeader: "Informatie"
+    memberHeader: "Informatie",
   },
   groupActivities: {
     exportConfirm: "Weet u zeker dat u de groepsagenda wilt exporteren?",
@@ -2167,17 +2170,17 @@ const nl = {
     plansHeader: "In afwachting",
     export: "Exporteer agenda",
     newPlan: "Planning tool",
-    newActivity: "Nieuwe activiteit"
+    newActivity: "Nieuwe activiteit",
   },
   activityListItem: {
     every: "Elk",
-    of: "van"
+    of: "van",
   },
   groupListItem: {
     open: "Deelname aan de groep is gesloten",
     closed: "Deelname aan de groep is open",
     members: "Leden",
-    kids: "Kinderen"
+    kids: "Kinderen",
   },
   groupInfo: {
     contact: "CONTACTGROEP",
@@ -2187,21 +2190,21 @@ const nl = {
     join: "Sluit je aan bij de groep",
     leave: "Verlaat de groep",
     pending: "Annuleer verzoek",
-    confirm: "Ben je zeker dat je de groep wilt verlaten"
+    confirm: "Ben je zeker dat je de groep wilt verlaten",
   },
   groupNavbar: {
     chatTab: "Berichten",
     activitiesTab: "Activiteiten",
     membersTab: "Leden",
     infoTab: "Over",
-    calendarTab: "Kalender"
+    calendarTab: "Kalender",
   },
   groupMembersAdminOptions: {
     invite: "Nodig mensen uit",
     groupIsOpen: "De groep is open",
     groupIsClosed: "De groep is gelsoten",
     requestsOpen: "Verzoeken om lid te worden zijn welkom",
-    requestsClosed: "Groep is volzet"
+    requestsClosed: "Groep is volzet",
   },
   inviteModal: {
     memberHeader: "Mensen uitnodigen",
@@ -2210,18 +2213,18 @@ const nl = {
     invite: "Uitnodigen",
     add: "Toevoegen",
     cancel: "Annuleer",
-    search: "Zoek"
+    search: "Zoek",
   },
   groupNewsNavbar: {
     children: "KINDEREN",
-    parents: "OUDERS"
+    parents: "OUDERS",
   },
   cardWithLink: { learnMore: "Kom meer te weten" },
   memberContact: {
     administrator: "Groep admin",
     addAdmin: "Admin toevoegen",
     removeAdmin: "Admin verwijderen",
-    removeUser: "Verwijder gebruiker"
+    removeUser: "Verwijder gebruiker",
   },
   startUpGuide: {
     backNavTitle: "Opstart gids",
@@ -2232,8 +2235,8 @@ const nl = {
       { main: "Maak interne afspraken", secondary: null },
       { main: "Sluit de agenda", secondary: null },
       { main: "Kick-off!", secondary: null },
-      { main: "Welkom", secondary: null }
-    ]
+      { main: "Welkom", secondary: null },
+    ],
   },
   notificationScreen: { backNavTitle: "Notificaties" },
   myFamiliesShareHeader: {
@@ -2253,7 +2256,7 @@ const nl = {
     signOut: "Afmelden",
     language: "Taal",
     export: "Exporteer mijn data",
-    community: "Gemeenschap"
+    community: "Gemeenschap",
   },
   myFamiliesShareScreen: {
     myGroups: "Mijn groepen",
@@ -2264,22 +2267,22 @@ const nl = {
     myActivitiesPrompt:
       "Hier ziet u uw toekomstige activiteiten nadat u zich heeft aangemeld voor een of meer groepen",
     joinPrompt: "DEELNEMEN AAN GROEP",
-    createPrompt: "CREËER GROEP"
+    createPrompt: "CREËER GROEP",
   },
   faqsScreen: {
-    backNavTitle: "FAQ's"
+    backNavTitle: "FAQ's",
   },
   searchGroupModal: {
     search: "Zoek een groep",
     results: "Resultaten",
-    example: "bijv. Naschoolse activiteiten"
+    example: "bijv. Naschoolse activiteiten",
   },
   createGroup: { backNavTitle: "Start een groep" },
   createGroupStepper: {
     contactTypes: {
       phone: " - ",
       email: "E-mail",
-      none: "Geen"
+      none: "Geen",
     },
     contactInfo: "Vul alstublieft uw contactgegevens in",
     continue: "Ga verder",
@@ -2290,7 +2293,7 @@ const nl = {
       "Zet je zichtbaarheid",
       "Geef het gebied op",
       "Geef contactgegevens op",
-      "Nodig mensen uit"
+      "Nodig mensen uit",
     ],
     name: "Naam",
     description: "Beschrijving",
@@ -2299,7 +2302,7 @@ const nl = {
     area: "Oppervlakte",
     invite: "Leden toevoegen",
     nameErr: "Deze groepsnaam bestaat al",
-    requiredErr: "Vul alstublieft dit veld in."
+    requiredErr: "Vul alstublieft dit veld in.",
   },
   profileNavbar: { framily: "Vrienden", info: "Info", children: "Kinderen" },
   profileInfo: {
@@ -2308,10 +2311,10 @@ const nl = {
     email: "Persoonlijk",
     mobile: "Mobiel",
     home: "Thuis",
-    unspecified: "Ongedefinieerd"
+    unspecified: "Ongedefinieerd",
   },
   profileScreen: {
-    privateProfile: "Profiel is privé"
+    privateProfile: "Profiel is privé",
   },
   editProfileScreen: {
     whatsappOption: "WhatsApp",
@@ -2335,7 +2338,7 @@ const nl = {
     visible: "Zichtbaar profiel",
     invisible: "Onzichtbaar profiel",
     cityErr: "Stad bestaat niet",
-    requiredErr: "Vul alstublieft dit veld in."
+    requiredErr: "Vul alstublieft dit veld in.",
   },
   editGroupScreen: {
     phone: "Telefoon",
@@ -2350,7 +2353,7 @@ const nl = {
     nameErr: "Deze groepsnaam bestaat al",
     visible: "Zichtbare group",
     invisible: "Onzichtbare groep",
-    requiredErr: "Vul alstublieft dit veld in."
+    requiredErr: "Vul alstublieft dit veld in.",
   },
   profileHeader: {
     export: "Exporteer",
@@ -2366,26 +2369,26 @@ const nl = {
       "Uw account is tijdelijk opgeschort. De volgende keer dat u inlogt, wordt uw account opnieuw geactiveerd.",
     exportSuccess:
       "U ontvangt binnenkort een e-mail met al uw persoonlijke gegevens",
-    error: "Er is iets fout gegaan."
+    error: "Er is iets fout gegaan.",
   },
   replyBar: {
     new: "Nieuw bericht",
-    maxFilesError: "U kunt maximaal 3 bestanden uploaden."
+    maxFilesError: "U kunt maximaal 3 bestanden uploaden.",
   },
   announcementReplies: { new: "Je bericht…" },
   reply: {
-    confirmDialogTitle: "Weet je zeker dat je je bericht wilt verwijderen?"
+    confirmDialogTitle: "Weet je zeker dat je je bericht wilt verwijderen?",
   },
   groupHeader: {
-    confirmDialogTitle: "Weet je zeker dat je de groep wilt verwijderen?"
+    confirmDialogTitle: "Weet je zeker dat je de groep wilt verwijderen?",
   },
   announcementHeader: {
-    confirmDialogTitle: "Weet je zeker dat je dit wilt verwijderen?"
+    confirmDialogTitle: "Weet je zeker dat je dit wilt verwijderen?",
   },
   childListItem: { boy: "Jongen", girl: "Meisje", age: "jaar oud" },
   childProfileHeader: {
     delete: "verwijder kind",
-    confirmDialogTitle: "Ben je zeker dat je je kind wilt verwijderen"
+    confirmDialogTitle: "Ben je zeker dat je je kind wilt verwijderen",
   },
   childProfileInfo: {
     confirmDialogTitle: "Weet je zeker dat je deze ouder wilt verwijderen?",
@@ -2398,7 +2401,7 @@ const nl = {
     otherInfo: "Andere info",
     specialNeeds: "Specialen noden",
     addAdditional: "Voeg toe",
-    addParent: "Voeg ouder toe"
+    addParent: "Voeg ouder toe",
   },
   editChildProfileScreen: {
     backNavTitle: "Profiel bewerken",
@@ -2417,7 +2420,7 @@ const nl = {
     year: "Jaar",
     file: "Kies een bestand",
     unspecified: "Ongedefinieerd",
-    requiredErr: "Vul alstublieft dit veld in."
+    requiredErr: "Vul alstublieft dit veld in.",
   },
   createChildScreen: {
     backNavTitle: "Voeg kind toe",
@@ -2440,7 +2443,7 @@ const nl = {
       "Ik ga akkoord met de gebruiksvoorwaarden en het privacybeleid inzake de verwerking van mijn gegevens.",
     acceptTermsErr: "Gelieve akkoord te gaan met de voorwaarden",
     unspecified: "Ongedefinieerd",
-    requiredErr: "Vul alstublieft dit veld in."
+    requiredErr: "Vul alstublieft dit veld in.",
   },
   additionalInfoScreen: {
     backNavTitle: "Informatie",
@@ -2449,7 +2452,7 @@ const nl = {
     special: "Specialen noden",
     others: "Andere",
     acceptTerms:
-      "Ik erken dat deze info meegedeeld zal worden met groepsleden die direct betrokken zijn bij de kinderactiviteiten."
+      "Ik erken dat deze info meegedeeld zal worden met groepsleden die direct betrokken zijn bij de kinderactiviteiten.",
   },
   createActivityScreen: { backNavTitle: "Nieuwe activiteit" },
   createPlanScreen: { backNavTitle: "Nieuwe Plan" },
@@ -2459,14 +2462,14 @@ const nl = {
     cancel: "Annuleer",
     finish: "Maak aan",
     save: "Opslaan",
-    stepLabels: ["Informatie", "Datums", "Timeslots"]
+    stepLabels: ["Informatie", "Datums", "Timeslots"],
   },
   createActivityInformation: {
     link: "Koppeling (optioneel)",
     color: "Kleur van de activiteit",
     description: "Beschrijving (optioneel)",
     name: "Naam van de activiteit",
-    location: "Plaats (optioneel)"
+    location: "Plaats (optioneel)",
   },
   createActivityDates: {
     header: "Selecteer 1 of meerdere dagen",
@@ -2474,42 +2477,45 @@ const nl = {
     weekly: "Wekelijk",
     monthly: "Maandelijks",
     datesError:
-      "Herhaling is niet mogelijk wanneer meerdere dagen geselecteerd zijn"
+      "Herhaling is niet mogelijk wanneer meerdere dagen geselecteerd zijn",
   },
   createActivityTimeslots: {
     header: "Voeg een timeslot toe aan de geselecteerde dagen",
     differentTimeslots: "Verschillende timeslots voor iedere dag?",
     sameTimeslots: "Zelfde timeslots voor iedere dag?",
-    selected: "datums geselecteerd"
+    selected: "datums geselecteerd",
   },
-  createMaterialRequestDates: { //TODO
+  createMaterialRequestDates: {
+    //TODO
     header: "Select one or more days",
     repetition: "Repetition",
     weekly: "Weekly",
     monthly: "Monthly",
-    datesError: "Repetition isn't available when multiple days are selected"
+    datesError: "Repetition isn't available when multiple days are selected",
   },
   createMaterialRequestInformation: {
     //link: "Koppeling (optioneel)",
-    color: "Kleur van de activiteit",//TODO
-    description: "Beschrijving (optioneel)",//TODO
-    name: "Naam van de activiteit",//TODO
-    location: "Plaats (optioneel)" //TODO
+    color: "Kleur van de activiteit", //TODO
+    description: "Beschrijving (optioneel)", //TODO
+    name: "Naam van de activiteit", //TODO
+    location: "Plaats (optioneel)", //TODO
   },
-  createMaterialRequestStepper: { //TODO
-    pendingMessage: "The material request is pending confirmation from an admin",
+  createMaterialRequestStepper: {
+    //TODO
+    pendingMessage:
+      "The material request is pending confirmation from an admin",
     continue: "Continue",
     cancel: "Cancel",
     finish: "Create",
     save: "Save",
-    stepLabels: ["Information", "Dates", "Timeslots"]
+    stepLabels: ["Information", "Dates", "Timeslots"],
   },
   timeslotsContainer: {
     addTimeslot: "Voeg timeslot toe",
     timeslot: "timeslot",
     timeslots: "timeslots",
     confirmDialogTitle: "Ben je zeker dat je dit timeslot wilt verwijderen",
-    timeRangeError: "Onmogelijke combinatie van start en eind tijd"
+    timeRangeError: "Onmogelijke combinatie van start en eind tijd",
   },
   clockModal: {
     am: "AM",
@@ -2517,7 +2523,7 @@ const nl = {
     start: "Start",
     end: "Einde",
     confirm: "OK",
-    cancel: "Annuleer"
+    cancel: "Annuleer",
   },
   activityScreen: {
     volunteers: "Vrijwilligers",
@@ -2534,7 +2540,7 @@ const nl = {
     every: "Elk",
     of: "van",
     deleteDialogTitle: "Ben je zeker dat je deze activiteit wilt verwijderen",
-    infoHeader: "Activiteit informatie"
+    infoHeader: "Activiteit informatie",
   },
   timeslotsList: {
     fixed: "vast",
@@ -2547,7 +2553,7 @@ const nl = {
     myChildrenSigned: "Mijn kinderen ingeschreven timeslots",
     enough: "Met genoeg deelnemers",
     notEnough: "Met te weinig deelnemers",
-    notEnoughParticipants: "Tekort aantal deelnemers"
+    notEnoughParticipants: "Tekort aantal deelnemers",
   },
   filterTimeslotsDrawer: {
     header: "Filter timeslots",
@@ -2555,7 +2561,7 @@ const nl = {
     mySigned: "Mijn ingeschreven timeslots",
     myChildrenSigned: "Mijn kinderen ingeschreven timeslots",
     enough: "Met genoeg deelnemers",
-    notEnough: "Met te weining deelnemers"
+    notEnough: "Met te weining deelnemers",
   },
   expandedTimeslot: {
     signup: "Schrijf in:",
@@ -2564,7 +2570,7 @@ const nl = {
     parent: " ouder ingeschreven",
     child: " kind ingeschreven",
     fixed: "Vastgelegd",
-    completed: "Voltooid"
+    completed: "Voltooid",
   },
   expandedTimeslotEdit: {
     link: "Koppeling",
@@ -2594,7 +2600,7 @@ const nl = {
     parties: "partijen of evenementen",
     coplaying: "Bijspelen",
     other: "andere",
-    category: "Type activiteit"
+    category: "Type activiteit",
   },
   editActivityScreen: {
     backNavTitle: "Bewerk activiteit",
@@ -2602,7 +2608,7 @@ const nl = {
     description: "Beschrijving (optioneel)",
     name: "Naam van de activiteit",
     save: "Sla op",
-    location: "Plaats (optioneel)"
+    location: "Plaats (optioneel)",
   },
   agendaView: {
     timeslots: "Timeslots",
@@ -2611,7 +2617,7 @@ const nl = {
     signed: "Mijn ingeschreven timeslots",
     enough: "Met genoeg deelnemers",
     notEnough: "Met te weining deelnemers",
-    notEnoughParticipants: "Tekort aan deelnemers"
+    notEnoughParticipants: "Tekort aan deelnemers",
   },
   confirmDialog: { agree: "Ok", disagree: "Annuleren" },
   pendingRequestsScreen: {
@@ -2619,7 +2625,7 @@ const nl = {
     invites: "Lopende verzoeken",
     activities: "Activiteit aanvragen",
     confirm: "Bevestig",
-    delete: "Verwijder"
+    delete: "Verwijder",
   },
   forgotPasswordScreen: {
     prompt:
@@ -2630,7 +2636,7 @@ const nl = {
     notExistErr: "Gebruiker bestaat niet",
     err: "Er ging iets mis",
     success: "Email verzonden",
-    requiredErr: "Vul alstublieft dit veld in."
+    requiredErr: "Vul alstublieft dit veld in.",
   },
   changePasswordScreen: {
     prompt: "Kies je nieuwe wachtwoord",
@@ -2640,19 +2646,19 @@ const nl = {
     err: "Wachtwoorden komen niet overeen",
     badRequest: "Foutief verzoek",
     requiredErr: "Vul alstublieft dit veld in.",
-    tooShortErr: "Gebruik ten minste 8 tekens."
+    tooShortErr: "Gebruik ten minste 8 tekens.",
   },
   calendar: { userCalendar: "Mijn kalender", groupCalendar: "Groep kalender" },
-  framilyListItem: { delete: "" }
+  framilyListItem: { delete: "" },
 };
 
 const it = {
   groupMembers: {
-    export: "Esporta contatti"
+    export: "Esporta contatti",
   },
   participantsModal: {
     header: "Partecipanti",
-    cancel: "Chiudi"
+    cancel: "Chiudi",
   },
   managePlanSolution: {
     needsHeader: "ESIGENZE SLOT",
@@ -2661,7 +2667,7 @@ const it = {
     available: "Membri disponibili slot",
     all: "Tutti i membri del gruppo",
     automaticSuccess: "Il piano è stato trasformato con successo in attività",
-    manualSuccess: "Presto riceverai la soluzione finale del piano via e-mail"
+    manualSuccess: "Presto riceverai la soluzione finale del piano via e-mail",
   },
   groupManagementScreen: {
     backNavTitle: "Gestione gruppi",
@@ -2672,7 +2678,7 @@ const it = {
     metricsHeader: "Group Metrics",
     metricsColumn: "Metric",
     valoriColonna: "Valore",
-    chartHeader: "Contributo totale per utente"
+    chartHeader: "Contributo totale per utente",
   },
   timeslotEmergencyScreen: {
     copy: "Numero di emergenza copiato negli appunti",
@@ -2682,8 +2688,8 @@ const it = {
       general: "Emergenza generale",
       ambulance: "Ambulanza",
       police: "Polizia",
-      fire: "Vigili del fuoco"
-    }
+      fire: "Vigili del fuoco",
+    },
   },
   editPlanScreen: {
     requiredErr: "Compila questo campo.",
@@ -2713,7 +2719,7 @@ const it = {
     planningStateHelper:
       "Nella fase di pianificazione, l'algoritmo di condivisione delle famiglie crea un piano ottimale basato sulle esigenze e le disponibilità fornite.",
     creationStateHelper:
-      "Nella fase di creazione il piano ottimale si trasforma in attività"
+      "Nella fase di creazione il piano ottimale si trasforma in attività",
   },
   createPlanStepper: {
     name: "Nome",
@@ -2733,8 +2739,8 @@ const it = {
       "Fornisci un titolo per l'attività pianificata",
       "Imposta intervallo di date",
       "Fornire scadenza per le esigenze",
-      "Fornisci la posizione"
-    ]
+      "Fornisci la posizione",
+    ],
   },
   managePlanScreen: {
     export: "Esporta piano",
@@ -2744,7 +2750,7 @@ const it = {
     exportToaster:
       "Il piano viene esportato in formato xls. Lo riceverai a breve via e-mail",
     backNavTitle: "Gestire la pianificazione",
-    deleteConfirm: "Sei sicuro di voler eliminare questo piano??"
+    deleteConfirm: "Sei sicuro di voler eliminare questo piano??",
   },
   managePlanStepper: {
     create: "Crea",
@@ -2775,14 +2781,14 @@ const it = {
       "Aggiungi disponibilità",
       "Personalizza disponibilità",
       "Gestisci soluzione",
-      "Gestisci i dettagli dell'attività"
+      "Gestisci i dettagli dell'attività",
     ],
     needsDeadline: "Devi fornire le tue esigenze fino al",
     availabilitiesDeadline: "Devi fornire le tue disponibilità fino al",
     availabilityError: "Disponibilità mancante per data",
     needError: "Assegnazione figlio mancante per data",
     needsSuccess: "Hai aggiunto con successo le tue esigenze",
-    availabilitiesSuccess: "Hai aggiunto correttamente le tue disponibilità"
+    availabilitiesSuccess: "Hai aggiunto correttamente le tue disponibilità",
   },
   planListItem: {
     participantsNeeds: "i membri hanno esigenze specifiche",
@@ -2792,7 +2798,7 @@ const it = {
     needsPhase: "dichiarare i bisogni",
     availabilitiesPhase: "dichiarazione di disponibilità",
     planningPhase: "Trovare la soluzione ottimale",
-    creationPhase: "Trasformazione del piano in attività"
+    creationPhase: "Trasformazione del piano in attività",
   },
   communityInterface: {
     backNavTitle: "Interfaccia della comunità",
@@ -2820,15 +2826,15 @@ const it = {
       "Numero totale di bambini",
       "Numero totale di gruppi",
       "Numero medio di membri del gruppo",
-      "Numero medio di attività di gruppo"
-    ]
+      "Numero medio di attività di gruppo",
+    ],
   },
   profileChildren: {
     addChildPrompt:
-      "Non hai ancora aggiunto figli. Fare clic sull'icona figlio per aggiungere un nuovo figlio"
+      "Non hai ancora aggiunto figli. Fare clic sull'icona figlio per aggiungere un nuovo figlio",
   },
   myCalendarScreen: {
-    backNavTitle: "Il mio calendario"
+    backNavTitle: "Il mio calendario",
   },
   editTimeslotScreen: {
     link: "Collegamento",
@@ -2862,7 +2868,7 @@ const it = {
     editConfirm: "confermare le modifiche?",
     crucialChangeConfirm:
       "Se salvi queste modifiche, tutti i partecipanti verranno annullati. Conferma le modifiche?",
-    deleteConfirm: "Sei sicuro di voler eliminare questo periodo di tempo?"
+    deleteConfirm: "Sei sicuro di voler eliminare questo periodo di tempo?",
   },
   timeslotScreen: {
     ongoing: "In corso",
@@ -2911,27 +2917,27 @@ const it = {
     you: "Tu",
     userSubscribeConfirm: "Sei sicuro di voler aggiungerti all'attività?",
     userUnsubscribeConfirm:
-      "Sei sicuro di voler rimuovere te stesso dall'attività?"
+      "Sei sicuro di voler rimuovere te stesso dall'attività?",
   },
   timeslotPreview: {
     confirmed: "Confermato",
     pending: "In attesa di conferma",
     participating: "Parteciperai tu e i tuoi figli",
     parentParticipating: "Parteciperai",
-    notParticipating: "Disponibile per nuove iscrizioni"
+    notParticipating: "Disponibile per nuove iscrizioni",
   },
   ratingModal: {
     title: "Come vorresti valutare Families Share?",
     rate: "Vota",
     rateInstruction:
-      "Tocca il numero di stelle che vorresti darci su una scala da 1 a 5."
+      "Tocca il numero di stelle che vorresti darci su una scala da 1 a 5.",
   },
   landingHeader: {
-    communityName: "Venezia"
+    communityName: "Venezia",
   },
   landingNavbar: {
     logIn: "ACCEDI",
-    signUp: "REGISTRATI"
+    signUp: "REGISTRATI",
   },
   aboutScreen: {
     findOutMore: "SCOPRI DI PIÙ SUL SITO",
@@ -2947,13 +2953,13 @@ const it = {
       "Il progetto Families_Share offre una soluzione dal basso, sotto forma di una piattaforma online (open source ed ad accesso aperto e gratuito) che supporti le famiglie nella condivisione del tempo e delle attività legate alla cura dei bambini, alla genitorialità, al doposcuola e tempo libero e alle attività domestiche, con una particolare attenzione all'inclusione delle famiglie a basso reddito. Il progetto aspira anche a coinvolgere gli anziani nelle attività di cura dei bambini, offrendo loro supporto nelle attività giornaliere e rendendoli partecipi agli eventi organizzati dalle famiglie. Per raggiungere tale obiettivo, il progetto parte dal concetto di \"banca del tempo\" capitalizzando le esperienze sull'innovazione digitale e cura all'infanzia dei partner. Il progetto sfrutta anche il potenziale delle reti delle tecnologie ICT, al fine di aumentare l'innovazione partecipata incoraggiando la diffusione di quartieri auto-organizzati. ",
     europeanUnionText:
       "Questo progetto ha ricevuto finanziamenti dal programma Europeo Horizon 2020, CAPS, Argomento: ICT-11-2017. Tipo di azione: IA. Grant Agreement n. 780783",
-    backNavTitle: "Il progetto"
+    backNavTitle: "Il progetto",
   },
   landingScreen: {
     suggestionsHeader: "Gruppi attivi",
     cardHeader: "Il progetto",
     cardInfo:
-      "Il progetto Families_Share sta sviluppando una piattaforma volta a favorire la diffusione di reti sociali e la sensibilizzazione nell'ambito della cura all'infanzia e dell'equilibrio vita-lavoro"
+      "Il progetto Families_Share sta sviluppando una piattaforma volta a favorire la diffusione di reti sociali e la sensibilizzazione nell'ambito della cura all'infanzia e dell'equilibrio vita-lavoro",
   },
   logInScreen: {
     backNavTitle: "Accedi",
@@ -2964,7 +2970,7 @@ const it = {
     dontHaveAccount: "Non hai ancora un account?",
     signUp: "Registrati",
     agreeWithTerms:
-      "Effettuando il login acconsente ai nostri termini di servizio e informativa sulla privacy"
+      "Effettuando il login acconsente ai nostri termini di servizio e informativa sulla privacy",
   },
   logInForm: {
     password: "Password",
@@ -2973,12 +2979,12 @@ const it = {
     authenticationErr: "E-mail o password errata",
     requiredErr: "Perfavore compila questo campo.",
     typeMismatchErr: "Si prega di inserire un indirizzo email valido.",
-    tooShortErr: "Per favore usa almeno 8 caratteri."
+    tooShortErr: "Per favore usa almeno 8 caratteri.",
   },
   signUpScreen: {
     backNavTitle: "Accedi",
     accountQuestion: "Hai già un account?",
-    logIn: "Accedi"
+    logIn: "Accedi",
   },
   signUpForm: {
     email: "E-mail",
@@ -2999,7 +3005,7 @@ const it = {
     typeMismatchErr: "Si prega di inserire un indirizzo email valido.",
     tooShortErr: "Per favore usa almeno 8 caratteri.",
     visibilityPrompt:
-      "Gli utenti potranno cercare il mio profilo all'interno dell'app"
+      "Gli utenti potranno cercare il mio profilo all'interno dell'app",
   },
   privacyPolicyModal: {
     privacyPolicy: (
@@ -3450,11 +3456,11 @@ const it = {
         </p>
       </div>
     ),
-    accept: "ACCETTA"
+    accept: "ACCETTA",
   },
   groupAbout: {
     memberHeader: "Informazioni",
-    header: "Informazioni sul gruppo"
+    header: "Informazioni sul gruppo",
   },
   groupActivities: {
     exportConfirm: "Sei sicuro di voler esportare l'agenda del gruppo?",
@@ -3462,17 +3468,17 @@ const it = {
     plansHeader: "Piani in sospeso",
     export: "Esporta l'agenda",
     newPlan: "Pianificazione avanzata",
-    newActivity: "Nuova attività"
+    newActivity: "Nuova attività",
   },
   activityListItem: {
     every: "Ogni",
-    of: "di"
+    of: "di",
   },
   groupListItem: {
     open: "Gruppo aperto: tutti possono richiedere di partecipare al gruppo",
     closed: "Gruppo chiuso: si può partecipare solo su invito",
     members: "Membri",
-    kids: "Bambini"
+    kids: "Bambini",
   },
   groupInfo: {
     contact: "CONTATTA IL GRUPPO",
@@ -3482,21 +3488,21 @@ const it = {
     join: "UNISCITI AL GRUPPO",
     leave: "ABBANDONA IL GRUPPO",
     pending: "CANCELLA LA RICHIESTA",
-    confirm: "Sei sicuro/a di voler abbandonare il gruppo?"
+    confirm: "Sei sicuro/a di voler abbandonare il gruppo?",
   },
   groupNavbar: {
     chatTab: "Messaggi",
     activitiesTab: "Attività  ",
     membersTab: "Membri",
     infoTab: "Info",
-    calendarTab: "Calendario"
+    calendarTab: "Calendario",
   },
   groupMembersAdminOptions: {
     invite: "Invita altre persone",
     groupIsOpen: "Il gruppo è aperto",
     groupIsClosed: "Il gruppo è chiuso",
     requestsOpen: "Le iscrizioni al gruppo sono aperte",
-    requestsClosed: "Il gruppo ha raggiunto il numero massimo di membri"
+    requestsClosed: "Il gruppo ha raggiunto il numero massimo di membri",
   },
   inviteModal: {
     memberHeader: "Invita altre persone",
@@ -3505,18 +3511,18 @@ const it = {
     invite: "INVITA",
     add: "AGGIUNGI",
     cancel: "CANCELLA",
-    search: "Cerca"
+    search: "Cerca",
   },
   groupNewsNavbar: {
     parents: "GENITORI",
-    children: "BAMBINI"
+    children: "BAMBINI",
   },
   cardWithLink: { learnMore: "PER SAPERNE DI PIÙ" },
   memberContact: {
     administrator: "Amministratore del gruppo",
     addAdmin: "Aggiungi amministratore",
     removeAdmin: "Rimuovi amministratore",
-    removeUser: "Rimuovi utente"
+    removeUser: "Rimuovi utente",
   },
   startUpGuide: {
     backNavTitle: "Come iniziare",
@@ -3527,8 +3533,8 @@ const it = {
       { main: "Definisci delle cariche interne", secondary: null },
       { main: "Chiudi l'agenda", secondary: null },
       { main: "Si parte!", secondary: null },
-      { main: "Benvenuti", secondary: null }
-    ]
+      { main: "Benvenuti", secondary: null },
+    ],
   },
   notificationScreen: { backNavTitle: "Notifica" },
   myFamiliesShareHeader: {
@@ -3548,7 +3554,7 @@ const it = {
     signOut: "Esci ",
     language: "Lingua",
     export: "Esporta i miei dati",
-    community: "Comunità"
+    community: "Comunità",
   },
   myFamiliesShareScreen: {
     myGroups: "I miei gruppi",
@@ -3559,15 +3565,15 @@ const it = {
     myActivitiesPrompt:
       "Qui vedrai le tue attività future dopo esserti registrato per uno o più gruppi",
     joinPrompt: "UNISCITI A UN GRUPPO",
-    createPrompt: "CREA UN NUOVO GRUPPO"
+    createPrompt: "CREA UN NUOVO GRUPPO",
   },
   faqsScreen: {
-    backNavTitle: "FAQs"
+    backNavTitle: "FAQs",
   },
   searchGroupModal: {
     search: "Cerca un gruppo",
     results: "Risultati",
-    example: "per esempio. Doposcuola"
+    example: "per esempio. Doposcuola",
   },
   createGroup: { backNavTitle: "Crea un gruppo" },
   createGroupStepper: {
@@ -3575,7 +3581,7 @@ const it = {
     contactTypes: {
       none: " - ",
       email: "E-mail",
-      phone: "Telefono"
+      phone: "Telefono",
     },
     continue: "Continua",
     cancel: "Cancella",
@@ -3585,7 +3591,7 @@ const it = {
       "Imposta la visibilità del gruppo",
       "Fornire l'area",
       "Fornire informazioni di contatto",
-      "Invita persone"
+      "Invita persone",
     ],
     name: "Nome",
     description: "Descrizione",
@@ -3594,12 +3600,13 @@ const it = {
     areay: "La zona",
     invite: "Aggiungi membri",
     nameErr: "Il nome scelto è già in uso da un altro gruppo",
-    requiredErr: "Perfavore compila questo campo."
+    requiredErr: "Perfavore compila questo campo.",
   },
   profileNavbar: {
     framily: "AMICI",
     info: "INFO",
-    children: "BAMBINI"
+    children: "BAMBINI",
+    senior: "ANZIANI",
   },
   profileInfo: {
     adress: "Indirizzo",
@@ -3607,10 +3614,10 @@ const it = {
     email: "Contatto personale ",
     mobile: "Cellulare",
     home: "Telefono",
-    unspecified: "Non specificato"
+    unspecified: "Non specificato",
   },
   profileScreen: {
-    privateProfile: "Il profilo è privato"
+    privateProfile: "Il profilo è privato",
   },
   editProfileScreen: {
     whatsappOption: "WhatsApp",
@@ -3634,7 +3641,7 @@ const it = {
     visible: "Profilo visibile",
     invisible: "Profilo non visibile",
     cityError: "Città non presente",
-    requiredErr: "Perfavore compila questo campo."
+    requiredErr: "Perfavore compila questo campo.",
   },
   editGroupScreen: {
     email: "E-mail",
@@ -3650,7 +3657,7 @@ const it = {
     cityError: "La città non è presente",
     visible: "Gruppo visibile",
     invisible: "Gruppo non visibile",
-    requiredErr: "Perfavore compila questo campo."
+    requiredErr: "Perfavore compila questo campo.",
   },
   profileHeader: {
     export: "Esporta",
@@ -3666,33 +3673,33 @@ const it = {
       "Il tuo account è stato sospeso temporaneamente. La prossima volta che accedi al tuo account verrà riattivato.",
     exportSuccess:
       "Presto riceverai un'e-mail con tutte le tue informazioni personali",
-    error: "Qualcosa è andato storto."
+    error: "Qualcosa è andato storto.",
   },
   replyBar: {
     new: "Nuovo messaggio",
-    maxFilesError: "Puoi caricare un massimo di 3 file."
+    maxFilesError: "Puoi caricare un massimo di 3 file.",
   },
   announcementReplies: {
-    new: "Il tuo commento..."
+    new: "Il tuo commento...",
   },
   reply: {
-    confirmDialogTitle: "Confermi di voler eliminare la tua risposta?"
+    confirmDialogTitle: "Confermi di voler eliminare la tua risposta?",
   },
   groupHeader: {
-    confirmDialogTitle: "Confermi di voler eliminare il gruppo?"
+    confirmDialogTitle: "Confermi di voler eliminare il gruppo?",
   },
   announcementHeader: {
-    confirmDialogTitle: "Confermi l'eliminazione?"
+    confirmDialogTitle: "Confermi l'eliminazione?",
   },
   childListItem: {
     boy: "Bambino",
     girl: "Bambina",
-    age: "anni"
+    age: "anni",
   },
   childProfileHeader: {
     delete: "Cancella profilo bambino/a",
     confirmDialogTitle:
-      "Confermi di voler eliminare il profilo di questo bambino/a?"
+      "Confermi di voler eliminare il profilo di questo bambino/a?",
   },
   childProfileInfo: {
     confirmDialogTitle: "Sei sicuro di voler eliminare questo genitore?",
@@ -3705,7 +3712,7 @@ const it = {
     otherInfo: "Altre informzioni",
     specialNeeds: "Bisogni speciali",
     addAdditional: "AGGIUNGI",
-    addParent: "AGGIUNGI GENITORE"
+    addParent: "AGGIUNGI GENITORE",
   },
   editChildProfileScreen: {
     backNavTitle: "Modifica profilo",
@@ -3724,7 +3731,7 @@ const it = {
     year: "Anno",
     file: "Scegli file",
     unspecified: "Non specificato",
-    requiredErr: "Perfavore compila questo campo."
+    requiredErr: "Perfavore compila questo campo.",
   },
   createChildScreen: {
     backNavTitle: "Aggiungi un/a bambino/a",
@@ -3748,7 +3755,7 @@ const it = {
     acceptTermsErr:
       "Si prega di accettare i termini d'uso e l'informativa sulla provacy per procedere",
     unspecified: "Non specificato",
-    requiredErr: "Perfavore compila questo campo."
+    requiredErr: "Perfavore compila questo campo.",
   },
   additionalInfoScreen: {
     backNavTitle: "Informazioni",
@@ -3757,10 +3764,10 @@ const it = {
     special: "Bisogni speciali",
     others: "Altri",
     acceptTerms:
-      'Acconsento che queste informazioni siano condivise con i membri del gruppo direttamente coinvolti nelle attività di cura dei figli ("childcare") '
+      'Acconsento che queste informazioni siano condivise con i membri del gruppo direttamente coinvolti nelle attività di cura dei figli ("childcare") ',
   },
   createActivityScreen: {
-    backNavTitle: "Nuova attività"
+    backNavTitle: "Nuova attività",
   },
   createPlanScreen: { backNavTitle: "Nuova Plan" },
   createActivityStepper: {
@@ -3770,14 +3777,14 @@ const it = {
     cancel: "Cancella",
     finish: "Crea",
     save: "Salva",
-    stepLabels: ["Informazioni", "Date", "Orari"]
+    stepLabels: ["Informazioni", "Date", "Orari"],
   },
   createActivityInformation: {
     link: "Collegamento (facoltativo)",
     color: "Colore dell'attività",
     description: "Descrizione (facoltativo)",
     name: "Titolo dell'attività",
-    location: "Posizione (facoltativo)"
+    location: "Posizione (facoltativo)",
   },
   createActivityDates: {
     header: "Seleziona uno o più giorni",
@@ -3785,13 +3792,13 @@ const it = {
     weekly: "Settimanale",
     monthly: "Mensile",
     datesError:
-      "La ripetizione non è disponibile quando sono selezionati più giorni"
+      "La ripetizione non è disponibile quando sono selezionati più giorni",
   },
   createActivityTimeslots: {
     header: "Aggiungi una fascia oraria nei giorni selezionati",
     differentTimeslots: "AGGIUNGERE ORARI DIFFERENTI PER OGNI GIORNATA?",
     sameTimeslots: "STESSI ORARI PER OGNI GIORNATA?",
-    selected: "date selezionate"
+    selected: "date selezionate",
   },
   createMaterialRequestDates: {
     header: "Seleziona uno o più giorni",
@@ -3799,29 +3806,31 @@ const it = {
     weekly: "Settimanale",
     monthly: "Mensile",
     datesError:
-        "La ripetizione non è disponibile quando sono selezionati più giorni"
+      "La ripetizione non è disponibile quando sono selezionati più giorni",
   },
   createMaterialRequestInformation: {
     //link: "Link (optional)",
     color: "Colore del materiale", //TODO
     description: "Descrizione (opzionale)", //TODO
-    name: "Nome del materiale",//TODO
-    location: "Posizione (opzionale)"//TODO
+    name: "Nome del materiale", //TODO
+    location: "Posizione (opzionale)", //TODO
   },
-  createMaterialRequestStepper: { //TODO
-    pendingMessage:"La richiesta di materiale è in attesa di conferma da parte di un amministratore",
+  createMaterialRequestStepper: {
+    //TODO
+    pendingMessage:
+      "La richiesta di materiale è in attesa di conferma da parte di un amministratore",
     continue: "Continua",
     cancel: "Cancella",
     finish: "Crea",
     save: "Salva",
-    stepLabels: ["Informazioni", "Date", "Orari"]
+    stepLabels: ["Informazioni"],
   },
   timeslotsContainer: {
     addTimeslot: "AGGIUNGI ORARI",
     timeslot: "orario",
     timeslots: "orari",
     confirmDialogTitle: "Confermi di eliminare questo orario?",
-    timeRangeError: "Orario di inizio e fine non compatibili"
+    timeRangeError: "Orario di inizio e fine non compatibili",
   },
   clockModal: {
     am: "AM",
@@ -3829,7 +3838,7 @@ const it = {
     start: "INIZIO",
     end: "FINE",
     confirm: "OK",
-    cancel: "CANCELLA"
+    cancel: "CANCELLA",
   },
   activityScreen: {
     children: "Bambini",
@@ -3846,7 +3855,7 @@ const it = {
     every: "Ogni",
     of: "di",
     deleteDialogTitle: "Confermi di eliminare questa attività?",
-    infoHeader: "Informazioni"
+    infoHeader: "Informazioni",
   },
   timeslotsList: {
     fixed: "fisso",
@@ -3859,7 +3868,7 @@ const it = {
     myChildrenSigned: "Le adesioni dei miei bambini",
     enough: "Con abbastanza partecipanti",
     notEnough: "Non ci sono abbastanza volontari",
-    notEnoughParticipants: "Non ci sono abbastanza partecipanti"
+    notEnoughParticipants: "Non ci sono abbastanza partecipanti",
   },
   filterTimeslotsDrawer: {
     header: "Filtra orari",
@@ -3867,7 +3876,7 @@ const it = {
     mySigned: "Le mie adesioni",
     myChildrenSigned: "Le mie bambini adesioni",
     enough: "Con abbastanza partecipanti",
-    notEnough: "Senza abbastanza partecipanti"
+    notEnough: "Senza abbastanza partecipanti",
   },
   expandedTimeslot: {
     signup: "Adesioni:",
@@ -3876,7 +3885,7 @@ const it = {
     parent: "Genitore che partecipa",
     child: "Bambino/a che partecipa",
     fixed: "Confermata",
-    completed: "Completata"
+    completed: "Completata",
   },
   expandedTimeslotEdit: {
     link: "Collegamento",
@@ -3906,7 +3915,7 @@ const it = {
     parties: "feste o eventi",
     coplaying: "Giochi di gruppo",
     other: "altro",
-    category: "Tipo di attività"
+    category: "Tipo di attività",
   },
   editActivityScreen: {
     backNavTitle: "Modifica attività",
@@ -3914,7 +3923,7 @@ const it = {
     description: "Descrizione (facoltativo)",
     name: "Nome dell'attività",
     save: "SALVA",
-    location: "Posizione (facoltativo)"
+    location: "Posizione (facoltativo)",
   },
   agendaView: {
     timeslots: "Orari",
@@ -3923,18 +3932,18 @@ const it = {
     signed: "Le mie adesioni",
     enough: "Con abbastanza participanti",
     notEnough: "Senza abbastanza partecipanti",
-    notEnoughParticipants: "Non ci sono abbastanza partecipanti"
+    notEnoughParticipants: "Non ci sono abbastanza partecipanti",
   },
   confirmDialog: {
     agree: "Ok",
-    disagree: "Annulla"
+    disagree: "Annulla",
   },
   pendingRequestsScreen: {
     requests: "Richieste in sospeso",
     activities: "Attivita in sospeso",
     invites: "Inviti in sospeso",
     confirm: "CONFERMA",
-    delete: "ELIMINA"
+    delete: "ELIMINA",
   },
   forgotPasswordScreen: {
     prompt:
@@ -3945,7 +3954,7 @@ const it = {
     notExistErr: "L'utente non è registrato nella piattaforma",
     err: "Qualcosa è andato storto",
     success: "Email inviata",
-    requiredErr: "Perfavore compila questo campo."
+    requiredErr: "Perfavore compila questo campo.",
   },
   changePasswordScreen: {
     prompt: "Inserisci la password",
@@ -3955,24 +3964,52 @@ const it = {
     err: "Le due password sono differenti",
     badRequest: "Richiesta errata",
     requiredErr: "Perfavore compila questo campo.",
-    typeMismatchErr: "Si prega di inserire un indirizzo email valido."
+    typeMismatchErr: "Si prega di inserire un indirizzo email valido.",
   },
   calendar: {
     userCalendar: "Mio calendario",
-    groupCalendar: "Calendario del gruppo"
+    groupCalendar: "Calendario del gruppo",
   },
   framilyListItem: {
-    delete: ""
-  }
+    delete: "",
+  },
+  /* TODO */
+  createMaterialOfferStepper: {
+    pendingMessage: "The activity is pending confirmation from an admin",
+    continue: "Continua",
+    cancel: "Cancella",
+    finish: "Crea",
+    save: "Salva",
+    stepLabels: ["Informazioni"],
+  },
+  createMaterialOfferInformation: {
+    color: "Colore del materiale", //TODO
+    description: "Descrizione (opzionale)", //TODO
+    name: "Nome del materiale", //TODO
+    location: "Posizione (opzionale)", //TODO
+  },
+  createMaterialOfferScreen: { backNavTitle: "Crea nuova offerta materiale" },
+  createMaterialRequestScreen: {
+    backNavTitle: "Crea nuova richiesta materiale",
+  },
+  groupMaterialsNavbar: {
+    offers: "OFFERTE",
+    requests: "RICHIESTE",
+  },
+  groupMaterials: {
+    header: "Offerta e richiesta materiali",
+    noRequests: "Non ci sono richieste da mostrare",
+    noOffers: "Non ci sono offerte da mostrare",
+  },
 };
 
 const el = {
   groupMembers: {
-    export: "Εξαγωγή επαφών"
+    export: "Εξαγωγή επαφών",
   },
   participantsModal: {
     header: "Συμμετέχοντες",
-    cancel: "Απόκρυψη"
+    cancel: "Απόκρυψη",
   },
   managePlanSolution: {
     needsHeader: "Ανάγκες",
@@ -3982,7 +4019,7 @@ const el = {
     all: "Όλα τα μέλη της ομάδας",
     automaticSuccess: "Το σχέδιο μετατράπηκε με επιτυχία σε δραστηριότητες",
     manualSuccess:
-      "Θα λάβετε σύντομα την τελική λύση του σχεδίου μέσω ηλεκτρονικού ταχυδρομείου"
+      "Θα λάβετε σύντομα την τελική λύση του σχεδίου μέσω ηλεκτρονικού ταχυδρομείου",
   },
   groupManagementScreen: {
     backNavTitle: "Διαχείριση Ομάδας",
@@ -3993,7 +4030,7 @@ const el = {
     metricsHeader: "Μετρικές Ομάδας",
     metricsColumn: "Μετρική",
     valuesColumn: "Τιμή",
-    chartHeader: "Συνολική συεισφορά ανά εθελοντή"
+    chartHeader: "Συνολική συεισφορά ανά εθελοντή",
   },
   timeslotEmergencyScreen: {
     copy: "Ο αριθμός έκτακτης ανάγκης αντιγράφηκε στο πρόχειρο",
@@ -4003,8 +4040,8 @@ const el = {
       general: "Έκτακτη ανάγκη",
       ambulance: "Νοσοκομείο",
       police: "Αστυνομία",
-      fire: "Πυροσβεστική"
-    }
+      fire: "Πυροσβεστική",
+    },
   },
   editPlanScreen: {
     requiredErr: "Παρακαλώ συμπληρώσετε το πεδίο",
@@ -4034,7 +4071,7 @@ const el = {
     planningStateHelper:
       "Σε αυτή τη φάση ο αλγόριθμος δημιουργεί ένα βέλτιστο σχέδιο με βάση τις ανάγκες και τις διαθεσιμότητες.",
     creationStateHelper:
-      "Στη φάση της δημιουργίας το βέλτιστο σχέδιο μετατρέπεται σε δραστηριότητες."
+      "Στη φάση της δημιουργίας το βέλτιστο σχέδιο μετατρέπεται σε δραστηριότητες.",
   },
   createPlanStepper: {
     name: "Όνομα",
@@ -4054,8 +4091,8 @@ const el = {
       "Παρέχετε ένα τίτλο για το σχέδιο",
       "Ορίσετε τη χρονική περίοδο",
       "Ορίσετε τη προθεσμία",
-      "Συμπληρώσετε τη τοποθεσία"
-    ]
+      "Συμπληρώσετε τη τοποθεσία",
+    ],
   },
   managePlanScreen: {
     export: "ΕΞαγωγή Σχεδίου",
@@ -4065,7 +4102,7 @@ const el = {
     exportToaster:
       "Το σχέδιο εξάγεται σε μορφή xls.Θα το λάβετε σύντομα μέσω email.",
     backNavTitle: "Διαχείριση Σχεδίου",
-    deleteConfirm: "Είστε σίγουρος ότι θέλετε να διαγράψετε αυτό το σχέδιο;"
+    deleteConfirm: "Είστε σίγουρος ότι θέλετε να διαγράψετε αυτό το σχέδιο;",
   },
   managePlanStepper: {
     amTimeslotFrom: "ΠΜ δραστηριότητα από",
@@ -4097,7 +4134,7 @@ const el = {
       "Προσθήκη διαθεσιμοτήτων",
       "Προσαρμογή διαθεσιμοτήτων",
       "Διαχείριση λύσης",
-      "Διαχείριση δραστηριοτήτων"
+      "Διαχείριση δραστηριοτήτων",
     ],
     needsDeadline: "Πρέπει να υποβάλετε τις ανάγκες σας μέχρι",
     availabilitiesDeadline: "Πρέπει να υποβάλετε τις διαθεσιμότητες σας μέχρι",
@@ -4105,7 +4142,7 @@ const el = {
       "Δεν έχετε επιλέξει τη διαθεσιμότητα σας για την ημερομηνία",
     needError: "Δεν έχετε επιλέξει κάποιο παιδί για την ημερομηνία",
     needsSuccess: "Προσθέσατε επιτυχώς τις ανάγκες σας",
-    availabilitiesSuccess: "Προσθέσατε επιτυχώς τις διαθεσιμότητες σας"
+    availabilitiesSuccess: "Προσθέσατε επιτυχώς τις διαθεσιμότητες σας",
   },
   planListItem: {
     participantsNeeds: "μέλη έχουν δηλώσει ανάγκες",
@@ -4115,7 +4152,7 @@ const el = {
     needsPhase: "Δήλωση αναγκών",
     availabilitiesPhase: "Δήλωση διαθεσιμοτήτων",
     planningPhase: "Εύρεση καλύτερης λύσης",
-    creationPhase: "Μετατροπή σχεδίου σε δραστηριότητες"
+    creationPhase: "Μετατροπή σχεδίου σε δραστηριότητες",
   },
   communityInterface: {
     backNavTitle: "Community Interface",
@@ -4143,15 +4180,15 @@ const el = {
       "Συνολικός αριθμός παιδιών",
       "Συνολικός αριθμός ομάδων",
       "Μέσος αριθμός μελών ομάδας",
-      "Μέσος αριθμός δραστηριοτήτων ομάδας"
-    ]
+      "Μέσος αριθμός δραστηριοτήτων ομάδας",
+    ],
   },
   profileChildren: {
     addChildPrompt:
-      "Δεν έχετε προσθέσει ακόμη παιδιά. Κάντε κλικ στο εικονίδιο για να προσθέσετε ένα νέο παιδί"
+      "Δεν έχετε προσθέσει ακόμη παιδιά. Κάντε κλικ στο εικονίδιο για να προσθέσετε ένα νέο παιδί",
   },
   myCalendarScreen: {
-    backNavTitle: "Το ημερολόγιο μου"
+    backNavTitle: "Το ημερολόγιο μου",
   },
   editTimeslotScreen: {
     link: "Σύνδεσμος",
@@ -4186,7 +4223,7 @@ const el = {
     crucialChangeConfirm:
       "Εάν αποθηκεύσετε αυτές τις αλλαγές όλοι οι συμμετέχοντες θα διαγραφούν. Αποθήκευση αλλαγών;",
     deleteConfirm:
-      "Είστε σίγουρος ότι θέλετε να διαγράψετε αυτή τη χρονική περίοδο;"
+      "Είστε σίγουρος ότι θέλετε να διαγράψετε αυτή τη χρονική περίοδο;",
   },
   timeslotScreen: {
     ongoing: "Σε εξέλιξη",
@@ -4235,20 +4272,20 @@ const el = {
     userSubscribeConfirm:
       "Είστε σίγουρος ότι θέλετε να προσθέσετε τον εαυτό σας στη δραστηριότητα;",
     userUnsubscribeConfirm:
-      "Είστε σίγουρος ότι θέλετε να αφαιρέσετε τον εαυτό σας από τη δραστηριότητα;"
+      "Είστε σίγουρος ότι θέλετε να αφαιρέσετε τον εαυτό σας από τη δραστηριότητα;",
   },
   timeslotPreview: {
     confirmed: "Επιβεβαιωμένο",
     pending: "Αναμένει επιβεβαίωση",
     participating: "Εσείς και τα παιδιά σας συμμετέχετε",
     parentParticipating: "Συμμετέχετε",
-    notParticipating: "Διαθέσιμο για νέες εγγραφές"
+    notParticipating: "Διαθέσιμο για νέες εγγραφές",
   },
   ratingModal: {
     title: "Πόσο θα θέλατε να βαθμολογήσετε τη πλατφόρμα Families Share;",
     rate: "Αξιολόγηση",
     rateInstruction:
-      "Επιλέξετε τον αριθμό αστεριών που θα θέλατε να δώσετε στην εφαρμογή με κλίμακα από 1 έως 5."
+      "Επιλέξετε τον αριθμό αστεριών που θα θέλατε να δώσετε στην εφαρμογή με κλίμακα από 1 έως 5.",
   },
   landingHeader: { communityName: "εργάνη" },
   landingNavbar: { logIn: "ΕΙΣΟΔΟΣ", signUp: "ΕΓΓΡΑΦΗ" },
@@ -4266,13 +4303,13 @@ const el = {
       'Το πρόγραμμα Families_Share προσφέρει μια λύση "από τα κάτω", με τη μορφή μιας κοινά σχεδιασμένης πλατφόρμας που υποστηρίζει τις οικογένειες για να μοιράζονται χρόνο και καθήκοντα που σχετίζονται με την παιδική μέριμνα, τη γονική μέριμνα, τις εξωσχολικές δραστηριότητες, τις δραστηριότητες αναψυχής και άλλα οικιακά καθήκοντα - Το πρόγραμμα φιλοδοξεί επίσης να συνεργαστεί με τους ηλικιωμένους, με την συμμετοχή τους σε δραστηριότητες παιδικής μέριμνας και προσφέροντάς τους παράλληλα υποστήριξη στα ψώνια τους και τα διάφορα καθήκοντά τους, αλλά και με τη συμμετοχή τους σε οικογενειακές εκδηλώσεις. Για να επιτύχει αυτό το στόχο, το πρόγραμμα "δανείζεται" και ενσωματώνει τις έννοιες της "χρονομετρητικής τραπεζικής" (time banking) , αξιοποιώντας τις υπάρχουσες ψηφιακές κοινωνικές καινοτομίες των εταίρων του έργου στον τομέα της παιδικής μέριμνας. Αξιοποιεί επίσης τις δυνατότητες των δικτύων τεχνολογίας πληροφοριών και επικοινωνιών (ΤΠΕ) για την αύξηση της συμμετοχικής καινοτομίας με την ενθάρρυνση της αυτορρύθμισης των γειτονιών.',
     europeanUnionText:
       "Το πρόγραμμα αυτό έλαβε χρηματοδότηση από το Ευρωπαϊκό Πρόγραμμα «Ορίζοντας 2020» της Ευρωπαϊκής Ένωσης για το Πρόγραμμα «Ορίζοντας 2020» με θέμα: ICT-11-2017 Είδος δράσης: IA, Συμφωνία επιχορήγησης αριθ. 780783",
-    backNavTitle: "Σχετικά με"
+    backNavTitle: "Σχετικά με",
   },
   landingScreen: {
     suggestionsHeader: "Ομάδες στην κοινότητα",
     cardHeader: "Σχετικά με το πρόγραμμα",
     cardInfo:
-      "Το πρόγραμμα Families_Share αναπτύσσει μια πλατφόρμα κοινωνικής δικτύωσης και ευαισθητοποίησης, αφιερωμένη στην ενθάρρυνση της παιδικής μέριμνας και της ισορροπίας μεταξύ της εργασίας και της καθημερίνότητας."
+      "Το πρόγραμμα Families_Share αναπτύσσει μια πλατφόρμα κοινωνικής δικτύωσης και ευαισθητοποίησης, αφιερωμένη στην ενθάρρυνση της παιδικής μέριμνας και της ισορροπίας μεταξύ της εργασίας και της καθημερίνότητας.",
   },
   logInScreen: {
     backNavTitle: "Είσοδος",
@@ -4283,7 +4320,7 @@ const el = {
     dontHaveAccount: "Δεν έχετε λογαριασμό;",
     signUp: "Εγγραφή",
     agreeWithTerms:
-      "Με τη σύνδεση σας, δέχεστε ότι συμφωνείτε με τους όρους Χρήσης και τη Πολιτική Απορρήτου."
+      "Με τη σύνδεση σας, δέχεστε ότι συμφωνείτε με τους όρους Χρήσης και τη Πολιτική Απορρήτου.",
   },
   logInForm: {
     password: "Κωδικός πρόσβασης",
@@ -4293,12 +4330,12 @@ const el = {
       "Λάθος διεύθυνση  ηλεκτρονικού ταχυδρομείου ή κωδικός πρόσβασης",
     requiredErr: "Παρακαλούμε συμπληρώστε αυτό το πεδίο.",
     typeMismatchErr: "Παρακαλούμε εισάγετε μια έγκυρη διεύθυνση e-mail.",
-    tooShortErr: "Παρακαλούμε χρησιμοποιήσετε τουλάχιστον 8 χαρακτήρες."
+    tooShortErr: "Παρακαλούμε χρησιμοποιήσετε τουλάχιστον 8 χαρακτήρες.",
   },
   signUpScreen: {
     backNavTitle: "Εγγραφή",
     accountQuestion: "Έχετε ήδη λογαριασμό;",
-    logIn: "Είσοδος"
+    logIn: "Είσοδος",
   },
   signUpForm: {
     email: "Ηλεκτρονικό ταχυδρομείο",
@@ -4318,7 +4355,7 @@ const el = {
     requiredErr: "Παρακαλούμε συμπληρώστε αυτό το πεδίο.",
     passwordPrompt: "Ο κωδικός πρέπει να περιλαμβάνει τουλάχιστον 8 χαρακτήρες",
     typeMismatchErr: "Παρακαλούμε εισάγετε μια έγκυρη διεύθυνση e-mail.",
-    tooShortErr: "Παρακαλούμε χρησιμοποιήσετε τουλάχιστον 8 χαρακτήρες."
+    tooShortErr: "Παρακαλούμε χρησιμοποιήσετε τουλάχιστον 8 χαρακτήρες.",
   },
   privacyPolicyModal: {
     privacyPolicy: (
@@ -4778,7 +4815,7 @@ const el = {
         </p>
       </div>
     ),
-    accept: "ΑΠΟΔΟΧΗ"
+    accept: "ΑΠΟΔΟΧΗ",
   },
   groupAbout: { memberHeader: "Πληροφορίες", header: "Σχετικά με την ομάδα" },
   groupActivities: {
@@ -4788,17 +4825,17 @@ const el = {
     plansHeader: "Εκκρεμή σχέδια",
     export: "Εξαγωγή Ημερολογίου",
     newPlan: "Νέο σχέδιο",
-    newActivity: "Νέα δραστηριότητα"
+    newActivity: "Νέα δραστηριότητα",
   },
   activityListItem: {
     every: "Κάθε",
-    of: "του"
+    of: "του",
   },
   groupListItem: {
     open: "Η συμμετοχή στην ομάδα είναι ανοιχτή.",
     closed: "Η συμμετοχή στην ομάδα είναι κλειστή.",
     members: "Μέλη",
-    kids: "Παιδιά"
+    kids: "Παιδιά",
   },
   groupInfo: {
     contact: "ΕΠΙΚΟΙΝΩΝΙΑ",
@@ -4808,21 +4845,21 @@ const el = {
     join: "Συμμετοχή στην ομάδα",
     leave: "Αποχώρηση από την ομάδα",
     pending: "Ακύρωση αιτήματος",
-    confirm: "Είστε βέβαιοι ότι θέλετε να αποχωρήσετε από την ομάδα;"
+    confirm: "Είστε βέβαιοι ότι θέλετε να αποχωρήσετε από την ομάδα;",
   },
   groupNavbar: {
     chatTab: "Μηνύματα",
     activitiesTab: "Δραστηριότητες",
     membersTab: "Μέλη",
     infoTab: "Σχετικά με",
-    calendarTab: "Ημερολόγιο"
+    calendarTab: "Ημερολόγιο",
   },
   groupMembersAdminOptions: {
     invite: "Προσκαλέστε άτομα",
     groupIsOpen: "Η ομάδα είναι ανοιχτή",
     groupIsClosed: "Η ομάδα είναι κλειστή",
     requestsOpen: "Αιτήματα συμμετοχής είναι ευπρόσδεκτα",
-    requestsClosed: "Έχει επιτευχθεί μέγιστη χωρητικότητα"
+    requestsClosed: "Έχει επιτευχθεί μέγιστη χωρητικότητα",
   },
   inviteModal: {
     memberHeader: "Προσκαλέστε άτομα",
@@ -4831,18 +4868,18 @@ const el = {
     invite: "ΠΡΟΣΚΛΗΣΗ",
     add: "ΠΡΟΣΘΗΚΗ",
     cancel: "ΑΚΥΡΩΣΗ",
-    search: "Αναζήτηση"
+    search: "Αναζήτηση",
   },
   groupNewsNavbar: {
     parents: "ΓΟΝΕΙΣ",
-    children: "ΠΑΙΔΙΑ"
+    children: "ΠΑΙΔΙΑ",
   },
   cardWithLink: { learnMore: "ΜΑΘΕΤΕ ΠΕΡΙΣΣΟΤΕΡΑ" },
   memberContact: {
     administrator: "Διαχειριστής ομάδας",
     addAdmin: "Προσθήκη διαχειριστή",
     removeAdmin: "Κατάργηση διαχειριστή",
-    removeUser: "Κατάργηση χρήστη"
+    removeUser: "Κατάργηση χρήστη",
   },
   startUpGuide: {
     backNavTitle: "Οδηγός εκκίνησης",
@@ -4853,11 +4890,11 @@ const el = {
       { main: "Κάντε εσωτερικά ραντεβού", secondary: null },
       {
         main: "Κλείστε την ατζέντα /Επιβεβαιώστε την αντζέντα",
-        secondary: null
+        secondary: null,
       },
       { main: "Ξεκινήστε!", secondary: null },
-      { main: "Καλώς ήρθατε", secondary: null }
-    ]
+      { main: "Καλώς ήρθατε", secondary: null },
+    ],
   },
   notificationScreen: { backNavTitle: "Ειδοποήση" },
   myFamiliesShareHeader: {
@@ -4877,7 +4914,7 @@ const el = {
     signOut: "Αποσύνδεση",
     language: "Γλώσσα",
     export: "Εξαγωγή των δεδομένων μου",
-    community: "Κοινότητα"
+    community: "Κοινότητα",
   },
   myFamiliesShareScreen: {
     myGroups: "Οι ομάδες μου",
@@ -4888,15 +4925,15 @@ const el = {
     myActivitiesPrompt:
       "Εδώ θα βλέπετε μελλοντικά τις δραστηριότητες, στις οποίες έχετε εγγραφεί.",
     joinPrompt: "ΓΙΝΕΤΕ ΜΕΛΟΣ ΜΙΑΣ ΟΜΑΔΑΣ",
-    createPrompt: "ΔΗΜΙΟΥΡΓΕΙΣΤΕ ΜΙΑ ΝΕΑ ΟΜΑΔΑ"
+    createPrompt: "ΔΗΜΙΟΥΡΓΕΙΣΤΕ ΜΙΑ ΝΕΑ ΟΜΑΔΑ",
   },
   faqsScreen: {
-    backNavTitle: "Συχνές ερωτήσεις"
+    backNavTitle: "Συχνές ερωτήσεις",
   },
   searchGroupModal: {
     search: "Αναζήτηση ομάδας",
     results: "Αποτελέσματα",
-    example: "π.χ. Δραστηριότητες μετά το σχολείο"
+    example: "π.χ. Δραστηριότητες μετά το σχολείο",
   },
   createGroup: { backNavTitle: "Δημιουργία ομάδας" },
   createGroupStepper: {
@@ -4904,7 +4941,7 @@ const el = {
     contactTypes: {
       none: " - ",
       email: "E-mail",
-      phone: "Τηλέφωνο"
+      phone: "Τηλέφωνο",
     },
     continue: "Συνέχεια",
     cancel: "Ακύρωση",
@@ -4914,7 +4951,7 @@ const el = {
       "Ορίστε την ορατότητα",
       "Δώστε την περιοχή",
       "Δώστε στοιχεία επικοινωνίας",
-      "Προσκαλέστε άτομα"
+      "Προσκαλέστε άτομα",
     ],
     name: "Όνομα",
     description: "Περιγραφή",
@@ -4923,7 +4960,7 @@ const el = {
     area: "Περιοχή",
     invite: "Προσθήκη μελών",
     nameErr: "Το όνομα της ομάδας υπάρχει ήδη",
-    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο."
+    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο.",
   },
   profileNavbar: { framily: "ΦΙΛΟΙ", info: "ΠΛΗΡΟΦΟΡΙΕΣ", children: "ΠΑΙΔΙΑ" },
   profileInfo: {
@@ -4932,7 +4969,7 @@ const el = {
     email: "Προσωπικό",
     mobile: "Κινητό (τηλέφωνο)",
     home: "Σταθερό (τηλέφωνο)",
-    unspecified: "Απροσδιόριστο"
+    unspecified: "Απροσδιόριστο",
   },
   profileScreen: { privateProfile: "Το προφίλ είναι ιδιωτικό" },
   editProfileScreen: {
@@ -4957,7 +4994,7 @@ const el = {
     visible: "Ορατό προφίλ",
     invisible: "Κρυφό προφίλ",
     cityErr: "Η πόλη δεν υπάρχει",
-    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο."
+    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο.",
   },
   editGroupScreen: {
     email: "E-mail",
@@ -4972,7 +5009,7 @@ const el = {
     nameErr: "Το όνομα της ομάδας υπάρχει ήδη",
     visible: "Ορατή ομάδα",
     invisible: "Κρυφή ομάδα",
-    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο."
+    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο.",
   },
   profileHeader: {
     export: "Εξαγωγή",
@@ -4989,27 +5026,28 @@ const el = {
       "Ο λογαριασμός σας απενεργοποιήθηκε προσωρινά. Την επόμενη φορά που θα συνδεθείτε θα επανεργοποιηθεί.",
     exportSuccess:
       "Θα λάβετε σύντομα ένα e-mail με όλα τα προσωπικά σας δεδομένα",
-    error: "Κάτι πήγε στραβά."
+    error: "Κάτι πήγε στραβά.",
   },
   replyBar: {
     new: "Νέο μήνυμα",
-    maxFilesError: "Παρακαλούμε επιλέξετε μέχρι 3 αρχεία."
+    maxFilesError: "Παρακαλούμε επιλέξετε μέχρι 3 αρχεία.",
   },
   announcementReplies: { new: "Το σχόλιο σας…" },
   reply: {
     confirmDialogTitle:
-      "Είστε σίγουροι ότι θέλετε να διαγράψετε την απάντησή σας;"
+      "Είστε σίγουροι ότι θέλετε να διαγράψετε την απάντησή σας;",
   },
   groupHeader: {
-    confirmDialogTitle: "Είστε σίγουροι ότι θέλετε να διαγράψετε την ομάδα σας;"
+    confirmDialogTitle:
+      "Είστε σίγουροι ότι θέλετε να διαγράψετε την ομάδα σας;",
   },
   announcementHeader: {
-    confirmDialogTitle: "Είστε σίγουροι ότι θέλετε να το διαγράψετε;"
+    confirmDialogTitle: "Είστε σίγουροι ότι θέλετε να το διαγράψετε;",
   },
   childListItem: { boy: "Αγόρι", girl: "Κορίτσι", age: "χρονών" },
   childProfileHeader: {
     delete: "Διαγραφή παιδιού",
-    confirmDialogTitle: "Είστε σίγουροι ότι θέλετε να διαγράψετε το παιδί;"
+    confirmDialogTitle: "Είστε σίγουροι ότι θέλετε να διαγράψετε το παιδί;",
   },
   childProfileInfo: {
     confirmDialogTitle:
@@ -5023,7 +5061,7 @@ const el = {
     otherInfo: "Άλλες πληροφορίες",
     specialNeeds: "Ειδικές ανάγκες",
     addAdditional: "ΠΡΟΣΘΗΚΗ",
-    addParent: "ΠΡΟΣΘΗΚΗ ΓΟΝΕΑ"
+    addParent: "ΠΡΟΣΘΗΚΗ ΓΟΝΕΑ",
   },
   editChildProfileScreen: {
     backNavTitle: "Επεξεργασία προφίλ",
@@ -5042,7 +5080,7 @@ const el = {
     year: "Ετών",
     file: "Επιλέξτε αρχείο",
     unspecified: "Απροσδιόριστο",
-    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο."
+    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο.",
   },
   createChildScreen: {
     backNavTitle: "Προσθήκη παιδιού",
@@ -5065,7 +5103,7 @@ const el = {
       "Αποδέχομαι τους Όρους Χρήσης και την Πολιτική όσον αφορά την επεξεργασία και τη χρήση των δεδομένων μου.",
     acceptTermsErr: "Παρακαλούμε αποδεχτείτε τους όρους",
     unspecified: "Απροσδιόριστο",
-    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο."
+    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο.",
   },
   additionalInfoScreen: {
     backNavTitle: "Πληροφορίες",
@@ -5074,7 +5112,7 @@ const el = {
     special: "Ειδικές ανάγκες",
     others: "Άλλα",
     acceptTerms:
-      "Αναγνωρίζω ότι αυτές οι πληροφορίες θα γνωστοποιηθούν στα μέλη της ομάδας που συμμετέχουν άμεσα στις δραστηριότητες παιδικής μέριμνας."
+      "Αναγνωρίζω ότι αυτές οι πληροφορίες θα γνωστοποιηθούν στα μέλη της ομάδας που συμμετέχουν άμεσα στις δραστηριότητες παιδικής μέριμνας.",
   },
   createActivityScreen: { backNavTitle: "Νέα δραστηριότητα" },
   createPlanScreen: { backNavTitle: "Νεο Πρόγραμμα" },
@@ -5085,13 +5123,13 @@ const el = {
     cancel: "Ακύρωση",
     finish: "Δημιουργία",
     save: "Αποθήκευση",
-    stepLabels: ["Πληροφορίες", "Ημερομηνίες", "Χρονική περίοδος"]
+    stepLabels: ["Πληροφορίες", "Ημερομηνίες", "Χρονική περίοδος"],
   },
   createActivityInformation: {
     color: "Χρώμα δραστηριότητας",
     description: "Περιγραφή (προαιρετική)",
     name: "Όνομα δραστηριότητας",
-    location: "Τοποθεσία (προαιρετική)"
+    location: "Τοποθεσία (προαιρετική)",
   },
   createActivityDates: {
     header: "Επιλέξτε μία ή περισσότερες ημέρες",
@@ -5099,35 +5137,38 @@ const el = {
     weekly: "Εβδομαδιαία",
     monthly: "Μηνιαία",
     datesError:
-      "Η επανάληψη δεν είναι διαθέσιμη όταν έχετε επιλέξει πολλές ημέρες"
+      "Η επανάληψη δεν είναι διαθέσιμη όταν έχετε επιλέξει πολλές ημέρες",
   },
   createActivityTimeslots: {
     header: "Προσθέστε χρονική περίοδο στις επιλεγμένες ημέρες",
     differentTimeslots: "ΔΙΑΦΟΡΕΤΙΚΗ ΧΡΟΝΙΚΗ ΠΕΡΙΟΔΟΣ ΓΙΑ ΚΑΘΕ ΗΜΕΡΑ;",
     sameTimeslots: "ΙΔΙΑ ΧΡΟΝΙΚΗ ΠΕΡΙΟΔΟΣ ΓΙΑ ΚΆΘΕ ΗΜΕΡΑ;",
-    selected: "ημερομηνίες επιλέχθηκαν"
+    selected: "ημερομηνίες επιλέχθηκαν",
   },
-  createMaterialRequestDates: { //TODO
+  createMaterialRequestDates: {
+    //TODO
     header: "Select one or more days",
     repetition: "Repetition",
     weekly: "Weekly",
     monthly: "Monthly",
-    datesError: "Repetition isn't available when multiple days are selected"
+    datesError: "Repetition isn't available when multiple days are selected",
   },
   createMaterialRequestInformation: {
     //link: "Link (optional)",
     color: "Color of the material", //TODO
     description: "Description (optional)", //TODO
-    name: "Name of the material",//TODO
-    location: "Location (optional)"//TODO
+    name: "Name of the material", //TODO
+    location: "Location (optional)", //TODO
   },
-  createMaterialRequestStepper: { //TODO
-    pendingMessage: "The material request is pending confirmation from an admin",
+  createMaterialRequestStepper: {
+    //TODO
+    pendingMessage:
+      "The material request is pending confirmation from an admin",
     continue: "Continue",
     cancel: "Cancel",
     finish: "Create",
     save: "Save",
-    stepLabels: ["Information", "Dates", "Timeslots"]
+    stepLabels: ["Information", "Dates", "Timeslots"],
   },
   timeslotsContainer: {
     addTimeslot: "Προσθήκη χρονικής περιόδου",
@@ -5135,7 +5176,7 @@ const el = {
     timeslots: "Χρονικές περίοδοι",
     confirmDialogTitle:
       "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την χρονική περίοδο;",
-    timeRangeError: "Μη έγκυρος συνδυασμός χρόνου έναρξης και λήξης"
+    timeRangeError: "Μη έγκυρος συνδυασμός χρόνου έναρξης και λήξης",
   },
   clockModal: {
     am: "π.μ.",
@@ -5143,7 +5184,7 @@ const el = {
     start: "ΞΕΚΙΝΗΣΤΕ",
     end: "ΤΕΛΟΣ",
     confirm: "ΟΚ",
-    cancel: "ΑΚΥΡΩΣΗ"
+    cancel: "ΑΚΥΡΩΣΗ",
   },
   activityScreen: {
     children: "Παιδιά",
@@ -5162,7 +5203,7 @@ const el = {
     of: "του",
     deleteDialogTitle:
       "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτήν τη δραστηριότητα;",
-    infoHeader: "Πληροφορίες Δραστηριότητας"
+    infoHeader: "Πληροφορίες Δραστηριότητας",
   },
   timeslotsList: {
     fixed: "καθορισμένη",
@@ -5175,7 +5216,7 @@ const el = {
     myChildrenSigned: "Οι εγγραφές των παιδιών μου",
     enough: "Με αρκετούς συμμετέχοντες",
     notEnough: "Χωρίς αρκετούς συμμετέχοντες",
-    notEnoughParticipants: "Δεν υπάρχουν αρκετοί συμμετέχοντες"
+    notEnoughParticipants: "Δεν υπάρχουν αρκετοί συμμετέχοντες",
   },
   filterTimeslotsDrawer: {
     header: "Φίλτρα χρονικής περιόδου",
@@ -5183,7 +5224,7 @@ const el = {
     mySigned: "Η εγγραφή μου",
     myChildrenSigned: "Οι εγγραφές των παιδιών μου",
     enough: "Με αρκετούς συμμετέχοντες",
-    notEnough: "Χωρίς αρκετούς συμμετέχοντες"
+    notEnough: "Χωρίς αρκετούς συμμετέχοντες",
   },
   expandedTimeslot: {
     signup: "Εγραφή:",
@@ -5192,7 +5233,7 @@ const el = {
     parent: "Εγγραφή γονέα",
     child: "Εγγραφή παιδιού",
     fixed: "Σταθερό / Κανονισμένο",
-    completed: "Ολοκληρωμένο "
+    completed: "Ολοκληρωμένο ",
   },
   expandedTimeslotEdit: {
     link: "Σύνδεσμος",
@@ -5222,7 +5263,7 @@ const el = {
     parties: "Πάρτυ ή εκδηλώσεις",
     coplaying: "Μέρες co-playing",
     other: "ΆΛλη",
-    category: "Κατηγορία δραστηριότητας"
+    category: "Κατηγορία δραστηριότητας",
   },
   editActivityScreen: {
     backNavTitle: "Επεξεργασία δραστηριότητας",
@@ -5230,7 +5271,7 @@ const el = {
     description: "Περιγραφή (προαιρετική)",
     name: "Όνομα δραστηριότητας",
     save: "ΑΠΟΘΗΚΕΥΣΗ",
-    location: "Τοποθεσία (προαιρετική)"
+    location: "Τοποθεσία (προαιρετική)",
   },
   agendaView: {
     timeslots: "Χρονικές περίοδοι",
@@ -5239,7 +5280,7 @@ const el = {
     signed: "Η εγγραφή μου",
     enough: "Με αρκετούς συμμετέχοντες",
     notEnough: "Χωρίς αρκετούς συμμετέχοντες",
-    notEnoughParticipants: "Δεν υπάρχουν αρκετοί συμμετέχοντες"
+    notEnoughParticipants: "Δεν υπάρχουν αρκετοί συμμετέχοντες",
   },
   confirmDialog: { agree: "Οκ", disagree: "Ακυρωση" },
   pendingRequestsScreen: {
@@ -5247,7 +5288,7 @@ const el = {
     invites: "Εκκρεμείς προσκλήσεις",
     activities: "Εκκρεμείς δραστηριότητες",
     confirm: "ΕΠΙΒΕΒΑΙΩΣΗ",
-    delete: "ΔΙΑΓΡΑΦΗ"
+    delete: "ΔΙΑΓΡΑΦΗ",
   },
   forgotPasswordScreen: {
     prompt:
@@ -5258,7 +5299,7 @@ const el = {
     notExistErr: "Ο χρήστης δεν υπάρχει",
     err: "Κάτι πήγε στραβά",
     success: "Το μήνυμα ηλεκτρονικού ταχυδρομείου εστάλη",
-    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο."
+    requiredErr: "Παρακαλούμε συμπληρώσετε αυτό το πεδίο.",
   },
   changePasswordScreen: {
     prompt: "Παρακαλούμε εισαγάγετε τον νέο κωδικό πρόσβασής",
@@ -5268,32 +5309,32 @@ const el = {
     err: "Οι κωδικοί πρόσβασης δεν ταιριάζουν",
     badRequest: "Σφάλμα Πρόσβασης",
     requiredErr: "Παρακαλούμε συμπληρώστε αυτό το πεδίο.",
-    typeMismatchErr: "Παρακαλούμε εισάγετε μια έγκυρη διεύθυνση e-mail."
+    typeMismatchErr: "Παρακαλούμε εισάγετε μια έγκυρη διεύθυνση e-mail.",
   },
   calendar: {
     userCalendar: "Το ημερολόγιο μου",
-    groupCalendar: "Το ημερολόγιο της ομάδας"
+    groupCalendar: "Το ημερολόγιο της ομάδας",
   },
-  framilyListItem: { delete: "" }
+  framilyListItem: { delete: "" },
 };
 
 const hu = {
   groupMembers: {
-    export: "Névjegyek exportálása"
+    export: "Névjegyek exportálása",
   },
   participantsModal: {
     header: "Résztvevők",
-    cancel: "Bezár"
+    cancel: "Bezár",
   },
   managePlanSolution: {
     needsHeader: "Igények kigyűjtése",
     selectFrom: "Ráérések kiválasztása ettől",
     participating: "Résztvevő tagok tervezése",
     available: "Elérhető tagok kigyűjtése",
-    all: "Összes csoporttag"
+    all: "Összes csoporttag",
   },
   createPlanScreen: {
-    backNavTitle: "Új tervezés"
+    backNavTitle: "Új tervezés",
   },
   groupManagementScreen: {
     backNavTitle: "Csoport kezelése",
@@ -5304,7 +5345,7 @@ const hu = {
     metricsHeader: "Csoport mérőszámai",
     metricsColumn: "Mérőszám",
     valuesColumn: "Érték",
-    chartHeader: "Felhasználónkénti hozzájárulás"
+    chartHeader: "Felhasználónkénti hozzájárulás",
   },
   timeslotEmergencyScreen: {
     copy: "Vágólapra másolt segélyhívó szám",
@@ -5314,8 +5355,8 @@ const hu = {
       general: "Általános segélyhívás",
       ambulance: "Mentő",
       police: "Rendőr",
-      fire: "Tűzoltó"
-    }
+      fire: "Tűzoltó",
+    },
   },
   editPlanScreen: {
     requiredErr: "Kérjük, töltsd ki ezt a mezőt!",
@@ -5347,7 +5388,7 @@ const hu = {
     planningStateHelper:
       "A tervezési fázisban a Families_Share algoritmusa elkészít egy optimális megoldási javaslatot a tevékenység lebonyolításához (dátumok, résztvevők) a felhasználók által megadott igények és ráérések alapján.",
     creationStateHelper:
-      "A létrehozás fázisban az algoritmus által elkészített terv konkrét tevékenységekké alakul."
+      "A létrehozás fázisban az algoritmus által elkészített terv konkrét tevékenységekké alakul.",
   },
   createPlanStepper: {
     name: "A tevékenység neve",
@@ -5368,8 +5409,8 @@ const hu = {
       "Adj meg egy címet a tervezett tevékenységnek!",
       "Állíts be egy idősávot (add meg a kezdő és a záró dátumot)!",
       "Jelöld meg, meddig adhatják le a csoporttagok a szükségleteiket!",
-      "Add meg a tevékenység helyszínét!"
-    ]
+      "Add meg a tevékenység helyszínét!",
+    ],
   },
   managePlanScreen: {
     export: "Terv exportálása",
@@ -5379,7 +5420,7 @@ const hu = {
     exportToaster:
       "A terv .xls formátumban exportálódik, és pár percen belül megérkezik hozzád emailben.",
     backNavTitle: "Tervezés kezelése",
-    deleteConfirm: "Biztosan törölni szeretnéd ezt a tervet?"
+    deleteConfirm: "Biztosan törölni szeretnéd ezt a tervet?",
   },
   managePlanStepper: {
     pmTimeslotFrom: "Délutáni időpontok ettől",
@@ -5412,7 +5453,7 @@ const hu = {
       "Ráérések megadása",
       "Ráérések testreszabása",
       "Megoldási javaslat kezelése",
-      "A tevékenység részleteinek kezelése"
+      "A tevékenység részleteinek kezelése",
     ],
     needsDeadline:
       "A következő időpontig add meg, mikor lenne szükséged gyermekfelügyeletre:",
@@ -5422,7 +5463,7 @@ const hu = {
       "A következő dátumon még senki nem jelezte, hogy elérhető gyerekfelügyeletre:",
     needError: "A következő dátumra még hiányos a gyermekek beosztása:",
     needsSuccess: "Sikeresen megadtad az igényeidet!",
-    availabilitiesSuccess: "Sikeresen megadtad a ráérésed!"
+    availabilitiesSuccess: "Sikeresen megadtad a ráérésed!",
   },
   planListItem: {
     participantsNeeds: "A csoporttagok megadták az igényeiket",
@@ -5432,7 +5473,7 @@ const hu = {
     needsPhase: "Igények véglegesítése",
     availabilitiesPhase: "Ráérérsek véglegesítése",
     planningPhase: "Optimális megoldás keresése",
-    creationPhase: "A javasolt terv véglegesítése, tevékenységekké alakítása"
+    creationPhase: "A javasolt terv véglegesítése, tevékenységekké alakítása",
   },
   communityInterface: {
     backNavTitle: "Közösségi felület",
@@ -5460,15 +5501,15 @@ const hu = {
       "Gyermekek száma",
       "Csoportok száma",
       "Csoporttagok átlagos száma",
-      "A csoporttevékenységek átlagos száma"
-    ]
+      "A csoporttevékenységek átlagos száma",
+    ],
   },
   profileChildren: {
     addChildPrompt:
-      "Még nem adott meg gyermeket. Kattintson a gyermek ikonra új gyermek hozzáadásáért"
+      "Még nem adott meg gyermeket. Kattintson a gyermek ikonra új gyermek hozzáadásáért",
   },
   myCalendarScreen: {
-    backNavTitle: "Eseménynaptáram"
+    backNavTitle: "Eseménynaptáram",
   },
   editTimeslotScreen: {
     link: "Kapcsolat",
@@ -5502,7 +5543,7 @@ const hu = {
     editConfirm: "Jóváhagyja a módosításokat?",
     crucialChangeConfirm:
       "Amennyiben elmenti ezeket a változtatásokat, akkor a teljes csoport leiratkozik. Jóváhagyja a módosításokat?",
-    deleteConfirm: "Biztosan törölni szeretné ezt az időrést?"
+    deleteConfirm: "Biztosan törölni szeretné ezt az időrést?",
   },
   timeslotScreen: {
     ongoing: "Folyamatban lévő",
@@ -5550,26 +5591,26 @@ const hu = {
     you: "Ön",
     userSubscribeConfirm:
       "Biztosan hozzá szeretné adni magát a tevékenységhez?",
-    userUnsubscribeConfirm: "Biztosan le szeretne iratkozni a tevékenységről?"
+    userUnsubscribeConfirm: "Biztosan le szeretne iratkozni a tevékenységről?",
   },
   timeslotPreview: {
     confirmed: "Jóváhagyva",
     pending: "Jóváhagyásra vár",
     participating: "Ön és gyermeke részt fognak venni",
     parentParticipating: "Ön részt fog venni",
-    notParticipating: "Új feliratokhoz kapható"
+    notParticipating: "Új feliratokhoz kapható",
   },
   ratingModal: {
     title: "Milyennek találja a Families_Share-t?",
     rate: "Értékelje",
-    rateInstruction: "Hány csillagot adna nekünk egy 1-5-ig terjedő skálán?"
+    rateInstruction: "Hány csillagot adna nekünk egy 1-5-ig terjedő skálán?",
   },
   landingHeader: {
-    communityName: null
+    communityName: null,
   },
   landingNavbar: {
     logIn: "Bejelentkezés",
-    signUp: "Regisztráció"
+    signUp: "Regisztráció",
   },
   aboutScreen: {
     findOutMore: "További információért, kérjük látogasson el a honlapra",
@@ -5585,13 +5626,13 @@ const hu = {
       "A Families_Share projekt alulról szerveződő megoldást kínál a közösen kialakított platform segítségével elősegítve a családok gyermekfelügyelettel kapcsolatos idejének és feladatainak, a gyermeknevelési, oktatási órákon túli, szabadidős és háztartási feladatainak megosztására - különös tekintettel az alacsony jövedelmű családokra.A projekt emellett épít az idősebb generáció bevonására, gyermekfelügyeleti, bevásárlási és a családok életét érintő adminisztratív feladatokon keresztül. A fentiek érdekében, a projekt kihasználja az időbank megoldást, építve a partnerség meglévő digitális társadalmi innovációs tapasztalataira. Továbbá, felhasználja az információs és kommunikációs technológiai hálózatokban rejlő lehetőségeket az önszerveződő szomszédságok kialakításának elősegítésével.",
     europeanUnionText:
       "A projekt az Európai Unió Horizont 2020 programja keretében részesült finanszírozásban (Téma: ICT-11-2017 tevékenység típusa: innovációs tevékenység, támogatási szerződés száma: 780783)",
-    backNavTitle: "Rólunk"
+    backNavTitle: "Rólunk",
   },
   landingScreen: {
     suggestionsHeader: "A közösség csoportjai",
     cardHeader: "A projektről",
     cardInfo:
-      "A Families_Share keretében közösségi és figyelemfelkeltő platform kerül kialakításra, amely célja a gyermekfelügyelet és a munka-magánélet egyensúlyának fenntartása."
+      "A Families_Share keretében közösségi és figyelemfelkeltő platform kerül kialakításra, amely célja a gyermekfelügyelet és a munka-magánélet egyensúlyának fenntartása.",
   },
   logInScreen: {
     backNavTitle: "Bejelentkezés",
@@ -5602,7 +5643,7 @@ const hu = {
     dontHaveAccount: "Még nincs fiókja?",
     signUp: "Bejelentkezés",
     agreeWithTerms:
-      "Bejelentkezésével elfogadja a szolgáltatási feltételeket és adatvédelmi szabályzatot."
+      "Bejelentkezésével elfogadja a szolgáltatási feltételeket és adatvédelmi szabályzatot.",
   },
   logInForm: {
     password: "Jelszó",
@@ -5611,12 +5652,12 @@ const hu = {
     authenticationErr: "Érvénytelen e-mail cím vagy jelszó",
     requiredErr: "Kérjük, töltse ki ezt a mezőt",
     tooShortErr: "Kérjük, adjon meg legalább 8 karaktert",
-    typeMismatchErr: "Kárjük, adjon meg e-mail címet"
+    typeMismatchErr: "Kárjük, adjon meg e-mail címet",
   },
   signUpScreen: {
     backNavTitle: "Bejelentkezés",
     accountQuestion: "Van már felhasználói fiókja?",
-    logIn: "Bejelentkezés"
+    logIn: "Bejelentkezés",
   },
   signUpForm: {
     email: "E-mail",
@@ -5636,7 +5677,7 @@ const hu = {
     tooShortErr: "Kérjük, adjon meg legalább 8 karaktert",
     typeMismatchErr: "Kérjük, adjon meg e-mail címet",
     visibilityPrompt:
-      "A felhasználók keresési találatai között megjelenik a profilon az applikációban"
+      "A felhasználók keresési találatai között megjelenik a profilon az applikációban",
   },
   privacyPolicyModal: {
     privacyPolicy: (
@@ -6100,11 +6141,11 @@ const hu = {
         </p>
       </div>
     ),
-    accept: "ELFOGAD"
+    accept: "ELFOGAD",
   },
   groupAbout: {
     header: "A csoportról",
-    memberHeader: "Rólunk"
+    memberHeader: "Rólunk",
   },
   groupActivities: {
     exportConfirm: "Biztosan exportálni akarja a csoport napirendjét?",
@@ -6112,17 +6153,17 @@ const hu = {
     plansHeader: "Függőben lévő tervek",
     export: "Program exportálása",
     newPlan: "Speciális tervezés",
-    newActivity: "Új tevékenység"
+    newActivity: "Új tevékenység",
   },
   activityListItem: {
     every: "Mindegyik",
-    of: "Mindegyik"
+    of: "Mindegyik",
   },
   groupListItem: {
     open: "A csoportban történő részvétel bárki számára lehetséges",
     closed: "A csoportban történő részvétel csak tagok számára lehetséges",
     members: "Tagok",
-    kids: "Gyermekek"
+    kids: "Gyermekek",
   },
   groupInfo: {
     contactMessage: "Az információ másolása a vágólapra",
@@ -6132,21 +6173,21 @@ const hu = {
     join: "Csatlakozás",
     leave: "Kilépés",
     pending: "Igénylés visszavonása",
-    confirm: "Biztosan ki szeretne lépni a csoportból?"
+    confirm: "Biztosan ki szeretne lépni a csoportból?",
   },
   groupNavbar: {
     chatTab: "Üzenetek",
     activitiesTab: "Tevékenységek",
     membersTab: "Tagok",
     infoTab: "A csoportról",
-    calendarTab: "Eseménynaptáram"
+    calendarTab: "Eseménynaptáram",
   },
   groupMembersAdminOptions: {
     invite: "Emberek meghívása",
     groupIsOpen: "Nyitott csoport",
     groupIsClosed: "Zárt csoport",
     requestsOpen: "Csatlakozás lehetséges",
-    requestsClosed: "A csoport betelt "
+    requestsClosed: "A csoport betelt ",
   },
   inviteModal: {
     memberHeader: "Emberek meghívása",
@@ -6155,57 +6196,56 @@ const hu = {
     invite: "Meghívás",
     add: "Hozzáadás",
     cancel: "Visszavonás",
-    search: "Keresés"
+    search: "Keresés",
   },
   groupNewsNavbar: {
     parents: "SZÜLŐK",
-    children: "GYERMEKEK"
+    children: "GYERMEKEK",
   },
   cardWithLink: {
-    learnMore: "További információ"
+    learnMore: "További információ",
   },
   memberContact: {
     administrator: "Adminisztrátor",
     addAdmin: "Adminisztrátor hozzáadása",
     removeAdmin: "Adminisztrátor eltávolítása",
-    removeUser: "Felhasználó eltávolítása"
+    removeUser: "Felhasználó eltávolítása",
   },
   startUpGuide: {
     backNavTitle: "Kezdő felhasználóknak szóló útmutató",
     guide: [
       {
-        main:
-          "Hírdesse meg a kezdeményezést barátai, ismerősei, munkatársai, szomszédai körében",
-        secondary: null
+        main: "Hírdesse meg a kezdeményezést barátai, ismerősei, munkatársai, szomszédai körében",
+        secondary: null,
       },
       {
         main: "Kapcsolja össze az érdeklődőket egy csoportban",
-        secondary: null
+        secondary: null,
       },
       {
         main: "Határozza meg a programok helyszínét",
-        secondary: null
+        secondary: null,
       },
       {
         main: "Egyeztessen a csoporttagokkal a részletekről",
-        secondary: null
+        secondary: null,
       },
       {
         main: "Véglegesítse a programot",
-        secondary: null
+        secondary: null,
       },
       {
         main: "Tegye közzé a tevékenységet!",
-        secondary: null
+        secondary: null,
       },
       {
         main: "Indulhat a program, jó szórakozást!",
-        secondary: null
-      }
-    ]
+        secondary: null,
+      },
+    ],
   },
   notificationScreen: {
-    backNavTitle: "Értesítés"
+    backNavTitle: "Értesítés",
   },
   myFamiliesShareHeader: {
     confirmDialogTitle: "Küldjünk Önnek egy bemutató anyagot e-mail címére?",
@@ -6223,7 +6263,7 @@ const hu = {
     signOut: "Kijelentkezés",
     language: "Nyelv",
     export: "Adatok exportálása",
-    community: "Közösség"
+    community: "Közösség",
   },
   myFamiliesShareScreen: {
     myGroups: "Csoportjaim",
@@ -6234,24 +6274,24 @@ const hu = {
     myActivitiesPrompt:
       "Itt láthatja a jövőbeli tevékenységeit, miután egy vagy több csoport tagjává vált.",
     joinPrompt: "Csatlakozás meglévő csoporthoz",
-    createPrompt: "Új csoport létrehozása"
+    createPrompt: "Új csoport létrehozása",
   },
   faqsScreen: {
-    backNavTitle: "GYIK"
+    backNavTitle: "GYIK",
   },
   searchGroupModal: {
     search: "Csoport keresése",
     example: "Pl. iskolai órák utáni tevékenységek",
-    results: "Eredmények"
+    results: "Eredmények",
   },
   createGroup: {
-    backNavTitle: "Csoport létrehozása"
+    backNavTitle: "Csoport létrehozása",
   },
   createGroupStepper: {
     contactTypes: {
       phone: "Telefon",
       none: " - ",
-      email: "E-mail"
+      email: "E-mail",
     },
     contactInfo: "Kérjük, töltse ki elérhetőségét",
     continue: "Folytatás",
@@ -6262,7 +6302,7 @@ const hu = {
       "Adja meg a láthatóságra vonatkozó beállításokat",
       "Adja meg a területet",
       "Adjon meg elérhetőségi adatokat",
-      "Emberek meghívása"
+      "Emberek meghívása",
     ],
     name: "Név",
     description: "Leírás",
@@ -6272,12 +6312,12 @@ const hu = {
     area: "Terület",
     invite: "Csoporttag hozzáadása",
     nameErr: "Csoport megnevezése már foglalt",
-    requiredErr: "Kérjük, töltse ki ezt a mezőt"
+    requiredErr: "Kérjük, töltse ki ezt a mezőt",
   },
   profileNavbar: {
     framily: "Család",
     info: "Információ",
-    children: "Gyermekek"
+    children: "Gyermekek",
   },
   profileInfo: {
     description: "Leírás",
@@ -6285,10 +6325,10 @@ const hu = {
     email: "Személyes",
     mobile: "Mobil telefonszám",
     home: "Vezetékes telefonszám",
-    unspecified: "További információ nem elérhető"
+    unspecified: "További információ nem elérhető",
   },
   profileScreen: {
-    privateProfile: "Magán profil"
+    privateProfile: "Magán profil",
   },
   editProfileScreen: {
     whatsappOption: "WhatsApp",
@@ -6312,7 +6352,7 @@ const hu = {
     visible: "Nyilvános profil",
     invisible: "Láthatatlan profil",
     cityErr: "Nem létező város",
-    requiredErr: "Kérjük, töltse ki ezt a mezőt"
+    requiredErr: "Kérjük, töltse ki ezt a mezőt",
   },
   editGroupScreen: {
     phone: "Telefon",
@@ -6327,7 +6367,7 @@ const hu = {
     nameErr: "Foglalt csoport megnevezés",
     visible: "Nyilvános csoport",
     invisible: "Láthatatlan csoport",
-    requiredErr: "Kérjük, töltse ki ezt a mezőt"
+    requiredErr: "Kérjük, töltse ki ezt a mezőt",
   },
   profileHeader: {
     export: "exportálás",
@@ -6340,33 +6380,33 @@ const hu = {
     suspendSuccess:
       "Fiókját átmenetileg felfüggesztettük. A következő bejelentkezés alkalmával fiókja aktiválásra kerül.",
     exportSuccess: "Hamarosan e-mailt fog kapni az összes személyes adatról",
-    error: "Hiba történt"
+    error: "Hiba történt",
   },
   replyBar: {
     new: "Új üzenet",
-    maxFilesError: "Legfeljebb 3 file tölthető fel"
+    maxFilesError: "Legfeljebb 3 file tölthető fel",
   },
   announcementReplies: {
-    new: "Véleménye"
+    new: "Véleménye",
   },
   reply: {
-    confirmDialogTitle: "Biztosan törölni szeretné válaszát?"
+    confirmDialogTitle: "Biztosan törölni szeretné válaszát?",
   },
   groupHeader: {
-    confirmDialogTitle: "Biztosan törölni szeretné a csoportot?"
+    confirmDialogTitle: "Biztosan törölni szeretné a csoportot?",
   },
   announcementHeader: {
-    confirmDialogTitle: "Biztosan törölni szeretné ezt?"
+    confirmDialogTitle: "Biztosan törölni szeretné ezt?",
   },
   childListItem: {
     boy: "Fiú",
     girl: "Lány",
-    age: "Éves"
+    age: "Éves",
   },
   childProfileHeader: {
     delete: "Gyermek törlése",
     confirmDialogTitle:
-      "Biztosan törölni szeretné a gyermeket és valamennyi adatát?"
+      "Biztosan törölni szeretné a gyermeket és valamennyi adatát?",
   },
   childProfileInfo: {
     boy: "Fiú",
@@ -6379,7 +6419,7 @@ const hu = {
     specialNeeds: "Sajátos nevelési igény",
     addAdditional: "Hozzáadás",
     addParent: "Szülő hozzáadása",
-    confirmDialogTitle: "Biztosan törölni szeretné ezt a szülőt?"
+    confirmDialogTitle: "Biztosan törölni szeretné ezt a szülőt?",
   },
   editChildProfileScreen: {
     backNavTitle: "Profil szerkesztése",
@@ -6398,7 +6438,7 @@ const hu = {
     year: "Év",
     file: "File kiválasztása",
     unspecified: "Meghatározhatatlan",
-    requiredErrr: "Kérjük, töltse ki ezt a mezőt"
+    requiredErrr: "Kérjük, töltse ki ezt a mezőt",
   },
   createChildScreen: {
     backNavTitle: "Gyermek hozzáadása",
@@ -6421,7 +6461,7 @@ const hu = {
       "Hozzájárulok a felhaszálási feltételekhez és személyes adataim kezeléséhez",
     acceptTermsErr: "Kérjük, fogadja el a felhasználási feltételeket",
     unspecified: "Meghatározhatatlan",
-    requiredErr: "Kérjük, töltse ki ezt a mezőt"
+    requiredErr: "Kérjük, töltse ki ezt a mezőt",
   },
   additionalInfoScreen: {
     backNavTitle: "Információ",
@@ -6430,10 +6470,10 @@ const hu = {
     special: "Sajátos nevelési igény",
     others: "Egyéb",
     acceptTerms:
-      "Tudomásul veszem, hogy ez az információ megosztásra kerül a gyermekfelügyeleti tevékenységekben részt vevő más csoporttagokkal."
+      "Tudomásul veszem, hogy ez az információ megosztásra kerül a gyermekfelügyeleti tevékenységekben részt vevő más csoporttagokkal.",
   },
   createActivityScreen: {
-    backNavTitle: "Új tevékenység"
+    backNavTitle: "Új tevékenység",
   },
   createActivityStepper: {
     pendingMessage: "A tevékenység a rendszergazda megerősítésétől függ",
@@ -6441,56 +6481,59 @@ const hu = {
     cancel: "Visszavonás",
     finish: "Létrehozás",
     save: "Mentés",
-    stepLabels: ["Információ", "Dátumok", "Időpontok"]
+    stepLabels: ["Információ", "Dátumok", "Időpontok"],
   },
   createActivityInformation: {
     link: "Kapcsolat (opcionális)",
     color: "Színezze be a tevékenységet",
     description: "Leírás (opcionális)",
     name: "Nevezze meg a tevékenységet",
-    location: "Helyszín (opcionális)"
+    location: "Helyszín (opcionális)",
   },
   createActivityDates: {
     header: "Jelöljön meg egy vagy több napot",
     repetition: "Ismétlés",
     weekly: "Heti",
     monthly: "Havi ",
-    datesError: "Több kiválasztott nap esetén ismétlés nem lehetséges"
+    datesError: "Több kiválasztott nap esetén ismétlés nem lehetséges",
   },
   createActivityTimeslots: {
     header: "Adjon hozzá időpontokat a kiválasztott napokhoz",
     differentTimeslots: "Naponta különböző időpontok?",
     sameTimeslots: "Ugyanazon időpontok minden nap?",
-    selected: "dátumok kiválasztása"
+    selected: "dátumok kiválasztása",
   },
-  createMaterialRequestDates: { //TODO
+  createMaterialRequestDates: {
+    //TODO
     header: "Select one or more days",
     repetition: "Repetition",
     weekly: "Weekly",
     monthly: "Monthly",
-    datesError: "Repetition isn't available when multiple days are selected"
+    datesError: "Repetition isn't available when multiple days are selected",
   },
   createMaterialRequestInformation: {
     //link: "Link (optional)",
     color: "Color of the material", //TODO
     description: "Description (optional)", //TODO
-    name: "Name of the material",//TODO
-    location: "Location (optional)"//TODO
+    name: "Name of the material", //TODO
+    location: "Location (optional)", //TODO
   },
-  createMaterialRequestStepper: { //TODO
-    pendingMessage: "The material request is pending confirmation from an admin",
+  createMaterialRequestStepper: {
+    //TODO
+    pendingMessage:
+      "The material request is pending confirmation from an admin",
     continue: "Continue",
     cancel: "Cancel",
     finish: "Create",
     save: "Save",
-    stepLabels: ["Information", "Dates", "Timeslots"]
+    stepLabels: ["Information", "Dates", "Timeslots"],
   },
   timeslotsContainer: {
     addTimeslot: "Időpont hozzáadása",
     timeslot: "Időpont",
     timeslots: "Időpontok",
     confirmDialogTitle: "Biztosan törölni szeretné ezt az időpontot?",
-    timeRangeError: "Érvénytelen kezdő és záró idöpont kombinációja"
+    timeRangeError: "Érvénytelen kezdő és záró idöpont kombinációja",
   },
   clockModal: {
     am: "Délelőtt",
@@ -6498,7 +6541,7 @@ const hu = {
     start: "Tegye közzé a tevékenységet! / Kezdés",
     end: "Szerkesztés",
     confirm: "OK",
-    cancel: "Visszavonás"
+    cancel: "Visszavonás",
   },
   activityScreen: {
     volunteers: "Onkéntesek",
@@ -6515,7 +6558,7 @@ const hu = {
     exportExcel: "Exportálás Excel",
     every: "Mindegyik",
     of: "Mindegyik",
-    infoHeader: "Tevékenységre vonatkozó információ"
+    infoHeader: "Tevékenységre vonatkozó információ",
   },
   timeslotsList: {
     fixed: "Rögzítve",
@@ -6527,7 +6570,7 @@ const hu = {
     mySigned: "Feliratkozásaim",
     myChildrenSigned: "Gyerekeim előfizetései",
     enough: "Résztvevők száma elegendő",
-    notEnough: "Résztvevők száma nem elengedő"
+    notEnough: "Résztvevők száma nem elengedő",
   },
   filterTimeslotsDrawer: {
     header: "Időpontok szűrése",
@@ -6535,7 +6578,7 @@ const hu = {
     mySigned: "Feliratkozásaim",
     myChildrenSigned: "Gyerekeim előfizetései",
     enough: "Résztvevők száma elegendő",
-    notEnough: "Résztvevők száma nem elengedő"
+    notEnough: "Résztvevők száma nem elengedő",
   },
   expandedTimeslot: {
     signup: "Feliratkozás",
@@ -6544,7 +6587,7 @@ const hu = {
     parent: "Szülő feliratkozása sikeres",
     child: "Gyermek feliratkozása sikeres",
     fixed: "Rögzítve",
-    completed: "Befejezve"
+    completed: "Befejezve",
   },
   expandedTimeslotEdit: {
     link: "Kapcsolat",
@@ -6554,8 +6597,7 @@ const hu = {
     parents: "A tevékenységhez szükséges szülők száma",
     children: "A tevékenységhez szükséges gyermekek száma",
     footer: null,
-    name:
-      "A változtatások csak az időszakot érintik és nem vonatkoznak a tevékenységre",
+    name: "A változtatások csak az időszakot érintik és nem vonatkoznak a tevékenységre",
     location: "Helyszín",
     description: "Leírás (opcionális)",
     cost: "Költségvonzat (opcionális)",
@@ -6574,7 +6616,7 @@ const hu = {
     parties: "partik vagy rendezvények",
     coplaying: "együttjátszó nap (ok)",
     other: "egyéb",
-    category: "tevékenység típusa"
+    category: "tevékenység típusa",
   },
   editActivityScreen: {
     backNavTitle: "Tevékenység szerkesztése",
@@ -6582,7 +6624,7 @@ const hu = {
     description: "Leírás (opcionális)",
     name: "Tevékenység megnevezése",
     save: "Mentés",
-    location: "Helyszín (opcionális)"
+    location: "Helyszín (opcionális)",
   },
   agendaView: {
     timeslots: "időpontok",
@@ -6591,18 +6633,18 @@ const hu = {
     signed: "Feliratkozásaim",
     enough: "Résztvevők száma elegendő",
     notEnough: "Résztvevők száma nem elengedő",
-    notEnoughParticipants: "Résztvevők száma nem éri el a minimális létszámot"
+    notEnoughParticipants: "Résztvevők száma nem éri el a minimális létszámot",
   },
   confirmDialog: {
     agree: "OK",
-    disagree: "Visszavonás"
+    disagree: "Visszavonás",
   },
   pendingRequestsScreen: {
     requests: "Függőben lévő felkérés ",
     invites: "Függőben lévő meghívás",
     activities: "Függőben lévő tevékenység",
     confirm: "Megerősítés",
-    delete: "Törlés"
+    delete: "Törlés",
   },
   forgotPasswordScreen: {
     prompt:
@@ -6613,7 +6655,7 @@ const hu = {
     notExistErr: "Nem létező felhasználó",
     err: "Hiba történt",
     success: "E-mail elküldve",
-    requiredErrr: "Kérjük, töltse ki ezt a mezőt"
+    requiredErrr: "Kérjük, töltse ki ezt a mezőt",
   },
   changePasswordScreen: {
     prompt: "Kérjük, adjon meg új jelszót",
@@ -6623,456 +6665,583 @@ const hu = {
     err: "Nem egyező jelszavak",
     badRequest: "Hibás igény",
     requiredErr: "Kérjük, töltse ki ezt a mezőt",
-    tooShortErr: "Kérjük, adjon meg legalább 8 karaktert"
+    tooShortErr: "Kérjük, adjon meg legalább 8 karaktert",
   },
   calendar: {
     userCalendar: "Eseménynaptáram",
-    groupCalendar: "Csoportos eseménynaptár"
+    groupCalendar: "Csoportos eseménynaptár",
   },
   framilyListItem: {
-    delete: "Család törlése"
-  }
+    delete: "Család törlése",
+  },
 };
 
 const fr = {
-  "groupMembers": {
-    "export": "Exporter les contacts"
+  groupMembers: {
+    export: "Exporter les contacts",
   },
-  "participantsModal": {
-    "header": "Participants",
-    "cancel": "Fermer"
+  participantsModal: {
+    header: "Participants",
+    cancel: "Fermer",
   },
-  "managePlanSolution": {
-    "needsHeader": "BESOINS DU CRÉNEAU HORAIRE",
-    "selectFrom": "Sélectionnez les disponibilités à partir de",
-    "participating": "Membres participants au planning",
-    "available": "Membres disponibles pour le créneau horaire",
-    "all": "Tous les membres du groupe"
+  managePlanSolution: {
+    needsHeader: "BESOINS DU CRÉNEAU HORAIRE",
+    selectFrom: "Sélectionnez les disponibilités à partir de",
+    participating: "Membres participants au planning",
+    available: "Membres disponibles pour le créneau horaire",
+    all: "Tous les membres du groupe",
   },
-  "createPlanScreen": {
-    "backNavTitle": "Nouvelle planification"
+  createPlanScreen: {
+    backNavTitle: "Nouvelle planification",
   },
-  "groupManagementScreen": {
-    "backNavTitle": "Gestion du groupe",
-    "totalVolunteers": "Nombre total de volontaires",
-    "totalKids": "Nombre total d'enfants",
-    "totalEvents": "Nombre total d'événements",
-    "totalCompletedEvents": "Nombre total d'événements terminés",
-    "metricsHeader": "Statistiques du groupe",
-    "metricsColumn": "Indicateur",
-    "valuesColumn": "Valeur",
-    "chartHeader": "Contribution totale par utilisateur"
+  groupManagementScreen: {
+    backNavTitle: "Gestion du groupe",
+    totalVolunteers: "Nombre total de volontaires",
+    totalKids: "Nombre total d'enfants",
+    totalEvents: "Nombre total d'événements",
+    totalCompletedEvents: "Nombre total d'événements terminés",
+    metricsHeader: "Statistiques du groupe",
+    metricsColumn: "Indicateur",
+    valuesColumn: "Valeur",
+    chartHeader: "Contribution totale par utilisateur",
   },
-  "timeslotEmergencyScreen": {
-    "copy": "Numéro d'urgence copié dans le presse-papiers",
-    "call": "Appeler",
-    "header": "Numéros d'urgence :",
-    "services": {
-      "general": "Urgences générales",
-      "ambulance": "Ambulance",
-      "police": "Police",
-      "fire": "Pompiers"
-    }
+  timeslotEmergencyScreen: {
+    copy: "Numéro d'urgence copié dans le presse-papiers",
+    call: "Appeler",
+    header: "Numéros d'urgence :",
+    services: {
+      general: "Urgences générales",
+      ambulance: "Ambulance",
+      police: "Police",
+      fire: "Pompiers",
+    },
   },
-  "editPlanScreen": {
-    "requiredErr": "Veuillez remplir ce champ.",
-    "learning": "activités d'apprentissage ou éducatives/devoirs",
-    "nature": "nature",
-    "tourism": "tourisme et culture",
-    "hobby": "passe-temps et sport",
-    "accompanying": "accompagnement (covoiturage ou pédibus)",
-    "entertainment": "divertissement",
-    "parties": "fêtes ou événements",
-    "coplaying": "jour(s) de co-jeu",
-    "other": "autre",
-    "category": "Type d'activité",
-    "backNavTitle": "Modifier le planning",
-    "ratio": "Ratio enfants/parents",
-    "minVolunteers": "Nombre minimum de volontaires",
-    "deadline": "Échéance",
-    "needsState": "Indiquer vos besoins",
-    "availabilitiesState": "Indiquer vos disponibilités",
-    "planningState": "Créer un planning",
-    "creationState": "Créer des activités",
-    "state": "Statut du planning",
-    "needsStateHelper": "Dans la phase des besoins, les utilisateurs choisissent les dates pour lesquelles ils auront besoin de garde d'enfants. Dans ce statut, la phase des disponibilités est verrouillée.",
-    "availabilitiesStateHelper": "Dans la phase des disponibilités, les utilisateurs sélectionnent les dates auxquelles ils sont disponibles pour la garde d'enfants. Dans ce statut, la phase des besoins est verrouillée.",
-    "planningStateHelper": "Dans la phase de planification, l'algorithme de Families Share crée un planning optimal en fonction des besoins et des disponibilités donnés.",
-    "creationStateHelper": "Dans la phase de création, le planning optimal se transforme en activités."
+  editPlanScreen: {
+    requiredErr: "Veuillez remplir ce champ.",
+    learning: "activités d'apprentissage ou éducatives/devoirs",
+    nature: "nature",
+    tourism: "tourisme et culture",
+    hobby: "passe-temps et sport",
+    accompanying: "accompagnement (covoiturage ou pédibus)",
+    entertainment: "divertissement",
+    parties: "fêtes ou événements",
+    coplaying: "jour(s) de co-jeu",
+    other: "autre",
+    category: "Type d'activité",
+    backNavTitle: "Modifier le planning",
+    ratio: "Ratio enfants/parents",
+    minVolunteers: "Nombre minimum de volontaires",
+    deadline: "Échéance",
+    needsState: "Indiquer vos besoins",
+    availabilitiesState: "Indiquer vos disponibilités",
+    planningState: "Créer un planning",
+    creationState: "Créer des activités",
+    state: "Statut du planning",
+    needsStateHelper:
+      "Dans la phase des besoins, les utilisateurs choisissent les dates pour lesquelles ils auront besoin de garde d'enfants. Dans ce statut, la phase des disponibilités est verrouillée.",
+    availabilitiesStateHelper:
+      "Dans la phase des disponibilités, les utilisateurs sélectionnent les dates auxquelles ils sont disponibles pour la garde d'enfants. Dans ce statut, la phase des besoins est verrouillée.",
+    planningStateHelper:
+      "Dans la phase de planification, l'algorithme de Families Share crée un planning optimal en fonction des besoins et des disponibilités donnés.",
+    creationStateHelper:
+      "Dans la phase de création, le planning optimal se transforme en activités.",
   },
-  "createPlanStepper": {
-    "name": "Nom",
-    "from": "De",
-    "to": "À",
-    "description": "Description",
-    "location": "Lieu",
-    "requiredErr": "Veuillez remplir ce champ.",
-    "deadlineErr": "L'échéance doit être antérieure à la plage de dates spécifiée",
-    "rangeErr": "Combinaison de dates de début et de fin erronée",
-    "continue": "Continuer",
-    "cancel": "Annuler",
-    "finish": "Créer",
-    "save": "Sauvegarder",
-    "stepLabels": [
+  createPlanStepper: {
+    name: "Nom",
+    from: "De",
+    to: "À",
+    description: "Description",
+    location: "Lieu",
+    requiredErr: "Veuillez remplir ce champ.",
+    deadlineErr:
+      "L'échéance doit être antérieure à la plage de dates spécifiée",
+    rangeErr: "Combinaison de dates de début et de fin erronée",
+    continue: "Continuer",
+    cancel: "Annuler",
+    finish: "Créer",
+    save: "Sauvegarder",
+    stepLabels: [
       "Attribuer un titre à l'activité planifiée",
       "Définir la plage de dates",
       "Définir une échéance des besoins",
-      "Indiquez le lieu"
-    ]
+      "Indiquez le lieu",
+    ],
   },
-  "managePlanScreen": {
-    "export": "Exporter le planning",
-    "edit": "Modifier le planning",
-    "delete": "Supprimer le planning",
-    "exportConfirm": "Êtes-vous sûr de vouloir exporter ce planning ?",
-    "exportToaster": "Le planning est exporté au format xls. Vous le recevrez sous peu par e-mail",
-    "backNavTitle": "Gérer le planning",
-    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce planning ?"
+  managePlanScreen: {
+    export: "Exporter le planning",
+    edit: "Modifier le planning",
+    delete: "Supprimer le planning",
+    exportConfirm: "Êtes-vous sûr de vouloir exporter ce planning ?",
+    exportToaster:
+      "Le planning est exporté au format xls. Vous le recevrez sous peu par e-mail",
+    backNavTitle: "Gérer le planning",
+    deleteConfirm: "Êtes-vous sûr de vouloir supprimer ce planning ?",
   },
-  "managePlanStepper": {
-    "pmTimeslotFrom": "Créneau horaire après-midi de",
-    "pmTimeslotTo": "à",
-    "amTimeslotFrom": "Créneau horaire matin de",
-    "amTimeslotTo": "à",
-    "create": "Créer",
-    "discard": "Abandonner",
-    "activitiesCreation": "Créer des activités",
-    "automatically": "Automatiquement",
-    "manually": "Manuellement",
-    "zeroVolunteersTimeslots": "Gérer les créneaux horaires sans volontaires",
-    "automaticSuccess": "Le planning a été transformé avec succès en activités",
-    "manualSuccess": "Vous recevrez bientôt la solution idéale du planning par e-mail",
-    "nextPhase": "Phase suivante",
-    "previousPhase": "Phase précédente",
-    "finishPlan": "Créer des activités",
-    "continue": "Continuer",
-    "cancel": "Annuler",
-    "finish": "Soumettre",
-    "link": "Recevoir le lien",
-    "linkSuccess": "Vous recevrez sous peu un e-mail avec le lien correspondant.",
-    "desktopPrompt": "Afin de modifier la solution proposée, vous devez accéder à la plateforme via un ordinateur de bureau ou un ordinateur portable. Appuyez sur le bouton pour recevoir un e-mail avec l'adresse de la plateforme.",
-    "stepLabels": [
+  managePlanStepper: {
+    pmTimeslotFrom: "Créneau horaire après-midi de",
+    pmTimeslotTo: "à",
+    amTimeslotFrom: "Créneau horaire matin de",
+    amTimeslotTo: "à",
+    create: "Créer",
+    discard: "Abandonner",
+    activitiesCreation: "Créer des activités",
+    automatically: "Automatiquement",
+    manually: "Manuellement",
+    zeroVolunteersTimeslots: "Gérer les créneaux horaires sans volontaires",
+    automaticSuccess: "Le planning a été transformé avec succès en activités",
+    manualSuccess:
+      "Vous recevrez bientôt la solution idéale du planning par e-mail",
+    nextPhase: "Phase suivante",
+    previousPhase: "Phase précédente",
+    finishPlan: "Créer des activités",
+    continue: "Continuer",
+    cancel: "Annuler",
+    finish: "Soumettre",
+    link: "Recevoir le lien",
+    linkSuccess: "Vous recevrez sous peu un e-mail avec le lien correspondant.",
+    desktopPrompt:
+      "Afin de modifier la solution proposée, vous devez accéder à la plateforme via un ordinateur de bureau ou un ordinateur portable. Appuyez sur le bouton pour recevoir un e-mail avec l'adresse de la plateforme.",
+    stepLabels: [
       "Ajouter des besoins",
       "Personnaliser les besoins",
       "Ajouter des disponibilités",
       "Personnaliser les disponibilités",
       "Gérer la solution",
-      "Gérer les détails de l'activité"
+      "Gérer les détails de l'activité",
     ],
-    "needsDeadline": "Vous devez indiquer vos besoins jusqu'au",
-    "availabilitiesDeadline": "Vous devez indiquer vos disponibilités jusqu'au",
-    "availabilityError": "Disponibilité manquante pour la date",
-    "needError": "Attribution d'enfant manquante pour la date",
-    "needsSuccess": "Vous avez ajouté vos besoins avec succès",
-    "availabilitiesSuccess": "Vous avez ajouté vos disponibilités avec succès"
+    needsDeadline: "Vous devez indiquer vos besoins jusqu'au",
+    availabilitiesDeadline: "Vous devez indiquer vos disponibilités jusqu'au",
+    availabilityError: "Disponibilité manquante pour la date",
+    needError: "Attribution d'enfant manquante pour la date",
+    needsSuccess: "Vous avez ajouté vos besoins avec succès",
+    availabilitiesSuccess: "Vous avez ajouté vos disponibilités avec succès",
   },
-  "planListItem": {
-    "participantsNeeds": "membres ont spécifié des besoins",
-    "participantNeeds": "membre a spécifié des besoins",
-    "participantsAvailabilities": "membres ont spécifié des disponibilités",
-    "participantAvailabilities": "membre a spécifié des disponibilités",
-    "needsPhase": "Annonce de besoins",
-    "availabilitiesPhase": "Annonce de disponibilités",
-    "planningPhase": "Recherche de la solution idéale",
-    "creationPhase": "Transformation du planning en activités"
+  planListItem: {
+    participantsNeeds: "membres ont spécifié des besoins",
+    participantNeeds: "membre a spécifié des besoins",
+    participantsAvailabilities: "membres ont spécifié des disponibilités",
+    participantAvailabilities: "membre a spécifié des disponibilités",
+    needsPhase: "Annonce de besoins",
+    availabilitiesPhase: "Annonce de disponibilités",
+    planningPhase: "Recherche de la solution idéale",
+    creationPhase: "Transformation du planning en activités",
   },
-  "communityInterface": {
-    "backNavTitle": "Interface de la communauté",
-    "totalNumberOfUsers": "Nombre total d'utilisateurs",
-    "totalNumberOfGroups": "Nombre total de groupes",
-    "averageAppRating": "Évaluation de l'application",
-    "averageNumberOfActivitiesPerGroup": "Nombre moyen d'activités par groupe",
-    "averageNumberOfMembersPerGroup": "Nombre moyen de membres par groupe",
-    "totalNumberOfChildren": "Nombre total d'enfants",
-    "analyticsHeader": "Analyse de données",
-    "communityGrowth": "Croissance des utilisateurs de la plateforme (%)",
-    "totalNumberOfGoogleSignups": "Inscrits avec Google",
-    "totalNumberOfPlatformSignups": "Inscrits avec la plateforme Families_Share",
-    "timeslot_autoconfirm": "Confirmation automatique des créneaux horaires",
-    "auto_admin": "Le membre devient automatiquement administrateur",
-    "metricsColumn": "Indicateur",
-    "valuesColumn": "Valeur",
-    "configurationsHeader": "Configurations",
-    "chartsHeader": "Graphiques",
-    "charts": [
+  communityInterface: {
+    backNavTitle: "Interface de la communauté",
+    totalNumberOfUsers: "Nombre total d'utilisateurs",
+    totalNumberOfGroups: "Nombre total de groupes",
+    averageAppRating: "Évaluation de l'application",
+    averageNumberOfActivitiesPerGroup: "Nombre moyen d'activités par groupe",
+    averageNumberOfMembersPerGroup: "Nombre moyen de membres par groupe",
+    totalNumberOfChildren: "Nombre total d'enfants",
+    analyticsHeader: "Analyse de données",
+    communityGrowth: "Croissance des utilisateurs de la plateforme (%)",
+    totalNumberOfGoogleSignups: "Inscrits avec Google",
+    totalNumberOfPlatformSignups: "Inscrits avec la plateforme Families_Share",
+    timeslot_autoconfirm: "Confirmation automatique des créneaux horaires",
+    auto_admin: "Le membre devient automatiquement administrateur",
+    metricsColumn: "Indicateur",
+    valuesColumn: "Valeur",
+    configurationsHeader: "Configurations",
+    chartsHeader: "Graphiques",
+    charts: [
       "Nombre total d'utilisateurs",
       "Nombre d'utilisateurs inscrits avec la plateforme",
       "Nombre d'utilisateurs inscrits avec Google",
       "Nombre total d'enfants",
       "Nombre total de groupes",
       "Nombre moyen de membres du groupe",
-      "Nombre moyen d'activités du groupe"
-    ]
+      "Nombre moyen d'activités du groupe",
+    ],
   },
-  "profileChildren": {
-    "addChildPrompt": "Vous n'avez pas encore ajouté d'enfants. Cliquez sur l'icône enfant pour ajouter un nouvel enfant"
+  profileChildren: {
+    addChildPrompt:
+      "Vous n'avez pas encore ajouté d'enfants. Cliquez sur l'icône enfant pour ajouter un nouvel enfant",
   },
-  "myCalendarScreen": {
-    "backNavTitle": "Mon calendrier"
+  myCalendarScreen: {
+    backNavTitle: "Mon calendrier",
   },
-  "editTimeslotScreen": {
-    "link": "Lien",
-    "learning": "activités d'apprentissage ou éducatives/devoirs",
-    "nature": "nature",
-    "tourism": "tourisme et culture",
-    "hobby": "passe-temps et sport",
-    "accompanying": "accompagnement (covoiturage ou pédibus)",
-    "entertainment": "divertissement",
-    "parties": "fêtes ou événements",
-    "coplaying": "jour(s) de co-jeu",
-    "other": "autre",
-    "category": "Type d'activité",
-    "addTimeslotTitle": "Nouveau créneau horaire",
-    "from": "De",
-    "date": "Jour",
-    "to": "À",
-    "details": "Détails",
-    "parents": "Parents requis",
-    "children": "Enfants requis",
-    "name": "Titre",
-    "location": "Lieu",
-    "description": "Description (facultatif)",
-    "cost": "Coût (facultatif)",
-    "status": "Statut du créneau horaire",
-    "ongoing": "En cours",
-    "completed": "Terminé",
-    "timeErr": "Combinaison d'heure de début et de fin erronée",
-    "requiredErr": "Veuillez remplir ce champ.",
-    "rangeErr": "Veuillez sélectionner une valeur supérieure à zéro.",
-    "editConfirm": "Confirmer les modifications ?",
-    "crucialChangeConfirm": "Si vous sauvegardez ces modifications, tous les participants seront désinscrits. Confirmer les modifications ?",
-    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce créneau horaire ?"
+  editTimeslotScreen: {
+    link: "Lien",
+    learning: "activités d'apprentissage ou éducatives/devoirs",
+    nature: "nature",
+    tourism: "tourisme et culture",
+    hobby: "passe-temps et sport",
+    accompanying: "accompagnement (covoiturage ou pédibus)",
+    entertainment: "divertissement",
+    parties: "fêtes ou événements",
+    coplaying: "jour(s) de co-jeu",
+    other: "autre",
+    category: "Type d'activité",
+    addTimeslotTitle: "Nouveau créneau horaire",
+    from: "De",
+    date: "Jour",
+    to: "À",
+    details: "Détails",
+    parents: "Parents requis",
+    children: "Enfants requis",
+    name: "Titre",
+    location: "Lieu",
+    description: "Description (facultatif)",
+    cost: "Coût (facultatif)",
+    status: "Statut du créneau horaire",
+    ongoing: "En cours",
+    completed: "Terminé",
+    timeErr: "Combinaison d'heure de début et de fin erronée",
+    requiredErr: "Veuillez remplir ce champ.",
+    rangeErr: "Veuillez sélectionner une valeur supérieure à zéro.",
+    editConfirm: "Confirmer les modifications ?",
+    crucialChangeConfirm:
+      "Si vous sauvegardez ces modifications, tous les participants seront désinscrits. Confirmer les modifications ?",
+    deleteConfirm: "Êtes-vous sûr de vouloir supprimer ce créneau horaire ?",
   },
-  "timeslotScreen": {
-    "ongoing": "En cours",
-    "completed": "Terminé",
-    "learning": "activités d'apprentissage ou éducatives/devoirs",
-    "nature": "nature",
-    "tourism": "tourisme et culture",
-    "hobby": "passe-temps et sport",
-    "accompanying": "accompagnement (covoiturage ou pédibus)",
-    "entertainment": "divertissement",
-    "parties": "fêtes ou événements",
-    "coplaying": "jour(s) de co-jeu",
-    "other": "autre",
-    "externals": "Externes",
-    "externalPlaceholder": "Ajouter un volontaire externe",
-    "externalAvailabilities": "Ajouter des disponibilités externes",
-    "allUsersAvailabilities": "Ajouter des utilisateurs disponibles",
-    "allChildrenAvailabilities": "Ajouter des enfants disponibles",
-    "admins": "Administrateurs du groupe",
-    "phoneConfirm": "Appeler",
-    "copy": "Numéro copié dans le presse-papiers",
-    "minimum": "nombre minimum",
-    "userAvailability": "Ajoutez votre disponibilité :",
-    "childrenAvailability": "Ajoutez la disponibilité de vos enfants :",
-    "volunteer": "Volontaire",
-    "volunteers": "Volontaires",
-    "child": "enfant",
-    "children": "Enfants",
-    "emergency": "URGENCE",
-    "signup": "inscrit(e)",
-    "userSubscribe": "Vous vous êtes ajouté(e) à l'activité",
-    "userUnsubscribe": "Vous vous êtes retiré(e) de l'activité",
-    "parentSubscribe1": "Vous avez ajouté",
-    "parentSubscribe2": "à l'activité",
-    "parentUnsubscribe1": "Vous avez supprimé",
-    "parentUnsubscribe2": "de l'activité",
-    "cannotEdit": "Un créneau horaire ne peut être édité une fois terminé",
-    "childSubscribe1": "Vous avez ajouté",
-    "childSubscribe2": "à l'activité",
-    "childUnsubscribe1": "Vous avez supprimé",
-    "childUnsubscribe2": "de l'activité",
-    "childSubscribeConfirm1": "Êtes-vous sûr de vouloir ajouter",
-    "childSubscribeConfirm2": "à l'activité ?",
-    "childUnsubscribeConfirm1": "Êtes-vous sûr de vouloir supprimer",
-    "childUnsubscribeConfirm2": "de l'activité ?",
-    "editConfirm": "Confirmer les modifications ?",
-    "you": "Vous",
-    "userSubscribeConfirm": "Êtes-vous sûr de vouloir vous ajouter à l'activité ?",
-    "userUnsubscribeConfirm": "Êtes-vous sûr de vouloir vous retirer de l'activité ?"
+  timeslotScreen: {
+    ongoing: "En cours",
+    completed: "Terminé",
+    learning: "activités d'apprentissage ou éducatives/devoirs",
+    nature: "nature",
+    tourism: "tourisme et culture",
+    hobby: "passe-temps et sport",
+    accompanying: "accompagnement (covoiturage ou pédibus)",
+    entertainment: "divertissement",
+    parties: "fêtes ou événements",
+    coplaying: "jour(s) de co-jeu",
+    other: "autre",
+    externals: "Externes",
+    externalPlaceholder: "Ajouter un volontaire externe",
+    externalAvailabilities: "Ajouter des disponibilités externes",
+    allUsersAvailabilities: "Ajouter des utilisateurs disponibles",
+    allChildrenAvailabilities: "Ajouter des enfants disponibles",
+    admins: "Administrateurs du groupe",
+    phoneConfirm: "Appeler",
+    copy: "Numéro copié dans le presse-papiers",
+    minimum: "nombre minimum",
+    userAvailability: "Ajoutez votre disponibilité :",
+    childrenAvailability: "Ajoutez la disponibilité de vos enfants :",
+    volunteer: "Volontaire",
+    volunteers: "Volontaires",
+    child: "enfant",
+    children: "Enfants",
+    emergency: "URGENCE",
+    signup: "inscrit(e)",
+    userSubscribe: "Vous vous êtes ajouté(e) à l'activité",
+    userUnsubscribe: "Vous vous êtes retiré(e) de l'activité",
+    parentSubscribe1: "Vous avez ajouté",
+    parentSubscribe2: "à l'activité",
+    parentUnsubscribe1: "Vous avez supprimé",
+    parentUnsubscribe2: "de l'activité",
+    cannotEdit: "Un créneau horaire ne peut être édité une fois terminé",
+    childSubscribe1: "Vous avez ajouté",
+    childSubscribe2: "à l'activité",
+    childUnsubscribe1: "Vous avez supprimé",
+    childUnsubscribe2: "de l'activité",
+    childSubscribeConfirm1: "Êtes-vous sûr de vouloir ajouter",
+    childSubscribeConfirm2: "à l'activité ?",
+    childUnsubscribeConfirm1: "Êtes-vous sûr de vouloir supprimer",
+    childUnsubscribeConfirm2: "de l'activité ?",
+    editConfirm: "Confirmer les modifications ?",
+    you: "Vous",
+    userSubscribeConfirm:
+      "Êtes-vous sûr de vouloir vous ajouter à l'activité ?",
+    userUnsubscribeConfirm:
+      "Êtes-vous sûr de vouloir vous retirer de l'activité ?",
   },
-  "timeslotPreview": {
-    "confirmed": "Confirmé",
-    "pending": "En attente de confirmation",
-    "participating": "Vous et vos enfants participerez",
-    "parentParticipating": "Vous participerez",
-    "notParticipating": "Disponible pour de nouvelles inscriptions"
+  timeslotPreview: {
+    confirmed: "Confirmé",
+    pending: "En attente de confirmation",
+    participating: "Vous et vos enfants participerez",
+    parentParticipating: "Vous participerez",
+    notParticipating: "Disponible pour de nouvelles inscriptions",
   },
-  "ratingModal": {
-    "title": "Comment souhaitez-vous évaluer Families Share ?",
-    "rate": "Évaluez",
-    "rateInstruction": "Sélectionnez le nombre d'étoiles que vous souhaitez nous donner sur une échelle de 1 à 5."
+  ratingModal: {
+    title: "Comment souhaitez-vous évaluer Families Share ?",
+    rate: "Évaluez",
+    rateInstruction:
+      "Sélectionnez le nombre d'étoiles que vous souhaitez nous donner sur une échelle de 1 à 5.",
   },
-  "landingHeader": {
-    "communityName": "De Stuyverij"
+  landingHeader: {
+    communityName: "De Stuyverij",
   },
-  "landingNavbar": {
-    "logIn": "SE CONNECTER",
-    "signUp": "S'INSCRIRE"
+  landingNavbar: {
+    logIn: "SE CONNECTER",
+    signUp: "S'INSCRIRE",
   },
-  "aboutScreen": {
-    "findOutMore": "EN SAVOIR PLUS – VISITEZ LE SITE",
-    "aboutHeader": "À propos du projet",
-    "privacyPolicy": "Politique de confidentialité",
-    "familyShareSolution": "La solution Families_Share",
-    "firstParagraph": "Financé dans le cadre de la composante Primauté industrielle dans les technologies de l'information et de la communication du programme Horizon 2020 et son appel aux plateformes de sensibilisation collective concernant la durabilité et l'innovation sociale, le projet Families_Share développe une plateforme de réseautage social et de sensibilisation dédiée à encourager l'équilibre entre la garde d'enfants et la vie professionnelle et privée. La plateforme capitalise sur les réseaux de voisinage et permet aux citoyens de se réunir pour partager des tâches, le temps et les compétences nécessaires à la garde d'enfants et à l'éducation/loisirs parascolaires, où ceux-ci sont devenus inabordables en période de stagnation et d'austérité.",
-    "challengeHeader": "Le Défi",
-    "secondParagraph": "L'équilibre entre vie professionnelle et vie familiale est devenu de plus en plus fragile au cours de la dernière décennie en Europe. La crise économique a eu un double effet, affectant les conditions du marché du travail d'une part, et les dispositions sociales d'autre part. En conséquence, le taux de chômage a augmenté (principalement dans les secteurs à prédominance masculine), tandis que davantage de femmes (y compris les mères) travaillent à temps partiel. Les emplois stables ne peuvent plus être considérés comme acquis et les contrats précaires sont de plus en plus répandus, et nombreux sont les travailleurs qui entrent dans des programmes de requalification et sont confrontés à des périodes de chômage. Le nombre décroissant de travailleurs permanents est soumis à des charges de travail accrues et à des heures de travail plus longues, ce qui rend l'équilibre entre le travail et la vie quotidienne plus difficile, et le modèle actuel insoutenable.",
-    "fourthParagraph": "Le projet Families_Share offre une solution ascendante sous la forme d'une plateforme co-conçue pour aider les familles à partager du temps et des tâches liées à la garde d'enfants, à l'éducation des enfants, aux activités parascolaires et de loisirs et à d'autres tâches ménagères, avec un accent particulier sur les familles à faible revenu. Le projet vise également à s'engager auprès des personnes âgées en les faisant participer à des activités de garde d'enfants et en leur offrant un soutien dans leurs tâches administratives et quotidiennes, comme leurs courses, mais aussi en les faisant participer à des événements familiaux. Pour atteindre cet objectif, le projet emprunte et intègre les concepts de banque de temps, en capitalisant sur les innovations sociales numériques existantes des membres du consortium dans le domaine de la garde d'enfants. Il exploite également le potentiel des réseaux de technologies de l'information et de la communication (TIC) pour accroître l'innovation participative en encourageant les quartiers autonomes.",
-    "europeanUnionText": "Ce projet a bénéficié d'un financement du programme Horizon 2020 de l'Union européenne dans le cadre du CAPS Topic: ICT-11-2017 Type of action : IA, Grant agreement No 780783",
-    "backNavTitle": "À propos"
+  aboutScreen: {
+    findOutMore: "EN SAVOIR PLUS – VISITEZ LE SITE",
+    aboutHeader: "À propos du projet",
+    privacyPolicy: "Politique de confidentialité",
+    familyShareSolution: "La solution Families_Share",
+    firstParagraph:
+      "Financé dans le cadre de la composante Primauté industrielle dans les technologies de l'information et de la communication du programme Horizon 2020 et son appel aux plateformes de sensibilisation collective concernant la durabilité et l'innovation sociale, le projet Families_Share développe une plateforme de réseautage social et de sensibilisation dédiée à encourager l'équilibre entre la garde d'enfants et la vie professionnelle et privée. La plateforme capitalise sur les réseaux de voisinage et permet aux citoyens de se réunir pour partager des tâches, le temps et les compétences nécessaires à la garde d'enfants et à l'éducation/loisirs parascolaires, où ceux-ci sont devenus inabordables en période de stagnation et d'austérité.",
+    challengeHeader: "Le Défi",
+    secondParagraph:
+      "L'équilibre entre vie professionnelle et vie familiale est devenu de plus en plus fragile au cours de la dernière décennie en Europe. La crise économique a eu un double effet, affectant les conditions du marché du travail d'une part, et les dispositions sociales d'autre part. En conséquence, le taux de chômage a augmenté (principalement dans les secteurs à prédominance masculine), tandis que davantage de femmes (y compris les mères) travaillent à temps partiel. Les emplois stables ne peuvent plus être considérés comme acquis et les contrats précaires sont de plus en plus répandus, et nombreux sont les travailleurs qui entrent dans des programmes de requalification et sont confrontés à des périodes de chômage. Le nombre décroissant de travailleurs permanents est soumis à des charges de travail accrues et à des heures de travail plus longues, ce qui rend l'équilibre entre le travail et la vie quotidienne plus difficile, et le modèle actuel insoutenable.",
+    fourthParagraph:
+      "Le projet Families_Share offre une solution ascendante sous la forme d'une plateforme co-conçue pour aider les familles à partager du temps et des tâches liées à la garde d'enfants, à l'éducation des enfants, aux activités parascolaires et de loisirs et à d'autres tâches ménagères, avec un accent particulier sur les familles à faible revenu. Le projet vise également à s'engager auprès des personnes âgées en les faisant participer à des activités de garde d'enfants et en leur offrant un soutien dans leurs tâches administratives et quotidiennes, comme leurs courses, mais aussi en les faisant participer à des événements familiaux. Pour atteindre cet objectif, le projet emprunte et intègre les concepts de banque de temps, en capitalisant sur les innovations sociales numériques existantes des membres du consortium dans le domaine de la garde d'enfants. Il exploite également le potentiel des réseaux de technologies de l'information et de la communication (TIC) pour accroître l'innovation participative en encourageant les quartiers autonomes.",
+    europeanUnionText:
+      "Ce projet a bénéficié d'un financement du programme Horizon 2020 de l'Union européenne dans le cadre du CAPS Topic: ICT-11-2017 Type of action : IA, Grant agreement No 780783",
+    backNavTitle: "À propos",
   },
-  "landingScreen": {
-    "suggestionsHeader": "Groupes dans la communauté",
-    "cardHeader": "À propos du projet",
-    "cardInfo": "  Le projet Families_Share développe une plateforme de réseautage social et de sensibilisation dédiée à encourager l'équilibre entre la garde d'enfants et la vie professionnelle et privée."
+  landingScreen: {
+    suggestionsHeader: "Groupes dans la communauté",
+    cardHeader: "À propos du projet",
+    cardInfo:
+      "  Le projet Families_Share développe une plateforme de réseautage social et de sensibilisation dédiée à encourager l'équilibre entre la garde d'enfants et la vie professionnelle et privée.",
   },
-  "logInScreen": {
-    "backNavTitle": "Se connecter",
-    "forgotPassword": "Mot de passe oublié ?",
-    "orLogInWith": "OU CONNECTEZ-VOUS AVEC",
-    "google": "GOOGLE",
-    "facebook": "FACEBOOK",
-    "dontHaveAccount": "Vous n'avez pas de compte ?",
-    "signUp": "S'inscrire",
-    "agreeWithTerms": "En vous connectant, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité"
+  logInScreen: {
+    backNavTitle: "Se connecter",
+    forgotPassword: "Mot de passe oublié ?",
+    orLogInWith: "OU CONNECTEZ-VOUS AVEC",
+    google: "GOOGLE",
+    facebook: "FACEBOOK",
+    dontHaveAccount: "Vous n'avez pas de compte ?",
+    signUp: "S'inscrire",
+    agreeWithTerms:
+      "En vous connectant, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité",
   },
-  "logInForm": {
-    "password": "Mot de passe",
-    "email": "E-mail",
-    "confirm": "CONFIRMER",
-    "authenticationErr": "E-mail ou mot de passe incorrect",
-    "requiredErr": "Veuillez remplir ce champ",
-    "tooShortErr": "Veuillez utiliser au moins 8 caractères.",
-    "typeMismatchErr": "Veuillez saisir une adresse e-mail."
+  logInForm: {
+    password: "Mot de passe",
+    email: "E-mail",
+    confirm: "CONFIRMER",
+    authenticationErr: "E-mail ou mot de passe incorrect",
+    requiredErr: "Veuillez remplir ce champ",
+    tooShortErr: "Veuillez utiliser au moins 8 caractères.",
+    typeMismatchErr: "Veuillez saisir une adresse e-mail.",
   },
-  "signUpScreen": {
-    "backNavTitle": "S'inscrire",
-    "accountQuestion": "Avez-vous déjà un compte ?",
-    "logIn": "Se connecter"
+  signUpScreen: {
+    backNavTitle: "S'inscrire",
+    accountQuestion: "Avez-vous déjà un compte ?",
+    logIn: "Se connecter",
   },
-  "signUpForm": {
-    "email": "E-mail",
-    "givenName": "Prénom",
-    "familyName": "Nom de famille",
-    "password": "Mot de passe",
-    "confirmPassword": "Confirmer mot de passe",
-    "confirm": "CONFIRMER",
-    "profileVisibility": "Mon profil apparaît dans les résultats de recherche",
-    "termsPolicy": "Conditions générales et politique",
-    "phoneNumber": "Numéro de téléphone (facultatif)",
-    "confirmPasswordErr": "Les mots de passe ne correspondent pas",
-    "signupErr": "Un autre compte utilise ",
-    "acceptTermsErr": "Veuillez accepter les conditions d'utilisation et la politique de confidentialité",
-    "passwordPrompt": "Le mot de passe doit comporter au moins 8 caractères",
-    "requiredErr": "Veuillez remplir ce champ",
-    "tooShortErr": "Veuillez utiliser au moins 8 caractères.",
-    "typeMismatchErr": "Veuillez saisir une adresse e-mail.",
-    "visibilityPrompt": "Les utilisateurs pourront rechercher mon profil dans l'application"
+  signUpForm: {
+    email: "E-mail",
+    givenName: "Prénom",
+    familyName: "Nom de famille",
+    password: "Mot de passe",
+    confirmPassword: "Confirmer mot de passe",
+    confirm: "CONFIRMER",
+    profileVisibility: "Mon profil apparaît dans les résultats de recherche",
+    termsPolicy: "Conditions générales et politique",
+    phoneNumber: "Numéro de téléphone (facultatif)",
+    confirmPasswordErr: "Les mots de passe ne correspondent pas",
+    signupErr: "Un autre compte utilise ",
+    acceptTermsErr:
+      "Veuillez accepter les conditions d'utilisation et la politique de confidentialité",
+    passwordPrompt: "Le mot de passe doit comporter au moins 8 caractères",
+    requiredErr: "Veuillez remplir ce champ",
+    tooShortErr: "Veuillez utiliser au moins 8 caractères.",
+    typeMismatchErr: "Veuillez saisir une adresse e-mail.",
+    visibilityPrompt:
+      "Les utilisateurs pourront rechercher mon profil dans l'application",
   },
-  "privacyPolicyModal": {
-    "privacyPolicy": (
+  privacyPolicyModal: {
+    privacyPolicy: (
       <div>
         <h1>Politique de confidentialité de Families_Share</h1>
         <p>
-          Cette politique de confidentialité a pour but de vous aider à comprendre quelles informations nous recueillons, pourquoi nous les collectons et comment vous pouvez mettre à jour, gérer, exporter et supprimer vos informations.
-            </p>
+          Cette politique de confidentialité a pour but de vous aider à
+          comprendre quelles informations nous recueillons, pourquoi nous les
+          collectons et comment vous pouvez mettre à jour, gérer, exporter et
+          supprimer vos informations.
+        </p>
         <ol type="i">
           <li>
             <h2>Politique de confidentialité de Families_Share</h2>
             <p>
-              Bienvenue sur le site web (le « site ») de Families_Share. Ce Site a été développé pour fournir des informations sur les services de Families_Share. L'application Families_Share, avec le site web, sont les « services » pour les visiteurs et les utilisateurs (« vous » et/ou « votre »).
-                </p>
+              Bienvenue sur le site web (le « site ») de Families_Share. Ce Site
+              a été développé pour fournir des informations sur les services de
+              Families_Share. L'application Families_Share, avec le site web,
+              sont les « services » pour les visiteurs et les utilisateurs
+              (« vous » et/ou « votre »).
+            </p>
             <p>
-              Cette politique de confidentialité définit la politique de Families_Share en ce qui concerne vos informations, y compris les informations qui vous identifient ou pourraient vous identifier personnellement (appelées « informations personnelles identifiables » aux États-Unis ou « données personnelles » dans l'Union européenne, que nous appellerons « données personnelles ») et d'autres informations collectées auprès des visiteurs et utilisateurs des Services.
-              Veuillez lire attentivement cette politique de confidentialité afin que vous compreniez comment nous traiterons vos données.  En utilisant l'un de nos services, vous confirmez avoir lu, compris et accepté cette politique de confidentialité.  Si vous n'acceptez pas cette politique, veuillez ne pas utiliser les services.  Si vous avez des questions, veuillez nous envoyer un courriel à
-                  <bold> contact@families-share.eu </bold>
+              Cette politique de confidentialité définit la politique de
+              Families_Share en ce qui concerne vos informations, y compris les
+              informations qui vous identifient ou pourraient vous identifier
+              personnellement (appelées « informations personnelles
+              identifiables » aux États-Unis ou « données personnelles » dans
+              l'Union européenne, que nous appellerons « données personnelles »)
+              et d'autres informations collectées auprès des visiteurs et
+              utilisateurs des Services. Veuillez lire attentivement cette
+              politique de confidentialité afin que vous compreniez comment nous
+              traiterons vos données. En utilisant l'un de nos services, vous
+              confirmez avoir lu, compris et accepté cette politique de
+              confidentialité. Si vous n'acceptez pas cette politique, veuillez
+              ne pas utiliser les services. Si vous avez des questions, veuillez
+              nous envoyer un courriel à<bold> contact@families-share.eu </bold>
             </p>
           </li>
           <li>
             <h2>Qui sommes-nous ?</h2>
             <p>
-              Nous sommes ViLabs, le partenaire du projet de l'UE, Families_Share, responsable pour le développement et la maintenance du site Web et des applications Families_Share et des services correspondants, et aussi responsable du traitement et du contrôle des données du dit projet.
-                  ViLabs CY (“Versatile Innovations”), ECASTICA Business centre 6, Vasili Vryonides str. Gala Court Chambers, Limassol, Chypre t. +30 2310 365 188, +35 725 760 967, <bold> info@vilabs.eu </bold>.Nous appelons cette équipe « ViLabs », « nous » et/ou « notre ».
-                </p>
+              Nous sommes ViLabs, le partenaire du projet de l'UE,
+              Families_Share, responsable pour le développement et la
+              maintenance du site Web et des applications Families_Share et des
+              services correspondants, et aussi responsable du traitement et du
+              contrôle des données du dit projet. ViLabs CY (“Versatile
+              Innovations”), ECASTICA Business centre 6, Vasili Vryonides str.
+              Gala Court Chambers, Limassol, Chypre t. +30 2310 365 188, +35 725
+              760 967, <bold> info@vilabs.eu </bold>.Nous appelons cette équipe
+              « ViLabs », « nous » et/ou « notre ».
+            </p>
           </li>
           <li>
-            <h2>Notre statut juridique et les lois applicables en matière de confidentialité des données</h2>
+            <h2>
+              Notre statut juridique et les lois applicables en matière de
+              confidentialité des données
+            </h2>
             <p>
-              ViLabs assume le rôle de responsable du traitement et du contrôle des données en vertu de la législation de l'UE. Toutes les données à caractère personnel sont collectées, utilisées, stockées et traitées en pleine conformité avec le règlement général sur la protection des données (règlement (UE) 679/2016 également connu sous le nom de « RGPD ») et la directive 2002/58/CE du Parlement européen (directive sur la vie privée et les communications électroniques). Seuls les chercheurs Vilabs et les administrateurs système auront accès au répertoire de données. Les services Families_Share sont hébergés sur des serveurs situés dans l'Union européenne et fournis par Contabo (https://contabo.com/).
-                </p>
+              ViLabs assume le rôle de responsable du traitement et du contrôle
+              des données en vertu de la législation de l'UE. Toutes les données
+              à caractère personnel sont collectées, utilisées, stockées et
+              traitées en pleine conformité avec le règlement général sur la
+              protection des données (règlement (UE) 679/2016 également connu
+              sous le nom de « RGPD ») et la directive 2002/58/CE du Parlement
+              européen (directive sur la vie privée et les communications
+              électroniques). Seuls les chercheurs Vilabs et les administrateurs
+              système auront accès au répertoire de données. Les services
+              Families_Share sont hébergés sur des serveurs situés dans l'Union
+              européenne et fournis par Contabo (https://contabo.com/).
+            </p>
           </li>
           <li>
             <h2>Informations que nous recueillons</h2>
             <p>
-              Lorsque vous interagissez avec nous par le biais des services, nous recueillons des données personnelles et autres informations vous concernant, comme décrit ci-dessous :
-
-              Nous recueillons des données personnelles auprès de vous lorsque vous fournissez volontairement de telles informations, par exemple lorsque vous nous contactez pour des demandes de renseignements, vous vous inscrivez pour accéder aux services ou vous utilisez certains des services.
-
-                </p>
+              Lorsque vous interagissez avec nous par le biais des services,
+              nous recueillons des données personnelles et autres informations
+              vous concernant, comme décrit ci-dessous : Nous recueillons des
+              données personnelles auprès de vous lorsque vous fournissez
+              volontairement de telles informations, par exemple lorsque vous
+              nous contactez pour des demandes de renseignements, vous vous
+              inscrivez pour accéder aux services ou vous utilisez certains des
+              services.
+            </p>
             <p>
-              En particulier, dans la plate-forme Families_Share sont recueillies des informations sur les parents, les enfants et les groupes de garde d'enfants.
-                </p>
+              En particulier, dans la plate-forme Families_Share sont
+              recueillies des informations sur les parents, les enfants et les
+              groupes de garde d'enfants.
+            </p>
             <ul>
               <li>
                 <p>
-                  &bull; Concernant les parents : prénom, nom de famille, numéro de téléphone, adresse, e-mail et photo/avatar.
-                    </p>
+                  &bull; Concernant les parents : prénom, nom de famille, numéro
+                  de téléphone, adresse, e-mail et photo/avatar.
+                </p>
               </li>
               <li>
                 <p>
-                  &bull; Concernant les enfants : les informations sont collectées uniquement par ceux qui exercent la responsabilité parentale, et ils ont le droit de fournir les informations pertinentes, conformément à la législation applicable. Ces informations sont : nom, date de naissance, sexe, photo/avatar et autres informations directement spécifiées par les parents (allergies, maladies, régime alimentaire spécifique, besoins spéciaux, etc.).
-                    </p>
+                  &bull; Concernant les enfants : les informations sont
+                  collectées uniquement par ceux qui exercent la responsabilité
+                  parentale, et ils ont le droit de fournir les informations
+                  pertinentes, conformément à la législation applicable. Ces
+                  informations sont : nom, date de naissance, sexe, photo/avatar
+                  et autres informations directement spécifiées par les parents
+                  (allergies, maladies, régime alimentaire spécifique, besoins
+                  spéciaux, etc.).
+                </p>
               </li>
               <li>
                 <p>
-                  &bull; Concernant les groupes de garde d'enfants : le nom du groupe, la biographie du groupe, l'emplacement de la garde d'enfants, les périodes de garde d'enfants et les messages du flux de groupe (texte et images).
-                    </p>
+                  &bull; Concernant les groupes de garde d'enfants : le nom du
+                  groupe, la biographie du groupe, l'emplacement de la garde
+                  d'enfants, les périodes de garde d'enfants et les messages du
+                  flux de groupe (texte et images).
+                </p>
               </li>
               <li>
                 <p>
-                  &bull; Détails techniques ou autres concernant tout appareil que vous utilisez pour accéder aux services, y compris l'identifiant unique de périphérique (UDID) ou équivalent de l'appareil ; votre système d'exploitation, type de navigateur ou autre logiciel ; les détails de votre matériel ou de votre appareil mobile (y compris le type et le numéro de votre appareil mobile et les informations de votre opérateur mobile), s'il y a lieu ; ou d'autres détails techniques.
-                    </p>
+                  &bull; Détails techniques ou autres concernant tout appareil
+                  que vous utilisez pour accéder aux services, y compris
+                  l'identifiant unique de périphérique (UDID) ou équivalent de
+                  l'appareil ; votre système d'exploitation, type de navigateur
+                  ou autre logiciel ; les détails de votre matériel ou de votre
+                  appareil mobile (y compris le type et le numéro de votre
+                  appareil mobile et les informations de votre opérateur
+                  mobile), s'il y a lieu ; ou d'autres détails techniques.
+                </p>
               </li>
               <li>
                 <p>
-                  &bull; Détails de votre utilisation de nos services : informations statistiques sur le moment et la façon dont vous utilisez les services.
-                    </p>
+                  &bull; Détails de votre utilisation de nos services :
+                  informations statistiques sur le moment et la façon dont vous
+                  utilisez les services.
+                </p>
               </li>
             </ul>
             <p>
-              En nous fournissant volontairement des données personnelles, vous consentez à ce que nous les utilisions dans le cadre des services et conformément à la présente politique de confidentialité (art. 6, par. 1, let. a, RGPD). Accessoirement, le traitement des données personnelles doit également être conforme à la loi lorsqu'il est nécessaire à l'exécution des services (art. 6, par. 1, let. b, RGPD). En ce qui concerne les catégories particulières de données personnelles, vous donnez votre consentement explicite au traitement de ces données dès leur communication aux fins des services.
-                </p>
+              En nous fournissant volontairement des données personnelles, vous
+              consentez à ce que nous les utilisions dans le cadre des services
+              et conformément à la présente politique de confidentialité (art.
+              6, par. 1, let. a, RGPD). Accessoirement, le traitement des
+              données personnelles doit également être conforme à la loi
+              lorsqu'il est nécessaire à l'exécution des services (art. 6, par.
+              1, let. b, RGPD). En ce qui concerne les catégories particulières
+              de données personnelles, vous donnez votre consentement explicite
+              au traitement de ces données dès leur communication aux fins des
+              services.
+            </p>
           </li>
           <li>
-            <h2>Notre utilisation de vos données personnelles et autres informations</h2>
+            <h2>
+              Notre utilisation de vos données personnelles et autres
+              informations
+            </h2>
             <p>
-              Toute information recueillie est immédiatement séparée en (i) une partie contenant des informations personnelles (non sensibles) (telles que le nom, l'adresse électronique, le numéro de téléphone, etc.) sur les participants concernés et (ii) une partie entièrement anonymisée (non identifiable) puis mise à la disposition de l'ensemble du consortium à des fins de recherche.
-                </p>
+              Toute information recueillie est immédiatement séparée en (i) une
+              partie contenant des informations personnelles (non sensibles)
+              (telles que le nom, l'adresse électronique, le numéro de
+              téléphone, etc.) sur les participants concernés et (ii) une partie
+              entièrement anonymisée (non identifiable) puis mise à la
+              disposition de l'ensemble du consortium à des fins de recherche.
+            </p>
             <p>
-              Les données personnelles des participants à chaque CityLab seront partagées via l'application aux autres membres du groupe pour la gestion des activités Families_Share, sous le contrôle de l'administrateur du groupe. Tout abus de la part d'un membre entraînera l'annulation de son compte. Notez que toute demande d'adhésion à un groupe est soumise à l'approbation de l'administrateur du groupe.
-                </p>
+              Les données personnelles des participants à chaque CityLab seront
+              partagées via l'application aux autres membres du groupe pour la
+              gestion des activités Families_Share, sous le contrôle de
+              l'administrateur du groupe. Tout abus de la part d'un membre
+              entraînera l'annulation de son compte. Notez que toute demande
+              d'adhésion à un groupe est soumise à l'approbation de
+              l'administrateur du groupe.
+            </p>
             <p>
-              Des données personnelles supplémentaires des participants seront collectées si nécessaire et uniquement à des fins scientifiques (par exemple, pour élargir les contacts pour des études longitudinales) et seront supprimées immédiatement après l'achèvement du projet. Les données anonymisées sont stockées dans un dépôt partagé et seront conservées après l'achèvement du projet comme preuves pour les études et les publications.
-                </p>
+              Des données personnelles supplémentaires des participants seront
+              collectées si nécessaire et uniquement à des fins scientifiques
+              (par exemple, pour élargir les contacts pour des études
+              longitudinales) et seront supprimées immédiatement après
+              l'achèvement du projet. Les données anonymisées sont stockées dans
+              un dépôt partagé et seront conservées après l'achèvement du projet
+              comme preuves pour les études et les publications.
+            </p>
             <p>
-              En particulier, les services peuvent utiliser ces informations et les mettre en commun avec d'autres informations sur une base anonyme et généralisée pour suivre, par exemple, le nombre total d'utilisateurs de nos services, le nombre de visiteurs de chaque page de notre site et les noms de domaine des fournisseurs de services Internet de nos visiteurs (aucune donnée personnelle est concernée dans ce cas).
-                </p>
+              En particulier, les services peuvent utiliser ces informations et
+              les mettre en commun avec d'autres informations sur une base
+              anonyme et généralisée pour suivre, par exemple, le nombre total
+              d'utilisateurs de nos services, le nombre de visiteurs de chaque
+              page de notre site et les noms de domaine des fournisseurs de
+              services Internet de nos visiteurs (aucune donnée personnelle est
+              concernée dans ce cas).
+            </p>
           </li>
           <li>
-            <h2>Notre divulgation de vos données personnelles informations supplémentaires</h2>
+            <h2>
+              Notre divulgation de vos données personnelles informations
+              supplémentaires
+            </h2>
             <p>
-              Dans tous les cas, Families_Share (et donc le partenaire responsable ViLabs) ne peut divulguer vos données personnelles que si la loi l'exige ou en croyant de bonne foi qu'une telle action est nécessaire pour :
-                </p>
+              Dans tous les cas, Families_Share (et donc le partenaire
+              responsable ViLabs) ne peut divulguer vos données personnelles que
+              si la loi l'exige ou en croyant de bonne foi qu'une telle action
+              est nécessaire pour :
+            </p>
             <ul>
               <li>
                 <p> &bull; Respecter une obligation légale</p>
               </li>
               <li>
                 <p>
-                  &bull; Agir en cas d'urgence pour protéger la sécurité personnelle des utilisateurs des services ou du public
-                    </p>
+                  &bull; Agir en cas d'urgence pour protéger la sécurité
+                  personnelle des utilisateurs des services ou du public
+                </p>
               </li>
               <li>
                 <p> &bull; Protéger contre toute responsabilité juridique</p>
@@ -7082,664 +7251,801 @@ const fr = {
           <li>
             <h2>Vos choix</h2>
             <p>
-              Vous pouvez visiter les services sans fournir de données personnelles. Si vous choisissez de ne pas fournir de données Personnelles, il se peut que vous ne puissiez pas utiliser certains services de Families_Share.
-                </p>
+              Vous pouvez visiter les services sans fournir de données
+              personnelles. Si vous choisissez de ne pas fournir de données
+              Personnelles, il se peut que vous ne puissiez pas utiliser
+              certains services de Families_Share.
+            </p>
           </li>
           <li>
-            <h2>Recueil des données    </h2>
+            <h2>Recueil des données </h2>
             <p>
-              Toutes les données proviennent des utilisateurs qui s'inscrivent à la plate-forme Families_Share. La plupart du temps, les parents doivent donner leur consentement au traitement d'informations privées et « sensibles » sur leurs enfants. En particulier, les informations concernant les enfants sont fournies par les parents et les données sont recueillies es conformément au RGPD (article 8) :
-                </p>
+              Toutes les données proviennent des utilisateurs qui s'inscrivent à
+              la plate-forme Families_Share. La plupart du temps, les parents
+              doivent donner leur consentement au traitement d'informations
+              privées et « sensibles » sur leurs enfants. En particulier, les
+              informations concernant les enfants sont fournies par les parents
+              et les données sont recueillies es conformément au RGPD (article
+              8) :
+            </p>
             <ul>
               <li>
                 <p>
-                  &bull; Lorsque l'article 6, paragraphe 1, point a, s'applique, en ce qui concerne l'offre de services de la société d'information directement à un enfant, le traitement des données à caractère personnel d'un enfant est légal lorsque l'enfant est âgé d'au moins 16 ans. Lorsque l'enfant est âgé de moins de 16 ans, ce traitement n'est légal que si et dans la mesure où le titulaire de la responsabilité parentale de l'enfant autorise ou donne son consentement.
-                    </p>
+                  &bull; Lorsque l'article 6, paragraphe 1, point a, s'applique,
+                  en ce qui concerne l'offre de services de la société
+                  d'information directement à un enfant, le traitement des
+                  données à caractère personnel d'un enfant est légal lorsque
+                  l'enfant est âgé d'au moins 16 ans. Lorsque l'enfant est âgé
+                  de moins de 16 ans, ce traitement n'est légal que si et dans
+                  la mesure où le titulaire de la responsabilité parentale de
+                  l'enfant autorise ou donne son consentement.
+                </p>
               </li>
               <li>
                 <p>
-                  &bull; Dans de tels cas, le contrôleur doit faire des efforts raisonnables pour vérifier que le titulaire de la responsabilité parentale de l'enfant autorise ou donne son consentement, en tenant compte de la technologie disponible.
-                    </p>
+                  &bull; Dans de tels cas, le contrôleur doit faire des efforts
+                  raisonnables pour vérifier que le titulaire de la
+                  responsabilité parentale de l'enfant autorise ou donne son
+                  consentement, en tenant compte de la technologie disponible.
+                </p>
               </li>
               <li>
                 <p>
-                  &bull; Le paragraphe 1 n'affecte pas le droit général des contrats des États membres, notamment les règles relatives à la validité, à la formation ou à l'effet d'un contrat à l'égard d'un enfant
-                    </p>
+                  &bull; Le paragraphe 1 n'affecte pas le droit général des
+                  contrats des États membres, notamment les règles relatives à
+                  la validité, à la formation ou à l'effet d'un contrat à
+                  l'égard d'un enfant
+                </p>
               </li>
             </ul>
             <p>
-              Rappelez-vous également le point 32 du RGPD : « Le consentement doit être donné par un acte affirmatif clair établissant une indication librement donnée, spécifique, éclairée et sans ambiguïté de l'accord de la personne concernée quant au traitement des données personnelles la concernant, par exemple par une déclaration écrite, y compris par des moyens électroniques, ou une déclaration orale. Cela pourrait inclure la coche d'une case lors de la visite d'un site Internet, le choix des paramètres techniques pour les services relatifs à la société de l'information ou une autre déclaration ou comportement indiquant clairement dans ce contexte l'acceptation par la personne concernée du traitement proposé de ses données personnelles [...] Si le consentement de la personne concernée doit être donné à la suite d'une demande par voie électronique, la demande doit être claire, concise et ne pas perturber inutilement l'utilisation du service pour lequel elle est fournie ».
-                </p>
+              Rappelez-vous également le point 32 du RGPD : « Le consentement
+              doit être donné par un acte affirmatif clair établissant une
+              indication librement donnée, spécifique, éclairée et sans
+              ambiguïté de l'accord de la personne concernée quant au traitement
+              des données personnelles la concernant, par exemple par une
+              déclaration écrite, y compris par des moyens électroniques, ou une
+              déclaration orale. Cela pourrait inclure la coche d'une case lors
+              de la visite d'un site Internet, le choix des paramètres
+              techniques pour les services relatifs à la société de
+              l'information ou une autre déclaration ou comportement indiquant
+              clairement dans ce contexte l'acceptation par la personne
+              concernée du traitement proposé de ses données personnelles [...]
+              Si le consentement de la personne concernée doit être donné à la
+              suite d'une demande par voie électronique, la demande doit être
+              claire, concise et ne pas perturber inutilement l'utilisation du
+              service pour lequel elle est fournie ».
+            </p>
           </li>
           <li>
             <h2>Enfants</h2>
             <p>
-              Families_Share ne collecte pas sciemment les données personnelles fournies par les enfants de moins de 16 ans. Si vous avez moins de 16 ans, veuillez ne pas fournir de données personnelles par le biais des services. Nous encourageons les parents et les tuteurs légaux à surveiller l'utilisation d'Internet de leurs enfants et à contribuer à l'application de notre politique de confidentialité en demandant à leurs enfants de ne jamais fournir de données personnelles sur les services sans leur autorisation. Si vous avez des raisons de croire qu'un enfant de moins de 16 ans a fourni des données personnelles à Families_Share par le biais des services, veuillez nous contacter et nous nous efforcerons de supprimer ces informations de nos bases de données.
-                </p>
+              Families_Share ne collecte pas sciemment les données personnelles
+              fournies par les enfants de moins de 16 ans. Si vous avez moins de
+              16 ans, veuillez ne pas fournir de données personnelles par le
+              biais des services. Nous encourageons les parents et les tuteurs
+              légaux à surveiller l'utilisation d'Internet de leurs enfants et à
+              contribuer à l'application de notre politique de confidentialité
+              en demandant à leurs enfants de ne jamais fournir de données
+              personnelles sur les services sans leur autorisation. Si vous avez
+              des raisons de croire qu'un enfant de moins de 16 ans a fourni des
+              données personnelles à Families_Share par le biais des services,
+              veuillez nous contacter et nous nous efforcerons de supprimer ces
+              informations de nos bases de données.
+            </p>
           </li>
           <li>
             <h2>Stratégie de stockage et de protection des données </h2>
             <p>
-              L'ensemble des services Families_Share sont proposés via le cloud, et les parties frontale et dorsale de la plateforme ainsi que les données sont stockées sur des serveurs dédiés sécurisés et protégés par l'intermédiaire d'un fournisseur de cloud certifié, qui dispose de toutes les infrastructures et certifications requises par le RGPD.
-                </p>
+              L'ensemble des services Families_Share sont proposés via le cloud,
+              et les parties frontale et dorsale de la plateforme ainsi que les
+              données sont stockées sur des serveurs dédiés sécurisés et
+              protégés par l'intermédiaire d'un fournisseur de cloud certifié,
+              qui dispose de toutes les infrastructures et certifications
+              requises par le RGPD.
+            </p>
             <p>
-              Le fournisseur de services cloud est géré par une personne responsable de VILABS et un responsable de la protection des données (Prof. Agostino Cortesi, Universita Ca'Foscari Venezia, cortesi@unive.it), suivant les meilleures pratiques et normes disponibles.
-                </p>
+              Le fournisseur de services cloud est géré par une personne
+              responsable de VILABS et un responsable de la protection des
+              données (Prof. Agostino Cortesi, Universita Ca'Foscari Venezia,
+              cortesi@unive.it), suivant les meilleures pratiques et normes
+              disponibles.
+            </p>
             <p>
-              Les données personnelles seront stockées tout au long du cycle de vie officiel du projet Families_Share financé par le programme de l'UE Horizon 2020 (jusqu'au 31/10/2020). Après la fin de la période officielle du projet, les données personnelles des utilisateurs qui ne se sont pas connectés à leur compte depuis un an (365 jours) seront entièrement supprimées.
-                </p>
+              Les données personnelles seront stockées tout au long du cycle de
+              vie officiel du projet Families_Share financé par le programme de
+              l'UE Horizon 2020 (jusqu'au 31/10/2020). Après la fin de la
+              période officielle du projet, les données personnelles des
+              utilisateurs qui ne se sont pas connectés à leur compte depuis un
+              an (365 jours) seront entièrement supprimées.
+            </p>
             <p>
-              L'installation de stockage protégé du fournisseur de services cloud sera basée sur des systèmes redondants et située dans l'UE. Les données sont sauvegardées quotidiennement et une copie de sauvegarde est également stockée dans les centres de données de l'UE
-                </p>
+              L'installation de stockage protégé du fournisseur de services
+              cloud sera basée sur des systèmes redondants et située dans l'UE.
+              Les données sont sauvegardées quotidiennement et une copie de
+              sauvegarde est également stockée dans les centres de données de
+              l'UE
+            </p>
             <p>
-              L'accès aux données sur le stockage est soumis à une authentification au moyen d'un nom d'utilisateur et d'un mot de passe gérés conformément à la directive 2002/58/CE du Parlement européen.
-                </p>
+              L'accès aux données sur le stockage est soumis à une
+              authentification au moyen d'un nom d'utilisateur et d'un mot de
+              passe gérés conformément à la directive 2002/58/CE du Parlement
+              européen.
+            </p>
             <p>
-              Seuls les chercheurs VILabs (à des fins de recherche) et les administrateurs système (à des fins de maintenance) auront accès au dossier de données.
-                </p>
+              Seuls les chercheurs VILabs (à des fins de recherche) et les
+              administrateurs système (à des fins de maintenance) auront accès
+              au dossier de données.
+            </p>
           </li>
           <li>
             <h2>Partage de données avec des tiers</h2>
             <p>
-              Aucun des renseignements personnels recueillis ne sera partagé avec des tiers. Les informations collectées ne seront utilisées que dans la plate-forme elle-même, comme décrit ci-dessus (V.)
-                </p>
+              Aucun des renseignements personnels recueillis ne sera partagé
+              avec des tiers. Les informations collectées ne seront utilisées
+              que dans la plate-forme elle-même, comme décrit ci-dessus (V.)
+            </p>
             <p>
-              L'application ne fait pas usage de l'utilisation d'« intentions » implicites. Cela empêche l'accès inapproprié aux données par d'autres applications installées sur le même appareil.
-                </p>
+              L'application ne fait pas usage de l'utilisation d'« intentions »
+              implicites. Cela empêche l'accès inapproprié aux données par
+              d'autres applications installées sur le même appareil.
+            </p>
           </li>
           <li>
             <h2>Sécurité</h2>
             <p>
-              ViLabs prend des mesures raisonnables pour protéger les données personnelles fournies via les services contre la perte, l'utilisation abusive et l'accès non autorisé, la divulgation, l'altération ou la destruction. La communication de données depuis/vers l'utilisateur sera gérée via le protocole SSL https.
-                </p>
+              ViLabs prend des mesures raisonnables pour protéger les données
+              personnelles fournies via les services contre la perte,
+              l'utilisation abusive et l'accès non autorisé, la divulgation,
+              l'altération ou la destruction. La communication de données
+              depuis/vers l'utilisateur sera gérée via le protocole SSL https.
+            </p>
             <p>
-              Il est de votre responsabilité de protéger correctement l'accès à l'appareil sur lequel l'application est installée contre toute utilisation non autorisée.
-                </p>
+              Il est de votre responsabilité de protéger correctement l'accès à
+              l'appareil sur lequel l'application est installée contre toute
+              utilisation non autorisée.
+            </p>
             <p>
-              Les utilisateurs enregistrés Families_Share disposent d'un nom d'utilisateur et d'un identifiant unique, ce qui vous permet d'accéder à certaines parties de nos services.  Vous êtes responsable de les garder confidentiels. Assurez-vous de ne pas les partager avec quelqu'un d'autre.
-                </p>
+              Les utilisateurs enregistrés Families_Share disposent d'un nom
+              d'utilisateur et d'un identifiant unique, ce qui vous permet
+              d'accéder à certaines parties de nos services. Vous êtes
+              responsable de les garder confidentiels. Assurez-vous de ne pas
+              les partager avec quelqu'un d'autre.
+            </p>
           </li>
           <li>
             <h2>Vos droits - Fermeture de votre compte </h2>
             <p>
-              La législation de l'UE sur la protection des données donne aux citoyens de l'UE le droit d'accéder aux informations les concernant. Ces informations sont mentionnées ci-dessus et peuvent être modifiées par vous via les services, conformément au RGPD (art. 15-22). En outre, vous avez le droit de rectification, le droit de retirer le consentement donné (lorsque le consentement est la base légale du traitement des données à caractère personnel), le droit d'effacement (« droit à l'oubli »), le droit de restreindre le traitement, le droit à la portabilité des données, le droit de s'opposer au traitement, le droit de ne pas faire l'objet d'une décision fondée sur un traitement automatisé (y compris le profilage), le droit de déposer une plainte auprès d'une autorité de contrôle, le droit à un recours judiciaire effectif.
-                </p>
+              La législation de l'UE sur la protection des données donne aux
+              citoyens de l'UE le droit d'accéder aux informations les
+              concernant. Ces informations sont mentionnées ci-dessus et peuvent
+              être modifiées par vous via les services, conformément au RGPD
+              (art. 15-22). En outre, vous avez le droit de rectification, le
+              droit de retirer le consentement donné (lorsque le consentement
+              est la base légale du traitement des données à caractère
+              personnel), le droit d'effacement (« droit à l'oubli »), le droit
+              de restreindre le traitement, le droit à la portabilité des
+              données, le droit de s'opposer au traitement, le droit de ne pas
+              faire l'objet d'une décision fondée sur un traitement automatisé
+              (y compris le profilage), le droit de déposer une plainte auprès
+              d'une autorité de contrôle, le droit à un recours judiciaire
+              effectif.
+            </p>
             <p>
               Vous pouvez nous envoyer un e-mail à contact@families-share.eu
-                </p>
+            </p>
             <p>
-              Tous les utilisateurs peuvent modifier leurs informations personnelles comme ils le souhaitent, avoir accès et peuvent télécharger une copie de leurs informations et de leur participation à des activités via l'application Families_Share, tout en ayant le droit de supprimer complètement leur compte et toutes les informations relatives à leur compte.
-                </p>
+              Tous les utilisateurs peuvent modifier leurs informations
+              personnelles comme ils le souhaitent, avoir accès et peuvent
+              télécharger une copie de leurs informations et de leur
+              participation à des activités via l'application Families_Share,
+              tout en ayant le droit de supprimer complètement leur compte et
+              toutes les informations relatives à leur compte.
+            </p>
             <p>
-              À la suite de l'annulation du compte par l'utilisateur, sauf dans le cas de données anonymes, il y a une obligation de supprimer les données à caractère personnel dès que possible, puisque la base légale pour le traitement ultérieur doit avoir disparu.
-                </p>
+              À la suite de l'annulation du compte par l'utilisateur, sauf dans
+              le cas de données anonymes, il y a une obligation de supprimer les
+              données à caractère personnel dès que possible, puisque la base
+              légale pour le traitement ultérieur doit avoir disparu.
+            </p>
             <p>
-              Vous pouvez également nous envoyer un e-mail à contact@families-share.eu pour nous demander de supprimer vos informations personnelles de notre base de données.
-                </p>
+              Vous pouvez également nous envoyer un e-mail à
+              contact@families-share.eu pour nous demander de supprimer vos
+              informations personnelles de notre base de données.
+            </p>
           </li>
           <li>
             <h2>Modification de la politique de confidentialité</h2>
             <p>
-              Cette politique de confidentialité peut changer de temps à autre. Lorsque des modifications sont apportées, la date d'entrée en vigueur indiquée ci-dessous changera également en conséquence, et la nouvelle politique de confidentialité sera publiée en ligne, tandis que toutes les parties concernées recevront une notification spécifique.
-                </p>
+              Cette politique de confidentialité peut changer de temps à autre.
+              Lorsque des modifications sont apportées, la date d'entrée en
+              vigueur indiquée ci-dessous changera également en conséquence, et
+              la nouvelle politique de confidentialité sera publiée en ligne,
+              tandis que toutes les parties concernées recevront une
+              notification spécifique.
+            </p>
           </li>
           <li>
             <h2>Communication </h2>
             <p>
-              Pour toute autre information à notre sujet, veuillez visiter notre site web : https://www.families-share.eu/
-                </p>
+              Pour toute autre information à notre sujet, veuillez visiter notre
+              site web : https://www.families-share.eu/
+            </p>
             <p>
-              N'hésitez pas à nous contacter si vous avez des questions concernant la politique de confidentialité de Families_Share ou les pratiques en matière d'information des services. Vous pouvez nous contacter en envoyant un e-mail à l’adresse contact@families-share.eu
-                </p>
+              N'hésitez pas à nous contacter si vous avez des questions
+              concernant la politique de confidentialité de Families_Share ou
+              les pratiques en matière d'information des services. Vous pouvez
+              nous contacter en envoyant un e-mail à l’adresse
+              contact@families-share.eu
+            </p>
           </li>
           <li>
             <h2>Gestion des données</h2>
             <p>
-              DPO: Coordinateur du projet Prof. Agostino Cortesi, Universita Ca'Foscari Venezia, <bold>cortesi@unive.it</bold>
+              DPO: Coordinateur du projet Prof. Agostino Cortesi, Universita
+              Ca'Foscari Venezia, <bold>cortesi@unive.it</bold>
             </p>
             <p>
-              Gestionnaire des données de la plateforme: Apostolos Vontas, Directeur de ViLabs,{" "}
-              <bold>avontas@vilabs.eu</bold>
+              Gestionnaire des données de la plateforme: Apostolos Vontas,
+              Directeur de ViLabs, <bold>avontas@vilabs.eu</bold>
             </p>
             <p>
               Contrôleur des données : Apostolos Vontas, directeur de ViLabs,
-                  <bold>avontas@vilabs.eu</bold>
+              <bold>avontas@vilabs.eu</bold>
             </p>
           </li>
         </ol>
         <p>
-          Je confirme que j'ai lu, compris et accepte la politique de confidentialité ci-dessus (veuillez cocher la case adjacente)
-            </p>
+          Je confirme que j'ai lu, compris et accepte la politique de
+          confidentialité ci-dessus (veuillez cocher la case adjacente)
+        </p>
       </div>
     ),
-    "accept": "ACCEPTER"
+    accept: "ACCEPTER",
   },
-  "groupAbout": {
-    "header": "À propos du groupe",
-    "memberHeader": "À propos"
+  groupAbout: {
+    header: "À propos du groupe",
+    memberHeader: "À propos",
   },
-  "groupActivities": {
-    "exportConfirm": "Êtes-vous sûr de vouloir exporter l'agenda du groupe ?",
-    "activitiesHeader": "Activités du groupe",
-    "plansHeader": "Plannings en attente",
-    "export": "Exporter l'agenda",
-    "newPlan": "Planification avancée",
-    "newActivity": "Nouvelle activité"
+  groupActivities: {
+    exportConfirm: "Êtes-vous sûr de vouloir exporter l'agenda du groupe ?",
+    activitiesHeader: "Activités du groupe",
+    plansHeader: "Plannings en attente",
+    export: "Exporter l'agenda",
+    newPlan: "Planification avancée",
+    newActivity: "Nouvelle activité",
   },
-  "activityListItem": {
-    "every": "Tous les",
-    "of": "de"
+  activityListItem: {
+    every: "Tous les",
+    of: "de",
   },
-  "groupListItem": {
-    "open": "La participation au groupe est ouverte.",
-    "closed": "La participation au groupe est fermée.",
-    "members": "Membres",
-    "kids": "Enfants"
+  groupListItem: {
+    open: "La participation au groupe est ouverte.",
+    closed: "La participation au groupe est fermée.",
+    members: "Membres",
+    kids: "Enfants",
   },
-  "groupInfo": {
-    "contact": "CONTACTER LE GROUPE",
-    "contactMessage": "Informations copiées dans le presse-papiers",
-    "startGuideHeader": "Vous ne savez pas par où commencer ?",
-    "startGuideInfo": "Consultez le guide de démarrage en 7 étapes",
-    "join": "REJOINDRE LE GROUPE",
-    "leave": "QUITTER LE GROUPE",
-    "pending": "ANNULER LA DEMANDE",
-    "confirm": "Êtes-vous sûr de vouloir quitter le groupe ?"
+  groupInfo: {
+    contact: "CONTACTER LE GROUPE",
+    contactMessage: "Informations copiées dans le presse-papiers",
+    startGuideHeader: "Vous ne savez pas par où commencer ?",
+    startGuideInfo: "Consultez le guide de démarrage en 7 étapes",
+    join: "REJOINDRE LE GROUPE",
+    leave: "QUITTER LE GROUPE",
+    pending: "ANNULER LA DEMANDE",
+    confirm: "Êtes-vous sûr de vouloir quitter le groupe ?",
   },
-  "groupNavbar": {
-    "chatTab": "Chat",
-    "activitiesTab": "Activités",
-    "membersTab": "Membres",
-    "infoTab": "À propos",
-    "calendarTab": "Calendrier"
+  groupNavbar: {
+    chatTab: "Chat",
+    activitiesTab: "Activités",
+    membersTab: "Membres",
+    infoTab: "À propos",
+    calendarTab: "Calendrier",
   },
-  "groupMembersAdminOptions": {
-    "invite": "Inviter des gens",
-    "groupIsOpen": "Le groupe est ouvert",
-    "groupIsClosed": "Le groupe est fermé",
-    "requestsOpen": "Les demandes d'adhésion sont les bienvenues",
-    "requestsClosed": "La capacité maximale a été atteinte"
+  groupMembersAdminOptions: {
+    invite: "Inviter des gens",
+    groupIsOpen: "Le groupe est ouvert",
+    groupIsClosed: "Le groupe est fermé",
+    requestsOpen: "Les demandes d'adhésion sont les bienvenues",
+    requestsClosed: "La capacité maximale a été atteinte",
   },
-  "inviteModal": {
-    "memberHeader": "Inviter des gens",
-    "parentHeader": "Ajouter un parent",
-    "framilyHeader": "Ajouter une famille",
-    "invite": "INVITER",
-    "add": "AJOUTER",
-    "cancel": "ANNULER",
-    "search": "Recherche"
+  inviteModal: {
+    memberHeader: "Inviter des gens",
+    parentHeader: "Ajouter un parent",
+    framilyHeader: "Ajouter une famille",
+    invite: "INVITER",
+    add: "AJOUTER",
+    cancel: "ANNULER",
+    search: "Recherche",
   },
-  "groupNewsNavbar": {
-    "parents": "PARENTS",
-    "children": "ENFANTS"
+  groupNewsNavbar: {
+    parents: "PARENTS",
+    children: "ENFANTS",
   },
-  "cardWithLink": {
-    "learnMore": "EN SAVOIR PLUS"
+  cardWithLink: {
+    learnMore: "EN SAVOIR PLUS",
   },
-  "memberContact": {
-    "administrator": "Administrateur du groupe",
-    "addAdmin": "Ajouter un administrateur",
-    "removeAdmin": "Supprimer un administrateur",
-    "removeUser": "Supprimer l'utilisateur"
+  memberContact: {
+    administrator: "Administrateur du groupe",
+    addAdmin: "Ajouter un administrateur",
+    removeAdmin: "Supprimer un administrateur",
+    removeUser: "Supprimer l'utilisateur",
   },
-  "startUpGuide": {
-    "backNavTitle": "Guide de démarrage",
-    "guide": [
+  startUpGuide: {
+    backNavTitle: "Guide de démarrage",
+    guide: [
       {
-        "main": "Lancez l'initiative dans votre cercle",
-        "secondary": null
+        main: "Lancez l'initiative dans votre cercle",
+        secondary: null,
       },
       {
-        "main": "Rassemblez les premiers enthousiastes",
-        "secondary": null
+        main: "Rassemblez les premiers enthousiastes",
+        secondary: null,
       },
       {
-        "main": "Contactez le propriétaire de l'endroit où vous allez jouer",
-        "secondary": null
+        main: "Contactez le propriétaire de l'endroit où vous allez jouer",
+        secondary: null,
       },
       {
-        "main": "Fixez des rendez-vous en interne",
-        "secondary": null
+        main: "Fixez des rendez-vous en interne",
+        secondary: null,
       },
       {
-        "main": "Fermez l'agenda",
-        "secondary": null
+        main: "Fermez l'agenda",
+        secondary: null,
       },
       {
-        "main": "C'est parti !",
-        "secondary": null
+        main: "C'est parti !",
+        secondary: null,
       },
       {
-        "main": "Bienvenue",
-        "secondary": null
-      }
-    ]
+        main: "Bienvenue",
+        secondary: null,
+      },
+    ],
   },
-  "notificationScreen": {
-    "backNavTitle": "Notification"
+  notificationScreen: {
+    backNavTitle: "Notification",
   },
-  "myFamiliesShareHeader": {
-    "confirmDialogTitle": "Souhaitez-vous qu'un guide pas à pas de la plateforme vous soit envoyé par e-mail ?",
-    "walkthrough": "Guide de démarrage",
-    "rating": "Notez-nous",
-    "header": "My Families Share",
-    "homeButton": "Page d'accueil",
-    "myProfile": "Mon profil",
-    "myCalendar": "Mon calendrier",
-    "createGroup": "Créer un groupe",
-    "searchGroup": "Rechercher un groupe",
-    "inviteFriends": "Inviter des amis",
-    "faqs": "FAQ",
-    "about": "À propos",
-    "signOut": "Quitter",
-    "language": "Langue",
-    "export": "Exporter mes données",
-    "community": "Communauté"
+  myFamiliesShareHeader: {
+    confirmDialogTitle:
+      "Souhaitez-vous qu'un guide pas à pas de la plateforme vous soit envoyé par e-mail ?",
+    walkthrough: "Guide de démarrage",
+    rating: "Notez-nous",
+    header: "My Families Share",
+    homeButton: "Page d'accueil",
+    myProfile: "Mon profil",
+    myCalendar: "Mon calendrier",
+    createGroup: "Créer un groupe",
+    searchGroup: "Rechercher un groupe",
+    inviteFriends: "Inviter des amis",
+    faqs: "FAQ",
+    about: "À propos",
+    signOut: "Quitter",
+    language: "Langue",
+    export: "Exporter mes données",
+    community: "Communauté",
   },
-  "myFamiliesShareScreen": {
-    "myGroups": "Mes groupes",
-    "myActivities": "Mes activités",
-    "myNotifications": "Mes notifications",
-    "myGroupsPrompt": "Vous n'êtes pas encore dans un groupe, utilisez le menu latéral pour en trouver un",
-    "myActivitiesPrompt": "Vous verrez ici vos activités futures après vous être inscrit(e) à un ou plusieurs groupes",
-    "joinPrompt": "REJOINDRE LE GROUPE",
-    "createPrompt": "CRÉER UN GROUPE"
+  myFamiliesShareScreen: {
+    myGroups: "Mes groupes",
+    myActivities: "Mes activités",
+    myNotifications: "Mes notifications",
+    myGroupsPrompt:
+      "Vous n'êtes pas encore dans un groupe, utilisez le menu latéral pour en trouver un",
+    myActivitiesPrompt:
+      "Vous verrez ici vos activités futures après vous être inscrit(e) à un ou plusieurs groupes",
+    joinPrompt: "REJOINDRE LE GROUPE",
+    createPrompt: "CRÉER UN GROUPE",
   },
-  "faqsScreen": {
-    "backNavTitle": "FAQ"
+  faqsScreen: {
+    backNavTitle: "FAQ",
   },
-  "searchGroupModal": {
-    "search": "Rechercher un groupe",
-    "example": "p. ex., activités parascolaires",
-    "results": "Résultats"
+  searchGroupModal: {
+    search: "Rechercher un groupe",
+    example: "p. ex., activités parascolaires",
+    results: "Résultats",
   },
-  "createGroup": {
-    "backNavTitle": "Créer un groupe"
+  createGroup: {
+    backNavTitle: "Créer un groupe",
   },
-  "createGroupStepper": {
-    "continue": "Continuer",
-    "cancel": "Annuler",
-    "finish": "Terminer",
-    "stepLabels": [
+  createGroupStepper: {
+    continue: "Continuer",
+    cancel: "Annuler",
+    finish: "Terminer",
+    stepLabels: [
       "Fournir un nom et une description",
       "Définir la visibilité",
       "Indiquer la localité",
       "Fournir des informations de contact",
-      "Inviter des gens"
+      "Inviter des gens",
     ],
-    "contactTypes": {
-      "phone": "Téléphone",
-      "email": "E-mail",
-      "none": " - "
+    contactTypes: {
+      phone: "Téléphone",
+      email: "E-mail",
+      none: " - ",
     },
-    "contactInfo": "Veuillez remplir vos coordonnées",
-    "name": "Nom",
-    "description": "Description",
-    "visibleGroup": "D'autres peuvent trouver mon groupe",
-    "invisibleGroup": "D'autres ne peuvent pas trouver mon groupe",
-    "area": "Localité",
-    "invite": "Ajouter des membres",
-    "nameErr": "Le nom du groupe existe déjà",
-    "requiredErr": "Veuillez remplir ce champ."
+    contactInfo: "Veuillez remplir vos coordonnées",
+    name: "Nom",
+    description: "Description",
+    visibleGroup: "D'autres peuvent trouver mon groupe",
+    invisibleGroup: "D'autres ne peuvent pas trouver mon groupe",
+    area: "Localité",
+    invite: "Ajouter des membres",
+    nameErr: "Le nom du groupe existe déjà",
+    requiredErr: "Veuillez remplir ce champ.",
   },
-  "profileNavbar": {
-    "framily": "FAMILLE",
-    "info": "INFO",
-    "children": "ENFANTS"
+  profileNavbar: {
+    framily: "FAMILLE",
+    info: "INFO",
+    children: "ENFANTS",
   },
-  "profileInfo": {
-    "adress": "Adresse",
-    "description": "Description",
-    "email": "Privé",
-    "mobile": "Mobile",
-    "home": "Maison",
-    "unspecified": "Non spécifié"
+  profileInfo: {
+    adress: "Adresse",
+    description: "Description",
+    email: "Privé",
+    mobile: "Mobile",
+    home: "Maison",
+    unspecified: "Non spécifié",
   },
-  "profileScreen": {
-    "privateProfile": "Profil privé"
+  profileScreen: {
+    privateProfile: "Profil privé",
   },
-  "editProfileScreen": {
-    "whatsappOption": "WhatsApp",
-    "viberOption": "Viber",
-    "emailOption": "E-mail",
-    "save": "SAUVEGARDER",
-    "header": "Modifier le profil",
-    "name": "Prénom",
-    "surname": "Nom de famille",
-    "phoneNumber": "Numéro de téléphone",
-    "phoneLabel": "Étiquette",
-    "street": "Rue",
-    "streetNumber": "Numéro",
-    "country": "Pays",
-    "city": "Ville",
-    "description": "Fournissez une description facultative...",
-    "email": "Adresse e-mail",
-    "mobile": "Mobile",
-    "home": "Maison",
-    "unspecified": "Non spécifié",
-    "visible": "Profil visible",
-    "invisible": "Profil invisible",
-    "cityErr": "La ville n'existe pas",
-    "requiredErr": "Veuillez remplir ce champ."
+  editProfileScreen: {
+    whatsappOption: "WhatsApp",
+    viberOption: "Viber",
+    emailOption: "E-mail",
+    save: "SAUVEGARDER",
+    header: "Modifier le profil",
+    name: "Prénom",
+    surname: "Nom de famille",
+    phoneNumber: "Numéro de téléphone",
+    phoneLabel: "Étiquette",
+    street: "Rue",
+    streetNumber: "Numéro",
+    country: "Pays",
+    city: "Ville",
+    description: "Fournissez une description facultative...",
+    email: "Adresse e-mail",
+    mobile: "Mobile",
+    home: "Maison",
+    unspecified: "Non spécifié",
+    visible: "Profil visible",
+    invisible: "Profil invisible",
+    cityErr: "La ville n'existe pas",
+    requiredErr: "Veuillez remplir ce champ.",
   },
-  "editGroupScreen": {
-    "phone": "Téléphone",
-    "email": "E-mail",
-    "none": " - ",
-    "save": "SAUVEGARDER",
-    "header": "Modifier le groupe",
-    "name": "Nom",
-    "description": "Description",
-    "file": "Télécharger",
-    "area": "Localité",
-    "nameErr": "Le nom du groupe existe déjà",
-    "visible": "Groupe visible",
-    "invisible": "Groupe invisible",
-    "requiredErr": "Veuillez remplir ce champ."
+  editGroupScreen: {
+    phone: "Téléphone",
+    email: "E-mail",
+    none: " - ",
+    save: "SAUVEGARDER",
+    header: "Modifier le groupe",
+    name: "Nom",
+    description: "Description",
+    file: "Télécharger",
+    area: "Localité",
+    nameErr: "Le nom du groupe existe déjà",
+    visible: "Groupe visible",
+    invisible: "Groupe invisible",
+    requiredErr: "Veuillez remplir ce champ.",
   },
-  "profileHeader": {
-    "export": "Exporter",
-    "delete": "Supprimer",
-    "signout": "Quitter",
-    "deleteDialogTitle": "Êtes-vous sûr de vouloir supprimer votre profil et supprimer toutes vos données ?",
-    "exportDialogTitle": "Êtes-vous sûr de vouloir exporter toutes vos informations personnelles ?",
-    "suspend": "Suspendre",
-    "suspendDialogTitle": "Êtes-vous sûr de vouloir suspendre temporairement votre compte ?",
-    "suspendSuccess": "Votre compte a été temporairement suspendu. La prochaine fois que vous vous connecterez votre compte sera réactivé.",
-    "exportSuccess": "Vous recevrez bientôt un e-mail contenant toutes vos informations personnelles",
-    "error": "Une erreur s'est produite."
+  profileHeader: {
+    export: "Exporter",
+    delete: "Supprimer",
+    signout: "Quitter",
+    deleteDialogTitle:
+      "Êtes-vous sûr de vouloir supprimer votre profil et supprimer toutes vos données ?",
+    exportDialogTitle:
+      "Êtes-vous sûr de vouloir exporter toutes vos informations personnelles ?",
+    suspend: "Suspendre",
+    suspendDialogTitle:
+      "Êtes-vous sûr de vouloir suspendre temporairement votre compte ?",
+    suspendSuccess:
+      "Votre compte a été temporairement suspendu. La prochaine fois que vous vous connecterez votre compte sera réactivé.",
+    exportSuccess:
+      "Vous recevrez bientôt un e-mail contenant toutes vos informations personnelles",
+    error: "Une erreur s'est produite.",
   },
-  "replyBar": {
-    "new": "Nouveau message",
-    "maxFilesError": "Vous pouvez télécharger un maximum de 3 fichiers."
+  replyBar: {
+    new: "Nouveau message",
+    maxFilesError: "Vous pouvez télécharger un maximum de 3 fichiers.",
   },
-  "announcementReplies": {
-    "new": "Votre réponse..."
+  announcementReplies: {
+    new: "Votre réponse...",
   },
-  "reply": {
-    "confirmDialogTitle": "Êtes-vous sûr de vouloir supprimer votre réponse ?"
+  reply: {
+    confirmDialogTitle: "Êtes-vous sûr de vouloir supprimer votre réponse ?",
   },
-  "groupHeader": {
-    "confirmDialogTitle": "Êtes-vous sûr de vouloir supprimer le groupe ?"
+  groupHeader: {
+    confirmDialogTitle: "Êtes-vous sûr de vouloir supprimer le groupe ?",
   },
-  "announcementHeader": {
-    "confirmDialogTitle": "Êtes-vous sûr de vouloir supprimer ceci ?"
+  announcementHeader: {
+    confirmDialogTitle: "Êtes-vous sûr de vouloir supprimer ceci ?",
   },
-  "childListItem": {
-    "boy": "Garçon",
-    "girl": "Fille",
-    "age": "ans"
+  childListItem: {
+    boy: "Garçon",
+    girl: "Fille",
+    age: "ans",
   },
-  "childProfileHeader": {
-    "delete": "Supprimer l'enfant",
-    "confirmDialogTitle": "Êtes-vous sûr de vouloir supprimer l'enfant et supprimer toutes ses données ?"
+  childProfileHeader: {
+    delete: "Supprimer l'enfant",
+    confirmDialogTitle:
+      "Êtes-vous sûr de vouloir supprimer l'enfant et supprimer toutes ses données ?",
   },
-  "childProfileInfo": {
-    "boy": "Garçon",
-    "girl": "Fille",
-    "unspecified": "Non spécifié",
-    "age": " ans",
-    "additional": "Informations supplémentaires",
-    "allergies": "Allergies",
-    "otherInfo": "Autres informations",
-    "specialNeeds": "Besoins spéciaux",
-    "addAdditional": "AJOUTER",
-    "addParent": "AJOUTER UN PARENT",
-    "confirmDialogTitle": "Êtes-vous sûr de vouloir supprimer ce parent ?"
+  childProfileInfo: {
+    boy: "Garçon",
+    girl: "Fille",
+    unspecified: "Non spécifié",
+    age: " ans",
+    additional: "Informations supplémentaires",
+    allergies: "Allergies",
+    otherInfo: "Autres informations",
+    specialNeeds: "Besoins spéciaux",
+    addAdditional: "AJOUTER",
+    addParent: "AJOUTER UN PARENT",
+    confirmDialogTitle: "Êtes-vous sûr de vouloir supprimer ce parent ?",
   },
-  "editChildProfileScreen": {
-    "backNavTitle": "Modifier le profil",
-    "save": "SAUVEGARDER",
-    "name": "Prénom",
-    "surname": "Nom de famille",
-    "birthday": "Anniversaire",
-    "gender": "Sexe",
-    "additional": "Ajouter des informations spécifiques",
-    "example": "p. ex. intolérances alimentaires",
-    "boy": "Garçon",
-    "girl": "Fille",
-    "date": "Jour",
-    "add": "MODIFIER",
-    "month": "Mois",
-    "year": "Année",
-    "file": "Choisir un fichier",
-    "unspecified": "Non spécifié",
-    "requiredErrr": "Veuillez remplir ce champ."
+  editChildProfileScreen: {
+    backNavTitle: "Modifier le profil",
+    save: "SAUVEGARDER",
+    name: "Prénom",
+    surname: "Nom de famille",
+    birthday: "Anniversaire",
+    gender: "Sexe",
+    additional: "Ajouter des informations spécifiques",
+    example: "p. ex. intolérances alimentaires",
+    boy: "Garçon",
+    girl: "Fille",
+    date: "Jour",
+    add: "MODIFIER",
+    month: "Mois",
+    year: "Année",
+    file: "Choisir un fichier",
+    unspecified: "Non spécifié",
+    requiredErrr: "Veuillez remplir ce champ.",
   },
-  "createChildScreen": {
-    "backNavTitle": "Ajouter un enfant",
-    "save": "SAUVEGARDER",
-    "file": "Choisir un fichier",
-    "name": "Prénom",
-    "surname": "Nom de famille",
-    "birthday": "Anniversaire",
-    "gender": "Sexe",
-    "additional": "Ajouter des informations spécifiques",
-    "add": "AJOUTER",
-    "edit": "MODIFIER",
-    "example": "p. ex. intolérances alimentaires",
-    "boy": "Garçon",
-    "girl": "Fille",
-    "date": "Jour",
-    "month": "Mois",
-    "year": "Année",
-    "acceptTerms": "J'accepte les Conditions d'utilisation et la Politique de confidentialité en ce qui concerne le traitement et l'utilisation de mes données.",
-    "acceptTermsErr": "Veuillez accepter les conditions",
-    "unspecified": "Non spécifié",
-    "requiredErr": "Veuillez remplir ce champ."
+  createChildScreen: {
+    backNavTitle: "Ajouter un enfant",
+    save: "SAUVEGARDER",
+    file: "Choisir un fichier",
+    name: "Prénom",
+    surname: "Nom de famille",
+    birthday: "Anniversaire",
+    gender: "Sexe",
+    additional: "Ajouter des informations spécifiques",
+    add: "AJOUTER",
+    edit: "MODIFIER",
+    example: "p. ex. intolérances alimentaires",
+    boy: "Garçon",
+    girl: "Fille",
+    date: "Jour",
+    month: "Mois",
+    year: "Année",
+    acceptTerms:
+      "J'accepte les Conditions d'utilisation et la Politique de confidentialité en ce qui concerne le traitement et l'utilisation de mes données.",
+    acceptTermsErr: "Veuillez accepter les conditions",
+    unspecified: "Non spécifié",
+    requiredErr: "Veuillez remplir ce champ.",
   },
-  "additionalInfoScreen": {
-    "backNavTitle": "Informations",
-    "save": "SAUVEGARDER",
-    "allergy": "Allergies",
-    "special": "Besoins spéciaux",
-    "others": "Autres",
-    "acceptTerms": "Je reconnais que cette information sera divulguée aux membres du groupe directement impliqués dans les activités de garde d'enfants."
+  additionalInfoScreen: {
+    backNavTitle: "Informations",
+    save: "SAUVEGARDER",
+    allergy: "Allergies",
+    special: "Besoins spéciaux",
+    others: "Autres",
+    acceptTerms:
+      "Je reconnais que cette information sera divulguée aux membres du groupe directement impliqués dans les activités de garde d'enfants.",
   },
-  "createActivityScreen": {
-    "backNavTitle": "Nouvelle activité"
+  createActivityScreen: {
+    backNavTitle: "Nouvelle activité",
   },
-  "createActivityStepper": {
-    "pendingMessage": "L'activité est en attente de confirmation de la part d'un administrateur",
-    "continue": "Continuer",
-    "cancel": "Annuler",
-    "finish": "Créer",
-    "save": "Sauvegarder",
-    "stepLabels": [
-      "Informations",
-      "Dates",
-      "Créneaux horaires"
-    ]
+  createActivityStepper: {
+    pendingMessage:
+      "L'activité est en attente de confirmation de la part d'un administrateur",
+    continue: "Continuer",
+    cancel: "Annuler",
+    finish: "Créer",
+    save: "Sauvegarder",
+    stepLabels: ["Informations", "Dates", "Créneaux horaires"],
   },
-  "createMaterialRequestStepper": { //TODO
-    "pendingMessage": "The material request is pending confirmation from an admin",
-    "continue": "Continue",
-    "cancel": "Cancel",
-    "finish": "Create",
-    "save": "Save",
-    "stepLabels": ["Information", "Dates", "Timeslots"]
+  createActivityInformation: {
+    link: "Lien (facultatif)",
+    color: "Couleur de l'activité",
+    description: "Description (facultatif)",
+    name: "Nom de l'activité",
+    location: "Lieu (facultatif)",
   },
-  "createActivityInformation": {
-    "link": "Lien (facultatif)",
-    "color": "Couleur de l'activité",
-    "description": "Description (facultatif)",
-    "name": "Nom de l'activité",
-    "location": "Lieu (facultatif)"
+  createMaterialRequestStepper: {
+    //TODO
+    pendingMessage:
+      "The material request is pending confirmation from an admin",
+    continue: "Continue",
+    cancel: "Cancel",
+    finish: "Create",
+    save: "Save",
+    stepLabels: ["Information", "Dates", "Timeslots"],
   },
-  "createActivityDates": {
-    "header": "Sélectionnez un ou plusieurs jours",
-    "repetition": "Répétition",
-    "weekly": "Hebdomadaire",
-    "monthly": "Mensuel",
-    "datesError": "La répétition n'est pas disponible lorsque plusieurs jours sont sélectionnés"
+  createActivityDates: {
+    header: "Sélectionnez un ou plusieurs jours",
+    repetition: "Répétition",
+    weekly: "Hebdomadaire",
+    monthly: "Mensuel",
+    datesError:
+      "La répétition n'est pas disponible lorsque plusieurs jours sont sélectionnés",
   },
-  "createActivityTimeslots": {
-    "header": "Ajoutez des créneaux horaires aux jours sélectionnés",
-    "differentTimeslots": "DIFFÉRENTS CRÉNEAUX HORAIRES POUR CHAQUE JOUR ?",
-    "sameTimeslots": "MÊMES CRÉNEAUX HORAIRES POUR CHAQUE JOUR ?",
-    "selected": "dates sélectionnées"
+  createActivityTimeslots: {
+    header: "Ajoutez des créneaux horaires aux jours sélectionnés",
+    differentTimeslots: "DIFFÉRENTS CRÉNEAUX HORAIRES POUR CHAQUE JOUR ?",
+    sameTimeslots: "MÊMES CRÉNEAUX HORAIRES POUR CHAQUE JOUR ?",
+    selected: "dates sélectionnées",
   },
-  "createMaterialRequestDates": { //TODO
-    "header": "Select one or more days",
-    "repetition": "Repetition",
-    "weekly": "Weekly",
-    "monthly": "Monthly",
-    "datesError": "Repetition isn't available when multiple days are selected"
+  createMaterialRequestDates: {
+    //TODO
+    header: "Select one or more days",
+    repetition: "Repetition",
+    weekly: "Weekly",
+    monthly: "Monthly",
+    datesError: "Repetition isn't available when multiple days are selected",
   },
-  "createMaterialRequestInformation": {
+  createMaterialRequestInformation: {
     //link: "Link (optional)",
-    "color": "Color of the material", //TODO
-    "description": "Description (optional)", //TODO
-    "name": "Name of the material",//TODO
-    "location": "Location (optional)"//TODO
+    color: "Color of the material", //TODO
+    description: "Description (optional)", //TODO
+    name: "Name of the material", //TODO
+    location: "Location (optional)", //TODO
   },
-  "timeslotsContainer": {
-    "addTimeslot": "AJOUTER UN CRÉNEAU HORAIRE",
-    "timeslot": "créneau horaire",
-    "timeslots": "créneaux horaires",
-    "confirmDialogTitle": "Êtes-vous sûr de vouloir supprimer ce créneau horaire ?",
-    "timeRangeError": "Combinaison d'heure de début et de fin erronée"
+  timeslotsContainer: {
+    addTimeslot: "AJOUTER UN CRÉNEAU HORAIRE",
+    timeslot: "créneau horaire",
+    timeslots: "créneaux horaires",
+    confirmDialogTitle:
+      "Êtes-vous sûr de vouloir supprimer ce créneau horaire ?",
+    timeRangeError: "Combinaison d'heure de début et de fin erronée",
   },
-  "clockModal": {
-    "am": "AM",
-    "pm": "PM",
-    "start": "DÉBUT",
-    "end": "FIN",
-    "confirm": "OK",
-    "cancel": "ANNULER"
+  clockModal: {
+    am: "AM",
+    pm: "PM",
+    start: "DÉBUT",
+    end: "FIN",
+    confirm: "OK",
+    cancel: "ANNULER",
   },
-  "activityScreen": {
-    "pdfToaster": "L'activité est exportée au format pdf. Vous la recevrez sous peu par e-mail",
-    "excelToaster": "L'activité est exportée au format Excel. Vous la recevrez sous peu par e-mail",
-    "volunteers": "Volontaires",
-    "participant": "participant",
-    "participants": "participants",
-    "children": "Enfants",
-    "signup": "inscrit(s)",
-    "color": "Couleur",
-    "deleteDialogTitle": "Êtes-vous sûr de vouloir supprimer cette activité ?",
-    "exportDialogTitle": "Êtes-vous sûr de vouloir exporter cette activité ?",
-    "delete": "Supprimer",
-    "exportPdf": "Exporter PDF",
-    "exportExcel": "Exporter Excel",
-    "every": "Tous les",
-    "of": "de",
-    "infoHeader": "Informations sur l'activité :"
+  activityScreen: {
+    pdfToaster:
+      "L'activité est exportée au format pdf. Vous la recevrez sous peu par e-mail",
+    excelToaster:
+      "L'activité est exportée au format Excel. Vous la recevrez sous peu par e-mail",
+    volunteers: "Volontaires",
+    participant: "participant",
+    participants: "participants",
+    children: "Enfants",
+    signup: "inscrit(s)",
+    color: "Couleur",
+    deleteDialogTitle: "Êtes-vous sûr de vouloir supprimer cette activité ?",
+    exportDialogTitle: "Êtes-vous sûr de vouloir exporter cette activité ?",
+    delete: "Supprimer",
+    exportPdf: "Exporter PDF",
+    exportExcel: "Exporter Excel",
+    every: "Tous les",
+    of: "de",
+    infoHeader: "Informations sur l'activité :",
   },
-  "timeslotsList": {
-    "fixed": "plamifiée",
-    "completed": "terminée",
-    "timeslot": "Créneau horaire",
-    "timeslots": "Créneaux horaires",
-    "available": " disponible",
-    "all": "Tous les créneaux horaires",
-    "mySigned": "Je suis inscrit(e)",
-    "myChildrenSigned": "Mon enfant est inscrit(e)",
-    "enough": "Avec suffisamment de participants",
-    "notEnough": "Sans suffisamment de participants"
+  timeslotsList: {
+    fixed: "plamifiée",
+    completed: "terminée",
+    timeslot: "Créneau horaire",
+    timeslots: "Créneaux horaires",
+    available: " disponible",
+    all: "Tous les créneaux horaires",
+    mySigned: "Je suis inscrit(e)",
+    myChildrenSigned: "Mon enfant est inscrit(e)",
+    enough: "Avec suffisamment de participants",
+    notEnough: "Sans suffisamment de participants",
   },
-  "filterTimeslotsDrawer": {
-    "header": "Filtrer les créneaux horaires",
-    "all": "Tous les créneaux horaires",
-    "mySigned": "Je suis inscrit(e)",
-    "myChildrenSigned": "Mon enfant est inscrit(e)",
-    "enough": "Suffisamment de participants",
-    "notEnough": "Pas suffisamment de participants"
+  filterTimeslotsDrawer: {
+    header: "Filtrer les créneaux horaires",
+    all: "Tous les créneaux horaires",
+    mySigned: "Je suis inscrit(e)",
+    myChildrenSigned: "Mon enfant est inscrit(e)",
+    enough: "Suffisamment de participants",
+    notEnough: "Pas suffisamment de participants",
   },
-  "expandedTimeslot": {
-    "signup": "S'inscrire :",
-    "parents": " parents inscrits",
-    "children": " enfants inscrits",
-    "parent": " parent inscrit",
-    "child": " enfant inscrit",
-    "fixed": "Planifiée",
-    "completed": "Terminé"
+  expandedTimeslot: {
+    signup: "S'inscrire :",
+    parents: " parents inscrits",
+    children: " enfants inscrits",
+    parent: " parent inscrit",
+    child: " enfant inscrit",
+    fixed: "Planifiée",
+    completed: "Terminé",
   },
-  "expandedTimeslotEdit": {
-    "link": "Lien",
-    "details": "Détails",
-    "from": "De",
-    "to": "À",
-    "parents": "Parents requis",
-    "children": "Enfants requis",
-    "footer": "Les modifications affecteront uniquement ce créneau horaire et non l'activité",
-    "name": "Titre",
-    "location": "Lieu",
-    "description": "Description (facultatif)",
-    "cost": "Coût (facultatif)",
-    "status": "Statut du créneau horaire",
-    "fixed": "Arrangé",
-    "completed": "Terminé",
-    "timeErr": "Combinaison d'heure de début et de fin erronée",
-    "requiredErr": "Veuillez remplir ce champ.",
-    "rangeErr": "Veuillez sélectionner une valeur supérieure à zéro.",
-    "learning": "activités d'apprentissage ou éducatives/devoirs",
-    "nature": "nature",
-    "tourism": "tourisme et culture",
-    "hobby": "passe-temps et sport",
-    "accompanying": "accompagnement (covoiturage ou pédibus)",
-    "entertainment": "divertissement",
-    "parties": "fêtes ou événements",
-    "coplaying": "jour(s) de co-jeu",
-    "other": "autre",
-    "category": "Type d'activité"
+  expandedTimeslotEdit: {
+    link: "Lien",
+    details: "Détails",
+    from: "De",
+    to: "À",
+    parents: "Parents requis",
+    children: "Enfants requis",
+    footer:
+      "Les modifications affecteront uniquement ce créneau horaire et non l'activité",
+    name: "Titre",
+    location: "Lieu",
+    description: "Description (facultatif)",
+    cost: "Coût (facultatif)",
+    status: "Statut du créneau horaire",
+    fixed: "Arrangé",
+    completed: "Terminé",
+    timeErr: "Combinaison d'heure de début et de fin erronée",
+    requiredErr: "Veuillez remplir ce champ.",
+    rangeErr: "Veuillez sélectionner une valeur supérieure à zéro.",
+    learning: "activités d'apprentissage ou éducatives/devoirs",
+    nature: "nature",
+    tourism: "tourisme et culture",
+    hobby: "passe-temps et sport",
+    accompanying: "accompagnement (covoiturage ou pédibus)",
+    entertainment: "divertissement",
+    parties: "fêtes ou événements",
+    coplaying: "jour(s) de co-jeu",
+    other: "autre",
+    category: "Type d'activité",
   },
-  "editActivityScreen": {
-    "backNavTitle": "Modifier l'activité",
-    "color": "Couleur de l'activité",
-    "description": "Description (facultatif)",
-    "name": "Nom de l'activité",
-    "save": "SAUVEGARDER",
-    "location": "Lieu (facultatif)"
+  editActivityScreen: {
+    backNavTitle: "Modifier l'activité",
+    color: "Couleur de l'activité",
+    description: "Description (facultatif)",
+    name: "Nom de l'activité",
+    save: "SAUVEGARDER",
+    location: "Lieu (facultatif)",
   },
-  "agendaView": {
-    "timeslots": "Créneaux horaires",
-    "available": " disponible",
-    "all": "Tous les créneaux horaires",
-    "signed": "Je suis inscrit(e)",
-    "enough": "Suffisamment de participants",
-    "notEnough": "Pas suffisamment de participants",
-    "notEnoughParticipants": "Pas assez de participants"
+  agendaView: {
+    timeslots: "Créneaux horaires",
+    available: " disponible",
+    all: "Tous les créneaux horaires",
+    signed: "Je suis inscrit(e)",
+    enough: "Suffisamment de participants",
+    notEnough: "Pas suffisamment de participants",
+    notEnoughParticipants: "Pas assez de participants",
   },
-  "confirmDialog": {
-    "agree": "Ok",
-    "disagree": "Annuler"
+  confirmDialog: {
+    agree: "Ok",
+    disagree: "Annuler",
   },
-  "pendingRequestsScreen": {
-    "requests": "Demandes en attente",
-    "invites": "Invitations en attente",
-    "activities": "Activités en attente",
-    "confirm": "CONFIRMER",
-    "delete": "SUPPRIMER"
+  pendingRequestsScreen: {
+    requests: "Demandes en attente",
+    invites: "Invitations en attente",
+    activities: "Activités en attente",
+    confirm: "CONFIRMER",
+    delete: "SUPPRIMER",
   },
-  "forgotPasswordScreen": {
-    "prompt": "Veuillez saisir votre e-mail pour recevoir un lien pour changer votre mot de passe",
-    "email": "E-mail",
-    "backNavTitle": "Mot de passe oublié",
-    "send": "ENVOYER",
-    "notExistErr": "L'utilisateur n'existe pas",
-    "err": "Une erreur s'est produite",
-    "success": "E-mail envoyé",
-    "requiredErrr": "Veuillez remplir ce champ."
+  forgotPasswordScreen: {
+    prompt:
+      "Veuillez saisir votre e-mail pour recevoir un lien pour changer votre mot de passe",
+    email: "E-mail",
+    backNavTitle: "Mot de passe oublié",
+    send: "ENVOYER",
+    notExistErr: "L'utilisateur n'existe pas",
+    err: "Une erreur s'est produite",
+    success: "E-mail envoyé",
+    requiredErrr: "Veuillez remplir ce champ.",
   },
-  "changePasswordScreen": {
-    "prompt": "Veuillez saisir votre nouveau mot de passe",
-    "password": "Mot de passe",
-    "confirm": "Confirmer mot de passe",
-    "change": "CHANGER",
-    "err": "Les mots de passe ne correspondent pas",
-    "badRequest": "Demande erronée",
-    "requiredErr": "Veuillez remplir ce champ",
-    "tooShortErr": "Veuillez utiliser au moins 8 caractères."
+  changePasswordScreen: {
+    prompt: "Veuillez saisir votre nouveau mot de passe",
+    password: "Mot de passe",
+    confirm: "Confirmer mot de passe",
+    change: "CHANGER",
+    err: "Les mots de passe ne correspondent pas",
+    badRequest: "Demande erronée",
+    requiredErr: "Veuillez remplir ce champ",
+    tooShortErr: "Veuillez utiliser au moins 8 caractères.",
   },
-  "calendar": {
-    "userCalendar": "Mon calendrier",
-    "groupCalendar": "Calendrier du groupe"
+  calendar: {
+    userCalendar: "Mon calendrier",
+    groupCalendar: "Calendrier du groupe",
   },
-  "framilyListItem": {
-    "delete": "Supprimer famille"
-  }
-}
+  framilyListItem: {
+    delete: "Supprimer famille",
+  },
+};
 
 const texts = { en, el, it, hu, nl, fr };
 
