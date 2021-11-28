@@ -33,6 +33,7 @@ router.put('/:id', async (req, res, next) => {
   }
   const update = {
     given_name: senior.given_name,
+    family_name: senior.family_name,
     gender: senior.gender,
     birthdate: senior.birthdate,
     background: senior.background,

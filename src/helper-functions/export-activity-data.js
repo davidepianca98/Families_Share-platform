@@ -181,7 +181,7 @@ async function createExcel (activity, timeslots, cb) {
         .map(c => `${c.given_name} ${c.family_name}`)
         .toString(),
       senior: seniorProfiles
-        .map(s => `${s.given_name}`)
+        .map(s => `${s.given_name} ${s.family_name}`)
         .toString(),
       specialNeeds: childrenWithSpecialNeeds
         .map(c => `${c.given_name} ${c.family_name}`)
@@ -303,7 +303,7 @@ async function createPdf (activity, timeslots, cb) {
       parentProfiles.map(p => `${p.given_name} ${p.family_name}`).toString() || '-',
       externals.toString(),
       childrenProfiles.map(c => `${c.given_name} ${c.family_name}`).toString() || '-',
-      seniorProfiles.map(s => `${s.given_name}`).toString() || '-'
+      seniorProfiles.map(s => `${s.given_name} ${s.family_name}`).toString() || '-'
     ])
   }
   specialNeedsProfiles

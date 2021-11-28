@@ -36,6 +36,10 @@ const seniorSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    family_name: {
+      type: String,
+      required: true
+    },
     gender: {
       type: String,
       required: true

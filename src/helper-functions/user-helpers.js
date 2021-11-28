@@ -219,6 +219,7 @@ function createPdf (profile, groups, children, seniors, events, cb) {
             width: '60%',
             stack: [
               `Given name: ${senior.given_name}`,
+              `Family name: ${senior.family_name}`,
               `Gender: ${senior.gender}`,
               `Email: ${profile.email}`,
               `Birthday: ${moment(senior.birthdate).format('DD MMMM YYYY')}`,

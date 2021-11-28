@@ -25,6 +25,7 @@ describe('/Post/api/users/userId/seniors', () => {
     User.findOne({ email: 'test@email.com' }, (err, user) => {
       const senior = {
         given_name: 'Test',
+        family_name: 'Test',
         gender: 'female',
         birthdate: new Date(),
         other_info: 'no',
@@ -58,6 +59,7 @@ describe('/Post/api/users/userId/seniors', () => {
     User.findOne({ email: 'test@email.com' }, (err, user) => {
       const senior = {
         given_name: 'Test 2',
+        family_name: 'Test 2',
         gender: 'male',
         birthdate: new Date(),
         other_info: 'no',
@@ -91,6 +93,7 @@ describe('/Post/api/users/userId/seniors', () => {
     User.findOne({ email: 'test@email.com' }, (err, user) => {
       const senior = {
         given_name: 'Test 3',
+        family_name: 'Test 3',
         gender: 'male',
         birthdate: new Date(),
         other_info: 'no',
