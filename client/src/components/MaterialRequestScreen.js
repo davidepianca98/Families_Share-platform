@@ -1,10 +1,7 @@
 import React from "react";
 import axios from "axios";
-import moment from "moment";
 import PropTypes from "prop-types";
-import Fab from "@material-ui/core/Fab";
 import { withStyles } from "@material-ui/core/styles";
-import * as path from "lodash.get";
 import { withSnackbar } from "notistack";
 import Texts from "../Constants/Texts";
 import withLanguage from "./LanguageContext";
@@ -13,7 +10,6 @@ import OptionsModal from "./OptionsModal";
 import LoadingSpinner from "./LoadingSpinner";
 import Images from "../Constants/Images";
 import Log from "./Log";
-import Avatar from "./Avatar";
 
 const styles = {
     add: {

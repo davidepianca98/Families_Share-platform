@@ -2831,7 +2831,11 @@ const it = {
   },
   profileChildren: {
     addChildPrompt:
-      "Non hai ancora aggiunto figli. Fare clic sull'icona figlio per aggiungere un nuovo figlio",
+      "Non hai ancora aggiunto figli. Fare click sull'icona figlio per aggiungere un nuovo figlio",
+  },
+  profileSeniors: {
+    addSeniorPrompt:
+      "Non hai ancora aggiunto anziani. Fare click sull'icona anziano per aggiungere un nuovo anziano",
   },
   myCalendarScreen: {
     backNavTitle: "Il mio calendario",
@@ -3606,7 +3610,7 @@ const it = {
     framily: "AMICI",
     info: "INFO",
     children: "BAMBINI",
-    senior: "ANZIANI",
+    seniors: "ANZIANI",
   },
   profileInfo: {
     adress: "Indirizzo",
@@ -3696,10 +3700,29 @@ const it = {
     girl: "Bambina",
     age: "anni",
   },
+  seniorListItem: {
+    boy: "Uomo",
+    girl: "Donna",
+    age: "anni",
+  },
   childProfileHeader: {
     delete: "Cancella profilo bambino/a",
     confirmDialogTitle:
       "Confermi di voler eliminare il profilo di questo bambino/a?",
+  },
+  seniorProfileHeader: {
+    delete: "Cancella profilo anziano/a",
+    confirmDialogTitle:
+      "Confermi di voler eliminare il profilo di questo anziano/a?",
+  },
+  seniorProfileInfo: {
+    confirmDialogTitle: "Sei sicuro di voler eliminare questo genitore?",
+    boy: "Maschio",
+    girl: "Femmina",
+    unspecified: "Non specificato",
+    age: "anni",
+    addAdditional: "AGGIUNGI",
+    addParent: "AGGIUNGI GENITORE",
   },
   childProfileInfo: {
     confirmDialogTitle: "Sei sicuro di voler eliminare questo genitore?",

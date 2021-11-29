@@ -69,6 +69,10 @@ const EditProfileScreen = Loadable({
   loader: () => import("./components/EditProfileScreen"),
   loading: () => Loading,
 });
+const SearchGroupScreen = Loadable({
+  loader: () => import("./components/SearchGroupScreen"),
+  loading: () => Loading,
+});
 const ChildProfileScreen = Loadable({
   loader: () => import("./components/ChildProfileScreen"),
   loading: () => Loading,
@@ -77,12 +81,20 @@ const CreateChildScreen = Loadable({
   loader: () => import("./components/CreateChildScreen"),
   loading: () => Loading,
 });
-const SearchGroupScreen = Loadable({
-  loader: () => import("./components/SearchGroupScreen"),
-  loading: () => Loading,
-});
 const EditChildProfileScreen = Loadable({
   loader: () => import("./components/EditChildProfileScreen"),
+  loading: () => Loading,
+});
+const SeniorProfileScreen = Loadable({
+  loader: () => import("./components/SeniorProfileScreen"),
+  loading: () => Loading,
+});
+const CreateSeniorScreen = Loadable({
+  loader: () => import("./components/CreateSeniorScreen"),
+  loading: () => Loading,
+});
+const EditSeniorProfileScreen = Loadable({
+  loader: () => import("./components/EditSeniorProfileScreen"),
   loading: () => Loading,
 });
 const EditActivityScreen = Loadable({
@@ -295,6 +307,21 @@ class App extends React.Component {
               <PrivateRoute
                 path="/profiles/:profileId/children/:childId"
                 component={ChildProfileScreen}
+              />
+
+              <PrivateRoute
+                exact
+                path="/profiles/:profileId/seniors/:seniorId/edit"
+                component={EditSeniorProfileScreen}
+              />
+              <PrivateRoute
+                exact
+                path="/profiles/:profileId/seniors/create"
+                component={CreateSeniorScreen}
+              />
+              <PrivateRoute
+                path="/profiles/:profileId/seniors/:seniorId"
+                component={SeniorProfileScreen}
               />
 
               <PrivateRoute

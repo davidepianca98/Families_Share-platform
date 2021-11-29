@@ -17,6 +17,10 @@ const ProfileChildren = Loadable({
   loader: () => import("./ProfileChildren"),
   loading: () => <div />
 });
+const ProfileSeniors = Loadable({
+  loader: () => import("./ProfileSeniors"),
+  loading: () => <div />
+});
 
 const getMyChildren = userId => {
   return axios
@@ -29,6 +33,19 @@ const getMyChildren = userId => {
       return [];
     });
 };
+
+const getMySeniors = userId => {
+  return axios
+    .get(`/api/users/${userId}/seniors`)
+    .then(response => {
+      return response.data;
+    })
+    .catch(error => {
+      Log.error(error);
+      return [];
+    });
+};
+
 const getMyProfile = userId => {
   return axios
     .get(`/api/users/${userId}/profile`)
@@ -55,6 +72,7 @@ class ProfileScreen extends React.Component {
   state = {
     profile: {},
     children: [],
+    seniors: [],
     fetchedProfile: false
   };
 
@@ -64,9 +82,11 @@ class ProfileScreen extends React.Component {
     const profile = await getMyProfile(profileId);
 
     const children = await getMyChildren(profileId);
+    const seniors  = await getMySeniors(profileId);
     this.setState({
       fetchedProfile: true,
       children,
+      seniors,
       profile
     });
   }
@@ -74,7 +94,7 @@ class ProfileScreen extends React.Component {
   render() {
     const { match } = this.props;
     const { profileId } = match.params;
-    const { fetchedProfile, children } = this.state;
+    const { fetchedProfile, children, seniors } = this.state;
     const currentPath = match.url;
     const { profile } = this.state;
     return fetchedProfile ? (
@@ -99,6 +119,17 @@ class ProfileScreen extends React.Component {
                   {...props}
                   profileId={profileId}
                   usersChildren={children}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={`${currentPath}/seniors`}
+              render={props => (
+                <ProfileSeniors
+                  {...props}
+                  profileId={profileId}
+                  usersSeniors={seniors}
                 />
               )}
             />
