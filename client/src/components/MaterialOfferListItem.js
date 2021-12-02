@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
 import withLanguage from "./LanguageContext";
+import Images from "../Constants/Images";
 
 class MaterialOfferListItem extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class MaterialOfferListItem extends React.Component {
   handleMaterialClick = (event) => {
     const { history } = this.props;
     const { pathname } = history.location;
-    history.push(`${pathname}/${event.currentTarget.id}`);
+    history.push(`${pathname}/${event.currentTarget.id}/info`);
   };
 
   getDatesString = (date) => {
@@ -64,10 +65,15 @@ class MaterialOfferListItem extends React.Component {
                 </h2>
               </div>
               <div className="row no-gutters">
-                {/* TODO: controllare perchè chrome non fa vedere l'icona della */}
-                <i
-                  className="far fa-map-marker-alt"
-                  style={{ marginRight: "1rem" }}
+                <img
+                  src={Images.mapMarkerAltRegular}
+                  alt="map marker icon"
+                  style={{
+                    width: "1.1rem",
+                    height: "1.4rem",
+                    marginRight: "5px",
+                    opacity: 0.87,
+                  }}
                 />
                 <h2>
                   {material.location
