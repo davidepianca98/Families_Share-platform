@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import SeniorListItem from "./SeniorListItem";
 import Texts from "../Constants/Texts";
 import withLanguage from "./LanguageContext";
+import { SeniorIcon } from "./SeniorIcon";
 
 const styles = () => ({
   add: {
@@ -17,8 +18,8 @@ const styles = () => ({
     border: "solid 0.5px #999",
     backgroundColor: "#ff6f00",
     zIndex: 100,
-    fontSize: "2rem"
-  }
+    fontSize: "2rem",
+  },
 });
 
 class ProfileSeniors extends React.Component {
@@ -30,7 +31,7 @@ class ProfileSeniors extends React.Component {
     this.state = {
       myProfile,
       seniors: usersSeniors,
-      profileId
+      profileId,
     };
   }
 
@@ -50,7 +51,10 @@ class ProfileSeniors extends React.Component {
           <ul>
             {seniors.map((senior, index) => (
               <li key={index}>
-                <SeniorListItem seniorId={senior.senior_id} userId={profileId} />
+                <SeniorListItem
+                  seniorId={senior.senior_id}
+                  userId={profileId}
+                />
               </li>
             ))}
           </ul>
@@ -64,7 +68,7 @@ class ProfileSeniors extends React.Component {
             className={classes.add}
             onClick={this.addSenior}
           >
-            <i className="fas fa-blind" />
+            <SeniorIcon fontSize="large" />
           </Fab>
         )}
       </React.Fragment>
@@ -77,7 +81,7 @@ ProfileSeniors.propTypes = {
   profileId: PropTypes.string,
   history: PropTypes.object,
   classes: PropTypes.object,
-  language: PropTypes.string
+  language: PropTypes.string,
 };
 
 export default withStyles(styles)(withLanguage(ProfileSeniors));
