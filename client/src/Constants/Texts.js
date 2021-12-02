@@ -4048,6 +4048,18 @@ const it = {
     noRequests: "Non ci sono richieste da mostrare",
     noOffers: "Non ci sono offerte da mostrare",
   },
+  materialOfferScreen: {
+    infoHeader: "Informazioni",
+    disponible: "Disponibile",
+    notDisponible: "Non disponibile",
+    creationDate: "Data di creazione",
+    disponibilityStatus: "Stato prenotazione",
+    book: "Prenota",
+  },
+  materialOfferScreenNavbar: {
+    info: "INFO",
+    books: "PRENOTAZIONI",
+  },
 };
 
 const el = {

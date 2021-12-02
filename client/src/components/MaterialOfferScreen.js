@@ -1,25 +1,19 @@
 import React from "react";
 import axios from "axios";
-import moment from "moment";
 import PropTypes from "prop-types";
-import Fab from "@material-ui/core/Fab";
 import { withStyles } from "@material-ui/core/styles";
-import * as path from "lodash.get";
 import { withSnackbar } from "notistack";
 import Texts from "../Constants/Texts";
 import withLanguage from "./LanguageContext";
-import TimeslotsList from "./TimeslotsList";
-import ConfirmDialog from "./ConfirmDialog";
-import OptionsModal from "./OptionsModal";
 import LoadingSpinner from "./LoadingSpinner";
 import Images from "../Constants/Images";
 import Log from "./Log";
-import Avatar from "./Avatar";
+import moment from "moment";
+import { Button } from "@material-ui/core";
+import MaterialOfferScreenNavbar from "./MaterialOfferScreenNavbar";
+import { Switch, Route, withRouter } from "react-router-dom";
 
-const styles = {
-  boo: {
-    position: "fixed",
-  },
+const styles = (theme) => ({
   add: {
     position: "fixed",
     bottom: "3rem",
@@ -32,36 +26,47 @@ const styles = {
     zIndex: 100,
     fontSize: "2rem",
   },
-};
+  avatar: {
+    width: "3rem!important",
+    height: "3rem!important",
+  },
 
-const getActivity = (activityId, groupId) => {
+  bookButton: {
+    backgroundColor: "#ff6f00",
+    position: "fixed",
+    bottom: "5%",
+    left: "50%",
+    transform: "translateX(-50%)",
+    borderRadius: "3.2rem",
+    marginTop: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    "&:hover": {
+      backgroundColor: "#ff6f00",
+    },
+  },
+});
+
+const getMaterialOffer = (materialOfferId) => {
   return axios
-    .get(`/api/groups/${groupId}/activities/${activityId}`)
+    .get(`/api/materials/offers/${materialOfferId}`)
     .then((response) => {
       return response.data;
     })
     .catch((error) => {
       Log.error(error);
       return {
-        name: "",
+        material_name: "",
         description: "",
-        color: "#ffffff",
-        group_name: "",
+        borrowed: true,
+        color: "#00838f",
         location: "",
-        dates: [],
-        repetition_type: "",
       };
     });
 };
 
-const getActivityParents = (ids) => {
+const getGroupMembers = (groupId) => {
   return axios
-    .get("/api/profiles", {
-      params: {
-        ids,
-        searchBy: "ids",
-      },
-    })
+    .get(`/api/groups/${groupId}/members`)
     .then((response) => {
       return response.data;
     })
@@ -71,7 +76,7 @@ const getActivityParents = (ids) => {
     });
 };
 
-class MaterialOfferInfo extends React.Component {
+class MaterialOfferScreen extends React.Component {
   constructor(props) {
     super(props);
     const { match } = this.props;
@@ -79,38 +84,33 @@ class MaterialOfferInfo extends React.Component {
     this.state = {
       fetchedMaterialOfferData: false,
       pendingRequest: false,
-      material: {},
-      confirmDialogIsOpen: false,
+      materialOffer: {},
       userCanEdit: false,
       action: "",
       groupId,
       materialId,
-      count: 0,
     };
   }
 
   async componentDidMount() {
-    const { groupId, materialId, material } = this.state;
+    const { groupId, materialId } = this.state;
     const userId = JSON.parse(localStorage.getItem("user")).id;
-    // TODO get material const activity = await getActivity(activityId, groupId);
-
-    const userIsCreator = userId === material.creator_id;
-    const userCanEdit = userIsCreator;
-    //this.setState({ activity, fetchedMaterialOfferData: true, userCanEdit });
+    const materialOffer = await getMaterialOffer(materialId, groupId);
+    const groupMembers = await getGroupMembers(groupId);
+    const userIsAdmin = groupMembers.filter(
+      (member) =>
+        member.user_id === userId &&
+        member.group_accepted &&
+        member.user_accepted
+    )[0].admin;
+    const userIsCreator = userId === materialOffer.created_by;
+    const userCanEdit = userIsAdmin || userIsCreator;
+    this.setState({
+      materialOffer,
+      fetchedMaterialOfferData: true,
+      userCanEdit,
+    });
   }
-
-  handleRedirect = (suspended, child_id) => {
-    const { history } = this.props;
-    if (!suspended) {
-      history.push(`/profiles/groupmember/children/${child_id}`);
-    }
-  };
-
-  addActivity = () => {
-    const { history } = this.props;
-    const { pathname } = history.location;
-    history.push(`${pathname}/timeslots/add`);
-  };
 
   handleEdit = () => {
     const { history } = this.props;
@@ -119,38 +119,39 @@ class MaterialOfferInfo extends React.Component {
     history.push(pathname);
   };
 
-  handleDelete = () => {
-    const { match, history } = this.props;
-    const { groupId, activityId } = match.params;
-    this.setState({ pendingRequest: true });
-    axios
-      .delete(`/api/groups/${groupId}/activities/${activityId}`)
-      .then((response) => {
-        Log.info(response);
-        history.goBack();
-      })
-      .catch((error) => {
-        Log.error(error);
-        history.goBack();
-      });
+  handleBook = () => {
+    const { history } = this.props;
+    let { pathname } = history.location;
+    pathname = `${pathname}/book`;
+    history.push(pathname);
+  };
+
+  getDatesString = (date) => {
+    return moment(date).format("ll");
   };
 
   render() {
     const { history, language, classes } = this.props;
     const {
-      material,
+      materialOffer,
       fetchedMaterialOfferData,
       userCanEdit,
-      action,
       pendingRequest,
+      materialId,
+      groupId,
     } = this.state;
+    const materialOfferPath = `/groups/${groupId}/materials/offers/${materialId}`;
     const texts = Texts[language].materialOfferScreen;
     const rowStyle = { minHeight: "5rem" };
     return fetchedMaterialOfferData ? (
       <React.Fragment>
         {pendingRequest && <LoadingSpinner />}
-        <div id="activityContainer">
-          <div id="activityHeaderContainer" className="row no-gutters">
+        <div id="materialContainer">
+          <div
+            id="materialHeaderContainer"
+            className="row no-gutters"
+            style={{ backgroundColor: materialOffer.color }}
+          >
             <div className="col-2-10">
               <button
                 type="button"
@@ -161,9 +162,9 @@ class MaterialOfferInfo extends React.Component {
               </button>
             </div>
             <div className="col-6-10">
-              <h1 className="center">{material.name}</h1>
+              <h1 className="center">{materialOffer.material_name}</h1>
             </div>
-            <div className="col-1-10">
+            <div className="col-2-10">
               {userCanEdit ? (
                 <button
                   type="button"
@@ -176,74 +177,109 @@ class MaterialOfferInfo extends React.Component {
                 <div />
               )}
             </div>
-            <div className="col-1-10">
-              {userCanEdit ? (
-                <button
-                  type="button"
-                  className="transparentButton center"
-                  onClick={this.handleOptions}
-                >
-                  <i className="fas fa-ellipsis-v" />
-                </button>
-              ) : (
-                <div />
+          </div>
+          <MaterialOfferScreenNavbar color={materialOffer.color} />
+
+          <Switch>
+            <Route
+              path={`${materialOfferPath}/info`}
+              render={() => (
+                <div id="materialMainContainer">
+                  <div className="row no-gutters" style={rowStyle}>
+                    <div className="materialInfoHeader">{texts.infoHeader}</div>
+                  </div>
+                  {materialOffer.description && (
+                    <div className="row no-gutters" style={rowStyle}>
+                      <div className="col-1-10">
+                        <i className="far fa-file-alt materialInfoIcon" />
+                      </div>
+                      <div className="col-9-10">
+                        <div className="materialInfoDescription">
+                          {materialOffer.description}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {materialOffer.location && (
+                    <div className="row no-gutters" style={rowStyle}>
+                      <div className="col-1-10">
+                        <img
+                          src={Images.mapMarkerAltRegular}
+                          alt="map marker icon"
+                          className="materialInfoImage"
+                        />
+                      </div>
+                      <div className="col-9-10">
+                        <div className="materialInfoDescription">
+                          {materialOffer.location}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <div className="row no-gutters" style={rowStyle}>
+                    <div className="materialInfoHeader">
+                      {texts.creationDate}
+                    </div>
+                  </div>
+                  <div className="row no-gutters" style={rowStyle}>
+                    <div className="col-1-10">
+                      <i className="far fa-calendar materialInfoIcon" />
+                    </div>
+                    <div className="col-9-10">
+                      <div className="materialInfoDescription">
+                        {this.getDatesString(materialOffer.createdAt)}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row no-gutters" style={rowStyle}>
+                    <div className="materialInfoHeader">
+                      {texts.disponibilityStatus}
+                    </div>
+                  </div>
+                  <div className="row no-gutters" style={rowStyle}>
+                    <div className="col-1-10">
+                      <i
+                        className={
+                          materialOffer.borrowed
+                            ? "fas fa-times materialInfoIcon"
+                            : "fas fa-check materialInfoIcon"
+                        }
+                      />
+                    </div>
+                    <div className="col-9-10">
+                      <div className="materialInfoDescription">
+                        {materialOffer.borrowed
+                          ? texts.notDisponibile
+                          : texts.disponible}
+                      </div>
+                    </div>
+                  </div>
+                  {/* TODO: add owner name */}
+                  <div className={classes.actionsContainer}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={this.handleBook}
+                      className={classes.bookButton}
+                      size="large"
+                    >
+                      {texts.book}
+                    </Button>
+                  </div>
+                </div>
               )}
-            </div>
-          </div>
-          <div id="activityMainContainer">
-            <div className="row no-gutters" style={rowStyle}>
-              <div className="activityInfoHeader">{texts.infoHeader}</div>
-            </div>
-            {material.description && (
-              <div className="row no-gutters" style={rowStyle}>
-                <div className="col-1-10">
-                  <i className="far fa-file-alt activityInfoIcon" />
+            />
+            <Route
+              path={`${materialOfferPath}/books`}
+              render={() => (
+                <div id="materialMainContainer">
+                  <h1>TODO</h1>
                 </div>
-                <div className="col-9-10">
-                  <div className="activityInfoDescription">
-                    {material.description}
-                  </div>
-                </div>
-              </div>
-            )}
-            {material.location && (
-              <div className="row no-gutters" style={rowStyle}>
-                <div className="col-1-10">
-                  <img
-                    src={Images.mapMarkerAltRegular}
-                    alt="map marker icon"
-                    className="activityInfoImage"
-                  />
-                </div>
-                <div className="col-9-10">
-                  <div className="activityInfoDescription">
-                    {material.location}
-                  </div>
-                </div>
-              </div>
-            )}
-            <div className="row no-gutters" style={rowStyle}>
-              <div className="col-1-10">
-                <i className="far fa-calendar activityInfoIcon" />
-              </div>
-              <div className="col-9-10">
-                <div className="activityInfoDescription">
-                  {this.getDatesString()}
-                </div>
-              </div>
-            </div>
-            {this.renderParticipants("volunteers")}
-            {this.renderParticipants("children")}
-          </div>
+              )}
+            />
+          </Switch>
         </div>
-        <Fab
-          color="primary"
-          aria-label="Add"
-          className={classes.add}
-          onClick={this.addActivity}
-        >
-          <i className="fas fa-plus" />
-        </Fab>
       </React.Fragment>
     ) : (
       <LoadingSpinner />
@@ -252,10 +288,10 @@ class MaterialOfferInfo extends React.Component {
 }
 
 export default withSnackbar(
-  withStyles(styles)(withLanguage(MaterialOfferInfo))
+  withRouter(withStyles(styles)(withLanguage(MaterialOfferScreen)))
 );
 
-MaterialOfferInfo.propTypes = {
+MaterialOfferScreen.propTypes = {
   history: PropTypes.object,
   language: PropTypes.string,
   match: PropTypes.object,
