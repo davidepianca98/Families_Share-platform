@@ -49,17 +49,6 @@ const styles = (theme) => ({
   root: {
     width: "100%",
   },
-  continueButton: {
-    backgroundColor: "#00838F",
-    marginTop: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    "&:hover": {
-      backgroundColor: "#00838F",
-    },
-    boxShadow: "0 6px 6px 0 rgba(0,0,0,0.24)",
-    height: "4.2rem",
-    width: "12rem",
-  },
   createButton: {
     backgroundColor: "#ff6f00",
     position: "fixed",
