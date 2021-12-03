@@ -2866,8 +2866,8 @@ const it = {
     status: "Stato di questa attività",
     ongoing: "In corso",
     completed: "Completata",
-    requiredErr: "Perfavore compila questo campo.",
-    rangeErr: "Perfavore seleziona un valore maggiore di zero",
+    requiredErr: "Per favore compila questo campo.",
+    rangeErr: "Per favore seleziona un valore maggiore di zero",
     date: "Data",
     editConfirm: "confermare le modifiche?",
     crucialChangeConfirm:
@@ -2981,7 +2981,7 @@ const it = {
     email: "E-mail",
     confirm: "CONFERMA",
     authenticationErr: "E-mail o password errata",
-    requiredErr: "Perfavore compila questo campo.",
+    requiredErr: "Per favore compila questo campo.",
     typeMismatchErr: "Si prega di inserire un indirizzo email valido.",
     tooShortErr: "Per favore usa almeno 8 caratteri.",
   },
@@ -3005,7 +3005,7 @@ const it = {
     passwordPrompt: "La password deve contenere almeno 8 caratteri",
     acceptTermsErr:
       "Per continuare, per favore accettare i termini e le condizioni",
-    requiredErr: "Perfavore compila questo campo.",
+    requiredErr: "Per favore compila questo campo.",
     typeMismatchErr: "Si prega di inserire un indirizzo email valido.",
     tooShortErr: "Per favore usa almeno 8 caratteri.",
     visibilityPrompt:
@@ -3604,7 +3604,7 @@ const it = {
     areay: "La zona",
     invite: "Aggiungi membri",
     nameErr: "Il nome scelto è già in uso da un altro gruppo",
-    requiredErr: "Perfavore compila questo campo.",
+    requiredErr: "Per favore compila questo campo.",
   },
   profileNavbar: {
     framily: "AMICI",
@@ -3645,7 +3645,7 @@ const it = {
     visible: "Profilo visibile",
     invisible: "Profilo non visibile",
     cityError: "Città non presente",
-    requiredErr: "Perfavore compila questo campo.",
+    requiredErr: "Per favore compila questo campo.",
   },
   editGroupScreen: {
     email: "E-mail",
@@ -3661,7 +3661,7 @@ const it = {
     cityError: "La città non è presente",
     visible: "Gruppo visibile",
     invisible: "Gruppo non visibile",
-    requiredErr: "Perfavore compila questo campo.",
+    requiredErr: "Per favore compila questo campo.",
   },
   profileHeader: {
     export: "Esporta",
@@ -3701,8 +3701,8 @@ const it = {
     age: "anni",
   },
   seniorListItem: {
-    boy: "Uomo",
-    girl: "Donna",
+    man: "Uomo",
+    woman: "Donna",
     age: "anni",
   },
   childProfileHeader: {
@@ -3710,20 +3710,7 @@ const it = {
     confirmDialogTitle:
       "Confermi di voler eliminare il profilo di questo bambino/a?",
   },
-  seniorProfileHeader: {
-    delete: "Cancella profilo anziano/a",
-    confirmDialogTitle:
-      "Confermi di voler eliminare il profilo di questo anziano/a?",
-  },
-  seniorProfileInfo: {
-    confirmDialogTitle: "Sei sicuro di voler eliminare questo genitore?",
-    boy: "Maschio",
-    girl: "Femmina",
-    unspecified: "Non specificato",
-    age: "anni",
-    addAdditional: "AGGIUNGI",
-    addParent: "AGGIUNGI GENITORE",
-  },
+  
   childProfileInfo: {
     confirmDialogTitle: "Sei sicuro di voler eliminare questo genitore?",
     boy: "Maschio",
@@ -3754,7 +3741,7 @@ const it = {
     year: "Anno",
     file: "Scegli file",
     unspecified: "Non specificato",
-    requiredErr: "Perfavore compila questo campo.",
+    requiredErr: "Per favore compila questo campo.",
   },
   createChildScreen: {
     backNavTitle: "Aggiungi un/a bambino/a",
@@ -3778,7 +3765,40 @@ const it = {
     acceptTermsErr:
       "Si prega di accettare i termini d'uso e l'informativa sulla provacy per procedere",
     unspecified: "Non specificato",
-    requiredErr: "Perfavore compila questo campo.",
+    requiredErr: "Per favore compila questo campo.",
+  },
+  seniorProfileHeader: {
+    delete: "Cancella profilo anziano/a",
+    confirmDialogTitle:
+      "Confermi di voler eliminare il profilo di questo anziano/a?",
+  },
+  seniorProfileInfo: {
+    confirmDialogTitle: "Sei sicuro di voler eliminare questo genitore?",
+    man: "Maschio",
+    woman: "Femmina",
+    unspecified: "Non specificato",
+    age: "anni",
+    addAdditional: "AGGIUNGI",
+    addParent: "AGGIUNGI GENITORE",
+  },
+  editSeniorProfileScreen: {
+    backNavTitle: "Modifica profilo",
+    save: "SALVA",
+    name: "Nome",
+    surname: "Cognome",
+    birthday: "Data di nascita",
+    gender: "Genere",
+    additional: "Aggiungi informazioni",
+    example: "es., intolleranze alimentari",
+    man: "Uomo",
+    woman: "Donna",
+    date: "Data",
+    add: "MODIFICA",
+    month: "Mese",
+    year: "Anno",
+    file: "Scegli file",
+    unspecified: "Non specificato",
+    requiredErr: "Per favore compila questo campo.",
   },
   createSeniorScreen: {
     backNavTitle: "Aggiungi un/a anziano/a",
@@ -3792,8 +3812,8 @@ const it = {
     add: "AGGIUNGI",
     edit: "MODIFICA",
     example: "es., intolleranze alimentari",
-    boy: "Uomo",
-    girl: "Donna",
+    man: "Uomo",
+    woman: "Donna",
     date: "Giorno",
     month: "Mese",
     year: "Anno",
@@ -3802,7 +3822,7 @@ const it = {
     acceptTermsErr:
       "Si prega di accettare i termini d'uso e l'informativa sulla provacy per procedere",
     unspecified: "Non specificato",
-    requiredErr: "Perfavore compila questo campo.",
+    requiredErr: "Per favore compila questo campo.",
   },
   additionalInfoScreen: {
     backNavTitle: "Informazioni",
@@ -3951,8 +3971,8 @@ const it = {
     status: "Stato di questa attività",
     fixed: "Confermata",
     completed: "Completata",
-    requiredErr: "Perfavore compila questo campo.",
-    rangeErr: "Perfavore seleziona un valore maggiore di zero",
+    requiredErr: "Per favore compila questo campo.",
+    rangeErr: "Per favore seleziona un valore maggiore di zero",
     learning: "attività di apprendimento / istruzione / compiti a casa",
     nature: "natura",
     tourism: "turismo e cultura",
@@ -4001,7 +4021,7 @@ const it = {
     notExistErr: "L'utente non è registrato nella piattaforma",
     err: "Qualcosa è andato storto",
     success: "Email inviata",
-    requiredErr: "Perfavore compila questo campo.",
+    requiredErr: "Per favore compila questo campo.",
   },
   changePasswordScreen: {
     prompt: "Inserisci la password",
@@ -4010,7 +4030,7 @@ const it = {
     change: "CAMBIA",
     err: "Le due password sono differenti",
     badRequest: "Richiesta errata",
-    requiredErr: "Perfavore compila questo campo.",
+    requiredErr: "Per favore compila questo campo.",
     typeMismatchErr: "Si prega di inserire un indirizzo email valido.",
   },
   calendar: {

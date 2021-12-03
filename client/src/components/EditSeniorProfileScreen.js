@@ -246,7 +246,7 @@ class EditSeniorProfileScreen extends React.Component {
       ).keys()
     ].map(x => x + 1);
     const months = [...Array(12).keys()].map(x => x + 1);
-    const years = [...Array(18).keys()].map(x => x + (moment().year() - 17));
+    const years = [...Array(100).keys()].map(x => x + (moment().year() - 99));
     if (formIsValidated) {
       formClass.push("was-validated");
     }
@@ -375,8 +375,8 @@ class EditSeniorProfileScreen extends React.Component {
                     onChange={this.handleChange}
                     name="gender"
                   >
-                    <option value="boy">{texts.boy}</option>
-                    <option value="girl">{texts.girl}</option>
+                    <option value="man">{texts.man}</option>
+                    <option value="woman">{texts.woman}</option>
                     <option value="unspecified">{texts.unspecified}</option>
                   </select>
                 </div>

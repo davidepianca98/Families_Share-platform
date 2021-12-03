@@ -61,6 +61,17 @@ const childProfileStorage = multer.diskStorage({
 })
 const childProfileUpload = multer({ storage: childProfileStorage, limits: { fieldSize: 52428800 } })
 
+const seniorProfileStorage = multer.diskStorage({
+  destination (req, file, cb) {
+    cb(null, path.join(__dirname, '../../images/profiles'))
+  },
+  filename (req, file, cb) {
+    fr(path.join(__dirname, '../../images/profiles'), { prefix: req.params.seniorId })
+    cb(null, `${req.params.seniorId}-${Date.now()}.${file.mimetype.slice(file.mimetype.indexOf('/') + 1, file.mimetype.length)}`)
+  }
+})
+const seniorProfileUpload = multer({ storage: seniorProfileStorage, limits: { fieldSize: 52428800 } })
+
 const Profile = require('../models/profile')
 const Address = require('../models/address')
 const Group = require('../models/group')
@@ -71,13 +82,13 @@ const Notification = require('../models/notification')
 const Parent = require('../models/parent')
 const Reply = require('../models/reply')
 const Child = require('../models/child')
+const Senior = require('../models/senior')
 const Announcement = require('../models/announcement')
 // const Framily = require('../models/framily')
 const Password_Reset = require('../models/password-reset')
 const Device = require('../models/device')
 const Rating = require('../models/rating')
 const Community = require('../models/community')
-const Senior = require('../models/senior')
 const MaterialOffer = require('../models/material-offer')
 const MaterialRequest = require('../models/material-request')
 const MaterialBooking = require('../models/material-booking')
@@ -1129,26 +1140,32 @@ router.get('/:userId/seniors', (req, res, next) => {
   }).catch(next)
 })
 
-router.post('/:userId/seniors', async (req, res, next) => {
-  if (!req.user_id || req.user_id !== req.params.userId) {
-    return res.status(401).send('Not authenticated')
-  }
-
-  const senior = req.body
+router.post('/:id/seniors', seniorProfileUpload.single('photo'), async (req, res, next) => {
+  if (req.user_id !== req.params.id) { return res.status(401).send('Unauthorized') }
+  const {
+    birthdate, given_name, family_name, gender, background, image: imagePath
+  } = req.body
   const { file } = req
-  if (!(senior.birthdate && senior.given_name && senior.gender && senior.background)) {
+  if (!(birthdate && given_name && family_name && gender && background)) {
     return res.status(400).send('Bad Request')
   }
-  senior.senior_id = objectid()
-  senior.user_id = req.user_id
-
+  const user_id = req.params.id
+  const senior = {
+    user_id,
+    birthdate,
+    given_name,
+    family_name,
+    gender,
+    background,
+    suspended: false
+  }
   const image_id = objectid()
+  const senior_id = objectid()
   const image = {
     image_id,
     owner_type: 'senior',
-    owner_id: senior.senior_id
+    owner_id: senior_id
   }
-
   if (file) {
     const fileName = file.filename.split('.')
     image.path = `/images/profiles/${file.filename}`
@@ -1160,17 +1177,15 @@ router.post('/:userId/seniors', async (req, res, next) => {
       })
       .toFile(path.join(__dirname, `../../images/profiles/${fileName[0]}_t.${fileName[1]}`))
   } else {
-    image.path = senior.image
-    image.thumbnail_path = senior.image
+    image.path = imagePath
+    image.thumbnail_path = imagePath
   }
+  senior.senior_id = senior_id
   senior.image_id = image_id
-
-  delete senior.image
-
   try {
     await Image.create(image)
     await Senior.create(senior)
-    res.status(200).send(senior)
+    res.status(200).send('Senior created')
   } catch (error) {
     next(error)
   }
