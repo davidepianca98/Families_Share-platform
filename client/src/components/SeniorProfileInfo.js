@@ -16,10 +16,6 @@ class SeniorProfileInfo extends React.Component {
   };
 
   handleConfirmDialogClose = choice => {
-    const { deleteIndex } = this.state;
-    if (choice === "agree") {
-      this.deleteParent(deleteIndex);
-    }
     this.setState({ confirmDialogIsOpen: false, deleteIndex: "" });
   };
 
@@ -29,19 +25,15 @@ class SeniorProfileInfo extends React.Component {
 
   render() {
     const {
-      match,
       language,
       specialNeeds,
       otherInfo,
       allergies,
       gender,
       birthdate,
-      showAdditional,
-      parents
+      showAdditional
     } = this.props;
-    const { profileId } = match.params;
     const { confirmDialogIsOpen, modalIsOpen } = this.state;
-    const isParent = JSON.parse(localStorage.getItem("user")).id === profileId;
     const texts = Texts[language].seniorProfileInfo;
     return (
       <React.Fragment>
@@ -79,66 +71,6 @@ class SeniorProfileInfo extends React.Component {
           <div className="row no-gutters">
             <div className="col-2-10">
               <img src={Images.couple} alt="birthday icon" />
-            </div>
-            <div className="col-3-10">
-              {parents[0] ? (
-                <div>
-                  <h1 onClick={() => this.handleRedirectToParent(parents[0])}>
-                    {`${parents[0].given_name} ${parents[0].family_name}`}
-                  </h1>
-                </div>
-              ) : (
-                isParent && (
-                  <button
-                    type="button"
-                    className="addParent"
-                    onClick={this.addParent}
-                  >
-                    {texts.addParent}
-                  </button>
-                )
-              )}
-            </div>
-            <div className="col-1-10">
-              {parents[0] && isParent && parents.length > 1 && (
-                <button
-                  type="button"
-                  className="deleteParent"
-                  onClick={() => this.handleConfirmDialogOpen(0)}
-                >
-                  <i className="fas fa-times" />
-                </button>
-              )}
-            </div>
-            <div className="col-3-10">
-              {parents[1] ? (
-                <div>
-                  <h1 onClick={() => this.handleRedirectToParent(parents[1])}>
-                    {`${parents[1].given_name} ${parents[1].family_name}`}
-                  </h1>
-                </div>
-              ) : (
-                isParent && (
-                  <button
-                    type="button"
-                    className="addParent"
-                    onClick={this.addParent}
-                  >
-                    {texts.addParent}
-                  </button>
-                )
-              )}
-            </div>
-            <div className="col-1-10">
-              {parents[1] && isParent && parents.length > 1 ? (
-                <button
-                  type="button"
-                  className="deleteParent"
-                  onClick={() => this.handleConfirmDialogOpen(1)}
-                >
-                  <i className="fas fa-times" />
-                </button>
-              ) : null}
             </div>
           </div>
         </div>
@@ -184,7 +116,6 @@ class SeniorProfileInfo extends React.Component {
 
 SeniorProfileInfo.propTypes = {
   history: PropTypes.object,
-  parents: PropTypes.array,
   birthdate: PropTypes.string,
   gender: PropTypes.string,
   specialNeeds: PropTypes.string,
@@ -192,9 +123,7 @@ SeniorProfileInfo.propTypes = {
   allergies: PropTypes.string,
   showAdditional: PropTypes.bool,
   language: PropTypes.string,
-  match: PropTypes.object,
-  handleAddParent: PropTypes.func,
-  handleDeleteParent: PropTypes.func
+  match: PropTypes.object
 };
 
 export default withRouter(withLanguage(SeniorProfileInfo));
