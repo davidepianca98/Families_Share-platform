@@ -1158,7 +1158,7 @@ router.get('/:userId/seniors', (req, res, next) => {
 router.post('/:id/seniors', seniorProfileUpload.single('photo'), async (req, res, next) => {
   if (req.user_id !== req.params.id) { return res.status(401).send('Unauthorized') }
   const {
-    birthdate, given_name, family_name, gender, background, image: imagePath
+    birthdate, given_name, family_name, gender, background, image: imagePath, availabilities, other_info
   } = req.body
   const { file } = req
   if (!(birthdate && given_name && family_name && gender && background)) {
@@ -1172,7 +1172,8 @@ router.post('/:id/seniors', seniorProfileUpload.single('photo'), async (req, res
     family_name,
     gender,
     background,
-    suspended: false
+    other_info,
+    availabilities
   }
   const image_id = objectid()
   const senior_id = objectid()
@@ -1200,7 +1201,7 @@ router.post('/:id/seniors', seniorProfileUpload.single('photo'), async (req, res
   try {
     await Image.create(image)
     await Senior.create(senior)
-    res.status(200).send('Senior created')
+    res.status(200).send(senior)
   } catch (error) {
     next(error)
   }
