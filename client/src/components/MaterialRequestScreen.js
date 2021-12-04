@@ -10,6 +10,9 @@ import OptionsModal from "./OptionsModal";
 import LoadingSpinner from "./LoadingSpinner";
 import Images from "../Constants/Images";
 import Log from "./Log";
+import moment from "moment";
+import Button from "@material-ui/core/Button";
+
 
 const styles = {
     add: {
@@ -28,6 +31,20 @@ const styles = {
         width: "3rem!important",
         height: "3rem!important",
     },
+    createButton: {
+        backgroundColor: "#ff6f00",
+        position: "fixed",
+        bottom: "5%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        borderRadius: "3.2rem",
+        fontSize: "1.5rem",
+        /*marginTop: theme.spacing.unit,
+        marginRight: theme.spacing.unit,*/
+        "&:hover": {
+            backgroundColor: "#ff6f00"
+        }
+    }
 };
 
 const getMaterialRequest = (materialRequestId) => {
@@ -40,15 +57,15 @@ const getMaterialRequest = (materialRequestId) => {
             Log.error(error);
             return {
                 material_name: "",
-                /*description: "",
+                description: "",
                 color: "#ffffff",
                 group_name: "",
-                location: "",*/
+                location: ""
             };
         });
 };
 
-const getGroupMembers = (groupId) => {
+/*const getGroupMembers = (groupId) => {
     return axios
         .get(`/api/groups/${groupId}/members`)
         .then((response) => {
@@ -58,13 +75,34 @@ const getGroupMembers = (groupId) => {
             Log.error(error);
             return [];
         });
+};*/
+
+const getMyProfile = (userId) => {
+    return axios
+        .get(`/api/users/${userId}/profile`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            Log.error(error);
+            return {
+                given_name: "",
+                family_name: "",
+                image: { path: "/images/profiles/user_default_photo.png" },
+                address: { street: "", number: "" },
+                email: "",
+                phone: "",
+                phone_type: "",
+                visible: false,
+                user_id: "",
+            };
+        });
 };
 
 class MaterialRequestScreen extends React.Component {
     constructor(props) {
         super(props);
         const { match } = this.props;
-        console.log("material request:" + Object.keys(match.params));
         const { groupId, materialId } = match.params;
         this.state = {
             fetchedMaterialRequestData: false,
@@ -74,6 +112,7 @@ class MaterialRequestScreen extends React.Component {
             userCanEdit: false,
             optionsModalIsOpen: false,
             action: "",
+            userCreator: {},
             groupId,
             materialId
         };
@@ -83,17 +122,17 @@ class MaterialRequestScreen extends React.Component {
         const { groupId, materialId } = this.state;
         const userId = JSON.parse(localStorage.getItem("user")).id;
         const materialRequest = await getMaterialRequest(materialId, groupId);
-        console.log("---------" + Object.keys(materialRequest));
-        const groupMembers = await getGroupMembers(groupId);
-        const userIsAdmin = groupMembers.filter(
+        /*const groupMembers = await getGroupMembers(groupId);*/
+        const userCreator = await getMyProfile(userId);
+        /*const userIsAdmin = groupMembers.filter(
             (member) =>
                 member.user_id === userId &&
                 member.group_accepted &&
                 member.user_accepted
-        )[0].admin;
+        )[0].admin;*/
         const userIsCreator = userId === materialRequest.created_by;
-        const userCanEdit = userIsAdmin || userIsCreator;
-        this.setState({ materialRequest, fetchedMaterialRequestData: true, userCanEdit });
+        const userCanEdit = /*userIsAdmin ||*/ userIsCreator;
+        this.setState({ materialRequest, fetchedMaterialRequestData: true, userCanEdit, userCreator});
     };
 
     handleEdit = () => {
@@ -155,10 +194,17 @@ class MaterialRequestScreen extends React.Component {
             });
     };
 
+    handleOffer = () => {
+
+    };
+
+    getDatesString = (date) => {
+        return moment(date).format("ll");
+    };
+
 
     render() {
         const { history, language, classes } = this.props;
-        console.log(classes);
         const {
             materialRequest,
             fetchedMaterialRequestData,
@@ -167,8 +213,10 @@ class MaterialRequestScreen extends React.Component {
             confirmDialogIsOpen,
             optionsModalIsOpen,
             pendingRequest,
+            userCreator
         } = this.state;
         const texts = Texts[language].activityScreen;
+        const name = userCreator.given_name + " " + userCreator.family_name;
         const options = [
             {
                 label: texts.delete,
@@ -176,7 +224,7 @@ class MaterialRequestScreen extends React.Component {
                 handle: () => {
                     this.handleConfirmDialogOpen("delete");
                 },
-            },
+            }/*,
             {
                 label: texts.exportPdf,
                 style: "optionsModalButton",
@@ -190,7 +238,7 @@ class MaterialRequestScreen extends React.Component {
                 handle: () => {
                     this.handleConfirmDialogOpen("exportExcel");
                 },
-            },
+            },*/
         ];
         const confirmDialogTitle =
             action === "delete" ? texts.deleteDialogTitle : texts.exportDialogTitle;
@@ -219,34 +267,8 @@ class MaterialRequestScreen extends React.Component {
                                 <i className="fas fa-arrow-left" />
                             </button>
                         </div>
-                        <div className="col-6-10">
+                        <div className="col-8-10">
                             <h1 className="center">{materialRequest.material_name}</h1>
-                        </div>
-                        <div className="col-1-10">
-                            {userCanEdit ? (
-                                <button
-                                    type="button"
-                                    className="transparentButton center"
-                                    onClick={this.handleEdit}
-                                >
-                                    <i className="fas fa-pencil-alt" />
-                                </button>
-                            ) : (
-                                <div />
-                            )}
-                        </div>
-                        <div className="col-1-10">
-                            {userCanEdit ? (
-                                <button
-                                    type="button"
-                                    className="transparentButton center"
-                                    onClick={this.handleOptions}
-                                >
-                                    <i className="fas fa-ellipsis-v" />
-                                </button>
-                            ) : (
-                                <div />
-                            )}
                         </div>
                     </div>
                     <div id="activityMainContainer">
@@ -282,18 +304,45 @@ class MaterialRequestScreen extends React.Component {
                             </div>
                         )}
                         <div className="row no-gutters" style={rowStyle}>
+                            <div className="activityInfoHeader">{"Data Creazione" /*TODO text.blablabla*/}</div>
+                        </div>
+                        <div className="row no-gutters" style={rowStyle}>
                             <div className="col-1-10">
                                 <i className="far fa-calendar activityInfoIcon" />
                             </div>
                             <div className="col-9-10">
                                 <div className="activityInfoDescription">
-                                    {/*this.getDatesString()*/}
+                                    {this.getDatesString()}
                                 </div>
                             </div>
                         </div>
+                        {!userCanEdit && (
+                        <div>
+                            <div className="row no-gutters" style={rowStyle}>
+                                <div className="activityInfoHeader">Utente {/*TODO text.blablabla*/}</div>
+                            </div>
+                            <div className="row no-gutters" style={rowStyle}>
+                                <div className="col-1-10">
+                                    <i className="far fa-user-circle activityInfoIcon" />
+                                </div>
+                                <div className="col-9-10">
+                                    <div className="activityInfoDescription">
+                                        {name}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        )}
                     </div>
                 </div>
-                {/*<TimeslotsList dates={materialRequest.dates} timeslots={materialRequest.timeslots} />*/}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={userCanEdit ? this.handleEdit : this.handleOffer}
+                    className={classes.createButton}
+                >
+                    {userCanEdit ? "MODIFICA" : "OFFRI"}
+                </Button>
             </React.Fragment>
         ) : (
             <LoadingSpinner />

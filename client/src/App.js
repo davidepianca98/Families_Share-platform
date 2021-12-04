@@ -177,6 +177,10 @@ const CreateMaterialRequestScreen = Loadable({
   loader: () => import("./components/CreateMaterialRequestScreen"),
   loading: () => Loading,
 });
+const EditMaterialRequestScreen = Loadable({
+  loader: () => import("./components/EditMaterialRequestScreen"),
+  loading: () => Loading,
+});
 const GroupMaterials = Loadable({
   loader: () => import("./components/GroupMaterials"),
   loading: () => Loading,
@@ -418,6 +422,10 @@ class App extends React.Component {
               <PrivateRoute
                 path="/groups/:groupId/materials/requests/create"
                 component={CreateMaterialRequestScreen}
+              />
+              <PrivateRoute
+                  path="/groups/:groupId/materials/requests/:materialId/edit"
+                  component={EditMaterialRequestScreen}
               />
               <PrivateRoute
                 path="/groups/:groupId/materials/requests/:materialId"

@@ -13,11 +13,9 @@ class CreateMaterialRequestInformation extends React.Component {
             name,
             location,
             description,
-            color,
-            /*cost,
-            link*/
+            color
         } = this.props;
-        this.state = { color, description, /*cost, link,*/ location, name };
+        this.state = { color, description, location, name };
         handleSubmit(this.state, this.validate(this.state));
         autosize(document.querySelectorAll("textarea"));
     }
@@ -101,21 +99,6 @@ class CreateMaterialRequestInformation extends React.Component {
                         />
                     </div>
                 </div>
-                {/*<div className="row no-gutters" style={rowStyle}>
-                    <div className="col-2-10">
-                        <i className="fas fa-link center" />
-                    </div>
-                    <div className="col-8-10">
-                        <input
-                            type="text"
-                            name="link"
-                            placeholder={texts.link}
-                            value={link}
-                            className="center"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                </div> */}
                 <div className="row no-gutters" style={rowStyle}>
                     <div className="col-2-10">
                         <i
