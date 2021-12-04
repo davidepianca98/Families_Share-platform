@@ -7,6 +7,7 @@ const { chai } = common
 const User = require('../../src/models/user')
 const Senior = require('../../src/models/senior')
 
+// T-22
 describe('/Put/api/seniors/id', () => {
   it('it should update a senior when the user is authenticated and in relationship with the senior', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -26,6 +27,7 @@ describe('/Put/api/seniors/id', () => {
   })
 })
 
+// T-48
 describe('/Put/api/seniors/id', () => {
   it('it should not update a senior when the user is authenticated and not in relationship with the senior', done => {
     User.findOne({ email: 'test3@email.com' }, (error, user) => {
@@ -45,6 +47,7 @@ describe('/Put/api/seniors/id', () => {
   })
 })
 
+// T-44
 describe('/Get/api/seniors/id', () => {
   it('it should NOT fetch a senior when the user is NOT authenticated or NOT a group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -62,6 +65,7 @@ describe('/Get/api/seniors/id', () => {
   })
 })
 
+// T-45
 describe('/Get/api/seniors/id', () => {
   it('it should NOT fetch a senior when a bad id is issued', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -79,6 +83,7 @@ describe('/Get/api/seniors/id', () => {
   })
 })
 
+// T-21
 describe('/Get/api/seniors/id', () => {
   it('it should fetch a senior when the user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -96,6 +101,7 @@ describe('/Get/api/seniors/id', () => {
   })
 })
 
+// T-46
 describe('/Delete/api/seniors/id', () => {
   it('it should NOT delete a senior when the senior_id is bad', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -113,6 +119,7 @@ describe('/Delete/api/seniors/id', () => {
   })
 })
 
+// T-47
 describe('/Delete/api/seniors/id', () => {
   it('it NOT should delete a senior when the user is NOT authenticated or NOT in relationship with the senior', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -130,6 +137,7 @@ describe('/Delete/api/seniors/id', () => {
   })
 })
 
+// T-23
 describe('/Delete/api/seniors/id', () => {
   it('it should delete a senior when the user is authenticated and in relationship with the senior', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {

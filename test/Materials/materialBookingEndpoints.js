@@ -8,6 +8,7 @@ const User = require('../../src/models/user')
 const MaterialOffer = require('../../src/models/material-offer')
 const MaterialBooking = require('../../src/models/material-booking')
 
+// T-24
 describe('/Get/api/materials/bookings/id', () => {
   it('it should fetch a material booking when the user is authenticated and group member', done => {
     User.findOne({ email: 'test3@email.com' }, (err0, user) => {
@@ -27,6 +28,7 @@ describe('/Get/api/materials/bookings/id', () => {
   })
 })
 
+// T-35
 describe('/Get/api/materials/bookings/id', () => {
   it('it should NOT fetch a material booking when the user is NOT group member', done => {
     User.findOne({ email: 'test5@email.com' }, (err0, user) => {
@@ -46,6 +48,8 @@ describe('/Get/api/materials/bookings/id', () => {
   })
 })
 
+
+// T-36
 describe('/Delete/api/materials/bookings/id', () => {
   it('it should NOT delete a material booking when the user is NOT the creator of the booking', done => {
     User.findOne({ email: 'test5@email.com' }, (err0, user) => {
@@ -65,6 +69,7 @@ describe('/Delete/api/materials/bookings/id', () => {
   })
 })
 
+// T-25
 describe('/Delete/api/materials/bookings/id', () => {
   it('it should delete a material booking when the user is authenticated and the creator of the booking', done => {
     User.findOne({ email: 'test3@email.com' }, (err0, user) => {

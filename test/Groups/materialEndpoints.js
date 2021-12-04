@@ -7,6 +7,7 @@ const { chai } = common
 const User = require('../../src/models/user')
 const Group = require('../../src/models/group')
 
+// T-01
 describe('/Post/api/groups/id/materialOffers', () => {
   it('it should post a new material offer when user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -31,6 +32,7 @@ describe('/Post/api/groups/id/materialOffers', () => {
   })
 })
 
+// T-02
 describe('/Get/api/groups/id/materialOffers', () => {
   it('it should fetch a groups material offers when user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -49,6 +51,7 @@ describe('/Get/api/groups/id/materialOffers', () => {
   })
 })
 
+// T-03
 describe('/Get/api/groups/id/materialOffers', () => {
   it('it should fetch a groups material offers filtered by keywords when user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -67,6 +70,7 @@ describe('/Get/api/groups/id/materialOffers', () => {
   })
 })
 
+// T-04
 describe('/Get/api/groups/id/materialOffers', () => {
   it('it should fail fetching a groups material offers filtered by keywords when user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -84,6 +88,7 @@ describe('/Get/api/groups/id/materialOffers', () => {
   })
 })
 
+// T-05
 describe('/Post/api/groups/id/materialRequests', () => {
   it('it should post a new material request when user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -105,6 +110,7 @@ describe('/Post/api/groups/id/materialRequests', () => {
   })
 })
 
+// T-06
 describe('/Get/api/groups/id/materialRequests', () => {
   it('it should fetch a groups material requests when user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -123,6 +129,7 @@ describe('/Get/api/groups/id/materialRequests', () => {
   })
 })
 
+// T-07
 describe('/Get/api/groups/id/materialRequests', () => {
   it('it should fetch a groups material requests filtered by keywords when user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -141,6 +148,7 @@ describe('/Get/api/groups/id/materialRequests', () => {
   })
 })
 
+// T-08
 describe('/Get/api/groups/id/materialRequests', () => {
   it('it should fail fetching a groups material requests filtered by keywords when user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {

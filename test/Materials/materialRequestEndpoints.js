@@ -7,6 +7,7 @@ const { chai } = common
 const User = require('../../src/models/user')
 const MaterialRequest = require('../../src/models/material-request')
 
+// T-37
 describe('/Get/api/materials/requests/id', () => {
   it('it should NOT fetch a material request when the user is NOT group member', done => {
     User.findOne({ email: 'test5@email.com' }, (error, user) => {
@@ -24,6 +25,7 @@ describe('/Get/api/materials/requests/id', () => {
   })
 })
 
+// T-38
 describe('/Get/api/materials/requests/id', () => {
   it('it should NOT fetch a material request when the there is no such a material', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -41,6 +43,7 @@ describe('/Get/api/materials/requests/id', () => {
   })
 })
 
+// T-09
 describe('/Get/api/materials/requests/id', () => {
   it('it should fetch a material request when the user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -58,6 +61,7 @@ describe('/Get/api/materials/requests/id', () => {
   })
 })
 
+// T-10
 describe('/Put/api/materials/requests/id', () => {
   it('it should update a material request when the user is authenticated and the creator of the request', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -77,6 +81,7 @@ describe('/Put/api/materials/requests/id', () => {
   })
 })
 
+// T-39
 describe('/Put/api/materials/requests/id', () => {
   it('it should NOT update a material request when the user is NOT authenticated or is NOT the creator of the request', done => {
     User.findOne({ email: 'test5@email.com' }, (error, user) => {
@@ -96,6 +101,7 @@ describe('/Put/api/materials/requests/id', () => {
   })
 })
 
+// T-40
 describe('/Post/api/materials/requests/id/satisfy', () => {
   it('it should NOT set the material request as satisfied when the user is NOT authenticated or NOT member of the group', done => {
     User.findOne({ email: 'test5@email.com' }, (error, user) => {
@@ -113,6 +119,7 @@ describe('/Post/api/materials/requests/id/satisfy', () => {
   })
 })
 
+// T-41
 describe('/Post/api/materials/requests/id/satisfy', () => {
   it('it should NOT set the material request as satisfied when such a request does not exist', done => {
     User.findOne({ email: 'test3@email.com' }, (error, user) => {
@@ -130,6 +137,7 @@ describe('/Post/api/materials/requests/id/satisfy', () => {
   })
 })
 
+// T-11
 describe('/Post/api/materials/requests/id/satisfy', () => {
   it('it should set the material request as satisfied when the user is authenticated and member of the group', done => {
     User.findOne({ email: 'test3@email.com' }, (error, user) => {
@@ -147,6 +155,7 @@ describe('/Post/api/materials/requests/id/satisfy', () => {
   })
 })
 
+// T-42
 describe('/Delete/api/materials/requests/id', () => {
   it('it should NOT delete a material request when the user is NOT authenticated or NOT the creator of the request', done => {
     User.findOne({ email: 'test5@email.com' }, (error, user) => {
@@ -164,6 +173,7 @@ describe('/Delete/api/materials/requests/id', () => {
   })
 })
 
+// T-43
 describe('/Delete/api/materials/requests/id', () => {
   it('it should NOT delete a material request when such a request does not exist', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -181,6 +191,7 @@ describe('/Delete/api/materials/requests/id', () => {
   })
 })
 
+// T-12
 describe('/Delete/api/materials/requests/id', () => {
   it('it should delete a material request when the user is authenticated and the creator of the request', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {

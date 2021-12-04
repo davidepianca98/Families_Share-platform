@@ -5,6 +5,7 @@ const chai = common.chai
 
 const User = require('../../src/models/user')
 
+// T-34
 describe('/Get/api/users/userId/seniors', () => {
   it('it should fail fetching the seniors of a user when he has none', (done) => {
     User.findOne({ email: 'test@email.com' }, (err, user) => {
@@ -20,6 +21,7 @@ describe('/Get/api/users/userId/seniors', () => {
   })
 })
 
+// T-13
 describe('/Post/api/users/userId/seniors', () => {
   it('it should create a senior for a given user when request user_id matches token user_id', (done) => {
     User.findOne({ email: 'test@email.com' }, (err, user) => {
@@ -54,6 +56,7 @@ describe('/Post/api/users/userId/seniors', () => {
   })
 })
 
+// T-13
 describe('/Post/api/users/userId/seniors', () => {
   it('it should create a senior for a given user when request user_id matches token user_id', (done) => {
     User.findOne({ email: 'test@email.com' }, (err, user) => {
@@ -88,6 +91,7 @@ describe('/Post/api/users/userId/seniors', () => {
   })
 })
 
+// T-13
 describe('/Post/api/users/userId/seniors', () => {
   it('it should create a senior for a given user when request user_id matches token user_id', (done) => {
     User.findOne({ email: 'test@email.com' }, (err, user) => {
@@ -122,6 +126,7 @@ describe('/Post/api/users/userId/seniors', () => {
   })
 })
 
+// T-14
 describe('/Get/api/users/userId/seniors', () => {
   it('it should fetch the seniors of a user when he is authenticated', (done) => {
     User.findOne({ email: 'test@email.com' }, (err, user) => {

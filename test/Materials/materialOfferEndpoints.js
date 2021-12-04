@@ -7,6 +7,7 @@ const { chai } = common
 const User = require('../../src/models/user')
 const MaterialOffer = require('../../src/models/material-offer')
 
+// T-16
 describe('/Get/api/materials/offers/id', () => {
   it('it should fetch a material offer when the user is authenticated and group member', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -24,6 +25,7 @@ describe('/Get/api/materials/offers/id', () => {
   })
 })
 
+// T-26
 describe('/Get/api/materials/offers/id', () => {
   it('it should fail fetching a material offer when the user is authenticated but not a group member', done => {
     User.findOne({ email: 'test5@email.com' }, (error, user) => {
@@ -41,6 +43,7 @@ describe('/Get/api/materials/offers/id', () => {
   })
 })
 
+// T-17
 describe('/Put/api/materials/offers/id', () => {
   it('it should update a material offer when the user is authenticated and the creator of the offer', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -61,6 +64,7 @@ describe('/Put/api/materials/offers/id', () => {
   })
 })
 
+// T-27
 describe('/Put/api/materials/offers/id', () => {
   it('it should not update a material offer when the user is authenticated and not the creator of the offer', done => {
     User.findOne({ email: 'test3@email.com' }, (error, user) => {
@@ -80,6 +84,7 @@ describe('/Put/api/materials/offers/id', () => {
   })
 })
 
+// T-28
 describe('/Post/api/materials/offers/id/book', () => {
   it('it should not create a new material booking when the user is authenticated and member of the group but not the creator of the offer', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -102,6 +107,7 @@ describe('/Post/api/materials/offers/id/book', () => {
   })
 })
 
+// T-18
 describe('/Post/api/materials/offers/id/book', () => {
   it('it should create a new material booking when the user is authenticated and member of the group', done => {
     User.findOne({ email: 'test3@email.com' }, (error, user) => {
@@ -124,6 +130,7 @@ describe('/Post/api/materials/offers/id/book', () => {
   })
 })
 
+// T-19
 describe('/Post/api/materials/offers/id/booked', () => {
   it('it should set the material offer as booked when the user is authenticated and the creator of the offer', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -145,6 +152,7 @@ describe('/Post/api/materials/offers/id/booked', () => {
   })
 })
 
+// T-29
 describe('/Post/api/materials/offers/id/booked', () => {
   it('it should not set the material offer as booked when the user is authenticated and not the creator of the offer', done => {
     User.findOne({ email: 'test3@email.com' }, (error, user) => {
@@ -166,6 +174,7 @@ describe('/Post/api/materials/offers/id/booked', () => {
   })
 })
 
+// T-30
 describe('/Get/api/materials/offers/id/bookings', () => {
   it('it should fetch a material offer bookings when user is authenticated and owner of material offer', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
@@ -184,6 +193,7 @@ describe('/Get/api/materials/offers/id/bookings', () => {
   })
 })
 
+// T-31
 describe('/Get/api/materials/offers/id/bookings', () => {
   it('it should fail fetching a material offer bookings when user is authenticated and not the owner of material offer', done => {
     User.findOne({ email: 'test3@email.com' }, (error, user) => {
@@ -201,6 +211,7 @@ describe('/Get/api/materials/offers/id/bookings', () => {
   })
 })
 
+// T-32
 describe('/Delete/api/materials/offers/id', () => {
   it('it should not delete a material offer when the user is authenticated and not the creator of the offer', done => {
     User.findOne({ email: 'test5@email.com' }, (error, user) => {
@@ -218,6 +229,7 @@ describe('/Delete/api/materials/offers/id', () => {
   })
 })
 
+// T-20
 describe('/Delete/api/materials/offers/id', () => {
   it('it should delete a material offer when the user is authenticated and the creator of the offer', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {

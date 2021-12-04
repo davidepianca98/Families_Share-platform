@@ -723,6 +723,7 @@ describe('/Patch/api/groups/groupId/activities/activityId/timeslots/timeslotId',
     res.should.have.status(200)
   })
 })
+// T-15
 describe('/Patch/api/groups/groupId/activities/activityId/timeslots/timeslotId', () => {
   it('it should edit seniors in the timeslot of an activity when user is authenticated and group member', async () => {
     const user = await User.findOne({ email: 'test@email.com' })
@@ -755,6 +756,7 @@ describe('/Patch/api/groups/groupId/activities/activityId/timeslots/timeslotId',
     res.should.have.status(200)
   })
 })
+// T-33
 describe('/Patch/api/groups/groupId/activities/activityId/timeslots/timeslotId', () => {
   it('it should not add senior in the timeslot of an activity when user is authenticated and group member but the senior is not available during that time', async () => {
     const user = await User.findOne({ email: 'test@email.com' })
