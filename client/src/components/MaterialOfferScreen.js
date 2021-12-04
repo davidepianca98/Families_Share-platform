@@ -38,6 +38,7 @@ const styles = (theme) => ({
     left: "50%",
     transform: "translateX(-50%)",
     borderRadius: "3.2rem",
+    fontSize: "1.5rem",
     marginTop: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     "&:hover": {
@@ -64,18 +65,6 @@ const getMaterialOffer = (materialOfferId) => {
     });
 };
 
-const getGroupMembers = (groupId) => {
-  return axios
-    .get(`/api/groups/${groupId}/members`)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      Log.error(error);
-      return [];
-    });
-};
-
 class MaterialOfferScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -96,15 +85,8 @@ class MaterialOfferScreen extends React.Component {
     const { groupId, materialId } = this.state;
     const userId = JSON.parse(localStorage.getItem("user")).id;
     const materialOffer = await getMaterialOffer(materialId, groupId);
-    const groupMembers = await getGroupMembers(groupId);
-    const userIsAdmin = groupMembers.filter(
-      (member) =>
-        member.user_id === userId &&
-        member.group_accepted &&
-        member.user_accepted
-    )[0].admin;
     const userIsCreator = userId === materialOffer.created_by;
-    const userCanEdit = userIsAdmin || userIsCreator;
+    const userCanEdit = userIsCreator;
     this.setState({
       materialOffer,
       fetchedMaterialOfferData: true,
@@ -115,14 +97,14 @@ class MaterialOfferScreen extends React.Component {
   handleEdit = () => {
     const { history } = this.props;
     let { pathname } = history.location;
-    pathname = `${pathname}/edit`;
+    pathname = pathname.slice(0, pathname.lastIndexOf("/") + 1) + "edit";
     history.push(pathname);
   };
 
   handleBook = () => {
     const { history } = this.props;
     let { pathname } = history.location;
-    pathname = `${pathname}/book`;
+    pathname = pathname.slice(0, pathname.lastIndexOf("/") + 1) + "book";
     history.push(pathname);
   };
 
@@ -250,7 +232,7 @@ class MaterialOfferScreen extends React.Component {
                     <div className="col-9-10">
                       <div className="materialInfoDescription">
                         {materialOffer.borrowed
-                          ? texts.notDisponibile
+                          ? texts.notDisponible
                           : texts.disponible}
                       </div>
                     </div>

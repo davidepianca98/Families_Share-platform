@@ -3710,7 +3710,7 @@ const it = {
     confirmDialogTitle:
       "Confermi di voler eliminare il profilo di questo bambino/a?",
   },
-  
+
   childProfileInfo: {
     confirmDialogTitle: "Sei sicuro di voler eliminare questo genitore?",
     boy: "Maschio",
@@ -4079,6 +4079,17 @@ const it = {
   materialOfferScreenNavbar: {
     info: "INFO",
     books: "PRENOTAZIONI",
+  },
+  editMaterialOfferScreen: {
+    backNavTitle: "Modifica offerta materiale",
+    color: "Colore del materiale",
+    description: "Descrizione (facoltativo)",
+    name: "Nome del materiale",
+    save: "SALVA",
+    location: "Posizione (facoltativo)",
+    borrowed: "Disponibile",
+    modify: "MODIFICA",
+    delete: "ELIMINA",
   },
 };
 

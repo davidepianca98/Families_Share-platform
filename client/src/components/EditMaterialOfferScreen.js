@@ -7,35 +7,72 @@ import Texts from "../Constants/Texts";
 import LoadingSpinner from "./LoadingSpinner";
 import withLanguage from "./LanguageContext";
 import Log from "./Log";
+import { Switch, Button } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
-class EditActivityScreen extends React.Component {
+const styles = (theme) => ({
+  modifyButton: {
+    backgroundColor: "#ff6f00",
+    position: "fixed",
+    bottom: "5%",
+    /*left: "25%",*/
+    /*transform: "translateX(-50%)",*/
+    borderRadius: "3.2rem",
+    fontSize: "1.5rem",
+    marginTop: theme.spacing.unit,
+    marginLeft: theme.spacing.unit,
+    "&:hover": {
+      backgroundColor: "#ff6f00",
+    },
+  },
+  deleteButton: {
+    backgroundColor: "#ff0000",
+    position: "fixed",
+    bottom: "5%",
+    /*left: "66%",*/
+    /*transform: "translateX(-50%)",*/
+    borderRadius: "3.2rem",
+    fontSize: "1.5rem",
+    marginTop: theme.spacing.unit,
+    /*marginRight: theme.spacing.unit,*/
+    "&:hover": {
+      backgroundColor: "#ff0000",
+    },
+  },
+});
+
+class EditMaterialOfferScreen extends React.Component {
   state = {
-    fetchedActivity: false,
+    fetchedData: false,
   };
 
   componentDidMount() {
     const { match } = this.props;
-    const { activityId, groupId } = match.params;
+    const { materialId } = match.params;
     axios
-      .get(`/api/groups/${groupId}/activities/${activityId}`)
+      .get(`/api/materials/offers/${materialId}`)
       .then((response) => {
-        const { name, description, color, location } = response.data;
+        const { material_name, description, color, location, borrowed } =
+          response.data;
         this.setState({
-          fetchedActivity: true,
-          name,
+          fetchedData: true,
+          material_name,
           color,
           description,
           location,
+          borrowed,
           validated: true,
         });
       })
       .catch((error) => {
         Log.error(error);
         this.setState({
-          fetchedActivity: true,
-          name: "",
+          fetchedData: true,
+          material_name: "",
           color: "",
           description: "",
+          location: "",
+          borrowed: true,
           validated: false,
         });
       });
@@ -47,9 +84,15 @@ class EditActivityScreen extends React.Component {
     const { value } = event.target;
     state[name] = value;
     state.validated = false;
-    if (state.color && state.name) {
+    if (state.color && state.material_name) {
       state.validated = true;
     }
+    this.setState(state);
+  };
+
+  handleSwitch = (value) => {
+    const state = Object.assign({}, this.state);
+    state.borrowed = !value;
     this.setState(state);
   };
 
@@ -61,18 +104,20 @@ class EditActivityScreen extends React.Component {
 
   handleSave = () => {
     const { match, history } = this.props;
-    const { activityId, groupId } = match.params;
-    const { validated, name, color, location, description } = this.state;
+    const { materialId } = match.params;
+    const { validated, material_name, color, location, description, borrowed } =
+      this.state;
     if (validated) {
-      this.setState({ fetchedActivity: false });
+      this.setState({ fetchedData: false });
       const patch = {
-        name,
+        material_name,
         color,
+        borrowed,
         location: location.trim(),
         description: description.trim(),
       };
       axios
-        .patch(`/api/groups/${groupId}/activities/${activityId}`, patch)
+        .put(`/api/materials/offers/${materialId}`, patch)
         .then((response) => {
           Log.info(response);
           history.goBack();
@@ -84,14 +129,36 @@ class EditActivityScreen extends React.Component {
     }
   };
 
+  handleDelete = () => {
+    const { match, history } = this.props;
+    const { materialId, groupId } = match.params;
+    axios
+      .delete(`/api/materials/offers/${materialId}`)
+      .then((response) => {
+        Log.info(response);
+        history.push(`/groups/${groupId}/materials/offers`);
+      })
+      .catch((error) => {
+        Log.error(error);
+        history.goBack();
+      });
+  };
+
   render() {
-    const { fetchedActivity, validated, name, description, location, color } =
-      this.state;
-    const { language, history } = this.props;
-    const texts = Texts[language].editActivityScreen;
-    return fetchedActivity ? (
+    const {
+      fetchedData,
+      validated,
+      material_name,
+      description,
+      location,
+      borrowed,
+      color,
+    } = this.state;
+    const { language, history, classes } = this.props;
+    const texts = Texts[language].editMaterialOfferScreen;
+    return fetchedData ? (
       <React.Fragment>
-        <div className="row no-gutters" id="editActivityHeaderContainer">
+        <div className="row no-gutters" id="editMaterialOfferHeaderContainer">
           <div className="col-2-10">
             <button
               className="transparentButton center"
@@ -101,21 +168,11 @@ class EditActivityScreen extends React.Component {
               <i className="fas fa-arrow-left" />
             </button>
           </div>
-          <div className="col-6-10">
+          <div className="col-8-10">
             <h1 className="verticalCenter">{texts.backNavTitle}</h1>
           </div>
-          <div className="col-2-10">
-            <button
-              type="button"
-              className="transparentButton center"
-              style={validated ? {} : { opacity: 0.5 }}
-              onClick={this.handleSave}
-            >
-              <i className="fas fa-check" />
-            </button>
-          </div>
         </div>
-        <div id="editActivityMainContainer">
+        <div id="editMaterialOfferMainContainer">
           <div className="row no-gutters">
             <div className="col-2-10">
               <i className="fas fa-clipboard-check center" />
@@ -123,9 +180,9 @@ class EditActivityScreen extends React.Component {
             <div className="col-8-10">
               <input
                 type="text"
-                name="name"
+                name="material_name"
                 placeholder={texts.name}
-                value={name}
+                value={material_name}
                 className="verticalCenter"
                 onChange={this.handleChange}
               />
@@ -169,6 +226,32 @@ class EditActivityScreen extends React.Component {
           </div>
           <div className="row no-gutters">
             <div className="col-2-10">
+              <i class="far fa-calendar-check center" />
+            </div>
+            <div className="col-6-10" style={{ paddingLeft: "10px" }}>
+              <h1 className="verticalCenter" style={{ fontSize: "1.5rem" }}>
+                {texts.borrowed}
+              </h1>
+            </div>
+            <div
+              className="col-2-10"
+              style={{
+                margin: "auto",
+              }}
+            >
+              <Switch
+                checked={!borrowed}
+                onClick={() => {
+                  this.handleSwitch(borrowed);
+                }}
+                color="primary"
+                name="borrowed"
+                inputProps={{ "aria-label": "primary checkbox" }}
+              />
+            </div>
+          </div>
+          <div className="row no-gutters">
+            <div className="col-2-10">
               <i
                 className="fas fa-palette center"
                 style={{ color }}
@@ -191,6 +274,31 @@ class EditActivityScreen extends React.Component {
               />
             </div>
           </div>
+          <div className={classes.actionsContainer + " row no-gutters"}>
+            <div className="col-1-2 d-flex justify-content-center">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.handleSave}
+                className={classes.modifyButton}
+                size="large"
+                disabled={!validated}
+              >
+                {texts.modify}
+              </Button>
+            </div>
+            <div className="col-1-2 d-flex justify-content-center">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.handleDelete}
+                className={classes.deleteButton}
+                size="large"
+              >
+                {texts.delete}
+              </Button>
+            </div>
+          </div>
         </div>
       </React.Fragment>
     ) : (
@@ -199,9 +307,9 @@ class EditActivityScreen extends React.Component {
   }
 }
 
-export default withLanguage(EditActivityScreen);
+export default withStyles(styles)(withLanguage(EditMaterialOfferScreen));
 
-EditActivityScreen.propTypes = {
+EditMaterialOfferScreen.propTypes = {
   history: PropTypes.object,
   language: PropTypes.string,
   match: PropTypes.object,
