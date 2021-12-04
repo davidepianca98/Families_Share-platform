@@ -10,7 +10,7 @@ import ConfirmDialog from "./ConfirmDialog";
 import ExpandedImageModal from "./ExpandedImageModal";
 import Log from "./Log";
 
-class ChildProfileHeader extends React.Component {
+class SeniorProfileHeader extends React.Component {
   state = {
     optionsModalIsOpen: false,
     confirmDialogIsOpen: false,
@@ -45,9 +45,9 @@ class ChildProfileHeader extends React.Component {
 
   handleDelete = () => {
     const { match, history } = this.props;
-    const { profileId: userId, childId } = match.params;
+    const { profileId: userId, seniorId } = match.params;
     axios
-      .delete(`/api/users/${userId}/children/${childId}`)
+      .delete(`/api/users/${userId}/seniors/${seniorId}`)
       .then(response => {
         Log.info(response);
         history.goBack();
@@ -77,7 +77,7 @@ class ChildProfileHeader extends React.Component {
       confirmDialogIsOpen,
       optionsModalIsOpen
     } = this.state;
-    const texts = Texts[language].childProfileHeader;
+    const texts = Texts[language].seniorProfileHeader;
     const options = [
       {
         label: texts.delete,
@@ -131,7 +131,7 @@ class ChildProfileHeader extends React.Component {
           </div>
           <img
             className="profilePhoto horizontalCenter"
-            alt="child's profile"
+            alt="senior's profile"
             src={photo}
             onClick={this.handleImageModalOpen}
           />
@@ -152,7 +152,7 @@ class ChildProfileHeader extends React.Component {
   }
 }
 
-ChildProfileHeader.propTypes = {
+SeniorProfileHeader.propTypes = {
   background: PropTypes.string,
   name: PropTypes.string,
   photo: PropTypes.string,
@@ -161,4 +161,4 @@ ChildProfileHeader.propTypes = {
   language: PropTypes.string
 };
 
-export default withRouter(withLanguage(ChildProfileHeader));
+export default withRouter(withLanguage(SeniorProfileHeader));

@@ -1,16 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
-import axios from "axios";
 import { withRouter } from "react-router-dom";
 import withLanguage from "./LanguageContext";
 import InviteDialog from "./InviteDialog";
 import Images from "../Constants/Images";
 import Texts from "../Constants/Texts";
 import ConfirmDialog from "./ConfirmDialog";
-import Log from "./Log";
 
-class ChildProfileInfo extends React.Component {
+class SeniorProfileInfo extends React.Component {
   state = { modalIsOpen: false, confirmDialogIsOpen: false, deleteIndex: "" };
 
   handleConfirmDialogOpen = index => {
@@ -25,50 +23,8 @@ class ChildProfileInfo extends React.Component {
     this.setState({ confirmDialogIsOpen: false, deleteIndex: "" });
   };
 
-  addParent = () => {
-    this.setState({ modalIsOpen: true });
-  };
-
   handleClose = () => {
     this.setState({ modalIsOpen: false });
-  };
-
-  deleteParent = index => {
-    const { match, parents, handleDeleteParent } = this.props;
-    const { profileId, childId } = match.params;
-    axios
-      .delete(
-        `/api/users/${profileId}/children/${childId}/parents/${parents[index].user_id}`
-      )
-      .then(response => {
-        Log.info(response);
-        handleDeleteParent(index);
-      })
-      .catch(error => {
-        Log.error(error);
-      });
-  };
-
-  handleAdd = parent => {
-    const { match, handleAddParent } = this.props;
-    const { profileId, childId } = match.params;
-    axios
-      .post(`/api/users/${profileId}/children/${childId}/parents`, {
-        parentId: parent.user_id
-      })
-      .then(response => {
-        Log.info(response);
-        handleAddParent(parent);
-      })
-      .catch(error => {
-        Log.error(error);
-      });
-    this.setState({ modalIsOpen: false });
-  };
-
-  handleRedirectToParent = parent => {
-    const { history } = this.props;
-    history.push(`/profiles/${parent.user_id}/info`);
   };
 
   render() {
@@ -86,7 +42,7 @@ class ChildProfileInfo extends React.Component {
     const { profileId } = match.params;
     const { confirmDialogIsOpen, modalIsOpen } = this.state;
     const isParent = JSON.parse(localStorage.getItem("user")).id === profileId;
-    const texts = Texts[language].childProfileInfo;
+    const texts = Texts[language].seniorProfileInfo;
     return (
       <React.Fragment>
         <ConfirmDialog
@@ -100,7 +56,7 @@ class ChildProfileInfo extends React.Component {
           handleInvite={this.handleAdd}
           inviteType="parent"
         />
-        <div className="childProfileInfoSection">
+        <div className="seniorProfileInfoSection">
           <div className="row no-gutters">
             <div className="col-2-10">
               <i className="fas fa-birthday-cake" />
@@ -187,7 +143,7 @@ class ChildProfileInfo extends React.Component {
           </div>
         </div>
         {showAdditional && (
-          <div className="childAdditionalInfoSection">
+          <div className="seniorAdditionalInfoSection">
             <h3>{texts.additional}</h3>
             {allergies && (
               <div className="row no-gutters">
@@ -226,7 +182,7 @@ class ChildProfileInfo extends React.Component {
   }
 }
 
-ChildProfileInfo.propTypes = {
+SeniorProfileInfo.propTypes = {
   history: PropTypes.object,
   parents: PropTypes.array,
   birthdate: PropTypes.string,
@@ -241,4 +197,4 @@ ChildProfileInfo.propTypes = {
   handleDeleteParent: PropTypes.func
 };
 
-export default withRouter(withLanguage(ChildProfileInfo));
+export default withRouter(withLanguage(SeniorProfileInfo));
