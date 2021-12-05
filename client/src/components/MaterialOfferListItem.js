@@ -60,7 +60,9 @@ class MaterialOfferListItem extends React.Component {
               <div className="row no-gutters">
                 <h2>
                   {material.description
-                    ? material.description
+                    ? material.description.length > 25
+                      ? material.description.slice(0, 25) + "..."
+                      : material.description
                     : "Nessuna descrizione"}
                 </h2>
               </div>

@@ -51,7 +51,6 @@ const styles = (theme) => ({
   },
   createButton: {
     backgroundColor: "#ff6f00",
-    position: "fixed",
     bottom: "5%",
     left: "50%",
     transform: "translateX(-50%)",

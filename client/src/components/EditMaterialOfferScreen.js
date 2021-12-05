@@ -15,8 +15,6 @@ const styles = (theme) => ({
     backgroundColor: "#ff6f00",
     position: "fixed",
     bottom: "5%",
-    /*left: "25%",*/
-    /*transform: "translateX(-50%)",*/
     borderRadius: "3.2rem",
     fontSize: "1.5rem",
     marginTop: theme.spacing.unit,
@@ -29,8 +27,6 @@ const styles = (theme) => ({
     backgroundColor: "#ff0000",
     position: "fixed",
     bottom: "5%",
-    /*left: "66%",*/
-    /*transform: "translateX(-50%)",*/
     borderRadius: "3.2rem",
     fontSize: "1.5rem",
     marginTop: theme.spacing.unit,
@@ -119,7 +115,7 @@ class EditMaterialOfferScreen extends React.Component {
       axios
         .put(`/api/materials/offers/${materialId}`, patch)
         .then((response) => {
-          Log.info(response);
+          //Log.info(response); // TODO: do we need this line?
           history.goBack();
         })
         .catch((error) => {
@@ -135,7 +131,7 @@ class EditMaterialOfferScreen extends React.Component {
     axios
       .delete(`/api/materials/offers/${materialId}`)
       .then((response) => {
-        Log.info(response);
+        //Log.info(response); // TODO: do we need this line?
         history.push(`/groups/${groupId}/materials/offers`);
       })
       .catch((error) => {
