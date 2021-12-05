@@ -27,13 +27,13 @@ const styles = (theme) => ({
     fontSize: "2rem",
   },
   avatar: {
-    width: "3rem!important",
-    height: "3rem!important",
+    width: "3rem",
+    height: "3rem",
+    borderRadius: "3.2rem",
   },
 
   bookButton: {
     backgroundColor: "#ff6f00",
-    position: "fixed",
     bottom: "5%",
     left: "50%",
     transform: "translateX(-50%)",
@@ -65,6 +65,28 @@ const getMaterialOffer = (materialOfferId) => {
     });
 };
 
+const getUserProfile = (userId) => {
+  return axios
+    .get(`/api/users/${userId}/profile`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      Log.error(error);
+      return {
+        given_name: "",
+        family_name: "",
+        image: { path: "/images/profiles/user_default_photo.png" },
+        address: { street: "", number: "" },
+        email: "",
+        phone: "",
+        phone_type: "",
+        visible: false,
+        user_id: "",
+      };
+    });
+};
+
 class MaterialOfferScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -82,15 +104,17 @@ class MaterialOfferScreen extends React.Component {
   }
 
   async componentDidMount() {
-    const { groupId, materialId } = this.state;
+    const { materialId } = this.state;
     const userId = JSON.parse(localStorage.getItem("user")).id;
-    const materialOffer = await getMaterialOffer(materialId, groupId);
+    const materialOffer = await getMaterialOffer(materialId);
+    const materialCreator = await getUserProfile(materialOffer.created_by);
     const userIsCreator = userId === materialOffer.created_by;
     const userCanEdit = userIsCreator;
     this.setState({
       materialOffer,
       fetchedMaterialOfferData: true,
       userCanEdit,
+      materialCreator,
     });
   }
 
@@ -121,6 +145,7 @@ class MaterialOfferScreen extends React.Component {
       pendingRequest,
       materialId,
       groupId,
+      materialCreator,
     } = this.state;
     const materialOfferPath = `/groups/${groupId}/materials/offers/${materialId}`;
     const texts = Texts[language].materialOfferScreen;
@@ -230,14 +255,54 @@ class MaterialOfferScreen extends React.Component {
                       />
                     </div>
                     <div className="col-9-10">
-                      <div className="materialInfoDescription">
-                        {materialOffer.borrowed
-                          ? texts.notDisponible
-                          : texts.disponible}
+                      <div
+                        className="materialInfoDescription"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        {materialOffer.borrowed ? (
+                          <div style={{ color: "red" }}>
+                            {texts.notDisponible}
+                          </div>
+                        ) : (
+                          <div style={{ color: "green" }}>
+                            {texts.disponible}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
                   {/* TODO: add owner name */}
+
+                  {userCanEdit ? (
+                    <div></div>
+                  ) : (
+                    <React.Fragment>
+                      <div className="row no-gutters" style={rowStyle}>
+                        <div className="materialInfoHeader">
+                          {texts.creator}
+                        </div>
+                      </div>
+                      <div className="row no-gutters" style={rowStyle}>
+                        <div className="col-1-10">
+                          <img
+                            className={classes.avatar}
+                            src={materialCreator.image.path}
+                            alt="avatar"
+                          />
+                        </div>
+                        <div className="col-9-10">
+                          <div
+                            className="materialInfoDescription"
+                            style={{ paddingLeft: "1rem" }}
+                          >
+                            {materialCreator.given_name}{" "}
+                            {materialCreator.family_name}
+                          </div>
+                        </div>
+                      </div>
+                    </React.Fragment>
+                  )}
+
                   <div className={classes.actionsContainer}>
                     <Button
                       variant="contained"
