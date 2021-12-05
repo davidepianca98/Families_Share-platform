@@ -4067,6 +4067,8 @@ const it = {
     header: "Offerta e richiesta materiali",
     noRequests: "Non ci sono richieste da mostrare",
     noOffers: "Non ci sono offerte da mostrare",
+    findRequests: "Cerca tra le richieste",
+    findOffers: "Cerca tra le offerte",
   },
   materialOfferScreen: {
     infoHeader: "Informazioni",
@@ -4075,6 +4077,7 @@ const it = {
     creationDate: "Data di creazione",
     disponibilityStatus: "Stato prenotazione",
     book: "Prenota",
+    creator: "Utente",
   },
   materialOfferScreenNavbar: {
     info: "INFO",

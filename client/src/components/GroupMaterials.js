@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
+import { TextField } from "@material-ui/core";
 import axios from "axios";
 import PropTypes from "prop-types";
 import LoadingSpinner from "./LoadingSpinner";
@@ -12,6 +13,8 @@ import GroupMaterialsNavbar from "./GroupMaterialsNavbar";
 import DisplayText from "./GroupMaterialNotFound";
 import GroupMaterialOffersList from "./GroupMaterialOffersList";
 import MaterialRequestListItem from "./MaterialRequestListItem";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 
 const styles = {
   add: {
@@ -25,6 +28,9 @@ const styles = {
     backgroundColor: "#ff6f00",
     zIndex: 100,
     fontSize: "2rem",
+  },
+  resize: {
+    fontSize: "1.5rem",
   },
 };
 
@@ -43,9 +49,11 @@ const getGroup = (groupId) => {
     });
 };
 
-const fetchMaterialOffers = (groupId) => {
+const fetchMaterialOffers = (groupId, filter) => {
+  const apiPath = `/api/groups/${groupId}/materialOffers`;
+  const filteredApiPath = filter ? apiPath + `?filter=${filter}` : apiPath;
   return axios
-    .get(`/api/groups/${groupId}/materialOffers`)
+    .get(filteredApiPath)
     .then((response) => {
       return response.data;
     })
@@ -55,9 +63,11 @@ const fetchMaterialOffers = (groupId) => {
     });
 };
 
-const fetchMaterialRequests = (groupId) => {
+const fetchMaterialRequests = (groupId, filter) => {
+  const apiPath = `/api/groups/${groupId}/materialRequests`;
+  const filteredApiPath = filter ? apiPath + `?filter=${filter}` : apiPath;
   return axios
-    .get(`/api/groups/${groupId}/materialRequests`)
+    .get(filteredApiPath)
     .then((response) => {
       return response.data;
     })
@@ -92,6 +102,28 @@ class GroupMaterials extends React.Component {
       materialRequests: materialRequests,
     });
   }
+
+  handleOffersSearch = async (event) => {
+    const { groupId } = this.state;
+    const filteredOffers = await fetchMaterialOffers(
+      groupId,
+      event.target.value
+    );
+    this.setState({
+      materialOffers: filteredOffers,
+    });
+  };
+
+  handleRequestSearch = async (event) => {
+    const { groupId } = this.state;
+    const filteredRequests = await fetchMaterialRequests(
+      groupId,
+      event.target.value
+    );
+    this.setState({
+      materialRequests: filteredRequests,
+    });
+  };
 
   add = () => {
     const { history } = this.props;
@@ -154,28 +186,49 @@ class GroupMaterials extends React.Component {
               path={`${materialsPath}/requests`}
               render={(props) => (
                 <React.Fragment>
-                  {materialRequests.length === 0 ? (
-                    <DisplayText text={texts.noRequests} {...props} />
-                  ) : (
-                    <div
-                      style={{ top: "11rem" }}
-                      id="groupMaterialsRequestContainer"
-                      className="horizontalCenter"
-                    >
-                      <ul>
-                        {materialRequests.map((material) => (
-                          <li key={material.material_request_id}>
-                            <MaterialRequestListItem
-                              materialRequest={material}
-                              groupId={groupId}
-                              history={history}
-                              language={language}
-                            />
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                  <div
+                    style={{ marginTop: "11rem" }}
+                    id="groupMaterialsRequestContainer"
+                    className="horizontalCenter"
+                  >
+                    <TextField
+                      id="standard-full-width"
+                      style={{ margin: 8 }}
+                      placeholder={texts.findRequests}
+                      fullWidth
+                      margin="normal"
+                      onChange={this.handleRequestSearch}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon style={{ fontSize: "2.3rem" }} />
+                          </InputAdornment>
+                        ),
+                        classes: {
+                          input: classes.resize,
+                        },
+                      }}
+                    />
+                    {materialRequests.length === 0 ? (
+                      <DisplayText text={texts.noRequests} {...props} />
+                    ) : (
+                      <div>
+                        {/*FIXME: anche con poche richieste appare la barra di scorrimento a sinista, probabile improprio incapsulamento... da verificare*/}
+                        <ul>
+                          {materialRequests.map((material) => (
+                            <li key={material.material_request_id}>
+                              <MaterialRequestListItem
+                                materialRequest={material}
+                                groupId={groupId}
+                                history={history}
+                                language={language}
+                              />
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 </React.Fragment>
               )}
             />
@@ -183,20 +236,40 @@ class GroupMaterials extends React.Component {
               path={`${materialsPath}/offers`}
               render={(props) => (
                 <React.Fragment>
-                  {materialOffers.length === 0 ? (
-                    <DisplayText text={texts.noOffers} {...props} />
-                  ) : (
-                    <div
-                      style={{ top: "11rem" }}
-                      id="groupActivitiesContainer"
-                      className="horizontalCenter"
-                    >
-                      <GroupMaterialOffersList
-                        materials={materialOffers}
-                        group={groupId}
-                      />
-                    </div>
-                  )}
+                  <div
+                    style={{ top: "11rem" }}
+                    id="groupMaterialsOfferContainer"
+                    className="horizontalCenter"
+                  >
+                    <TextField
+                      id="standard-full-width"
+                      style={{ margin: 8 }}
+                      placeholder={texts.findOffers}
+                      fullWidth
+                      margin="normal"
+                      onChange={this.handleOffersSearch}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon style={{ fontSize: "2.3rem" }} />
+                          </InputAdornment>
+                        ),
+                        classes: {
+                          input: classes.resize,
+                        },
+                      }}
+                    />
+                    {materialOffers.length === 0 ? (
+                      <DisplayText text={texts.noOffers} {...props} />
+                    ) : (
+                      <div>
+                        <GroupMaterialOffersList
+                          materials={materialOffers}
+                          group={groupId}
+                        />
+                      </div>
+                    )}
+                  </div>
                 </React.Fragment>
               )}
             />
