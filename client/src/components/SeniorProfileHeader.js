@@ -45,9 +45,9 @@ class SeniorProfileHeader extends React.Component {
 
   handleDelete = () => {
     const { match, history } = this.props;
-    const { profileId: userId, seniorId } = match.params;
+    const { seniorId } = match.params;
     axios
-      .delete(`/api/users/${userId}/seniors/${seniorId}`)
+      .delete(`/api/seniors/${seniorId}`)
       .then(response => {
         Log.info(response);
         history.goBack();

@@ -9,7 +9,7 @@ import Log from "./Log";
 
 const getSenior = (userId, seniorId) => {
   return axios
-    .get(`/api/users/${userId}/seniors/${seniorId}`)
+    .get(`/api/seniors/${seniorId}`)
     .then(response => {
       return response.data;
     })

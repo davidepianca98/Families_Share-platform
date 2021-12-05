@@ -41,9 +41,9 @@ class EditSeniorProfileScreen extends React.Component {
       this.setState({ ...state });
     } else {
       const { match } = this.props;
-      const { profileId: userId, seniorId } = match.params;
+      const { seniorId } = match.params;
       axios
-        .get(`/api/users/${userId}/seniors/${seniorId}`)
+        .get(`/api/seniors/${seniorId}`)
         .then(response => {
           const senior = response.data;
           senior.date = new Date(senior.birthdate).getDate();
@@ -149,7 +149,7 @@ class EditSeniorProfileScreen extends React.Component {
 
   submitChanges = () => {
     const { match, history } = this.props;
-    const { profileId: userId, seniorId } = match.params;
+    const { seniorId } = match.params;
     const {
       year,
       month,
@@ -158,10 +158,7 @@ class EditSeniorProfileScreen extends React.Component {
       family_name,
       given_name,
       background,
-      other_info,
       gender,
-      special_needs,
-      allergies
     } = this.state;
     const bodyFormData = new FormData();
     const birthdate = moment().set({
@@ -176,12 +173,10 @@ class EditSeniorProfileScreen extends React.Component {
     bodyFormData.append("family_name", family_name);
     bodyFormData.append("gender", gender);
     bodyFormData.append("background", background);
-    bodyFormData.append("other_info", other_info);
-    bodyFormData.append("special_needs", special_needs);
-    bodyFormData.append("allergies", allergies);
     bodyFormData.append("birthdate", birthdate);
     axios
-      .patch(`/api/users/${userId}/seniors/${seniorId}`, bodyFormData, {
+      //.patch(`/api/users/${userId}/seniors/${seniorId}`, bodyFormData, {
+      .put(`/api/seniors/${seniorId}`, bodyFormData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }

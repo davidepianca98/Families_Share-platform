@@ -998,21 +998,6 @@ router.get('/:userId/children/:childId', (req, res, next) => {
     }).catch(next)
 })
 
-router.get('/:userId/seniors/:seniorId', (req, res, next) => {
-  if (!req.user_id) { return res.status(401).send('Unauthorized') }
-  const senior_id = req.params.seniorId
-  Senior.findOne({ senior_id })
-    .populate('image')
-    .lean()
-    .exec()
-    .then(senior => {
-      if (!senior) {
-        return res.status(404).send('Senior not found')
-      }
-      res.json(senior)
-    }).catch(next)
-})
-
 router.patch('/:userId/children/:childId', childProfileUpload.single('photo'), async (req, res, next) => {
   if (req.user_id !== req.params.userId) { return res.status(401).send('Unauthorized') }
   const { file } = req

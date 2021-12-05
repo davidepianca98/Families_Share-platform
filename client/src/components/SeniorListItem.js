@@ -14,9 +14,9 @@ class SeniorListItem extends React.Component {
   state = { fetchedSenior: false, senior: {} };
 
   componentDidMount() {
-    const { userId, seniorId } = this.props;
+    const { seniorId } = this.props;
     axios
-      .get(`/api/users/${userId}/seniors/${seniorId}`)
+      .get(`/api/seniors/${seniorId}`)
       .then(response => {
         const senior = response.data;
         this.setState({ fetchedSenior: true, senior });

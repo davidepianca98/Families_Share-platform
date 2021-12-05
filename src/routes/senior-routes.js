@@ -9,13 +9,17 @@ router.get('/:id', (req, res, next) => {
     return res.status(401).send('Unauthorized')
   }
   const id = req.params.id
-  Senior.findOne({ senior_id: id, user_id: req.user_id }).then(senior => {
-    if (!senior) {
-      return res.status(404).send("Senior doesn't exist")
-    }
+  Senior.findOne({ senior_id: id, user_id: req.user_id })
+    .populate('image')
+    .lean()
+    .exec()
+    .then(senior => {
+      if (!senior) {
+        return res.status(404).send("Senior doesn't exist")
+      }
 
-    res.json(senior)
-  }).catch(next)
+      res.json(senior)
+    }).catch(next)
 })
 
 // S-22c
