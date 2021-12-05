@@ -87,9 +87,18 @@ class EditMaterialOfferScreen extends React.Component {
   };
 
   handleSwitch = (value) => {
+    const { match } = this.props;
+    const { materialId } = match.params;
     const state = Object.assign({}, this.state);
     state.borrowed = !value;
     this.setState(state);
+    axios
+      .post(`/api/materials/offers/${materialId}/booked`, {
+        borrowed: state.borrowed,
+      })
+      .catch((error) => {
+        Log.error(error);
+      });
   };
 
   handleColorChange = (color) => {
@@ -101,21 +110,20 @@ class EditMaterialOfferScreen extends React.Component {
   handleSave = () => {
     const { match, history } = this.props;
     const { materialId } = match.params;
-    const { validated, material_name, color, location, description, borrowed } =
+    const { validated, material_name, color, location, description } =
       this.state;
     if (validated) {
       this.setState({ fetchedData: false });
       const patch = {
         material_name,
         color,
-        borrowed,
         location: location.trim(),
         description: description.trim(),
       };
       axios
         .put(`/api/materials/offers/${materialId}`, patch)
         .then((response) => {
-          //Log.info(response); // TODO: do we need this line?
+          Log.info(response); // TODO: do we need this line?
           history.goBack();
         })
         .catch((error) => {
