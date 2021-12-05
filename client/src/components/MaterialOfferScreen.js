@@ -303,17 +303,22 @@ class MaterialOfferScreen extends React.Component {
                     </React.Fragment>
                   )}
 
-                  <div className={classes.actionsContainer}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={this.handleBook}
-                      className={classes.bookButton}
-                      size="large"
-                    >
-                      {texts.book}
-                    </Button>
-                  </div>
+                  {userCanEdit ? (
+                    <div />
+                  ) : (
+                    <div className={classes.actionsContainer}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleBook}
+                        className={classes.bookButton}
+                        size="large"
+                        disabled={materialOffer.borrowed}
+                      >
+                        {texts.book}
+                      </Button>
+                    </div>
+                  )}
                 </div>
               )}
             />
