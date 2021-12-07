@@ -33,7 +33,7 @@ router.put('/:id', async (req, res, next) => {
 
   MaterialRequest.findOneAndUpdate(
     { material_request_id: id, created_by: req.user_id },
-    { material_name: materialRequest.material_name })
+    materialRequest)
     .then(request => {
       if (!request) {
         return res.status(404).send("Request doesn't exist")

@@ -15,18 +15,6 @@ import Button from "@material-ui/core/Button";
 
 
 const styles = {
-    add: {
-        position: "fixed",
-        bottom: "3rem",
-        right: "5%",
-        height: "5rem",
-        width: "5rem",
-        borderRadius: "50%",
-        border: "solid 0.5px #999",
-        backgroundColor: "#ff6f00",
-        zIndex: 100,
-        fontSize: "2rem",
-    },
     avatar: {
         width: "3rem!important",
         height: "3rem!important",
@@ -39,8 +27,6 @@ const styles = {
         transform: "translateX(-50%)",
         borderRadius: "3.2rem",
         fontSize: "1.5rem",
-        /*marginTop: theme.spacing.unit,
-        marginRight: theme.spacing.unit,*/
         "&:hover": {
             backgroundColor: "#ff6f00"
         }
@@ -195,7 +181,7 @@ class MaterialRequestScreen extends React.Component {
     };
 
     handleOffer = () => {
-
+        //TODO metodo per gestire l'offerta del materiale da parte di un utente
     };
 
     getDatesString = (date) => {

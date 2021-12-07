@@ -7,42 +7,56 @@ import Texts from "../Constants/Texts";
 import LoadingSpinner from "./LoadingSpinner";
 import withLanguage from "./LanguageContext";
 import Log from "./Log";
+import Button from "@material-ui/core/Button";
+import {withStyles} from "@material-ui/core/styles";
 
-const getMaterialRequest = (materialRequestId) => {
-    return axios
-        .get(`/api/materials/requests/${materialRequestId}`)
-        .then((response) => {
-            return response.data;
-        })
-        .catch((error) => {
-            Log.error(error);
-            return {
-                material_name: "",
-                description: "",
-                color: "#ffffff",
-                group_name: "",
-                location: ""
-            };
-        });
+const styles = {
+    modifyButton: {
+        backgroundColor: "#ff6f00",
+        position: "fixed",
+        bottom: "5%",
+        transform: "translateX(-50%)",
+        borderRadius: "3.2rem",
+        fontSize: "1.5rem",
+        "&:hover": {
+            backgroundColor: "#ff6f00"
+        }
+    },
+    deleteButton: {
+        backgroundColor: "#ff0000",
+        position: "fixed",
+        bottom: "5%",
+        left: "60%",
+        transform: "translateX(-50%)",
+        borderRadius: "3.2rem",
+        fontSize: "1.5rem",
+        "&:hover": {
+            backgroundColor: "#ff0000"
+        }
+    }
 };
 
 class EditMaterialRequestScreen extends React.Component {
-    state = {
-        fetchedMaterial: false
-    };
+    constructor(props) {
+        super(props);
+        const { match } = this.props;
+        const { groupId, materialId } = match.params;
+        this.state = {
+            fetchedMaterial: false,
+            groupId,
+            materialId
+        };
+    }
 
     componentDidMount() {
-        const { match } = this.props;
-        const { materialId, groupId } = match.params;
+        const { materialId} = this.state;
         axios
             .get(`/api/materials/requests/${materialId}`)
             .then(response => {
-                const {  description, color, location } = response.data;
-                const name = response.data.material_name;
-                console.log(response.data);
+                const { material_name, description, color, location } = response.data;
                 this.setState({
                     fetchedMaterial: true,
-                    name,
+                    material_name,
                     color,
                     description,
                     location,
@@ -53,7 +67,7 @@ class EditMaterialRequestScreen extends React.Component {
                 Log.error(error);
                 this.setState({
                     fetchedMaterial: true,
-                    name: "",
+                    material_name: "",
                     color: "",
                     description: "",
                     validated: false
@@ -67,7 +81,7 @@ class EditMaterialRequestScreen extends React.Component {
         const { value } = event.target;
         state[name] = value;
         state.validated = false;
-        if (state.color && state.name) {
+        if (state.color && state.material_name) {
             state.validated = true;
         }
         this.setState(state);
@@ -81,18 +95,18 @@ class EditMaterialRequestScreen extends React.Component {
 
     handleSave = () => {
         const { match, history } = this.props;
-        const { activityId, groupId } = match.params;
-        const { validated, name, color, location, description } = this.state;
+        const { materialId} = match.params;
+        const { validated, material_name, color, location, description } = this.state;
         if (validated) {
             this.setState({ fetchedMaterial: false });
             const patch = {
-                name,
+                material_name,
                 color,
                 location: location.trim(),
                 description: description.trim()
             };
             axios
-                .patch(`/api/groups/${groupId}/activities/${activityId}`, patch)
+                .put(`/api/materials/requests/${materialId}`, patch)
                 .then(response => {
                     Log.info(response);
                     history.goBack();
@@ -108,12 +122,13 @@ class EditMaterialRequestScreen extends React.Component {
         const {
             fetchedMaterial,
             validated,
-            name,
+            material_name,
             description,
             location,
             color
         } = this.state;
-        const { language, history } = this.props;
+        const { language, history, classes} = this.props;
+        console.log(this.props);
         const texts = Texts[language].editActivityScreen;
         return fetchedMaterial ? (
             <React.Fragment>
@@ -149,9 +164,9 @@ class EditMaterialRequestScreen extends React.Component {
                         <div className="col-8-10">
                             <input
                                 type="text"
-                                name="name"
+                                name="material_name"
                                 placeholder={texts.name}
-                                value={name}
+                                value={material_name}
                                 className="verticalCenter"
                                 onChange={this.handleChange}
                             />
@@ -180,17 +195,20 @@ class EditMaterialRequestScreen extends React.Component {
                             <i className="fas fa-align-left center" />
                         </div>
                         <div className="col-8-10">
-              <textarea
-                  rows="1"
-                  name="description"
-                  className="verticalCenter"
-                  placeholder={texts.description}
-                  value={description}
-                  onChange={event => {
-                      this.handleChange(event);
-                      autosize(document.querySelectorAll("textarea"));
-                  }}
-              />
+                          <textarea
+                              rows="1"
+                              name="description"
+                              className="verticalCenter"
+                              placeholder={texts.description}
+                              value={description}
+                              onClick={() =>{
+                                  autosize(document.querySelectorAll("textarea"));
+                              }}
+                              onChange={event => {
+                                  this.handleChange(event);
+                                  autosize(document.querySelectorAll("textarea"));
+                              }}
+                          />
                         </div>
                     </div>
                     <div className="row no-gutters">
@@ -218,6 +236,18 @@ class EditMaterialRequestScreen extends React.Component {
                         </div>
                     </div>
                 </div>
+                {/*<Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.modifyButton}
+                >
+                </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.deleteButton}
+                >
+                </Button>*/}
             </React.Fragment>
         ) : (
             <LoadingSpinner />
@@ -225,10 +255,11 @@ class EditMaterialRequestScreen extends React.Component {
     }
 }
 
-export default withLanguage(EditMaterialRequestScreen);
+export default withStyles(styles)(withLanguage(EditMaterialRequestScreen));
 
 EditMaterialRequestScreen.propTypes = {
     history: PropTypes.object,
     language: PropTypes.string,
-    match: PropTypes.object
+    match: PropTypes.object,
+    classes: PropTypes.object
 };
