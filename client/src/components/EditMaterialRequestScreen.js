@@ -28,18 +28,20 @@ const getMaterialRequest = (materialRequestId) => {
 
 class EditMaterialRequestScreen extends React.Component {
     state = {
-        fetchedActivity: false
+        fetchedMaterial: false
     };
 
     componentDidMount() {
         const { match } = this.props;
-        const { materialRequestId, groupId } = match.params;
+        const { materialId, groupId } = match.params;
         axios
-            .get(`/api/materials/requests/${materialRequestId}`)
+            .get(`/api/materials/requests/${materialId}`)
             .then(response => {
-                const { name, description, color, location } = response.data;
+                const {  description, color, location } = response.data;
+                const name = response.data.material_name;
+                console.log(response.data);
                 this.setState({
-                    fetchedActivity: true,
+                    fetchedMaterial: true,
                     name,
                     color,
                     description,
@@ -50,7 +52,7 @@ class EditMaterialRequestScreen extends React.Component {
             .catch(error => {
                 Log.error(error);
                 this.setState({
-                    fetchedActivity: true,
+                    fetchedMaterial: true,
                     name: "",
                     color: "",
                     description: "",
@@ -82,7 +84,7 @@ class EditMaterialRequestScreen extends React.Component {
         const { activityId, groupId } = match.params;
         const { validated, name, color, location, description } = this.state;
         if (validated) {
-            this.setState({ fetchedActivity: false });
+            this.setState({ fetchedMaterial: false });
             const patch = {
                 name,
                 color,
@@ -104,7 +106,7 @@ class EditMaterialRequestScreen extends React.Component {
 
     render() {
         const {
-            fetchedActivity,
+            fetchedMaterial,
             validated,
             name,
             description,
@@ -113,7 +115,7 @@ class EditMaterialRequestScreen extends React.Component {
         } = this.state;
         const { language, history } = this.props;
         const texts = Texts[language].editActivityScreen;
-        return fetchedActivity ? (
+        return fetchedMaterial ? (
             <React.Fragment>
                 <div className="row no-gutters" id="editActivityHeaderContainer">
                     <div className="col-2-10">
