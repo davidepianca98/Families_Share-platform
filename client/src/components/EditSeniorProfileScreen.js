@@ -42,6 +42,7 @@ class EditSeniorProfileScreen extends React.Component {
     } else {
       const { match } = this.props;
       const { seniorId } = match.params;
+      localStorage.setItem("seniorId", seniorId);
       axios
         .get(`/api/seniors/${seniorId}`)
         .then(response => {

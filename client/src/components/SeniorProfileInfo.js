@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { withRouter } from "react-router-dom";
 import withLanguage from "./LanguageContext";
-import InviteDialog from "./InviteDialog";
+import SeniorAvailabilityDialog from "./SeniorAvailabilityDialog";
 import Images from "../Constants/Images";
 import Texts from "../Constants/Texts";
 import ConfirmDialog from "./ConfirmDialog";
@@ -19,16 +19,23 @@ class SeniorProfileInfo extends React.Component {
     this.setState({ confirmDialogIsOpen: false, deleteIndex: "" });
   };
 
+  handleOpen = () => {
+    this.setState({ modalIsOpen: true });
+  };
+
   handleClose = () => {
     this.setState({ modalIsOpen: false });
+  };
+
+  handleAvailability = () => {
+    //
   };
 
   render() {
     const {
       language,
-      specialNeeds,
+      availabilities,
       otherInfo,
-      allergies,
       gender,
       birthdate,
       showAdditional
@@ -42,11 +49,11 @@ class SeniorProfileInfo extends React.Component {
           title={texts.confirmDialogTitle}
           handleClose={this.handleConfirmDialogClose}
         />
-        <InviteDialog
+        <SeniorAvailabilityDialog
           isOpen={modalIsOpen}
           handleClose={this.handleClose}
-          handleInvite={this.handleAdd}
-          inviteType="parent"
+          handleAvailability={this.handleAvailability}
+          availabilities={availabilities}
         />
         <div className="seniorProfileInfoSection">
           <div className="row no-gutters">
@@ -69,34 +76,21 @@ class SeniorProfileInfo extends React.Component {
             </div>
           </div>
           <div className="row no-gutters">
-            <div className="col-2-10">
-              <img src={Images.couple} alt="birthday icon" />
+            <div className="col-3-10">
+              <button
+                type="button"
+                className="setAvailabilities"
+                onClick={this.handleOpen}
+              >
+                {texts.setAvailabilities}
+              </button>
             </div>
           </div>
+
         </div>
         {showAdditional && (
           <div className="seniorAdditionalInfoSection">
             <h3>{texts.additional}</h3>
-            {allergies && (
-              <div className="row no-gutters">
-                <div className="col-3-10">
-                  <h4>{`${texts.allergies}:`}</h4>
-                </div>
-                <div className="col-7-10">
-                  <p>{allergies}</p>
-                </div>
-              </div>
-            )}
-            {specialNeeds && (
-              <div className="row no-gutters">
-                <div className="col-3-10">
-                  <h4>{`${texts.specialNeeds}:`}</h4>
-                </div>
-                <div className="col-7-10">
-                  <p>{specialNeeds}</p>
-                </div>
-              </div>
-            )}
             {otherInfo && (
               <div className="row no-gutters">
                 <div className="col-3-10">
@@ -118,9 +112,7 @@ SeniorProfileInfo.propTypes = {
   history: PropTypes.object,
   birthdate: PropTypes.string,
   gender: PropTypes.string,
-  specialNeeds: PropTypes.string,
   otherInfo: PropTypes.string,
-  allergies: PropTypes.string,
   showAdditional: PropTypes.bool,
   language: PropTypes.string,
   match: PropTypes.object

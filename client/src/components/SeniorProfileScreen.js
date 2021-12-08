@@ -50,11 +50,9 @@ class SeniorProfileScreen extends React.Component {
         />
         <SeniorProfileInfo
           birthdate={senior.birthdate}
-          parents={senior.parents}
+          availabilities={senior.availabilities}
           showAdditional={senior.showAdditional}
-          specialNeeds={senior.special_needs}
           otherInfo={senior.other_info}
-          allergies={senior.allergies}
           gender={senior.gender}
           handleAddParent={this.handleAddParent}
           handleDeleteParent={this.handleDeleteParent}

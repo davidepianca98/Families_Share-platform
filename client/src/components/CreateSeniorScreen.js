@@ -49,6 +49,7 @@ class CreateSeniorScreen extends React.Component {
         name: "",
         surname: "",
         gender: "unspecified",
+        availabilities: [],
         date: moment().date(),
         month: moment().month() + 1,
         year: moment().year(),
@@ -139,6 +140,7 @@ class CreateSeniorScreen extends React.Component {
       month,
       date,
       gender,
+      availabilities,
       background,
       image,
       file
@@ -157,14 +159,16 @@ class CreateSeniorScreen extends React.Component {
     bodyFormData.append("given_name", given_name);
     bodyFormData.append("family_name", family_name);
     bodyFormData.append("gender", gender);
+    bodyFormData.append("availabilities", availabilities);
     bodyFormData.append("background", background);
     bodyFormData.append("birthdate", birthdate);
 
+    /*
     Log.info('birthdate ' + birthdate)
     Log.info('given_name ' + given_name)
     Log.info('gender ' + gender)
     Log.info('background ' + background)
-  
+  */
     axios
       .post(`/api/users/${userId}/seniors`, bodyFormData, {
         headers: {
@@ -189,7 +193,7 @@ class CreateSeniorScreen extends React.Component {
     this.setState({ formIsValidated: true });
   };
 
-  handleAdd = () => {
+  handleAvailability = () => {
     const { history } = this.props;
     const { pathname } = history.location;
     history.push({
@@ -454,9 +458,9 @@ class CreateSeniorScreen extends React.Component {
                 <button
                   className="center"
                   type="button"
-                  onClick={this.handleAdd}
+                  onClick={this.handleAvailability}
                 >
-                  {acceptAdditionalTerms ? texts.edit : texts.add}
+                  {acceptAdditionalTerms ? texts.edit : texts.availability}
                 </button>
               </div>
             </div>

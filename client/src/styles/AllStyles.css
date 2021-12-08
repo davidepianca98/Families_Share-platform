@@ -528,6 +528,10 @@
   min-height: 4rem;
   border-radius: 3px;
 }
+.setAvailabilities {
+  min-height: 4rem;
+  border-radius: 3px;
+}
 .deleteParent {
   width: 2rem;
   height: 2rem;
@@ -2712,6 +2716,28 @@
   color: #00838f;
 }
 /*INVITE MODAL END*/
+
+/*AVAILABILITY DIALOG*/
+.seniorAvailabilityDialogInput {
+  min-height: 4rem;
+  font-size: 1.6rem;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 2rem;
+  padding-left: 2rem;
+  width: 100%;
+  margin-top: 2rem;
+  font-family: "Roboto", sans-serif;
+}
+.seniorAvailabilityDialogTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.seniorAvailabilitySelect {
+  font-size: 1.4rem;
+  color: #00838f;
+}
+/*AVAILABILITY MODAL END*/
 
 /*LANDING SCREEN*/
 /****Layout Styles****/
