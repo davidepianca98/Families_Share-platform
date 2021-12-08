@@ -57,15 +57,25 @@ class SeniorAvailabilityDialog extends React.Component {
     const allDays = [];
     let idx = 0;
     ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
-      .forEach(day => allDays.push(
-        {index: idx++, 
-         dayName: day, 
-         available: false, 
-         startTimeHour: 0, 
-         startTimeMinute: 0, 
-         endTimeHour: 0, 
-         endTimeMinute: 0
-        }));
+      .forEach(day => {
+        allDays.push(
+          {index: idx, 
+           dayName: day, 
+           available: false, 
+           startTimeHour: 0, 
+           startTimeMinute: 0, 
+           endTimeHour: 0, 
+           endTimeMinute: 0
+          });
+        idx++;
+      });
+
+    availabilities.forEach(availability => {
+      let found = allDays.filter(day => day.index === availability.weekDay);
+      if (found) {
+          found.available = true
+      }
+    })
 
     this.state = {
       availabilities,
@@ -91,13 +101,27 @@ class SeniorAvailabilityDialog extends React.Component {
     const { language, isOpen, classes } = this.props;
     const texts = Texts[language].availabilityModal;
 
-    const handleToggle = id => {
+    const handleToggle = dayIndex => {
       const { availabilities } = this.state;
-      const indexOf = availabilities.indexOf(id);
-      if (indexOf === -1) {
-        availabilities.push(id);
+      let found = -1;
+      let idx = 0;
+      availabilities.forEach(item => {
+        if (item.weekDay === dayIndex)
+          found = idx;
+        idx++;
+      })
+      if (found === -1) {
+        allDays[dayIndex].available = true
+        availabilities.push({
+          weekDay: dayIndex,
+          startTimeHour: 0,
+          startTimeMinute: 0,
+          endTimeHour: 0,
+          endTimeMinute: 0
+        });
       } else {
-        availabilities.splice(indexOf, 1);
+        allDays[dayIndex].available = false
+        availabilities.splice(found, 1);
       }
       this.setState({ availabilities });
     };
@@ -118,11 +142,11 @@ class SeniorAvailabilityDialog extends React.Component {
               {allDays.map( (day) => {
                 return (
                   <ListItem
-                     key={day.index}
+                      key={day.index}
                       role={undefined}
                       dense
                       button
-                      onClick={() => handleToggle(day)}>
+                      onClick={() => handleToggle(day.index)}>
                     <ListItemIcon>
                       <Checkbox
                         edge="start"
@@ -161,7 +185,7 @@ SeniorAvailabilityDialog.propTypes = {
   isOpen: PropTypes.bool,
   handleClose: PropTypes.func,
   handleSave: PropTypes.func,
-  inviteType: PropTypes.string,
+  availabilities: PropTypes.array,
   language: PropTypes.string
 };
 

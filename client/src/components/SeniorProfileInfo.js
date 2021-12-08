@@ -110,6 +110,7 @@ class SeniorProfileInfo extends React.Component {
 
 SeniorProfileInfo.propTypes = {
   history: PropTypes.object,
+  availabilities: PropTypes.array,
   birthdate: PropTypes.string,
   gender: PropTypes.string,
   otherInfo: PropTypes.string,

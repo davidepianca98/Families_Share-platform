@@ -145,6 +145,7 @@ class CreateSeniorScreen extends React.Component {
       image,
       file
     } = this.state;
+
     const bodyFormData = new FormData();
     if (file !== undefined) {
       bodyFormData.append("photo", file);
@@ -159,16 +160,15 @@ class CreateSeniorScreen extends React.Component {
     bodyFormData.append("given_name", given_name);
     bodyFormData.append("family_name", family_name);
     bodyFormData.append("gender", gender);
-    bodyFormData.append("availabilities", availabilities);
     bodyFormData.append("background", background);
     bodyFormData.append("birthdate", birthdate);
-
-    /*
-    Log.info('birthdate ' + birthdate)
+    // bodyFormData.append("availabilities", JSON.stringify (availabilities));
+    
     Log.info('given_name ' + given_name)
     Log.info('gender ' + gender)
+    Log.info('availabilities ' + availabilities.length)
     Log.info('background ' + background)
-  */
+
     axios
       .post(`/api/users/${userId}/seniors`, bodyFormData, {
         headers: {

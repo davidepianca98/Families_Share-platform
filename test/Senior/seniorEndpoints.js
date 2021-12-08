@@ -13,6 +13,22 @@ describe('/Put/api/seniors/id', () => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
       Senior.findOne({ given_name: 'Test' }, (err, senior) => {
         senior.given_name = 'My Grandpa'
+        senior.availabilities = [
+          {
+            weekDay: 0,
+            startTimeHour: 21,
+            startTimeMinute: 0,
+            endTimeHour: 24,
+            endTimeMinute: 0
+          },
+          {
+            weekDay: 3,
+            startTimeHour: 21,
+            startTimeMinute: 0,
+            endTimeHour: 24,
+            endTimeMinute: 0
+          }
+        ]
         chai
           .request(server)
           .put(`/api/seniors/${senior.senior_id}`)

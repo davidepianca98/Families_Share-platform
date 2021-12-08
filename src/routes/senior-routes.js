@@ -35,10 +35,15 @@ router.put('/:id', async (req, res, next) => {
       return res.status(401).send('Unauthorized')
     }
   }
+
+  console.log("given_name = " + senior.given_name)
+  console.log("availabilities = " + senior.availabilities)
+
   const update = {
     given_name: senior.given_name,
     family_name: senior.family_name,
     gender: senior.gender,
+    availabilities: senior.availabilities,
     birthdate: senior.birthdate,
     background: senior.background,
     other_info: senior.other_info
