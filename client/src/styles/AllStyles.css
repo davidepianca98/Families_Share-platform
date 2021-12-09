@@ -3027,6 +3027,77 @@ a:active {
 }
 /*LOGGING SCREEN END*/
 
+/*MATERIALBOOKING SCREEN*/
+#materialBookingContainer {
+  overflow: hidden;
+}
+#materialBookingHeaderContainer {
+  font-size: 2rem;
+  background-color: #00838f;
+  height: 5.6rem;
+  color: #ffffff;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  width: 100%;
+}
+#materialBookingHeaderContainer button {
+  width: 5rem;
+  height: 5rem;
+}
+#materialBookingHeaderContainer h1 {
+  font-size: 2rem;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#materialBookingMainContainer {
+  margin-top: 7rem;
+  padding: 5%;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+#materialBookingMainContainer i {
+  color: rgba(0, 0, 0, 0.87);
+}
+#materialBookingMainContainer .row {
+  padding: 0 5%;
+  align-items: center;
+}
+.materialBookingInfoHeader {
+  font-size: 1.8rem;
+  color: #000000;
+  font-weight: 800;
+  width: 100%;
+}
+.materialBookingInfoIcon {
+  font-size: 1.6rem;
+  color: rgba(0, 0, 0, 0.87);
+}
+.materialBookingInfoImage {
+  width: 1.3rem;
+  height: 1.6rem;
+  opacity: 0.87;
+}
+.materialBookingInfoDescription {
+  font-size: 1.6rem;
+  color: #000000;
+}
+.filterBookingLabel {
+  padding-left: 1rem;
+  width: 100%;
+  right: 10%;
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  color: rgba(0, 0, 0, 0.87);
+}
+.categoryBookingText {
+  display: inline-block;
+  font-size: 1.4rem;
+  padding-left: 1rem;
+}
+/*MATERIALBOOKING SCREEN END*/
+
 /*MATERIALOFFERS SCREEN*/
 #materialContainer {
   overflow: hidden;

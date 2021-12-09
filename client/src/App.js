@@ -197,6 +197,10 @@ const EditMaterialOfferScreen = Loadable({
   loader: () => import("./components/EditMaterialOfferScreen"),
   loading: () => Loading,
 });
+const MaterialBookingScreen = Loadable({
+  loader: () => import("./components/MaterialBookingScreen"),
+  loading: () => Loading,
+});
 
 axios.interceptors.request.use(
   (config) => {
@@ -438,6 +442,10 @@ class App extends React.Component {
               <PrivateRoute
                 path="/groups/:groupId/materials/offers/create"
                 component={CreateMaterialOfferScreen}
+              />
+              <PrivateRoute
+                path="/groups/:groupId/materials/offers/:materialId/book"
+                component={MaterialBookingScreen}
               />
               <PrivateRoute
                 path="/groups/:groupId/materials/offers/:materialId/edit"

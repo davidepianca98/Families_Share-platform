@@ -3527,7 +3527,7 @@ const it = {
     saturday: "Sabato",
     sunday: "Domenica",
     save: "SALVA",
-    cancel: "ANNULLA"
+    cancel: "ANNULLA",
   },
   groupNewsNavbar: {
     parents: "GENITORI",
@@ -4103,6 +4103,13 @@ const it = {
     borrowed: "Disponibile",
     modify: "MODIFICA",
     delete: "ELIMINA",
+  },
+  MaterialBookingScreen: {
+    backNavTitle: "Crea prenotazione",
+    create: "CREA",
+    date: "Data",
+    startDateLabel: "Inizio prenotazione",
+    endDateLabel: "Fine prenotazione",
   },
 };
 
