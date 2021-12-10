@@ -5,8 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import { withSnackbar } from "notistack";
 import Texts from "../Constants/Texts";
 import withLanguage from "./LanguageContext";
-import ConfirmDialog from "./ConfirmDialog";
-import OptionsModal from "./OptionsModal";
 import LoadingSpinner from "./LoadingSpinner";
 import Images from "../Constants/Images";
 import Log from "./Log";
@@ -51,17 +49,6 @@ const getMaterialRequest = (materialRequestId) => {
         });
 };
 
-/*const getGroupMembers = (groupId) => {
-    return axios
-        .get(`/api/groups/${groupId}/members`)
-        .then((response) => {
-            return response.data;
-        })
-        .catch((error) => {
-            Log.error(error);
-            return [];
-        });
-};*/
 
 const getMyProfile = (userId) => {
     return axios
@@ -94,10 +81,7 @@ class MaterialRequestScreen extends React.Component {
             fetchedMaterialRequestData: false,
             pendingRequest: false,
             materialRequest: {},
-            confirmDialogIsOpen: false,
             userCanEdit: false,
-            optionsModalIsOpen: false,
-            action: "",
             userCreator: {},
             groupId,
             materialId
@@ -108,16 +92,9 @@ class MaterialRequestScreen extends React.Component {
         const { groupId, materialId } = this.state;
         const userId = JSON.parse(localStorage.getItem("user")).id;
         const materialRequest = await getMaterialRequest(materialId, groupId);
-        /*const groupMembers = await getGroupMembers(groupId);*/
         const userCreator = await getMyProfile(userId);
-        /*const userIsAdmin = groupMembers.filter(
-            (member) =>
-                member.user_id === userId &&
-                member.group_accepted &&
-                member.user_accepted
-        )[0].admin;*/
         const userIsCreator = userId === materialRequest.created_by;
-        const userCanEdit = /*userIsAdmin ||*/ userIsCreator;
+        const userCanEdit = userIsCreator;
         this.setState({ materialRequest, fetchedMaterialRequestData: true, userCanEdit, userCreator});
     };
 
@@ -126,58 +103,6 @@ class MaterialRequestScreen extends React.Component {
         let { pathname } = history.location;
         pathname = `${pathname}/edit`;
         history.push(pathname);
-    };
-
-    handleConfirmDialogOpen = (action) => {
-        this.setState({
-            confirmDialogIsOpen: true,
-            optionsModalIsOpen: false,
-            action,
-        });
-    };
-
-    handleConfirmDialogClose = (choice) => {
-        const { action } = this.state;
-        if (choice === "agree") {
-            switch (action) {
-                case "delete":
-                    this.handleDelete();
-                    break;
-                case "exportPdf":
-                    this.handleExport("pdf");
-                    break;
-                case "exportExcel":
-                    this.handleExport("excel");
-                    break;
-                default:
-            }
-        }
-        this.setState({ confirmDialogIsOpen: false });
-    };
-
-    handleOptions = () => {
-        const { optionsModalIsOpen } = this.state;
-        this.setState({ optionsModalIsOpen: !optionsModalIsOpen });
-    };
-
-    handleOptionsClose = () => {
-        this.setState({ optionsModalIsOpen: false });
-    };
-
-    handleDelete = () => {
-        const { match, history } = this.props;
-        const { groupId, materialId } = match.params;
-        this.setState({ pendingRequest: true });
-        axios
-            .delete(`/api/groups/${groupId}/activities/${materialId}`)//todo
-            .then((response) => {
-                Log.info(response);
-                history.goBack();
-            })
-            .catch((error) => {
-                Log.error(error);
-                history.goBack();
-            });
     };
 
     handleOffer = () => {
@@ -195,54 +120,16 @@ class MaterialRequestScreen extends React.Component {
             materialRequest,
             fetchedMaterialRequestData,
             userCanEdit,
-            action,
-            confirmDialogIsOpen,
-            optionsModalIsOpen,
             pendingRequest,
             userCreator
         } = this.state;
         const texts = Texts[language].activityScreen;
         const name = userCreator.given_name + " " + userCreator.family_name;
-        const options = [
-            {
-                label: texts.delete,
-                style: "optionsModalButton",
-                handle: () => {
-                    this.handleConfirmDialogOpen("delete");
-                },
-            }/*,
-            {
-                label: texts.exportPdf,
-                style: "optionsModalButton",
-                handle: () => {
-                    this.handleConfirmDialogOpen("exportPdf");
-                },
-            },
-            {
-                label: texts.exportExcel,
-                style: "optionsModalButton",
-                handle: () => {
-                    this.handleConfirmDialogOpen("exportExcel");
-                },
-            },*/
-        ];
-        const confirmDialogTitle =
-            action === "delete" ? texts.deleteDialogTitle : texts.exportDialogTitle;
         const rowStyle = { minHeight: "5rem" };
         return fetchedMaterialRequestData ? (
             <React.Fragment>
                 {pendingRequest && <LoadingSpinner />}
                 <div id="activityContainer">
-                    <ConfirmDialog
-                        title={confirmDialogTitle}
-                        isOpen={confirmDialogIsOpen}
-                        handleClose={this.handleConfirmDialogClose}
-                    />
-                    <OptionsModal
-                        isOpen={optionsModalIsOpen}
-                        handleClose={this.handleOptionsClose}
-                        options={options}
-                    />
                     <div id="activityHeaderContainer" className="row no-gutters">
                         <div className="col-2-10">
                             <button

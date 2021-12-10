@@ -9,13 +9,11 @@ import withLanguage from "./LanguageContext";
 import Log from "./Log";
 import Button from "@material-ui/core/Button";
 import {withStyles} from "@material-ui/core/styles";
+import ConfirmDialog from "./ConfirmDialog";
 
 const styles = {
     modifyButton: {
         backgroundColor: "#ff6f00",
-        position: "fixed",
-        bottom: "5%",
-        transform: "translateX(-50%)",
         borderRadius: "3.2rem",
         fontSize: "1.5rem",
         "&:hover": {
@@ -24,10 +22,6 @@ const styles = {
     },
     deleteButton: {
         backgroundColor: "#ff0000",
-        position: "fixed",
-        bottom: "5%",
-        left: "60%",
-        transform: "translateX(-50%)",
         borderRadius: "3.2rem",
         fontSize: "1.5rem",
         "&:hover": {
@@ -43,6 +37,7 @@ class EditMaterialRequestScreen extends React.Component {
         const { groupId, materialId } = match.params;
         this.state = {
             fetchedMaterial: false,
+            confirmDialogIsOpen: false,
             groupId,
             materialId
         };
@@ -93,6 +88,33 @@ class EditMaterialRequestScreen extends React.Component {
         this.setState(state);
     };
 
+    handleConfirmDialogOpen = () => {
+        this.setState({
+            confirmDialogIsOpen: true
+        });
+    };
+
+    handleConfirmDialogClose = () => {
+        this.setState({ confirmDialogIsOpen: false });
+        this.handleDelete();
+    };
+
+    handleDelete = () => {
+        const { match, history } = this.props;
+        const { materialId } = match.params;
+        this.setState({ pendingRequest: true });
+        axios
+            .delete(`/api/materials/requests/${materialId}`)
+            .then((response) => {
+                Log.info(response);
+                history.goBack().goBack();
+            })
+            .catch((error) => {
+                Log.error(error);
+                history.goBack();
+            });
+    };
+
     handleSave = () => {
         const { match, history } = this.props;
         const { materialId} = match.params;
@@ -125,13 +147,20 @@ class EditMaterialRequestScreen extends React.Component {
             material_name,
             description,
             location,
+            confirmDialogIsOpen,
             color
         } = this.state;
         const { language, history, classes} = this.props;
-        console.log(this.props);
         const texts = Texts[language].editActivityScreen;
+        const texts2 = Texts[language].activityScreen; //todo sistemare sta cosa dei text
+        const confirmDialogTitle = texts2.deleteDialogTitle;
         return fetchedMaterial ? (
             <React.Fragment>
+                <ConfirmDialog
+                    title={confirmDialogTitle}
+                    isOpen={confirmDialogIsOpen}
+                    handleClose={this.handleConfirmDialogClose}
+                />
                 <div className="row no-gutters" id="editActivityHeaderContainer">
                     <div className="col-2-10">
                         <button
@@ -142,18 +171,8 @@ class EditMaterialRequestScreen extends React.Component {
                             <i className="fas fa-arrow-left" />
                         </button>
                     </div>
-                    <div className="col-6-10">
+                    <div className="col-8-10">
                         <h1 className="verticalCenter">{texts.backNavTitle}</h1>
-                    </div>
-                    <div className="col-2-10">
-                        <button
-                            type="button"
-                            className="transparentButton center"
-                            style={validated ? {} : { opacity: 0.5 }}
-                            onClick={this.handleSave}
-                        >
-                            <i className="fas fa-check" />
-                        </button>
                     </div>
                 </div>
                 <div id="editActivityMainContainer">
@@ -235,19 +254,31 @@ class EditMaterialRequestScreen extends React.Component {
                             />
                         </div>
                     </div>
+                    <div className="row no-gutters d-flex justify-content-center" style={{ marginBottom: "4rem", paddingTop:"2rem" }}>
+                        <div className="col-1 d-flex ">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                style={validated ? {} : { opacity: 0.5 }}
+                                onClick={this.handleSave}
+                                className={classes.modifyButton}
+                            >
+                                MODIFICA {/*todo text.blabla*/}
+                            </Button>
+                        </div>
+                        <div className="col-1 d-flex ">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                className={classes.deleteButton}
+                                onClick={this.handleConfirmDialogOpen}
+                            >
+                                ELIMINA {/*todo text.blabla*/}
+                            </Button>
+                        </div>
+                    </div>
                 </div>
-                {/*<Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.modifyButton}
-                >
-                </Button>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.deleteButton}
-                >
-                </Button>*/}
+
             </React.Fragment>
         ) : (
             <LoadingSpinner />
