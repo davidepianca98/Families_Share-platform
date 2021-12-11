@@ -46,6 +46,19 @@ const styles = (theme) => ({
       backgroundColor: "#ff6f00",
     },
   },
+  bookDeleteButton: {
+    backgroundColor: "#ff0000",
+    bottom: "5%",
+    left: "50%",
+    transform: "translateX(-50%)",
+    borderRadius: "3.2rem",
+    fontSize: "1.5rem",
+    marginTop: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    "&:hover": {
+      backgroundColor: "#ff0000",
+    },
+  },
 });
 
 const getMaterialOffer = (materialOfferId) => {
@@ -130,6 +143,7 @@ class MaterialOfferScreen extends React.Component {
       userCanEdit,
       materialCreator,
       materialBookings,
+      userId,
     });
   }
 
@@ -147,6 +161,22 @@ class MaterialOfferScreen extends React.Component {
     history.push(pathname);
   };
 
+  handleBookDelete = (id) => {
+    let { materialBookings } = this.state;
+    materialBookings = materialBookings.filter(
+      (elem) => elem.material_booking_id !== id
+    );
+    axios
+      .delete(`/api/materials/bookings/${id}`)
+      .then((response) => {
+        Log.info(response);
+        this.setState({ materialBookings });
+      })
+      .catch((error) => {
+        Log.error(error);
+      });
+  };
+
   getDatesString = (date) => {
     return moment(date).format("ll");
   };
@@ -160,6 +190,7 @@ class MaterialOfferScreen extends React.Component {
       pendingRequest,
       materialId,
       groupId,
+      userId,
       materialCreator,
       materialBookings,
     } = this.state;
@@ -347,7 +378,7 @@ class MaterialOfferScreen extends React.Component {
                         <React.Fragment>
                           <div className="row no-gutters" style={rowStyle}>
                             <div className="materialInfoDescription">
-                              Il tuo oggetto è stato prenotato da:
+                              {texts.offerOwnerBookingDisplay}
                             </div>
                           </div>
                           {materialBookings.map((book) => {
@@ -366,10 +397,11 @@ class MaterialOfferScreen extends React.Component {
                                   </div>
                                   <div className="col-9-10">
                                     <div className="row no-gutters materialInfoDescription">
-                                      Da: {moment(book.start).format("L")}
+                                      {texts.from}{" "}
+                                      {moment(book.start).format("L")}
                                     </div>
                                     <div className="row no-gutters materialInfoDescription">
-                                      A: {moment(book.end).format("L")}
+                                      {texts.to} {moment(book.end).format("L")}
                                     </div>
                                   </div>
                                 </div>
@@ -380,20 +412,76 @@ class MaterialOfferScreen extends React.Component {
                       ) : (
                         <div className="row no-gutters" style={rowStyle}>
                           <div className="materialInfoDescription">
-                            Il tuo oggetto non è ancora stato prenotato
+                            {texts.offerOwnerBookingNotDisplay}
                           </div>
                         </div>
                       )}
                     </React.Fragment>
                   ) : (
                     <div className="row no-gutters" style={rowStyle}>
-                      <div className="materialInfoDescription">
-                        Hai prenotato questo oggetto per:
-                      </div>
+                      {Object.keys(materialBookings).length > 0 ? (
+                        <div
+                          style={{ marginTop: "1.5rem" }}
+                          className="materialInfoDescription"
+                        >
+                          {texts.bookerDisplay}
+                          {materialBookings.map((booking) => {
+                            if (userId === booking.user) {
+                              return (
+                                <div key={booking._id}>
+                                  <div
+                                    className="row no-gutters"
+                                    style={rowStyle}
+                                  >
+                                    <div className="col-1-10">
+                                      <i
+                                        className="far fa-calendar-alt materialInfoIcon"
+                                        style={{ fontSize: "2.5rem" }}
+                                      />
+                                    </div>
+                                    <div className="col-9-10">
+                                      <div className="row no-gutters materialInfoDescription">
+                                        {texts.from}{" "}
+                                        {moment(booking.start).format("L")}
+                                      </div>
+                                      <div className="row no-gutters materialInfoDescription">
+                                        {texts.to}{" "}
+                                        {moment(booking.end).format("L")}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="row no-gutters justify-content-center">
+                                    <div className={classes.actionsContainer}>
+                                      <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={() =>
+                                          this.handleBookDelete(
+                                            booking.material_booking_id
+                                          )
+                                        }
+                                        className={classes.bookDeleteButton}
+                                        size="large"
+                                      >
+                                        {texts.delete}
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            }
+                            return <div></div>;
+                          })}
+                        </div>
+                      ) : (
+                        <div className="row no-gutters" style={rowStyle}>
+                          <div className="materialInfoDescription">
+                            {texts.bookerNotDisplay}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
-
-                  <h1>TODO</h1>
                 </div>
               )}
             />

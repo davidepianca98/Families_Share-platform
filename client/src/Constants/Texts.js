@@ -3522,7 +3522,7 @@ const it = {
     start: "Inizio",
     end: "Fine",
     save: "SALVA",
-    cancel: "ANNULLA"
+    cancel: "ANNULLA",
   },
   availabilityWeekModal: {
     header: "Disponibilità",
@@ -4094,7 +4094,14 @@ const it = {
     creationDate: "Data di creazione",
     disponibilityStatus: "Stato prenotazione",
     book: "Prenota",
+    delete: "CANCELLA",
     creator: "Utente",
+    from: "Da",
+    to: "A",
+    offerOwnerBookingDisplay: "Il tuo oggetto è stato prenotato da:",
+    offerOwnerBookingNotDisplay: "Il tuo oggetto non è ancora stato prenotato",
+    bookerDisplay: "Hai prenotato questo oggetto nei seguenti periodi:",
+    bookerNotDisplay: "Non hai prenotato quest'oggetto",
   },
   materialOfferScreenNavbar: {
     info: "INFO",
