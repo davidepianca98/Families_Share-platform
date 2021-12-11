@@ -43,6 +43,7 @@ class SeniorListItem extends React.Component {
     const { senior, fetchedSenior } = this.state;
     const texts = Texts[language].seniorListItem;
     const route = `${pathname}/${seniorId}`;
+
     return (
       <div
         id="seniorContainer"

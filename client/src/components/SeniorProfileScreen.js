@@ -11,7 +11,8 @@ const getSenior = (userId, seniorId) => {
   return axios
     .get(`/api/seniors/${seniorId}`)
     .then(response => {
-      return response.data;
+      let senior = response.data;
+      return senior;
     })
     .catch(error => {
       Log.error(error);
@@ -41,9 +42,6 @@ class SeniorProfileScreen extends React.Component {
 
   render() {
     const { senior, fetchedSeniorData } = this.state;
-    if (!senior.availabilities) {      
-      senior.availabilities = []
-    }
 
     return fetchedSeniorData ? (
       <React.Fragment>
@@ -53,6 +51,7 @@ class SeniorProfileScreen extends React.Component {
           name={`${senior.given_name} ${senior.family_name}`}
         />
         <SeniorProfileInfo
+          senior={senior}
           birthdate={senior.birthdate}
           availabilities={senior.availabilities}
           showAdditional={senior.showAdditional}

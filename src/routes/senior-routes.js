@@ -36,9 +36,6 @@ router.put('/:id', async (req, res, next) => {
     }
   }
 
-  console.log("given_name = " + senior.given_name)
-  console.log("availabilities = " + senior.availabilities)
-
   const update = {
     given_name: senior.given_name,
     family_name: senior.family_name,
