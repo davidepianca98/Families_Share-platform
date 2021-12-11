@@ -160,27 +160,23 @@ class EditSeniorProfileScreen extends React.Component {
       given_name,
       background,
       gender,
+      availabilities
     } = this.state;
-    const bodyFormData = new FormData();
-    const birthdate = moment().set({
-      year,
-      month,
-      date
-    });
-    if (file !== undefined) {
-      bodyFormData.append("photo", file);
+
+    let senior = {
+      given_name: given_name,
+      family_name: family_name,
+      gender: gender,
+      background: background,
+      birthdate: moment().set({
+        year,
+        month,
+        date
+      }),
+      availabilities: availabilities,
     }
-    bodyFormData.append("given_name", given_name);
-    bodyFormData.append("family_name", family_name);
-    bodyFormData.append("gender", gender);
-    bodyFormData.append("background", background);
-    bodyFormData.append("birthdate", birthdate);
     axios
-      //.patch(`/api/users/${userId}/seniors/${seniorId}`, bodyFormData, {
-      .put(`/api/seniors/${seniorId}`, bodyFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
+      .put(`/api/seniors/${seniorId}`, senior, {
       })
       .then(response => {
         Log.info(response);

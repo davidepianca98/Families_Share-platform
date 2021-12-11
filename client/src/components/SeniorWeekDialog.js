@@ -16,6 +16,8 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
+import axios from "axios";
+import Log from "./Log";
 
 const styles = () => ({
   paper: { height: "60vh" },
@@ -49,11 +51,11 @@ const theme = createMuiTheme({
   }
 });
 
-class SeniorAvailabilityDialog extends React.Component {
+class SeniorWeekDialog extends React.Component {
   constructor(props) {
     super(props);
-    const { availabilities } = this.props;
-
+    const { senior } = this.props;
+    let availabilities = senior.availabilities;
     const allDays = [];
     let idx = 0;
     ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
@@ -71,15 +73,16 @@ class SeniorAvailabilityDialog extends React.Component {
       });
 
     availabilities.forEach(availability => {
-      let found = allDays.filter(day => day.index === availability.weekDay);
-      if (found) {
-          found.available = true
-      }
+      allDays.forEach(day => {
+        if (day.index === availability.weekDay)
+          day.available = true
+      })
     })
 
     this.state = {
       availabilities,
-      allDays
+      allDays,
+      senior
     };
   }
 
@@ -87,11 +90,41 @@ class SeniorAvailabilityDialog extends React.Component {
   }
 
   handleSave = () => {
+    const { allDays, senior } = this.state;
+
+    let newAvailabilities = [];
+    this.setState({ availabilities: newAvailabilities });
+
+    allDays.forEach(day => {
+      if (day.available)
+        newAvailabilities.push({
+          weekDay: day.index,
+          startTimeHour: 10,
+          startTimeMinute: 30,
+          endTimeHour: 13,
+          endTimeMinute: 30
+        })
+    });
+
+    senior.availabilities = newAvailabilities
+    
+    axios
+      .put(`/api/seniors/${senior.senior_id}`, senior, {
+      })
+      .then(response => {
+        Log.info(response);
+        this.handleCloseWeek();
+      })
+      .catch(error => {
+        Log.error(error);
+        this.handleCloseWeek();
+      });
+
   };
 
-  handleClose = () => {
-    const { handleClose } = this.props;
-    handleClose();
+  handleCloseWeek = () => {
+    const { handleCloseWeek } = this.props;
+    handleCloseWeek();
   };
 
   render() {
@@ -99,7 +132,7 @@ class SeniorAvailabilityDialog extends React.Component {
       allDays
     } = this.state;
     const { language, isOpen, classes } = this.props;
-    const texts = Texts[language].availabilityModal;
+    const texts = Texts[language].availabilityWeekModal;
 
     const handleToggle = dayIndex => {
       const { availabilities } = this.state;
@@ -123,19 +156,19 @@ class SeniorAvailabilityDialog extends React.Component {
         allDays[dayIndex].available = false
         availabilities.splice(found, 1);
       }
-      this.setState({ availabilities });
+      this.setState({ availabilities: availabilities });
     };
   
     return (
       <MuiThemeProvider theme={theme}>
         <Dialog
-          onClose={this.handleClose}
+          onClose={this.handleCloseWeek}
           aria-labelledby="availability user dialog"
           open={isOpen}
           classes={{ paper: classes.paper }}
         >
           <DialogTitle>
-            <div className="seniorAvailabilityDialogTitle">{texts.header}</div>
+            <div className="seniorAvailabilitySelect">{texts.header}</div>
           </DialogTitle>
           <DialogContent>
             <List>
@@ -170,10 +203,12 @@ class SeniorAvailabilityDialog extends React.Component {
             </List>
           </DialogContent>
           <DialogActions>
-            <Button fontSize={20} variant="text" onClick={this.handleClose}>
+            <Button fontSize={20} variant="text" onClick={this.handleCloseWeek}>
               {texts.cancel}
             </Button>
-            <Button onClick={this.handleSave}>{texts.save}</Button>
+            <Button onClick={this.handleSave}>
+              {texts.save}
+            </Button>
           </DialogActions>
         </Dialog>
       </MuiThemeProvider>
@@ -181,12 +216,12 @@ class SeniorAvailabilityDialog extends React.Component {
   }
 }
 
-SeniorAvailabilityDialog.propTypes = {
+SeniorWeekDialog.propTypes = {
   isOpen: PropTypes.bool,
-  handleClose: PropTypes.func,
+  handleCloseWeek: PropTypes.func,
   handleSave: PropTypes.func,
-  availabilities: PropTypes.array,
+  senior: PropTypes.object,
   language: PropTypes.string
 };
 
-export default withStyles(styles)(withLanguage(SeniorAvailabilityDialog));
+export default withStyles(styles)(withLanguage(SeniorWeekDialog));

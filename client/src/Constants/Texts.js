@@ -3517,7 +3517,14 @@ const it = {
     cancel: "CANCELLA",
     search: "Cerca",
   },
-  availabilityModal: {
+  availabilityTimeModal: {
+    header: "Orario",
+    start: "Inizio",
+    end: "Fine",
+    save: "SALVA",
+    cancel: "ANNULLA"
+  },
+  availabilityWeekModal: {
     header: "Disponibilità",
     monday: "Lunedì",
     tuesday: "Martedì",

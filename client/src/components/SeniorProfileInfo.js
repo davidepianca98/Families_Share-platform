@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { withRouter } from "react-router-dom";
 import withLanguage from "./LanguageContext";
-import SeniorAvailabilityDialog from "./SeniorAvailabilityDialog";
+import SeniorWeekDialog from "./SeniorWeekDialog";
 import Images from "../Constants/Images";
 import Texts from "../Constants/Texts";
 import ConfirmDialog from "./ConfirmDialog";
 
 class SeniorProfileInfo extends React.Component {
-  state = { modalIsOpen: false, confirmDialogIsOpen: false, deleteIndex: "" };
+  state = { weekModalIsOpen: false, confirmDialogIsOpen: false, deleteIndex: "" };
 
   handleConfirmDialogOpen = index => {
     this.setState({ confirmDialogIsOpen: true, deleteIndex: index });
@@ -19,20 +19,17 @@ class SeniorProfileInfo extends React.Component {
     this.setState({ confirmDialogIsOpen: false, deleteIndex: "" });
   };
 
-  handleOpen = () => {
-    this.setState({ modalIsOpen: true });
+  handleOpenWeek = () => {
+    this.setState({ weekModalIsOpen: true });
   };
 
-  handleClose = () => {
-    this.setState({ modalIsOpen: false });
-  };
-
-  handleAvailability = () => {
-    //
+  handleCloseWeek = () => {
+    this.setState({ weekModalIsOpen: false });
   };
 
   render() {
     const {
+      senior,
       language,
       availabilities,
       otherInfo,
@@ -40,7 +37,8 @@ class SeniorProfileInfo extends React.Component {
       birthdate,
       showAdditional
     } = this.props;
-    const { confirmDialogIsOpen, modalIsOpen } = this.state;
+
+    const { confirmDialogIsOpen, weekModalIsOpen } = this.state;
     const texts = Texts[language].seniorProfileInfo;
     return (
       <React.Fragment>
@@ -49,11 +47,11 @@ class SeniorProfileInfo extends React.Component {
           title={texts.confirmDialogTitle}
           handleClose={this.handleConfirmDialogClose}
         />
-        <SeniorAvailabilityDialog
-          isOpen={modalIsOpen}
-          handleClose={this.handleClose}
-          handleAvailability={this.handleAvailability}
+        <SeniorWeekDialog
+          isOpen={weekModalIsOpen}
+          handleCloseWeek={this.handleCloseWeek}
           availabilities={availabilities}
+          senior={senior}
         />
         <div className="seniorProfileInfoSection">
           <div className="row no-gutters">
@@ -80,7 +78,7 @@ class SeniorProfileInfo extends React.Component {
               <button
                 type="button"
                 className="setAvailabilities"
-                onClick={this.handleOpen}
+                onClick={this.handleOpenWeek}
               >
                 {texts.setAvailabilities}
               </button>
@@ -111,7 +109,7 @@ class SeniorProfileInfo extends React.Component {
 SeniorProfileInfo.propTypes = {
   history: PropTypes.object,
   availabilities: PropTypes.array,
-  birthdate: PropTypes.string,
+  birthdate: PropTypes.instanceOf(Date),
   gender: PropTypes.string,
   otherInfo: PropTypes.string,
   showAdditional: PropTypes.bool,
