@@ -13,7 +13,7 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = (theme) => ({
   modifyButton: {
     backgroundColor: "#ff6f00",
-    position: "fixed",
+
     bottom: "5%",
     borderRadius: "3.2rem",
     fontSize: "1.5rem",
@@ -25,7 +25,7 @@ const styles = (theme) => ({
   },
   deleteButton: {
     backgroundColor: "#ff0000",
-    position: "fixed",
+
     bottom: "5%",
     borderRadius: "3.2rem",
     fontSize: "1.5rem",
@@ -278,7 +278,10 @@ class EditMaterialOfferScreen extends React.Component {
               />
             </div>
           </div>
-          <div className={classes.actionsContainer + " row no-gutters"}>
+          <div
+            className={classes.actionsContainer + " row no-gutters"}
+            style={{ marginTop: "10rem" }}
+          >
             <div className="col-1-2 d-flex justify-content-center">
               <Button
                 variant="contained"
