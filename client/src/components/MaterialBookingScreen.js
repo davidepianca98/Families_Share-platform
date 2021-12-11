@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import LoadingSpinner from "./LoadingSpinner";
 import Texts from "../Constants/Texts";
 import withLanguage from "./LanguageContext";
 import Log from "./Log";
@@ -13,6 +14,7 @@ import {
 } from "@material-ui/pickers";
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+import moment from "moment";
 
 const materialTheme = createTheme({
   overrides: {
@@ -62,17 +64,54 @@ const styles = (theme) => ({
   },
 });
 
+const getMaterialBookings = (materialOfferId) => {
+  return axios
+    .get(`/api/materials/offers/${materialOfferId}/bookings`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      Log.error(error);
+      return {};
+    });
+};
+
 class MaterialBookingScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       startDate: new Date(),
       endDate: new Date(),
+      fetchedData: false,
     };
+  }
+
+  async componentDidMount() {
+    const { match } = this.props;
+    const { materialId } = match.params;
+    const bookList = await getMaterialBookings(materialId);
+    this.setState({ bookList, fetchedData: true });
   }
 
   isValidBooking = (booking) => {
     return booking.start <= booking.end;
+  };
+
+  isInvalidDate = (date) => {
+    const { bookList } = this.state;
+    let datesArray = [];
+    if (Object.keys(bookList).length !== 0) {
+      bookList.forEach((book) => {
+        let i = new Date(book.start);
+        const end = new Date(book.end);
+        while (i.getDate() <= end.getDate()) {
+          datesArray.push(moment(new Date(i)).format("L"));
+          i.setDate(i.getDate() + 1);
+        }
+      });
+      return datesArray.includes(moment(date._d).format("L"));
+    }
+    return false;
   };
 
   handleStartChange = (date) => {
@@ -106,11 +145,13 @@ class MaterialBookingScreen extends React.Component {
   };
 
   render() {
-    const { startDate, endDate } = this.state;
+    const { startDate, endDate, fetchedData } = this.state;
     const { language, history, classes } = this.props;
     const texts = Texts[language].MaterialBookingScreen;
     const rowStyle = { minHeight: "5rem" };
-    return (
+    return !fetchedData ? (
+      <LoadingSpinner />
+    ) : (
       <React.Fragment>
         <div id="materialBookingContainer">
           <div className="row no-gutters" id="materialBookingHeaderContainer">
@@ -140,56 +181,59 @@ class MaterialBookingScreen extends React.Component {
               </div>
             </div>
 
-            <div
-              className="row no-gutters justify-content-center"
-              style={rowStyle}
-            >
+            <div className="no-gutters" style={rowStyle}>
               <MuiPickersUtilsProvider utils={MomentUtils}>
                 <ThemeProvider theme={materialTheme}>
-                  <KeyboardDatePicker
-                    margin="normal"
-                    id="date-picker-dialog"
-                    label={texts.startDateLabel}
-                    format="L"
-                    value={startDate}
-                    onChange={this.handleStartChange}
-                    minDate={new Date()}
-                    KeyboardButtonProps={{
-                      "aria-label": "change date",
-                    }}
-                    InputLabelProps={{
-                      style: {
-                        fontSize: "1.5rem",
-                      },
-                    }}
-                    InputProps={{
-                      classes: {
-                        input: classes.resize,
-                      },
-                    }}
-                  />
-                  <KeyboardDatePicker
-                    margin="normal"
-                    id="date-picker-dialog"
-                    label={texts.endDateLabel}
-                    format="L"
-                    value={endDate}
-                    onChange={this.handleEndChange}
-                    minDate={startDate}
-                    KeyboardButtonProps={{
-                      "aria-label": "change date",
-                    }}
-                    InputLabelProps={{
-                      style: {
-                        fontSize: "1.5rem",
-                      },
-                    }}
-                    InputProps={{
-                      classes: {
-                        input: classes.resize,
-                      },
-                    }}
-                  />
+                  <div className="row justify-content-center">
+                    <KeyboardDatePicker
+                      margin="normal"
+                      id="date-picker-dialog"
+                      label={texts.startDateLabel}
+                      format="L"
+                      value={startDate}
+                      onChange={this.handleStartChange}
+                      shouldDisableDate={this.isInvalidDate}
+                      disablePast
+                      KeyboardButtonProps={{
+                        "aria-label": "change date",
+                      }}
+                      InputLabelProps={{
+                        style: {
+                          fontSize: "1.5rem",
+                        },
+                      }}
+                      InputProps={{
+                        classes: {
+                          input: classes.resize,
+                        },
+                      }}
+                    />
+                  </div>
+                  <div className="row justify-content-center">
+                    <KeyboardDatePicker
+                      margin="normal"
+                      id="date-picker-dialog"
+                      label={texts.endDateLabel}
+                      format="L"
+                      value={endDate}
+                      onChange={this.handleEndChange}
+                      shouldDisableDate={this.isInvalidDate}
+                      minDate={startDate}
+                      KeyboardButtonProps={{
+                        "aria-label": "change date",
+                      }}
+                      InputLabelProps={{
+                        style: {
+                          fontSize: "1.5rem",
+                        },
+                      }}
+                      InputProps={{
+                        classes: {
+                          input: classes.resize,
+                        },
+                      }}
+                    />
+                  </div>
                 </ThemeProvider>
               </MuiPickersUtilsProvider>
             </div>

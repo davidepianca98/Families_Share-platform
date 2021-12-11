@@ -12,6 +12,7 @@ import moment from "moment";
 import { Button } from "@material-ui/core";
 import MaterialOfferScreenNavbar from "./MaterialOfferScreenNavbar";
 import { Switch, Route, withRouter } from "react-router-dom";
+import BookerDisplay from "./BookerDisplay";
 
 const styles = (theme) => ({
   add: {
@@ -65,6 +66,18 @@ const getMaterialOffer = (materialOfferId) => {
     });
 };
 
+const getMaterialBookings = (materialOfferId) => {
+  return axios
+    .get(`/api/materials/offers/${materialOfferId}/bookings`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      Log.error(error);
+      return {};
+    });
+};
+
 const getUserProfile = (userId) => {
   return axios
     .get(`/api/users/${userId}/profile`)
@@ -108,6 +121,7 @@ class MaterialOfferScreen extends React.Component {
     const userId = JSON.parse(localStorage.getItem("user")).id;
     const materialOffer = await getMaterialOffer(materialId);
     const materialCreator = await getUserProfile(materialOffer.created_by);
+    const materialBookings = await getMaterialBookings(materialId);
     const userIsCreator = userId === materialOffer.created_by;
     const userCanEdit = userIsCreator;
     this.setState({
@@ -115,6 +129,7 @@ class MaterialOfferScreen extends React.Component {
       fetchedMaterialOfferData: true,
       userCanEdit,
       materialCreator,
+      materialBookings,
     });
   }
 
@@ -146,6 +161,7 @@ class MaterialOfferScreen extends React.Component {
       materialId,
       groupId,
       materialCreator,
+      materialBookings,
     } = this.state;
     const materialOfferPath = `/groups/${groupId}/materials/offers/${materialId}`;
     const texts = Texts[language].materialOfferScreen;
@@ -271,7 +287,6 @@ class MaterialOfferScreen extends React.Component {
                       </div>
                     </div>
                   </div>
-                  {/* TODO: add owner name */}
 
                   {userCanEdit ? (
                     <div></div>
@@ -326,6 +341,58 @@ class MaterialOfferScreen extends React.Component {
               path={`${materialOfferPath}/books`}
               render={() => (
                 <div id="materialMainContainer">
+                  {userCanEdit ? (
+                    <React.Fragment>
+                      {Object.keys(materialBookings).length > 0 ? (
+                        <React.Fragment>
+                          <div className="row no-gutters" style={rowStyle}>
+                            <div className="materialInfoDescription">
+                              Il tuo oggetto è stato prenotato da:
+                            </div>
+                          </div>
+                          {materialBookings.map((book) => {
+                            return (
+                              <div key={book._id}>
+                                <BookerDisplay bookerId={book.user} />
+                                <div
+                                  className="row no-gutters"
+                                  style={rowStyle}
+                                >
+                                  <div className="col-1-10">
+                                    <i
+                                      className="far fa-calendar-alt materialInfoIcon"
+                                      style={{ fontSize: "2.5rem" }}
+                                    />
+                                  </div>
+                                  <div className="col-9-10">
+                                    <div className="row no-gutters materialInfoDescription">
+                                      Da: {moment(book.start).format("L")}
+                                    </div>
+                                    <div className="row no-gutters materialInfoDescription">
+                                      A: {moment(book.end).format("L")}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </React.Fragment>
+                      ) : (
+                        <div className="row no-gutters" style={rowStyle}>
+                          <div className="materialInfoDescription">
+                            Il tuo oggetto non è ancora stato prenotato
+                          </div>
+                        </div>
+                      )}
+                    </React.Fragment>
+                  ) : (
+                    <div className="row no-gutters" style={rowStyle}>
+                      <div className="materialInfoDescription">
+                        Hai prenotato questo oggetto per:
+                      </div>
+                    </div>
+                  )}
+
                   <h1>TODO</h1>
                 </div>
               )}
