@@ -41,6 +41,10 @@ class SeniorProfileScreen extends React.Component {
 
   render() {
     const { senior, fetchedSeniorData } = this.state;
+    if (!senior.availabilities) {      
+      senior.availabilities = []
+    }
+
     return fetchedSeniorData ? (
       <React.Fragment>
         <SeniorProfileHeader
@@ -54,8 +58,6 @@ class SeniorProfileScreen extends React.Component {
           showAdditional={senior.showAdditional}
           otherInfo={senior.other_info}
           gender={senior.gender}
-          handleAddParent={this.handleAddParent}
-          handleDeleteParent={this.handleDeleteParent}
         />
       </React.Fragment>
     ) : (
