@@ -186,6 +186,7 @@ describe('/Get/api/materials/offers/id/bookings', () => {
           .end((err, res) => {
             res.should.have.status(200)
             res.body.should.be.a('array').with.lengthOf(1)
+            res.body[0].should.have.property('user')
             done()
           })
       })
@@ -195,7 +196,7 @@ describe('/Get/api/materials/offers/id/bookings', () => {
 
 // T-31
 describe('/Get/api/materials/offers/id/bookings', () => {
-  it('it should fail fetching a material offer bookings when user is authenticated and not the owner of material offer', done => {
+  it('it should fetch a material offer bookings when user is authenticated and not the owner of material offer, without the user field', done => {
     User.findOne({ email: 'test3@email.com' }, (error, user) => {
       MaterialOffer.findOne({ material_name: 'PlayStation 2' }, (err, offer) => {
         chai
@@ -203,7 +204,8 @@ describe('/Get/api/materials/offers/id/bookings', () => {
           .get(`/api/materials/offers/${offer.material_offer_id}/bookings`)
           .set('Authorization', user.token)
           .end((err, res) => {
-            res.should.have.status(404)
+            res.should.have.status(200)
+            res.body[0].should.not.have.property('user')
             done()
           })
       })

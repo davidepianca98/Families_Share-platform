@@ -123,12 +123,16 @@ router.get('/:id/bookings', (req, res, next) => {
   }
 
   const material_offer_id = req.params.id
-  MaterialOffer.findOne({ material_offer_id: material_offer_id, created_by: { '$eq': req.user_id } })
+  MaterialOffer.findOne({ material_offer_id: material_offer_id })
     .then(offer => {
       if (!offer) {
         return res.status(404).send('Offer not found')
       }
-      MaterialBooking.find({ material_offer_id: material_offer_id })
+      let userFetch = 1
+      if (offer.created_by !== req.user_id) {
+        userFetch = 0
+      }
+      MaterialBooking.find({ material_offer_id: material_offer_id }, { user: userFetch })
         .lean()
         .exec()
         .then(bookings => {
