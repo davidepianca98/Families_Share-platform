@@ -68,6 +68,7 @@ class SeniorProfileInfo extends React.Component {
       this.props;
 
     // FIXME: fix temporaneo - il problema è che i metodi funzionali non vanno su oggetti vuoti
+    console.log("senior.availabilities = " + senior.availabilities)
     const availabilities = senior.availabilities
       ? senior.availabilities
       : [
