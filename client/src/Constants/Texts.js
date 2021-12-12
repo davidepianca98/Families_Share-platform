@@ -3807,7 +3807,7 @@ const it = {
     birthday: "Data di nascita",
     gender: "Genere",
     additional: "Aggiungi informazioni",
-    example: "es., intolleranze alimentari",
+    example: "...",
     man: "Uomo",
     woman: "Donna",
     date: "Data",

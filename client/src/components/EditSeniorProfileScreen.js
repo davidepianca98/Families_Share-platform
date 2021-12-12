@@ -163,7 +163,10 @@ class EditSeniorProfileScreen extends React.Component {
       availabilities
     } = this.state;
 
-    let senior = {
+    const userId = JSON.parse(localStorage.getItem("user")).id;
+
+    let senior = { 
+      user_id: userId,
       given_name: given_name,
       family_name: family_name,
       gender: gender,
@@ -175,9 +178,11 @@ class EditSeniorProfileScreen extends React.Component {
       }),
       availabilities: availabilities,
     }
+    if (file !== undefined) {
+      senior.photo = file;
+    }
     axios
-      .put(`/api/seniors/${seniorId}`, senior, {
-      })
+      .put(`/api/seniors/${seniorId}`, senior)
       .then(response => {
         Log.info(response);
         history.goBack();

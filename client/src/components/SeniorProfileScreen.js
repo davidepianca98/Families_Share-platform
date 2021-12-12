@@ -53,7 +53,6 @@ class SeniorProfileScreen extends React.Component {
         <SeniorProfileInfo
           senior={senior}
           birthdate={senior.birthdate}
-          availabilities={senior.availabilities}
           showAdditional={senior.showAdditional}
           otherInfo={senior.other_info}
           gender={senior.gender}

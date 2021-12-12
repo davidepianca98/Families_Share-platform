@@ -64,22 +64,8 @@ class SeniorProfileInfo extends React.Component {
   };
 
   render() {
-    const { senior, language, otherInfo, gender, birthdate, showAdditional } =
+    let { senior, language, otherInfo, gender, birthdate, showAdditional } =
       this.props;
-
-    // FIXME: fix temporaneo - il problema è che i metodi funzionali non vanno su oggetti vuoti
-    console.log("senior.availabilities = " + senior.availabilities)
-    const availabilities = senior.availabilities
-      ? senior.availabilities
-      : [
-          {
-            weekDay: 0,
-            startTimeHour: 10,
-            startTimeMinute: 10,
-            endTimeHour: 12,
-            endTimeMinute: 50,
-          },
-        ];
 
     const { confirmDialogIsOpen, weekModalIsOpen } = this.state;
     const texts = Texts[language].seniorProfileInfo;
@@ -93,7 +79,6 @@ class SeniorProfileInfo extends React.Component {
         <SeniorWeekDialog
           isOpen={weekModalIsOpen}
           handleCloseWeek={this.handleCloseWeek}
-          availabilities={availabilities}
           senior={senior}
         />
         <div className="seniorProfileInfoSection">
@@ -154,7 +139,7 @@ class SeniorProfileInfo extends React.Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {availabilities.map((row) => (
+                {senior.availabilities.map((row) => (
                   <TableRow
                     key={row.weekDay}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -179,14 +164,13 @@ class SeniorProfileInfo extends React.Component {
 }
 
 SeniorProfileInfo.propTypes = {
-  history: PropTypes.object,
   availabilities: PropTypes.array,
   birthdate: PropTypes.instanceOf(Date),
   gender: PropTypes.string,
+  senior: PropTypes.object,
   otherInfo: PropTypes.string,
   showAdditional: PropTypes.bool,
-  language: PropTypes.string,
-  match: PropTypes.object,
+  language: PropTypes.string
 };
 
 export default withRouter(withLanguage(SeniorProfileInfo));

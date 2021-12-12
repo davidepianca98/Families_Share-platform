@@ -40,7 +40,7 @@ router.put('/:id', async (req, res, next) => {
     given_name: senior.given_name,
     family_name: senior.family_name,
     gender: senior.gender,
-    availabilities: senior.availabilities,
+    availabilities: senior.availabilities ? senior.availabilities : [],
     birthdate: senior.birthdate,
     background: senior.background,
     other_info: senior.other_info

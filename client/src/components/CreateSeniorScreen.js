@@ -55,7 +55,6 @@ class CreateSeniorScreen extends React.Component {
         year: moment().year(),
         acceptTerms: false,
         background: "#00838F",
-        acceptAdditionalTerms: false,
         image: "/images/profiles/senior_default_photo.png"
       };
     }
@@ -133,6 +132,7 @@ class CreateSeniorScreen extends React.Component {
   submitChanges = () => {
     const { match, history } = this.props;
     const { profileId: userId } = match.params;
+    
     const {
       name: given_name,
       surname: family_name,
@@ -146,35 +146,25 @@ class CreateSeniorScreen extends React.Component {
       file
     } = this.state;
 
-    const bodyFormData = new FormData();
-    if (file !== undefined) {
-      bodyFormData.append("photo", file);
-    } else {
-      bodyFormData.append("image", image);
+    let senior = {
+      given_name: given_name,
+      family_name: family_name,
+      gender: gender,
+      background: background,
+      birthdate: moment().set({
+        year,
+        month: month - 1,
+        date
+      }),
+      availabilities: availabilities,
     }
-    const birthdate = moment().set({
-      year,
-      month: month - 1,
-      date
-    });
-    bodyFormData.append("given_name", given_name);
-    bodyFormData.append("family_name", family_name);
-    bodyFormData.append("gender", gender);
-    bodyFormData.append("background", background);
-    bodyFormData.append("birthdate", birthdate);
-    // bodyFormData.append("availabilities", JSON.stringify (availabilities));
-    
-    Log.info('given_name ' + given_name)
-    Log.info('gender ' + gender)
-    Log.info('availabilities ' + availabilities.length)
-    Log.info('background ' + background)
-
+    if (file !== undefined) {
+      senior.photo = file;
+    } else {
+      senior.image = image;
+    }
     axios
-      .post(`/api/users/${userId}/seniors`, bodyFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      })
+      .post(`/api/users/${userId}/seniors`, senior)
       .then(response => {
         Log.info(response);
         history.goBack();
@@ -250,11 +240,11 @@ class CreateSeniorScreen extends React.Component {
       surname,
       gender,
       date,
-      acceptAdditionalTerms,
       acceptTerms,
       background,
       image
     } = this.state;
+
     const formClass = [];
     const dates = [
       ...Array(
@@ -441,27 +431,6 @@ class CreateSeniorScreen extends React.Component {
                   color={background}
                   onChange={this.handleColorChange}
                 />
-              </div>
-            </div>
-            <div
-              id="additionalInformationContainer"
-              className="row no-gutters"
-              style={bottomBorder}
-            >
-              <div className="col-7-10">
-                <div className="center">
-                  <h1>{texts.additional}</h1>
-                  <h2>{texts.example}</h2>
-                </div>
-              </div>
-              <div className="col-3-10">
-                <button
-                  className="center"
-                  type="button"
-                  onClick={this.handleAvailability}
-                >
-                  {acceptAdditionalTerms ? texts.edit : texts.availability}
-                </button>
               </div>
             </div>
             <div className="row no-gutters">
