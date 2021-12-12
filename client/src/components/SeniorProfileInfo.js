@@ -8,36 +8,50 @@ import Images from "../Constants/Images";
 import Texts from "../Constants/Texts";
 import ConfirmDialog from "./ConfirmDialog";
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  TableHead,
+} from "@material-ui/core";
 
 let toDayName = (index, language) => {
   const days = Texts[language].availabilityWeekModal;
   switch (index) {
-    case 0: return days.monday; break;
-    case 1: return days.tuesday; break;
-    case 2: return days.wednesday; break;
-    case 3: return days.thursday; break;
-    case 4: return days.friday; break;
-    case 5: return days.saturday; break;
-    case 6: return days.sunday; break;
-    default: return "";
+    case 0:
+      return days.monday;
+    case 1:
+      return days.tuesday;
+    case 2:
+      return days.wednesday;
+    case 3:
+      return days.thursday;
+    case 4:
+      return days.friday;
+    case 5:
+      return days.saturday;
+    case 6:
+      return days.sunday;
+    default:
+      return "";
   }
-}
+};
 
 class SeniorProfileInfo extends React.Component {
-  state = { weekModalIsOpen: false, confirmDialogIsOpen: false, deleteIndex: "" };
+  state = {
+    weekModalIsOpen: false,
+    confirmDialogIsOpen: false,
+    deleteIndex: "",
+  };
 
-  handleConfirmDialogOpen = index => {
+  handleConfirmDialogOpen = (index) => {
     this.setState({ confirmDialogIsOpen: true, deleteIndex: index });
   };
 
-  handleConfirmDialogClose = choice => {
+  handleConfirmDialogClose = (choice) => {
     this.setState({ confirmDialogIsOpen: false, deleteIndex: "" });
   };
 
@@ -50,16 +64,21 @@ class SeniorProfileInfo extends React.Component {
   };
 
   render() {
-    const {
-      senior,
-      language,
-      otherInfo,
-      gender,
-      birthdate,
-      showAdditional
-    } = this.props;
+    const { senior, language, otherInfo, gender, birthdate, showAdditional } =
+      this.props;
 
-    const availabilities = senior.availabilities;
+    // FIXME: fix temporaneo - il problema è che i metodi funzionali non vanno su oggetti vuoti
+    const availabilities = senior.availabilities
+      ? senior.availabilities
+      : [
+          {
+            weekDay: 0,
+            startTimeHour: 10,
+            startTimeMinute: 10,
+            endTimeHour: 12,
+            endTimeMinute: 50,
+          },
+        ];
 
     const { confirmDialogIsOpen, weekModalIsOpen } = this.state;
     const texts = Texts[language].seniorProfileInfo;
@@ -107,7 +126,6 @@ class SeniorProfileInfo extends React.Component {
               </button>
             </div>
           </div>
-
         </div>
         {showAdditional && (
           <div className="seniorAdditionalInfoSection">
@@ -125,34 +143,35 @@ class SeniorProfileInfo extends React.Component {
           </div>
         )}
 
-        <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 300 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Giorno</TableCell>
-              <TableCell align="center">Orario</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {availabilities.map((row) => (
-              <TableRow
-                key={row.weekDay}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {toDayName(row.weekDay, language)}
-                </TableCell>
-                <TableCell align="center">
-                    dalle {row.startTimeHour} : {row.startTimeMinute} 
-                    <br/>
-                    alle {row.endTimeHour} : {row.endTimeMinute} 
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
+        <div className="row" style={{ marginLeft: "10%", marginRight: "10%" }}>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 300 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Giorno</TableCell>
+                  <TableCell align="center">Orario</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {availabilities.map((row) => (
+                  <TableRow
+                    key={row.weekDay}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {toDayName(row.weekDay, language)}
+                    </TableCell>
+                    <TableCell align="center">
+                      dalle {row.startTimeHour} : {row.startTimeMinute}
+                      <br />
+                      alle {row.endTimeHour} : {row.endTimeMinute}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </React.Fragment>
     );
   }
@@ -166,7 +185,7 @@ SeniorProfileInfo.propTypes = {
   otherInfo: PropTypes.string,
   showAdditional: PropTypes.bool,
   language: PropTypes.string,
-  match: PropTypes.object
+  match: PropTypes.object,
 };
 
 export default withRouter(withLanguage(SeniorProfileInfo));
