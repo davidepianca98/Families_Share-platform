@@ -69,7 +69,7 @@ const fetchMaterialRequests = (groupId, filter) => {
   return axios
     .get(filteredApiPath)
     .then((response) => {
-      return response.data;
+      return response.data.filter(materials => materials.satisfied_by === null || materials.satisfied_by === undefined);
     })
     .catch((error) => {
       Log.error(error);

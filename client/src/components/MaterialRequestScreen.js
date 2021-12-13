@@ -106,7 +106,17 @@ class MaterialRequestScreen extends React.Component {
     };
 
     handleOffer = () => {
-        //TODO metodo per gestire l'offerta del materiale da parte di un utente
+        const { match, history } = this.props;
+        const { materialId } = match.params;
+        axios
+            .post(`/api/materials/requests/${materialId}/satisfy`)
+            .then((response) => {
+                Log.info(response);
+                history.goBack();
+            })
+            .catch((error) => {
+                Log.error(error);
+            });
     };
 
     getDatesString = (date) => {
