@@ -5,6 +5,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Button from "@material-ui/core/Button";
+import MomentUtils from "@date-io/moment";
+import { MuiPickersUtilsProvider, TimePicker } from "@material-ui/pickers";
 import {
   createMuiTheme,
   MuiThemeProvider,
@@ -66,13 +68,17 @@ class SeniorTimeDialog extends React.Component {
 
     this.state = {
       dayName: "xxx", 
+      startTime: null,
+      endTime: null,
     };
 
   }
 
   componentDidMount() {
     const {language, day} = this.props;
-    this.setState({ dayName: getDayName(day, language) });
+    let startTime = "10:30";
+    let endTime = "12:30";
+    this.setState({ startTime: startTime, endTime: endTime, dayName: getDayName(day, language) });
   }
 
   handleSave = () => {
@@ -85,9 +91,17 @@ class SeniorTimeDialog extends React.Component {
     handleCloseTime();
   };
 
+  handleStartChange = () => {
+    // do something
+  };
+
+  handleEndChange = () => {
+    // do something
+  };
+
   render() {
     const { language, isOpen, classes, senior} = this.props;
-    const { dayName } = this.state;
+    const { dayName, startTime, endTime } = this.state;
     const texts = Texts[language].availabilityTimeModal;
 
     return (
@@ -103,6 +117,15 @@ class SeniorTimeDialog extends React.Component {
           </DialogTitle>
 
           <DialogContent>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <TimePicker
+                clearable
+                ampm={false}
+                label="Inizio"
+                value={startTime}
+                onChange={this.handleStartChange}
+              />
+            </MuiPickersUtilsProvider>
           </DialogContent>
 
           <DialogActions>
