@@ -80,7 +80,7 @@ class SeniorWeekDialog extends React.Component {
     const allDays = [];
 
     this.state = {
-      fetchedSeniorData: false, 
+      fetchedSeniorData: false,
       allDays,
     };
 
@@ -113,44 +113,18 @@ class SeniorWeekDialog extends React.Component {
       });
     });
 
-    this.setState({ 
+    this.setState({
       senior: senior,
       fetchedSeniorData: true,
-      allDays: allDays, 
+      allDays: allDays,
       localAvailabilities: localAvailabilities,
       originalAvailabilities: originalAvailabilities
      });
   }
 
   handleSave = () => {
-    const { allDays, senior } = this.state;
-
-    let newAvailabilities = [];
-
-    allDays.forEach((day) => {
-      if (day.available)
-        newAvailabilities.push({
-          weekDay: day.index,
-          startTimeHour: 10,
-          startTimeMinute: 30,
-          endTimeHour: 13,
-          endTimeMinute: 30,
-        });
-    });
-
-    senior.availabilities = newAvailabilities;
-
     const { handleCloseWeek } = this.props;
-    axios
-      .put(`/api/seniors/${senior.senior_id}`, senior, {})
-      .then((response) => {
-        Log.info(response);
-        handleCloseWeek();
-      })
-      .catch((error) => {
-        Log.error(error);
-        handleCloseWeek();
-      });
+    handleCloseWeek();
   };
 
   handleCancelWeek = () => {
@@ -239,7 +213,7 @@ class SeniorWeekDialog extends React.Component {
 
                       <ListItemSecondaryAction>
                         <IconButton edge="end" aria-label="comments">
-                          <AccessTimeIcon 
+                          <AccessTimeIcon
                             onClick={() => day.available ? this.handleOpenTime(day.index) : null}/>
                         </IconButton>
                       </ListItemSecondaryAction>

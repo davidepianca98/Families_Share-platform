@@ -92,7 +92,7 @@ class SeniorProfileInfo extends React.Component {
       this.props;
 
     const {
-       confirmDialogIsOpen, 
+       confirmDialogIsOpen,
        weekModalIsOpen,
        time0ModalIsOpen,
        time1ModalIsOpen,
@@ -216,7 +216,7 @@ class SeniorProfileInfo extends React.Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {senior.availabilities.map((row) => (
+                {senior?.availabilities?.map((row) => (
                   <TableRow
                     key={row.weekDay}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

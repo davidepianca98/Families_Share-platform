@@ -7,6 +7,7 @@ images/announcements/*
 images/profiles/
 !images/profiles/child_default_photo.jpg
 !images/profiles/user_default_photo.png
+!images/profiles/senior_default_photo.png
 images/groups/
 !images/groups/group_default_photo.png
 coverage

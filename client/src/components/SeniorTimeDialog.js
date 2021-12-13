@@ -14,6 +14,9 @@ import {
 } from "@material-ui/core/styles";
 import Texts from "../Constants/Texts";
 import withLanguage from "./LanguageContext";
+import moment from "moment";
+import axios from 'axios'
+import Log from './Log'
 
 let getDayName = (index, language) => {
   const days = Texts[language].availabilityWeekModal;
@@ -66,24 +69,39 @@ class SeniorTimeDialog extends React.Component {
   constructor(props) {
     super(props);
 
+    let startTime, endTime;
+    if (props.senior?.availabilities !== undefined && props.senior?.availabilities[props.day] !== undefined) {
+      let str = `${props.senior.availabilities[props.day].startTimeHour}:${props.senior.availabilities[props.day].startTimeMinute}`;
+      startTime = moment(str, "H:mm");
+      str = `${props.senior.availabilities[props.day].endTimeHour}:${props.senior.availabilities[props.day].endTimeMinute}`;
+      endTime = moment(str, "H:mm");
+    } else {
+      startTime = moment(new Date);
+      endTime = moment(new Date);
+    }
+
     this.state = {
-      dayName: "xxx", 
-      startTime: null,
-      endTime: null,
+      dayName: getDayName(props.day, props.language),
+      startTime,
+      endTime
     };
-
-  }
-
-  componentDidMount() {
-    const {language, day} = this.props;
-    let startTime = "10:30";
-    let endTime = "12:30";
-    this.setState({ startTime: startTime, endTime: endTime, dayName: getDayName(day, language) });
   }
 
   handleSave = () => {
-    const { handleCloseTime } = this.props;
+    const { handleCloseTime, senior } = this.props;
     handleCloseTime();
+    senior.availabilities[this.props.day].startTimeHour = this.state.startTime.hour();
+    senior.availabilities[this.props.day].startTimeMinute = this.state.startTime.minutes();
+    senior.availabilities[this.props.day].endTimeHour = this.state.endTime.hour();
+    senior.availabilities[this.props.day].endTimeMinute = this.state.endTime.minutes();
+    axios
+      .put(`/api/seniors/${senior.senior_id}`, senior)
+      .then(response => {
+        Log.info(response);
+      })
+      .catch(error => {
+        Log.error(error);
+      });
   };
 
   handleCancel = () => {
@@ -91,12 +109,12 @@ class SeniorTimeDialog extends React.Component {
     handleCloseTime();
   };
 
-  handleStartChange = () => {
-    // do something
+  handleStartChange = (time) => {
+    this.setState({ startTime: time })
   };
 
-  handleEndChange = () => {
-    // do something
+  handleEndChange = (time) => {
+    this.setState({ endTime: time })
   };
 
   render() {
@@ -124,6 +142,15 @@ class SeniorTimeDialog extends React.Component {
                 label="Inizio"
                 value={startTime}
                 onChange={this.handleStartChange}
+              />
+            </MuiPickersUtilsProvider>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <TimePicker
+                clearable
+                ampm={false}
+                label="Fine"
+                value={endTime}
+                onChange={this.handleEndChange}
               />
             </MuiPickersUtilsProvider>
           </DialogContent>
