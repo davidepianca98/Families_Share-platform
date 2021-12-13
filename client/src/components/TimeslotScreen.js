@@ -118,9 +118,7 @@ const getGroupSeniors = async (membersIds) => {
   await asyncForEach(membersIds, async (id) => {
     let caaa = await getUsersSeniors(id);
     respArray = respArray.concat(respArray, caaa);
-    //respArray.concat(await getUsersSeniors(id));
   });
-  console.log(respArray);
   return respArray;
 };
 
@@ -131,8 +129,6 @@ const getUsersSeniors = (userId) => {
       return response.data.map((senior) => senior.senior_id);
     })
     .catch((error) => {
-      console.log("ERRORE --------------");
-      console.log(error);
       Log.error(error);
       return [];
     });
@@ -257,8 +253,6 @@ class TimeslotScreen extends React.Component {
       seniors = await getUsersSeniors(userId);
       parents = [userId];
     }
-    console.log("DB 1");
-    console.log(seniors);
     if (shared.externals) {
       shared.externals = JSON.parse(shared.externals);
     } else {
@@ -268,15 +262,11 @@ class TimeslotScreen extends React.Component {
     parentIds = parentIds.concat(parents);
     seniorsIds = seniorsIds.concat(seniors);
 
-    console.log("DB 2");
-    console.log(seniorsIds);
     const seniorProfiles = await getSeniorProfiles([...new Set(seniorsIds)]);
     const parentProfiles = await getParentProfiles([...new Set(parentIds)]);
     const childrenProfiles = await getChildrenProfiles([
       ...new Set(childrenIds),
     ]);
-    console.log("DB 3");
-    console.log(seniorProfiles);
     this.setState({
       fetchedTimeslot: true,
       timeslot,
@@ -758,14 +748,11 @@ class TimeslotScreen extends React.Component {
       seniors,
       timeslot,
     } = this.state;
-    console.log(unfilteredSeniorProfiles);
     const seniorProfiles = unfilteredSeniorProfiles.filter((profile) =>
       seniors.includes(profile.senior_id)
     );
-    console.log(seniorProfiles);
     const seniorParticipants = timeslot.extendedProperties.shared.seniors;
     return seniorProfiles.map((senior, index) => {
-      console.log(senior);
       return (
         <TimeslotSubcribe
           key={index}
