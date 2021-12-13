@@ -12,10 +12,10 @@ import Log from "./Log";
 const styles = {
   checkbox: {
     "&$checked": {
-      color: "#00838F"
-    }
+      color: "#00838F",
+    },
   },
-  checked: {}
+  checked: {},
 };
 
 const dataURLtoFile = (dataurl, filename) => {
@@ -42,7 +42,7 @@ class CreateSeniorScreen extends React.Component {
     const { state } = history.location;
     if (state !== undefined) {
       this.state = {
-        ...state
+        ...state,
       };
     } else {
       this.state = {
@@ -55,7 +55,7 @@ class CreateSeniorScreen extends React.Component {
         year: moment().year(),
         acceptTerms: false,
         background: "#00838F",
-        image: "/images/profiles/senior_default_photo.png"
+        image: "/images/profiles/senior_default_photo.jpg",
       };
     }
   }
@@ -75,13 +75,13 @@ class CreateSeniorScreen extends React.Component {
     document.removeEventListener("message", this.handleMessage, false);
   }
 
-  handleMessage = event => {
+  handleMessage = (event) => {
     const data = JSON.parse(event.data);
     if (data.action === "fileUpload") {
       const image = `data:image/png;base64, ${data.value}`;
       this.setState({
         image,
-        file: dataURLtoFile(image, "photo.png")
+        file: dataURLtoFile(image, "photo.png"),
       });
     }
   };
@@ -91,7 +91,7 @@ class CreateSeniorScreen extends React.Component {
     history.goBack();
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name } = event.target;
     const { value } = event.target;
     this.setState({ [name]: value });
@@ -132,7 +132,7 @@ class CreateSeniorScreen extends React.Component {
   submitChanges = () => {
     const { match, history } = this.props;
     const { profileId: userId } = match.params;
-    
+
     const {
       name: given_name,
       surname: family_name,
@@ -143,7 +143,7 @@ class CreateSeniorScreen extends React.Component {
       availabilities,
       background,
       image,
-      file
+      file,
     } = this.state;
 
     let senior = {
@@ -154,10 +154,10 @@ class CreateSeniorScreen extends React.Component {
       birthdate: moment().set({
         year,
         month: month - 1,
-        date
+        date,
       }),
       availabilities: availabilities,
-    }
+    };
     if (file !== undefined) {
       senior.photo = file;
     } else {
@@ -165,17 +165,17 @@ class CreateSeniorScreen extends React.Component {
     }
     axios
       .post(`/api/users/${userId}/seniors`, senior)
-      .then(response => {
+      .then((response) => {
         Log.info(response);
         history.goBack();
       })
-      .catch(error => {
+      .catch((error) => {
         Log.error(error);
         history.goBack();
       });
   };
 
-  handleSave = event => {
+  handleSave = (event) => {
     event.preventDefault();
     if (this.validate()) {
       this.submitChanges();
@@ -189,8 +189,8 @@ class CreateSeniorScreen extends React.Component {
     history.push({
       pathname: `${pathname}/additional`,
       state: {
-        ...this.state
-      }
+        ...this.state,
+      },
     });
     return false;
   };
@@ -208,15 +208,15 @@ class CreateSeniorScreen extends React.Component {
     this.setState({ acceptTerms: !acceptTerms });
   };
 
-  handleColorChange = color => {
+  handleColorChange = (color) => {
     this.setState({ background: color.hex });
   };
 
-  handleImageChange = event => {
+  handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       const file = event.target.files[0];
-      reader.onload = e => {
+      reader.onload = (e) => {
         this.setState({ image: e.target.result, file });
       };
       reader.readAsDataURL(event.target.files[0]);
@@ -242,7 +242,7 @@ class CreateSeniorScreen extends React.Component {
       date,
       acceptTerms,
       background,
-      image
+      image,
     } = this.state;
 
     const formClass = [];
@@ -252,10 +252,10 @@ class CreateSeniorScreen extends React.Component {
           .month(month - 1)
           .year(year)
           .daysInMonth()
-      ).keys()
-    ].map(x => x + 1);
-    const months = [...Array(12).keys()].map(x => x + 1);
-    const years = [...Array(100).keys()].map(x => x + (moment().year() - 99));
+      ).keys(),
+    ].map((x) => x + 1);
+    const months = [...Array(12).keys()].map((x) => x + 1);
+    const years = [...Array(100).keys()].map((x) => x + (moment().year() - 99));
     if (formIsValidated) {
       formClass.push("was-validated");
     }
@@ -297,7 +297,7 @@ class CreateSeniorScreen extends React.Component {
         </div>
         <div id="createSeniorProfileInfoContainer">
           <form
-            ref={form => {
+            ref={(form) => {
               this.formEl = form;
             }}
             onSubmit={this.handleSubmit}
@@ -335,7 +335,7 @@ class CreateSeniorScreen extends React.Component {
                 <div className="fullInput editSeniorProfileInputField">
                   <label htmlFor="date">{texts.date}</label>
                   <select value={date} onChange={this.handleChange} name="date">
-                    {dates.map(d => (
+                    {dates.map((d) => (
                       <option key={d} value={d}>
                         {d}
                       </option>
@@ -351,7 +351,7 @@ class CreateSeniorScreen extends React.Component {
                     onChange={this.handleChange}
                     name="month"
                   >
-                    {months.map(m => (
+                    {months.map((m) => (
                       <option key={m} value={m}>
                         {m}
                       </option>
@@ -363,7 +363,7 @@ class CreateSeniorScreen extends React.Component {
                 <div className="fullInput editSeniorProfileInputField">
                   <label htmlFor="year">{texts.year}</label>
                   <select value={year} onChange={this.handleChange} name="year">
-                    {years.map(y => (
+                    {years.map((y) => (
                       <option key={y} value={y}>
                         {y}
                       </option>
@@ -410,15 +410,15 @@ class CreateSeniorScreen extends React.Component {
                       onClick={this.handleNativeImageChange}
                     />
                   ) : (
-                      <input
-                        id="uploadLogoInput"
-                        className="editSeniorProfileInput"
-                        type="file"
-                        accept="image/*"
-                        name="logo"
-                        onChange={this.handleImageChange}
-                      />
-                    )}
+                    <input
+                      id="uploadLogoInput"
+                      className="editSeniorProfileInput"
+                      type="file"
+                      accept="image/*"
+                      name="logo"
+                      onChange={this.handleImageChange}
+                    />
+                  )}
                 </div>
               </div>
               <div className="col-2-10">
@@ -471,5 +471,5 @@ CreateSeniorScreen.propTypes = {
   history: PropTypes.object,
   match: PropTypes.object,
   language: PropTypes.string,
-  classes: PropTypes.object
+  classes: PropTypes.object,
 };
