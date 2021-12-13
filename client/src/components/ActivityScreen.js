@@ -15,6 +15,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import Images from "../Constants/Images";
 import Log from "./Log";
 import Avatar from "./Avatar";
+import { SeniorIcon } from "./SeniorIcon";
 
 const styles = {
   add: {
@@ -34,6 +35,12 @@ const styles = {
     height: "3rem!important",
   },
 };
+
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}
 
 const getActivityTimeslots = (activityId, groupId) => {
   return axios
@@ -95,6 +102,26 @@ const getActivityChildren = (ids) => {
     });
 };
 
+const getSeniorProfile = (id) => {
+  return axios
+    .get(`/api/seniors/${id}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      Log.error(err);
+      return {};
+    });
+};
+
+const getActivitySenior = async (seniorIds) => {
+  let respArray = [];
+  asyncForEach(seniorIds, async (id) => {
+    respArray.push(await getSeniorProfile(id));
+  });
+  return respArray;
+};
+
 const getActivityParents = (ids) => {
   return axios
     .get("/api/profiles", {
@@ -127,6 +154,7 @@ class ActivityScreen extends React.Component {
       action: "",
       showVolunteers: false,
       showChildren: false,
+      showSenior: false,
       groupId,
       activityId,
       count: 0,
@@ -140,6 +168,7 @@ class ActivityScreen extends React.Component {
     activity.timeslots = await getActivityTimeslots(activityId, groupId);
     let childIds = [];
     let parentIds = [];
+    let seniorIds = [];
     activity.timeslots.forEach((timeslot) => {
       const childParticipants = JSON.parse(
         timeslot.extendedProperties.shared.children
@@ -147,18 +176,31 @@ class ActivityScreen extends React.Component {
       const parentParticipants = JSON.parse(
         timeslot.extendedProperties.shared.parents
       );
+      const seniorParticipants = JSON.parse(
+        timeslot.extendedProperties.shared.seniors
+      );
       childIds = childIds.concat(childParticipants);
       parentIds = parentIds.concat(parentParticipants);
+      seniorIds = seniorIds.concat(seniorParticipants);
     });
     const childUniqueIds = [...new Set(childIds)];
     const parentUniqueIds = [...new Set(parentIds)];
+    const seniorUniqueIds = [...new Set(seniorIds)];
     activity.children = await getActivityChildren(childUniqueIds);
     activity.parents = await getActivityParents(parentUniqueIds);
+    activity.seniors = await getActivitySenior(seniorUniqueIds);
+    console.log(activity.children);
+    console.log(activity.parents);
+    console.log(activity.seniors);
     activity.children = activity.children.sort(
       (a, b) =>
         `${a.given_name} ${a.family_name}` - `${b.given_name} ${b.family_name}`
     );
     activity.parents = activity.parents.sort(
+      (a, b) =>
+        `${a.given_name} ${a.family_name}` - `${b.given_name} ${b.family_name}`
+    );
+    activity.seniors = activity.seniors.sort(
       (a, b) =>
         `${a.given_name} ${a.family_name}` - `${b.given_name} ${b.family_name}`
     );
@@ -195,17 +237,27 @@ class ActivityScreen extends React.Component {
     }
   };
 
+  switchAssignment = (type, profile) => {
+    switch (type) {
+      case "parents":
+        return `/profiles/groupmember/children/${profile.child_id}`;
+      case "child":
+        return `/profiles/${profile.user_id}/info`;
+      case "senior":
+        return `/profiles/${profile.user_id}/seniors/${profile.senior_id}`;
+      default:
+        return "";
+    }
+  };
+
   renderList = (list, type) => {
     const { classes } = this.props;
     return list.map((profile, index) => (
       <li key={index} style={{ display: "block" }}>
+        {console.log(profile)}
         <div className="row" style={{ margin: "1rem 0" }}>
           <Avatar
-            route={
-              type === "parents"
-                ? `/profiles/groupmember/children/${profile.child_id}`
-                : `/profiles/${profile.user_id}/info`
-            }
+            route={this.switchAssignment(type, profile)}
             className={classes.avatar}
             thumbnail={path(profile, ["image", "path"])}
             disabled={profile.suspended}
@@ -227,30 +279,60 @@ class ActivityScreen extends React.Component {
 
   renderParticipants = (type) => {
     const {
-      activity: { children, parents },
+      activity: { children, parents, seniors },
       showVolunteers,
       showChildren,
+      showSenior,
     } = this.state;
+    const showPartecipants = (type) => {
+      switch (type) {
+        case "volunteers":
+          return showVolunteers;
+        case "children":
+          return showChildren;
+        case "seniors":
+          return showSenior;
+        default:
+          return false;
+      }
+    };
+    const cssProperty = (type) => {
+      switch (type) {
+        case "volunteers":
+          return "showVolunteers";
+        case "children":
+          return "showChildren";
+        case "seniors":
+          return "showSenior";
+        default:
+          return "";
+      }
+    };
     const { language } = this.props;
     const texts = Texts[language].activityScreen;
     const rowStyle = { minHeight: "5rem" };
-    const showParticipants =
-      type === "volunteers" ? showVolunteers : showChildren;
-    const stateProperty =
-      type === "volunteers" ? "showVolunteers" : "showChildren";
-    const profiles = type === "volunteers" ? parents : children;
+    const showParticipants = showPartecipants(type);
+    const stateProperty = cssProperty(type);
+    const profiles =
+      type === "volunteers"
+        ? parents
+        : type === "children"
+        ? children
+        : seniors; // FIXME: change ?
     return (
       <React.Fragment>
         <div className="row no-gutters" style={rowStyle}>
           <div className="col-1-10">
             {type === "volunteers" ? (
               <i className="fas fa-user-friends" />
-            ) : (
+            ) : type === "children" ? (
               <img
                 src={Images.babyFace}
                 alt="map marker icon"
                 className="activityInfoImage"
               />
+            ) : (
+              <SeniorIcon fontSize="large" />
             )}
           </div>
           <div className="col-8-10">
@@ -400,7 +482,6 @@ class ActivityScreen extends React.Component {
 
   render() {
     const { history, language, classes } = this.props;
-    console.log(classes);
     const {
       activity,
       fetchedActivityData,
@@ -535,6 +616,7 @@ class ActivityScreen extends React.Component {
             </div>
             {this.renderParticipants("volunteers")}
             {this.renderParticipants("children")}
+            {this.renderParticipants("seniors")}
           </div>
         </div>
         <Fab

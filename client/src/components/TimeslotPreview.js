@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
 import Images from "../Constants/Images";
+import { SeniorIcon } from "./SeniorIcon";
 
 const TimeslotPreview = ({ timeslot, history }) => {
   const getPreviewStyle = () => {
@@ -22,6 +23,7 @@ const TimeslotPreview = ({ timeslot, history }) => {
   const startTime = moment(timeslot.start.dateTime).format("HH:mm");
   const endTime = moment(timeslot.end.dateTime).format("HH:mm");
   const parents = JSON.parse(timeslot.extendedProperties.shared.parents);
+  const seniors = JSON.parse(timeslot.extendedProperties.shared.seniors);
   const externals = JSON.parse(
     timeslot.extendedProperties.shared.externals || "[]"
   );
@@ -79,6 +81,10 @@ const TimeslotPreview = ({ timeslot, history }) => {
               />
             </div>
             <div className="timeslotPreviewParticipants">{children.length}</div>
+            <div className="col-1-10">
+              <SeniorIcon fontSize="large" />
+            </div>
+            <div className="timeslotPreviewParticipants">{seniors.length}</div>
           </div>
         </div>
         <div className="col-1-10">
@@ -100,5 +106,5 @@ export default withRouter(TimeslotPreview);
 
 TimeslotPreview.propTypes = {
   timeslot: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
 };

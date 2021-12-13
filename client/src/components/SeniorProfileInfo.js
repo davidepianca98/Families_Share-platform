@@ -22,14 +22,22 @@ import {
 let getDayName = (index, language) => {
   const days = Texts[language].availabilityWeekModal;
   switch (index) {
-    case 0:      return days.monday;
-    case 1:      return days.tuesday;
-    case 2:      return days.wednesday;
-    case 3:      return days.thursday;
-    case 4:      return days.friday;
-    case 5:      return days.saturday;
-    case 6:      return days.sunday;
-    default:      return "";
+    case 0:
+      return days.monday;
+    case 1:
+      return days.tuesday;
+    case 2:
+      return days.wednesday;
+    case 3:
+      return days.thursday;
+    case 4:
+      return days.friday;
+    case 5:
+      return days.saturday;
+    case 6:
+      return days.sunday;
+    default:
+      return "";
   }
 };
 
@@ -65,13 +73,27 @@ class SeniorProfileInfo extends React.Component {
 
   handleOpenTime = (day) => {
     switch (day) {
-      case 0: this.setState({ day: day, time0ModalIsOpen: true }); break;
-      case 1: this.setState({ day: day, time1ModalIsOpen: true }); break;
-      case 2: this.setState({ day: day, time2ModalIsOpen: true }); break;
-      case 3: this.setState({ day: day, time3ModalIsOpen: true }); break;
-      case 4: this.setState({ day: day, time4ModalIsOpen: true }); break;
-      case 5: this.setState({ day: day, time5ModalIsOpen: true }); break;
-      case 6: this.setState({ day: day, time6ModalIsOpen: true }); break;
+      case 0:
+        this.setState({ day: day, time0ModalIsOpen: true });
+        break;
+      case 1:
+        this.setState({ day: day, time1ModalIsOpen: true });
+        break;
+      case 2:
+        this.setState({ day: day, time2ModalIsOpen: true });
+        break;
+      case 3:
+        this.setState({ day: day, time3ModalIsOpen: true });
+        break;
+      case 4:
+        this.setState({ day: day, time4ModalIsOpen: true });
+        break;
+      case 5:
+        this.setState({ day: day, time5ModalIsOpen: true });
+        break;
+      case 6:
+        this.setState({ day: day, time6ModalIsOpen: true });
+        break;
     }
   };
 
@@ -84,7 +106,7 @@ class SeniorProfileInfo extends React.Component {
       time4ModalIsOpen: false,
       time5ModalIsOpen: false,
       time6ModalIsOpen: false,
-     });
+    });
   };
 
   render() {
@@ -92,16 +114,16 @@ class SeniorProfileInfo extends React.Component {
       this.props;
 
     const {
-       confirmDialogIsOpen,
-       weekModalIsOpen,
-       time0ModalIsOpen,
-       time1ModalIsOpen,
-       time2ModalIsOpen,
-       time3ModalIsOpen,
-       time4ModalIsOpen,
-       time5ModalIsOpen,
-       time6ModalIsOpen,
-      } = this.state;
+      confirmDialogIsOpen,
+      weekModalIsOpen,
+      time0ModalIsOpen,
+      time1ModalIsOpen,
+      time2ModalIsOpen,
+      time3ModalIsOpen,
+      time4ModalIsOpen,
+      time5ModalIsOpen,
+      time6ModalIsOpen,
+    } = this.state;
     const texts = Texts[language].seniorProfileInfo;
     return (
       <React.Fragment>
@@ -179,7 +201,7 @@ class SeniorProfileInfo extends React.Component {
             </div>
           </div>
           <div className="row no-gutters">
-            <div className="col-3-10">
+            <div className="horizontalCenter">
               <button
                 type="button"
                 className="setAvailabilities"
@@ -216,21 +238,31 @@ class SeniorProfileInfo extends React.Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {senior?.availabilities?.map((row) => (
-                  <TableRow
-                    key={row.weekDay}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {getDayName(row.weekDay, language)}
-                    </TableCell>
-                    <TableCell align="center">
-                      dalle {row.startTimeHour} : {row.startTimeMinute}
-                      <br />
-                      alle {row.endTimeHour} : {row.endTimeMinute}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {senior?.availabilities?.map((row) => {
+                  console.log(row);
+                  if (row !== null) {
+                    return (
+                      <TableRow
+                        key={row.weekDay}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        {" "}
+                        <TableCell component="th" scope="row">
+                          {getDayName(row.weekDay, language)}
+                        </TableCell>
+                        <TableCell align="center">
+                          dalle {row.startTimeHour} : {row.startTimeMinute}
+                          <br />
+                          alle {row.endTimeHour} : {row.endTimeMinute}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  } else {
+                    return <div></div>;
+                  }
+                })}
               </TableBody>
             </Table>
           </TableContainer>
@@ -247,7 +279,7 @@ SeniorProfileInfo.propTypes = {
   senior: PropTypes.object,
   otherInfo: PropTypes.string,
   showAdditional: PropTypes.bool,
-  language: PropTypes.string
+  language: PropTypes.string,
 };
 
 export default withRouter(withLanguage(SeniorProfileInfo));

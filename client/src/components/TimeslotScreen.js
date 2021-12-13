@@ -14,126 +14,190 @@ import LoadingSpinner from "./LoadingSpinner";
 import TimeslotSubcribe from "./TimeslotSubcribe";
 import Images from "../Constants/Images";
 import Log from "./Log";
+import { ColorLensOutlined, ContactSupportOutlined } from "@material-ui/icons";
 
 const styles = () => ({
   avatar: {
     width: "3rem",
-    height: "3rem"
-  }
+    height: "3rem",
+  },
 });
 
-const getTimeslot = pathname => {
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}
+
+const getTimeslot = (pathname) => {
   return axios
     .get(pathname)
-    .then(response => {
+    .then((response) => {
       return response.data;
     })
-    .catch(error => {
+    .catch((error) => {
       Log.error(error);
       return {
         start: {
-          dateTime: ""
+          dateTime: "",
         },
         end: {
-          dateTime: ""
+          dateTime: "",
         },
         extendedProperties: {
           shared: {
             parents: "[]",
-            children: "[]"
-          }
-        }
+            children: "[]",
+          },
+        },
       };
     });
 };
 
-const getUsersChildren = userId => {
+const getUsersChildren = (userId) => {
   return axios
     .get(`/api/users/${userId}/children`)
-    .then(response => {
-      return response.data.map(child => child.child_id);
+    .then((response) => {
+      return response.data.map((child) => child.child_id);
     })
-    .catch(error => {
+    .catch((error) => {
       Log.error(error);
       return [];
     });
 };
 
-const getGroupChildren = groupId => {
+const getGroupChildren = (groupId) => {
   return axios
     .get(`/api/groups/${groupId}/children`)
-    .then(response => {
+    .then((response) => {
       return response.data;
     })
-    .catch(error => {
+    .catch((error) => {
       Log.error(error);
       return [];
     });
 };
 
-const getGroupMembers = groupId => {
+const getGroupMembers = (groupId) => {
   return axios
     .get(`/api/groups/${groupId}/members`)
-    .then(response => {
-      return response.data.filter(m => m.group_accepted && m.user_accepted);
+    .then((response) => {
+      return response.data.filter((m) => m.group_accepted && m.user_accepted);
     })
-    .catch(error => {
+    .catch((error) => {
       Log.error(error);
       return [];
     });
 };
 
-const getChildrenProfiles = ids => {
+const getChildrenProfiles = (ids) => {
   return axios
     .get("/api/children", {
       params: {
-        ids
-      }
+        ids,
+      },
     })
-    .then(response => {
-      return response.data.map(child => {
+    .then((response) => {
+      return response.data.map((child) => {
         return {
           child_id: child.child_id,
           image: path(child, ["image", "path"]),
           name: `${child.given_name} ${child.family_name}`,
-          given_name: child.given_name
+          given_name: child.given_name,
         };
       });
     })
-    .catch(error => {
+    .catch((error) => {
       Log.error(error);
       return [];
     });
 };
 
-const getParentProfiles = ids => {
+const getGroupSeniors = async (membersIds) => {
+  let respArray = [];
+  await asyncForEach(membersIds, async (id) => {
+    let caaa = await getUsersSeniors(id);
+    respArray = respArray.concat(respArray, caaa);
+    //respArray.concat(await getUsersSeniors(id));
+  });
+  console.log(respArray);
+  return respArray;
+};
+
+const getUsersSeniors = (userId) => {
+  return axios
+    .get(`/api/users/${userId}/seniors`)
+    .then((response) => {
+      return response.data.map((senior) => senior.senior_id);
+    })
+    .catch((error) => {
+      console.log("ERRORE --------------");
+      console.log(error);
+      Log.error(error);
+      return [];
+    });
+};
+
+const getOneSeniorProfile = (id) => {
+  return axios
+    .get(`/api/seniors/${id}`)
+    .then((response) => {
+      return response.data; /*response.data.map((child) => {
+        return {
+          child_id: child.child_id,
+          image: path(child, ["image", "path"]),
+          name: `${child.given_name} ${child.family_name}`,
+          given_name: child.given_name,
+        };
+      });*/
+    })
+    .catch((error) => {
+      Log.error(error);
+      return {};
+    });
+};
+
+const getSeniorProfiles = async (ids) => {
+  const profileArray = [];
+  asyncForEach(ids, async (id) => {
+    let profile = await getOneSeniorProfile(id);
+    profileArray.push(profile);
+  });
+  /*ids.forEach((id) => {
+    let profile = getOneSeniorProfile(id);
+    profileArray.push(profile);
+  });*/
+  return profileArray;
+};
+
+const getParentProfiles = (ids) => {
   return axios
     .get("/api/profiles", {
       params: {
         ids,
-        searchBy: "ids"
-      }
+        searchBy: "ids",
+      },
     })
-    .then(response => {
-      return response.data.map(parent => {
+    .then((response) => {
+      return response.data.map((parent) => {
         return {
           user_id: parent.user_id,
           image: path(parent, ["image", "path"]),
           name: `${parent.given_name} ${parent.family_name}`,
           phone: parent.phone,
           given_name: parent.given_name,
-          family_name: parent.family_name
+          family_name: parent.family_name,
         };
       });
     })
-    .catch(error => {
+    .catch((error) => {
       Log.error(error);
       return [
         {
           image: "",
           name: "",
-          id: ""
-        }
+          id: "",
+        },
       ];
     });
 };
@@ -147,6 +211,7 @@ class TimeslotScreen extends React.Component {
     confirmData: {},
     showParents: false,
     showChildren: false,
+    showSeniors: false,
     showAdmins: false,
     showExternals: false,
     children: [],
@@ -156,11 +221,12 @@ class TimeslotScreen extends React.Component {
       extendedProperties: {
         shared: {
           parents: [],
-          children: []
-        }
-      }
+          children: [],
+          seniors: [],
+        },
+      },
     },
-    adminChanges: {}
+    adminChanges: {},
   };
 
   async componentDidMount() {
@@ -173,19 +239,26 @@ class TimeslotScreen extends React.Component {
     const { shared } = timeslot.extendedProperties;
     shared.parents = JSON.parse(shared.parents);
     shared.children = JSON.parse(shared.children);
+    shared.seniors = JSON.parse(shared.seniors);
     let parentIds = [...shared.parents];
     let childrenIds = [...shared.children];
+    let seniorsIds = [...shared.seniors];
     let children;
     let parents;
+    let seniors;
     const members = await getGroupMembers(groupId);
-    const admins = members.filter(p => p.admin).map(m => m.user_id);
+    const admins = members.filter((p) => p.admin).map((m) => m.user_id);
     if (timeslot.userCanEdit) {
       children = await getGroupChildren(groupId);
-      parents = members.map(m => m.user_id);
+      seniors = await getGroupSeniors([userId]); // FIXME: getGroupSeniors
+      parents = members.map((m) => m.user_id);
     } else {
       children = await getUsersChildren(userId);
+      seniors = await getUsersSeniors(userId);
       parents = [userId];
     }
+    console.log("DB 1");
+    console.log(seniors);
     if (shared.externals) {
       shared.externals = JSON.parse(shared.externals);
     } else {
@@ -193,20 +266,28 @@ class TimeslotScreen extends React.Component {
     }
     childrenIds = childrenIds.concat(children);
     parentIds = parentIds.concat(parents);
+    seniorsIds = seniorsIds.concat(seniors);
 
+    console.log("DB 2");
+    console.log(seniorsIds);
+    const seniorProfiles = await getSeniorProfiles([...new Set(seniorsIds)]);
     const parentProfiles = await getParentProfiles([...new Set(parentIds)]);
     const childrenProfiles = await getChildrenProfiles([
-      ...new Set(childrenIds)
+      ...new Set(childrenIds),
     ]);
+    console.log("DB 3");
+    console.log(seniorProfiles);
     this.setState({
       fetchedTimeslot: true,
       timeslot,
       parentProfiles,
       childrenProfiles,
+      seniorProfiles,
       children,
       parents,
+      seniors,
       admins,
-      external: ""
+      external: "",
     });
   }
 
@@ -223,7 +304,7 @@ class TimeslotScreen extends React.Component {
     }
   };
 
-  handleMessage = event => {
+  handleMessage = (event) => {
     const { madeChanges } = this.state;
     const data = JSON.parse(event.data);
     if (data.action === "confirmGoBack") {
@@ -235,10 +316,10 @@ class TimeslotScreen extends React.Component {
     }
   };
 
-  handleLink = link => {
+  handleLink = (link) => {
     const message = {
       action: "link",
-      value: link
+      value: link,
     };
     if (window.isNative) {
       window.ReactNativeWebView.postMessage(JSON.stringify(message));
@@ -259,8 +340,8 @@ class TimeslotScreen extends React.Component {
     history.push({
       pathname: `${pathname}/emergency`,
       state: {
-        timeslot
-      }
+        timeslot,
+      },
     });
   };
 
@@ -272,6 +353,9 @@ class TimeslotScreen extends React.Component {
       return "fas fa-phone emergencyNumber";
     }
     if (type === "children") {
+      return "fas fa-info-circle emergencyNumber";
+    }
+    if (type === "senior") {
       return "fas fa-info-circle emergencyNumber";
     }
     return "";
@@ -287,11 +371,11 @@ class TimeslotScreen extends React.Component {
         this.setState({
           confirmDialogIsOpen: true,
           confirmTrigger: "phone",
-          confirmData: profile
+          confirmData: profile,
         });
       } else {
         enqueueSnackbar(texts.copy, {
-          variant: "info"
+          variant: "info",
         });
       }
     }
@@ -308,31 +392,34 @@ class TimeslotScreen extends React.Component {
     timeslot.extendedProperties.shared.parents = JSON.stringify(
       timeslot.extendedProperties.shared.parents
     );
+    timeslot.extendedProperties.shared.seniors = JSON.stringify(
+      timeslot.extendedProperties.shared.seniors
+    );
     timeslot.extendedProperties.shared.externals = JSON.stringify(
       timeslot.extendedProperties.shared.externals
     );
 
     axios
       .patch(`/api${pathname}`, {
-        ...timeslot
+        ...timeslot,
       })
-      .then(response => {
+      .then((response) => {
         Log.info(response);
         this.handleGoBack();
       })
-      .catch(error => {
+      .catch((error) => {
         Log.error(error);
       });
   };
 
-  handleConfirmDialogClose = choice => {
+  handleConfirmDialogClose = (choice) => {
     const { confirmTrigger, confirmData } = this.state;
     if (choice === "agree") {
       if (confirmTrigger === "phone") {
         window.ReactNativeWebView.postMessage(
           JSON.stringify({
             action: "phoneCall",
-            value: confirmData.phone
+            value: confirmData.phone,
           })
         );
       } else {
@@ -344,7 +431,7 @@ class TimeslotScreen extends React.Component {
     this.setState({ confirmDialogIsOpen: false, confirmTrigger: "" });
   };
 
-  handleConfirmDialogOpen = confirmTrigger => {
+  handleConfirmDialogOpen = (confirmTrigger) => {
     this.setState({ confirmDialogIsOpen: true, confirmTrigger });
   };
 
@@ -354,8 +441,9 @@ class TimeslotScreen extends React.Component {
     const {
       timeslot,
       childrenProfiles,
+      seniorProfiles,
       parentProfiles,
-      adminChanges
+      adminChanges,
     } = this.state;
     let snackMessage;
     const texts = Texts[language].timeslotScreen;
@@ -369,25 +457,31 @@ class TimeslotScreen extends React.Component {
             adminChanges[id] = 2;
           }
           const parentName = parentProfiles.find(
-            profile => profile.user_id === id
+            (profile) => profile.user_id === id
           ).given_name;
           snackMessage = `${texts.parentSubscribe1} ${parentName} ${texts.parentSubscribe2}`;
         } else {
           snackMessage = texts.userSubscribe;
         }
-      } else {
+      } else if (type === "child") {
         const childName = childrenProfiles.find(
-          profile => profile.child_id === id
+          (profile) => profile.child_id === id
         ).given_name;
         timeslot.extendedProperties.shared.children.push(id);
         snackMessage = `${texts.childSubscribe1} ${childName} ${texts.childSubscribe2}`;
+      } else {
+        const seniorName = seniorProfiles.find(
+          (profile) => profile.senior_id === id
+        ).given_name;
+        timeslot.extendedProperties.shared.seniors.push(id);
+        snackMessage = `${texts.childSubscribe1} ${seniorName} ${texts.childSubscribe2}`;
       }
       this.setState({ timeslot, madeChanges: true });
     } else {
       snackMessage = texts.cannotEdit;
     }
     enqueueSnackbar(snackMessage, {
-      variant: "info"
+      variant: "info",
     });
   };
 
@@ -398,15 +492,17 @@ class TimeslotScreen extends React.Component {
       timeslot,
       childrenProfiles,
       parentProfiles,
-      adminChanges
+      seniorProfiles,
+      adminChanges,
     } = this.state;
     const texts = Texts[language].timeslotScreen;
     let snackMessage;
     if (timeslot.extendedProperties.shared.status !== "completed") {
       if (type === "parent") {
-        timeslot.extendedProperties.shared.parents = timeslot.extendedProperties.shared.parents.filter(
-          subId => subId !== id
-        );
+        timeslot.extendedProperties.shared.parents =
+          timeslot.extendedProperties.shared.parents.filter(
+            (subId) => subId !== id
+          );
         if (timeslot.userCanEdit && userId !== id) {
           if (adminChanges[id]) {
             adminChanges[id] -= 2;
@@ -414,7 +510,7 @@ class TimeslotScreen extends React.Component {
             adminChanges[id] = -2;
           }
           const parentName = parentProfiles.find(
-            profile => profile.user_id === id
+            (profile) => profile.user_id === id
           ).given_name;
           snackMessage = `${texts.parentUnsubscribe1} ${parentName} ${texts.parentUnsubscribe2}`;
         } else {
@@ -422,16 +518,25 @@ class TimeslotScreen extends React.Component {
         }
       } else if (type === "child") {
         const childName = childrenProfiles.find(
-          profile => profile.child_id === id
+          (profile) => profile.child_id === id
         ).given_name;
-        timeslot.extendedProperties.shared.children = timeslot.extendedProperties.shared.children.filter(
-          subId => subId !== id
-        );
+        timeslot.extendedProperties.shared.children =
+          timeslot.extendedProperties.shared.children.filter(
+            (subId) => subId !== id
+          );
         snackMessage = `${texts.childUnsubscribe1} ${childName} ${texts.childUnsubscribe2}`;
+      } else if (type === "senior") {
+        const seniorName = seniorProfiles.find(
+          (profile) => profile.senior_id === id
+        ).given_name;
+        timeslot.extendedProperties.shared.seniors =
+          timeslot.extendedProperties.shared.seniors.filter(
+            (subId) => subId !== id
+          );
+        snackMessage = `${texts.childUnsubscribe1} ${seniorName} ${texts.childUnsubscribe2}`;
       } else {
-        timeslot.extendedProperties.shared.externals = timeslot.extendedProperties.shared.externals.filter(
-          e => e !== id
-        );
+        timeslot.extendedProperties.shared.externals =
+          timeslot.extendedProperties.shared.externals.filter((e) => e !== id);
         snackMessage = `${texts.parentUnsubscribe1} ${id} ${texts.parentUnsubscribe2}`;
       }
       this.setState({ timeslot, madeChanges: true });
@@ -439,7 +544,7 @@ class TimeslotScreen extends React.Component {
       snackMessage = texts.cannotEdit;
     }
     enqueueSnackbar(snackMessage, {
-      variant: "info"
+      variant: "info",
     });
   };
 
@@ -451,11 +556,20 @@ class TimeslotScreen extends React.Component {
     ).format("HH:mm")}-${moment(end.dateTime).format("HH:mm")}`;
   };
 
-  handleShowList = type => {
-    const { showParents, showAdmins, showChildren, showExternals } = this.state;
+  handleShowList = (type) => {
+    const {
+      showParents,
+      showAdmins,
+      showChildren,
+      showSeniors,
+      showExternals,
+    } = this.state;
     switch (type) {
       case "parents":
         this.setState({ showParents: !showParents });
+        break;
+      case "seniors":
+        this.setState({ showSeniors: !showSeniors });
         break;
       case "children":
         this.setState({ showChildren: !showChildren });
@@ -479,17 +593,19 @@ class TimeslotScreen extends React.Component {
     }
   };
 
-  renderParticipants = type => {
+  renderParticipants = (type) => {
     const { language, classes } = this.props;
     const {
       timeslot,
       parentProfiles,
+      seniorProfiles,
       showParents,
       childrenProfiles,
       showChildren,
+      showSeniors,
       showAdmins,
       showExternals,
-      admins
+      admins,
     } = this.state;
     const texts = Texts[language].timeslotScreen;
     let participants;
@@ -500,7 +616,7 @@ class TimeslotScreen extends React.Component {
     switch (type) {
       case "parents":
         participants = timeslot.extendedProperties.shared.parents;
-        profiles = parentProfiles.filter(profile =>
+        profiles = parentProfiles.filter((profile) =>
           participants.includes(profile.user_id)
         );
         showing = showParents;
@@ -512,7 +628,7 @@ class TimeslotScreen extends React.Component {
         break;
       case "children":
         participants = timeslot.extendedProperties.shared.children;
-        profiles = childrenProfiles.filter(profile =>
+        profiles = childrenProfiles.filter((profile) =>
           participants.includes(profile.child_id)
         );
         showing = showChildren;
@@ -522,10 +638,19 @@ class TimeslotScreen extends React.Component {
         // minimum = timeslot.extendedProperties.shared.requiredChildren;
         participantsHeader = texts.children;
         break;
+      case "seniors":
+        participants = timeslot.extendedProperties.shared.seniors;
+
+        profiles = seniorProfiles.filter((profile) =>
+          participants.includes(profile.senior_id)
+        );
+        showing = showSeniors;
+        participantsHeader = texts.seniors;
+        break;
       case "admins":
         showing = showAdmins;
         participantsHeader = texts.admins;
-        profiles = parentProfiles.filter(profile =>
+        profiles = parentProfiles.filter((profile) =>
           admins.includes(profile.user_id)
         );
         break;
@@ -533,9 +658,9 @@ class TimeslotScreen extends React.Component {
         participants = timeslot.extendedProperties.shared.externals;
         showing = showExternals;
         participantsHeader = texts.externals;
-        profiles = participants.map(name => ({
+        profiles = participants.map((name) => ({
           name,
-          image: "/images/profiles/user_default_photo.png"
+          image: "/images/profiles/user_default_photo.png",
         }));
         break;
       default:
@@ -606,14 +731,14 @@ class TimeslotScreen extends React.Component {
     const {
       timeslot,
       parentProfiles: unfilteredParentProfiles,
-      parents
+      parents,
     } = this.state;
 
     const parentParticipants = timeslot.extendedProperties.shared.parents;
-    const parentProfiles = unfilteredParentProfiles.filter(profile =>
+    const parentProfiles = unfilteredParentProfiles.filter((profile) =>
       parents.includes(profile.user_id)
     );
-    return parentProfiles.map(parent => (
+    return parentProfiles.map((parent) => (
       <TimeslotSubcribe
         name={parent.name}
         key={parent.user_id}
@@ -627,13 +752,42 @@ class TimeslotScreen extends React.Component {
     ));
   };
 
+  getSeniorSubscribes = () => {
+    const {
+      seniorProfiles: unfilteredSeniorProfiles,
+      seniors,
+      timeslot,
+    } = this.state;
+    console.log(unfilteredSeniorProfiles);
+    const seniorProfiles = unfilteredSeniorProfiles.filter((profile) =>
+      seniors.includes(profile.senior_id)
+    );
+    console.log(seniorProfiles);
+    const seniorParticipants = timeslot.extendedProperties.shared.seniors;
+    return seniorProfiles.map((senior, index) => {
+      console.log(senior);
+      return (
+        <TimeslotSubcribe
+          key={index}
+          name={senior.given_name + " " + senior.family_name}
+          image={senior.image}
+          subscribed={seniorParticipants.includes(senior.senior_id)}
+          id={senior.senior_id}
+          type="senior"
+          handleSubscribe={this.handleSubscribe}
+          handleUnsubscribe={this.handleUnsubscribe}
+        />
+      );
+    });
+  };
+
   getChildrenSubscribes = () => {
     const {
       childrenProfiles: unfilteredChildrenProfiles,
       children,
-      timeslot
+      timeslot,
     } = this.state;
-    const childrenProfiles = unfilteredChildrenProfiles.filter(profile =>
+    const childrenProfiles = unfilteredChildrenProfiles.filter((profile) =>
       children.includes(profile.child_id)
     );
     const childrenParticipants = timeslot.extendedProperties.shared.children;
@@ -665,7 +819,9 @@ class TimeslotScreen extends React.Component {
             name="external"
             value={externalInput}
             className="expandedTimeslotInput form-control"
-            onChange={event => this.setState({ external: event.target.value })}
+            onChange={(event) =>
+              this.setState({ external: event.target.value })
+            }
             placeholder={texts.externalPlaceholder}
             required
           />
@@ -677,7 +833,7 @@ class TimeslotScreen extends React.Component {
             <i className="fas fa-plus" />
           </button>
         </div>
-        {externals.map(external => (
+        {externals.map((external) => (
           <TimeslotSubcribe
             key={external}
             name={external}
@@ -700,7 +856,7 @@ class TimeslotScreen extends React.Component {
     const snackMessage = `${texts.parentSubscribe1} ${external} ${texts.parentSubscribe2}`;
     if (external) {
       enqueueSnackbar(snackMessage, {
-        variant: "info"
+        variant: "info",
       });
       externals.push(external);
       timeslot.extendedProperties.shared.externals = [...new Set(externals)];
@@ -720,7 +876,7 @@ class TimeslotScreen extends React.Component {
       confirmDialogIsOpen,
       madeChanges,
       confirmTrigger,
-      confirmData
+      confirmData,
     } = this.state;
     return fetchedTimeslot ? (
       <React.Fragment>
@@ -898,6 +1054,12 @@ class TimeslotScreen extends React.Component {
                     : texts.childrenAvailability}
                 </div>
                 {this.getChildrenSubscribes()}
+                <div className="activityInfoHeader">
+                  {timeslot.userCanEdit
+                    ? texts.allSeniorAvailabilities
+                    : texts.seniorAvailability}
+                </div>
+                {this.getSeniorSubscribes()}
                 {timeslot.userCanEdit && (
                   <div className="activityInfoHeader">
                     {texts.externalAvailabilities}
@@ -910,6 +1072,9 @@ class TimeslotScreen extends React.Component {
           </div>
           <div className="row no-gutters" style={rowStyle}>
             {this.renderParticipants("children")}
+          </div>
+          <div className="row no-gutters" style={rowStyle}>
+            {this.renderParticipants("seniors")}
           </div>
           <div className="row no-gutters" style={rowStyle}>
             {this.renderParticipants("externals")}
@@ -946,5 +1111,5 @@ TimeslotScreen.propTypes = {
   history: PropTypes.object,
   enqueueSnackbar: PropTypes.func,
   classes: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
 };

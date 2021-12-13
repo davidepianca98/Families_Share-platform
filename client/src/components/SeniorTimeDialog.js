@@ -15,20 +15,28 @@ import {
 import Texts from "../Constants/Texts";
 import withLanguage from "./LanguageContext";
 import moment from "moment";
-import axios from 'axios'
-import Log from './Log'
+import axios from "axios";
+import Log from "./Log";
 
 let getDayName = (index, language) => {
   const days = Texts[language].availabilityWeekModal;
   switch (index) {
-    case 0:      return days.monday;
-    case 1:      return days.tuesday;
-    case 2:      return days.wednesday;
-    case 3:      return days.thursday;
-    case 4:      return days.friday;
-    case 5:      return days.saturday;
-    case 6:      return days.sunday;
-    default:      return "";
+    case 0:
+      return days.monday;
+    case 1:
+      return days.tuesday;
+    case 2:
+      return days.wednesday;
+    case 3:
+      return days.thursday;
+    case 4:
+      return days.friday;
+    case 5:
+      return days.saturday;
+    case 6:
+      return days.sunday;
+    default:
+      return "";
   }
 };
 
@@ -65,41 +73,55 @@ const theme = createMuiTheme({
 });
 
 class SeniorTimeDialog extends React.Component {
-
   constructor(props) {
     super(props);
 
     let startTime, endTime;
-    if (props.senior?.availabilities !== undefined && props.senior?.availabilities[props.day] !== undefined) {
-      let str = `${props.senior.availabilities[props.day].startTimeHour}:${props.senior.availabilities[props.day].startTimeMinute}`;
+    if (
+      props.senior?.availabilities !== undefined &&
+      props.day !== undefined &&
+      props.senior?.availabilities[props.day] !== undefined
+    ) {
+      let str = `${props.senior.availabilities[props.day].startTimeHour}:${
+        props.senior.availabilities[props.day].startTimeMinute
+      }`;
       startTime = moment(str, "H:mm");
-      str = `${props.senior.availabilities[props.day].endTimeHour}:${props.senior.availabilities[props.day].endTimeMinute}`;
+      str = `${props.senior.availabilities[props.day].endTimeHour}:${
+        props.senior.availabilities[props.day].endTimeMinute
+      }`;
       endTime = moment(str, "H:mm");
     } else {
-      startTime = moment(new Date);
-      endTime = moment(new Date);
+      startTime = moment(new Date());
+      endTime = moment(new Date());
     }
 
     this.state = {
       dayName: getDayName(props.day, props.language),
       startTime,
-      endTime
+      endTime,
     };
   }
 
   handleSave = () => {
     const { handleCloseTime, senior } = this.props;
+    console.log(this.props);
     handleCloseTime();
-    senior.availabilities[this.props.day].startTimeHour = this.state.startTime.hour();
-    senior.availabilities[this.props.day].startTimeMinute = this.state.startTime.minutes();
-    senior.availabilities[this.props.day].endTimeHour = this.state.endTime.hour();
-    senior.availabilities[this.props.day].endTimeMinute = this.state.endTime.minutes();
+    senior.availabilities[this.props.day] = {};
+    senior.availabilities[this.props.day].weekDay = this.props.day;
+    senior.availabilities[this.props.day].startTimeHour =
+      this.state.startTime.hour();
+    senior.availabilities[this.props.day].startTimeMinute =
+      this.state.startTime.minutes();
+    senior.availabilities[this.props.day].endTimeHour =
+      this.state.endTime.hour();
+    senior.availabilities[this.props.day].endTimeMinute =
+      this.state.endTime.minutes();
     axios
       .put(`/api/seniors/${senior.senior_id}`, senior)
-      .then(response => {
+      .then((response) => {
         Log.info(response);
       })
-      .catch(error => {
+      .catch((error) => {
         Log.error(error);
       });
   };
@@ -110,15 +132,15 @@ class SeniorTimeDialog extends React.Component {
   };
 
   handleStartChange = (time) => {
-    this.setState({ startTime: time })
+    this.setState({ startTime: time });
   };
 
   handleEndChange = (time) => {
-    this.setState({ endTime: time })
+    this.setState({ endTime: time });
   };
 
   render() {
-    const { language, isOpen, classes, senior} = this.props;
+    const { language, isOpen, classes, senior } = this.props;
     const { dayName, startTime, endTime } = this.state;
     const texts = Texts[language].availabilityTimeModal;
 

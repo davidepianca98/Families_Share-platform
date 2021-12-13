@@ -2891,6 +2891,7 @@ const it = {
     externalAvailabilities: "Aggiungi disponibilità volontari esterni",
     allUsersAvailabilities: "Aggiungi disponibilità utenti",
     allChildrenAvailabilities: "Aggiungi disponibilità bambini",
+    allSeniorAvailabilities: "Aggiungi disponibilità anziani",
     parentSubscribe1: "Hai aggiunto",
     parentSubscribe2: "all'attività",
     parentUnsubscribe1: "Hai rimosso",
@@ -2901,12 +2902,14 @@ const it = {
     minimum: "numero minimo",
     userAvailability: "Aggiungi la tua disponibilità:",
     childrenAvailability: "Aggiungi la disponibilità dei tuoi bambini:",
+    seniorAvailability: "Aggiungi la disponibilità dei tuoi anziani:",
     volunteer: "Volontario",
     volunteers: "Volontari",
     signup: "registrato",
     child: "Bambino",
     admins: "Amministratori",
     children: "Bambini",
+    seniors: "Anziani",
     userSubscribe: "Ti sei aggiunto all'attività",
     userUnsubscribe: "Ti sei rimosso dall'attività",
     childSubscribe1: "Hai aggiunto",
@@ -3927,6 +3930,7 @@ const it = {
   activityScreen: {
     children: "Bambini",
     volunteers: "Volontari",
+    seniors: "Anziani",
     pdfToaster:
       "L'attività viene esportata in formato pdf. Lo riceverai a breve via e-mail.",
     excelToaster:
