@@ -14,7 +14,6 @@ import LoadingSpinner from "./LoadingSpinner";
 import TimeslotSubcribe from "./TimeslotSubcribe";
 import Images from "../Constants/Images";
 import Log from "./Log";
-import { ColorLensOutlined, ContactSupportOutlined } from "@material-ui/icons";
 
 const styles = () => ({
   avatar: {
@@ -113,11 +112,11 @@ const getChildrenProfiles = (ids) => {
     });
 };
 
-const getGroupSeniors = async (membersIds) => {
+const getGroupSeniors = async (members) => {
   let respArray = [];
-  await asyncForEach(membersIds, async (id) => {
-    let caaa = await getUsersSeniors(id);
-    respArray = respArray.concat(respArray, caaa);
+  await asyncForEach(members, async (id) => {
+    let senior = await getUsersSeniors(id.user_id);
+    respArray = respArray.concat(respArray, senior);
   });
   return respArray;
 };
@@ -138,14 +137,7 @@ const getOneSeniorProfile = (id) => {
   return axios
     .get(`/api/seniors/${id}`)
     .then((response) => {
-      return response.data; /*response.data.map((child) => {
-        return {
-          child_id: child.child_id,
-          image: path(child, ["image", "path"]),
-          name: `${child.given_name} ${child.family_name}`,
-          given_name: child.given_name,
-        };
-      });*/
+      return response.data;
     })
     .catch((error) => {
       Log.error(error);
@@ -159,10 +151,6 @@ const getSeniorProfiles = async (ids) => {
     let profile = await getOneSeniorProfile(id);
     profileArray.push(profile);
   });
-  /*ids.forEach((id) => {
-    let profile = getOneSeniorProfile(id);
-    profileArray.push(profile);
-  });*/
   return profileArray;
 };
 
@@ -246,7 +234,7 @@ class TimeslotScreen extends React.Component {
     const admins = members.filter((p) => p.admin).map((m) => m.user_id);
     if (timeslot.userCanEdit) {
       children = await getGroupChildren(groupId);
-      seniors = await getGroupSeniors([userId]); // FIXME: getGroupSeniors
+      seniors = await getGroupSeniors(members); // FIXME: getGroupSeniors
       parents = members.map((m) => m.user_id);
     } else {
       children = await getUsersChildren(userId);
@@ -345,7 +333,7 @@ class TimeslotScreen extends React.Component {
     if (type === "children") {
       return "fas fa-info-circle emergencyNumber";
     }
-    if (type === "senior") {
+    if (type === "seniors") {
       return "fas fa-info-circle emergencyNumber";
     }
     return "";
@@ -354,6 +342,7 @@ class TimeslotScreen extends React.Component {
   handleParticipantIconClick = (profile, type) => {
     const { history, enqueueSnackbar, language } = this.props;
     const texts = Texts[language].timeslotScreen;
+    // FIXME: insert a case for seniors
     if (type === "children") {
       history.push(`/profiles/groupmember/children/${profile.child_id}`);
     } else if (type !== "externals" && profile.phone !== undefined) {
@@ -388,6 +377,8 @@ class TimeslotScreen extends React.Component {
     timeslot.extendedProperties.shared.externals = JSON.stringify(
       timeslot.extendedProperties.shared.externals
     );
+    console.log(pathname);
+    console.log(timeslot);
 
     axios
       .patch(`/api${pathname}`, {
@@ -578,6 +569,9 @@ class TimeslotScreen extends React.Component {
     const { history } = this.props;
     if (type === "children") {
       history.push(`/profiles/groupmember/children/${profile.child_id}`);
+    } else if (type === "seniors") {
+      // FIXME: ci vorrebbe una route in groupmember/seniors
+      history.push(`/`);
     } else if (type !== "externals") {
       history.push(`/profiles/${profile.user_id}/info`);
     }
@@ -690,7 +684,7 @@ class TimeslotScreen extends React.Component {
                     tabIndex={-42}
                     onClick={() => this.handleParticipantClick(type, profile)}
                   >
-                    {profile.name}
+                    {profile.given_name + " " + profile.family_name}
                   </div>
                 </div>
                 <div className="col-1-10">
