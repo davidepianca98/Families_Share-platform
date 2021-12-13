@@ -4,6 +4,7 @@ import moment from "moment";
 import { withRouter } from "react-router-dom";
 import withLanguage from "./LanguageContext";
 import SeniorWeekDialog from "./SeniorWeekDialog";
+import SeniorTimeDialog from "./SeniorTimeDialog";
 import Images from "../Constants/Images";
 import Texts from "../Constants/Texts";
 import ConfirmDialog from "./ConfirmDialog";
@@ -18,31 +19,30 @@ import {
   TableHead,
 } from "@material-ui/core";
 
-let toDayName = (index, language) => {
+let getDayName = (index, language) => {
   const days = Texts[language].availabilityWeekModal;
   switch (index) {
-    case 0:
-      return days.monday;
-    case 1:
-      return days.tuesday;
-    case 2:
-      return days.wednesday;
-    case 3:
-      return days.thursday;
-    case 4:
-      return days.friday;
-    case 5:
-      return days.saturday;
-    case 6:
-      return days.sunday;
-    default:
-      return "";
+    case 0:      return days.monday;
+    case 1:      return days.tuesday;
+    case 2:      return days.wednesday;
+    case 3:      return days.thursday;
+    case 4:      return days.friday;
+    case 5:      return days.saturday;
+    case 6:      return days.sunday;
+    default:      return "";
   }
 };
 
 class SeniorProfileInfo extends React.Component {
   state = {
     weekModalIsOpen: false,
+    time0ModalIsOpen: false,
+    time1ModalIsOpen: false,
+    time2ModalIsOpen: false,
+    time3ModalIsOpen: false,
+    time4ModalIsOpen: false,
+    time5ModalIsOpen: false,
+    time6ModalIsOpen: false,
     confirmDialogIsOpen: false,
     deleteIndex: "",
   };
@@ -63,11 +63,45 @@ class SeniorProfileInfo extends React.Component {
     this.setState({ weekModalIsOpen: false });
   };
 
+  handleOpenTime = (day) => {
+    switch (day) {
+      case 0: this.setState({ day: day, time0ModalIsOpen: true }); break;
+      case 1: this.setState({ day: day, time1ModalIsOpen: true }); break;
+      case 2: this.setState({ day: day, time2ModalIsOpen: true }); break;
+      case 3: this.setState({ day: day, time3ModalIsOpen: true }); break;
+      case 4: this.setState({ day: day, time4ModalIsOpen: true }); break;
+      case 5: this.setState({ day: day, time5ModalIsOpen: true }); break;
+      case 6: this.setState({ day: day, time6ModalIsOpen: true }); break;
+    }
+  };
+
+  handleCloseTime = () => {
+    this.setState({
+      time0ModalIsOpen: false,
+      time1ModalIsOpen: false,
+      time2ModalIsOpen: false,
+      time3ModalIsOpen: false,
+      time4ModalIsOpen: false,
+      time5ModalIsOpen: false,
+      time6ModalIsOpen: false,
+     });
+  };
+
   render() {
     let { senior, language, otherInfo, gender, birthdate, showAdditional } =
       this.props;
 
-    const { confirmDialogIsOpen, weekModalIsOpen } = this.state;
+    const {
+       confirmDialogIsOpen, 
+       weekModalIsOpen,
+       time0ModalIsOpen,
+       time1ModalIsOpen,
+       time2ModalIsOpen,
+       time3ModalIsOpen,
+       time4ModalIsOpen,
+       time5ModalIsOpen,
+       time6ModalIsOpen,
+      } = this.state;
     const texts = Texts[language].seniorProfileInfo;
     return (
       <React.Fragment>
@@ -79,7 +113,50 @@ class SeniorProfileInfo extends React.Component {
         <SeniorWeekDialog
           isOpen={weekModalIsOpen}
           handleCloseWeek={this.handleCloseWeek}
+          handleOpenTime={this.handleOpenTime}
           senior={senior}
+        />
+        <SeniorTimeDialog
+          isOpen={time0ModalIsOpen}
+          handleCloseTime={this.handleCloseTime}
+          senior={senior}
+          day={0}
+        />
+        <SeniorTimeDialog
+          isOpen={time1ModalIsOpen}
+          handleCloseTime={this.handleCloseTime}
+          senior={senior}
+          day={1}
+        />
+        <SeniorTimeDialog
+          isOpen={time2ModalIsOpen}
+          handleCloseTime={this.handleCloseTime}
+          senior={senior}
+          day={2}
+        />
+        <SeniorTimeDialog
+          isOpen={time3ModalIsOpen}
+          handleCloseTime={this.handleCloseTime}
+          senior={senior}
+          day={3}
+        />
+        <SeniorTimeDialog
+          isOpen={time4ModalIsOpen}
+          handleCloseTime={this.handleCloseTime}
+          senior={senior}
+          day={4}
+        />
+        <SeniorTimeDialog
+          isOpen={time5ModalIsOpen}
+          handleCloseTime={this.handleCloseTime}
+          senior={senior}
+          day={5}
+        />
+        <SeniorTimeDialog
+          isOpen={time6ModalIsOpen}
+          handleCloseTime={this.handleCloseTime}
+          senior={senior}
+          day={6}
         />
         <div className="seniorProfileInfoSection">
           <div className="row no-gutters">
@@ -145,7 +222,7 @@ class SeniorProfileInfo extends React.Component {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {toDayName(row.weekDay, language)}
+                      {getDayName(row.weekDay, language)}
                     </TableCell>
                     <TableCell align="center">
                       dalle {row.startTimeHour} : {row.startTimeMinute}

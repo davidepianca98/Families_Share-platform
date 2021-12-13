@@ -24,6 +24,22 @@ import axios from "axios";
 import Log from "./Log";
 import LoadingSpinner from "./LoadingSpinner";
 
+
+let mygetDayName = (index, language) => {
+  const days = Texts[language].availabilityWeekModal;
+  switch (index) {
+    case 0:      return days.monday;
+    case 1:      return days.tuesday;
+    case 2:      return days.wednesday;
+    case 3:      return days.thursday;
+    case 4:      return days.friday;
+    case 5:      return days.saturday;
+    case 6:      return days.sunday;
+    default:      return "";
+  }
+};
+
+
 const styles = () => ({
   paper: { height: "60vh" },
 });
@@ -144,6 +160,15 @@ class SeniorWeekDialog extends React.Component {
     handleCloseWeek();
   };
 
+  handleOpenTime = (day) => {
+    const { language, handleOpenTime } = this.props;
+
+    let dayName = mygetDayName(day.index, language);
+    this.setState({ day: dayName });
+
+    handleOpenTime(day);
+  }
+
   render() {
     const { allDays, fetchedSeniorData } = this.state;
 
@@ -214,7 +239,8 @@ class SeniorWeekDialog extends React.Component {
 
                       <ListItemSecondaryAction>
                         <IconButton edge="end" aria-label="comments">
-                          <AccessTimeIcon />
+                          <AccessTimeIcon 
+                            onClick={() => day.available ? this.handleOpenTime(day.index) : null}/>
                         </IconButton>
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -240,7 +266,7 @@ class SeniorWeekDialog extends React.Component {
 SeniorWeekDialog.propTypes = {
   isOpen: PropTypes.bool,
   handleCloseWeek: PropTypes.func,
-  handleSave: PropTypes.func,
+  handleOpenTime: PropTypes.func,
   senior: PropTypes.object,
   language: PropTypes.string,
 };
