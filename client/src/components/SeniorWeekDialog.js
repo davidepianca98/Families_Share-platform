@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+import Log from "./Log";
 import PropTypes from "prop-types";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -20,8 +22,6 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import Checkbox from "@material-ui/core/Checkbox";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
-import axios from "axios";
-import Log from "./Log";
 import LoadingSpinner from "./LoadingSpinner";
 
 
@@ -122,8 +122,50 @@ class SeniorWeekDialog extends React.Component {
      });
   }
 
-  handleSave = () => {
+  handleSave = async () => {
+    let { allDays, senior } = this.state;
+
+    senior = await axios
+      .get(`/api/seniors/${senior.senior_id}`)
+      .then(response => {
+        let res = response.data;
+        return res;
+      })
+      .catch(error => {
+        Log.error(error);
+        return null;
+      });
+
+    console.log(senior);
+    let newAvailabilities = [];
+
+    allDays.forEach((day) => {
+      if (day.available) {
+          let current = senior.availabilities.find(row => row.weekDay === day.index )
+          if (!current) current = {weekDay: day.index}
+          if (!current.startTimeHour) current.startTimeHour = 8
+          if (!current.startTimeMinute) current.startTimeMinute = 0
+          if (!current.endTimeHour) current.endTimeHour = 20
+          if (!current.endTimeMinute) current.endTimeMinute = 0
+          newAvailabilities.push(current);
+        }
+    });
+    
+    console.log(senior.availabilities);
+    console.log(newAvailabilities);
+    senior.availabilities = newAvailabilities;
+
     const { handleCloseWeek } = this.props;
+    axios
+      .put(`/api/seniors/${senior.senior_id}`, senior, {})
+      .then((response) => {
+        Log.info(response);
+        handleCloseWeek();
+      })
+      .catch((error) => {
+        Log.error(error);
+        handleCloseWeek();
+      });
     handleCloseWeek();
   };
 
@@ -162,9 +204,9 @@ class SeniorWeekDialog extends React.Component {
           allDays[dayIndex].available = true;
           localAvailabilities.push({
             weekDay: dayIndex,
-            startTimeHour: 0,
+            startTimeHour: 8,
             startTimeMinute: 0,
-            endTimeHour: 0,
+            endTimeHour: 20,
             endTimeMinute: 0,
           });
         } else {
@@ -212,9 +254,11 @@ class SeniorWeekDialog extends React.Component {
                       />
 
                       <ListItemSecondaryAction>
-                        <IconButton edge="end" aria-label="comments">
-                          <AccessTimeIcon
-                            onClick={() => day.available ? this.handleOpenTime(day.index) : null}/>
+                        <IconButton 
+                            edge="end" 
+                            aria-label="comments" 
+                            onClick={() => day.available ? this.handleOpenTime(day.index) : null}>
+                          <AccessTimeIcon/>
                         </IconButton>
                       </ListItemSecondaryAction>
                     </ListItem>

@@ -8,6 +8,8 @@ import SeniorTimeDialog from "./SeniorTimeDialog";
 import Images from "../Constants/Images";
 import Texts from "../Constants/Texts";
 import ConfirmDialog from "./ConfirmDialog";
+import axios from "axios";
+import Log from "./Log";
 
 import {
   Paper,
@@ -42,18 +44,26 @@ let getDayName = (index, language) => {
 };
 
 class SeniorProfileInfo extends React.Component {
-  state = {
-    weekModalIsOpen: false,
-    time0ModalIsOpen: false,
-    time1ModalIsOpen: false,
-    time2ModalIsOpen: false,
-    time3ModalIsOpen: false,
-    time4ModalIsOpen: false,
-    time5ModalIsOpen: false,
-    time6ModalIsOpen: false,
-    confirmDialogIsOpen: false,
-    deleteIndex: "",
-  };
+
+  constructor(props) {
+    super(props);
+
+    let { senior } = this.props;
+
+    this.state = {
+      weekModalIsOpen: false,
+      time0ModalIsOpen: false,
+      time1ModalIsOpen: false,
+      time2ModalIsOpen: false,
+      time3ModalIsOpen: false,
+      time4ModalIsOpen: false,
+      time5ModalIsOpen: false,
+      time6ModalIsOpen: false,
+      confirmDialogIsOpen: false,
+      deleteIndex: "",
+      senior: senior
+    };
+  }
 
   handleConfirmDialogOpen = (index) => {
     this.setState({ confirmDialogIsOpen: true, deleteIndex: index });
@@ -68,6 +78,7 @@ class SeniorProfileInfo extends React.Component {
   };
 
   handleCloseWeek = () => {
+    this.reloadSenior();
     this.setState({ weekModalIsOpen: false });
   };
 
@@ -91,11 +102,32 @@ class SeniorProfileInfo extends React.Component {
       case 5:
         this.setState({ day: day, time5ModalIsOpen: true });
         break;
-      case 6:
-        this.setState({ day: day, time6ModalIsOpen: true });
-        break;
-    }
+        case 6:
+          this.setState({ day: day, time6ModalIsOpen: true });
+          break;
+        default:
+          break;
+      }
   };
+
+  reloadSenior = async () => {
+
+    // reload senior
+    let { senior } = this.state;
+
+    senior = await axios
+    .get(`/api/seniors/${senior.senior_id}`)
+    .then(response => {
+      let resp = response.data;
+      return resp;
+    })
+    .catch(error => {
+      Log.error(error);
+      return null;
+    });
+
+    this.setState({ senior: senior });
+  }
 
   handleCloseTime = () => {
     this.setState({
@@ -110,7 +142,8 @@ class SeniorProfileInfo extends React.Component {
   };
 
   render() {
-    let { senior, language, otherInfo, gender, birthdate, showAdditional } =
+    const { senior } = this.state;
+    let { language, otherInfo, gender, birthdate, showAdditional } =
       this.props;
 
     const {
@@ -124,6 +157,7 @@ class SeniorProfileInfo extends React.Component {
       time5ModalIsOpen,
       time6ModalIsOpen,
     } = this.state;
+
     const texts = Texts[language].seniorProfileInfo;
     return (
       <React.Fragment>
@@ -142,42 +176,49 @@ class SeniorProfileInfo extends React.Component {
           isOpen={time0ModalIsOpen}
           handleCloseTime={this.handleCloseTime}
           senior={senior}
+          language={language}
           day={0}
         />
         <SeniorTimeDialog
           isOpen={time1ModalIsOpen}
           handleCloseTime={this.handleCloseTime}
           senior={senior}
+          language={language}
           day={1}
         />
         <SeniorTimeDialog
           isOpen={time2ModalIsOpen}
           handleCloseTime={this.handleCloseTime}
           senior={senior}
+          language={language}
           day={2}
         />
         <SeniorTimeDialog
           isOpen={time3ModalIsOpen}
           handleCloseTime={this.handleCloseTime}
           senior={senior}
+          language={language}
           day={3}
         />
         <SeniorTimeDialog
           isOpen={time4ModalIsOpen}
           handleCloseTime={this.handleCloseTime}
           senior={senior}
+          language={language}
           day={4}
         />
         <SeniorTimeDialog
           isOpen={time5ModalIsOpen}
           handleCloseTime={this.handleCloseTime}
           senior={senior}
+          language={language}
           day={5}
         />
         <SeniorTimeDialog
           isOpen={time6ModalIsOpen}
           handleCloseTime={this.handleCloseTime}
           senior={senior}
+          language={language}
           day={6}
         />
         <div className="seniorProfileInfoSection">

@@ -75,47 +75,74 @@ const theme = createMuiTheme({
 class SeniorTimeDialog extends React.Component {
   constructor(props) {
     super(props);
-
-    let startTime, endTime;
-    if (
-      props.senior?.availabilities !== undefined &&
-      props.day !== undefined &&
-      props.senior?.availabilities[props.day] !== undefined
-    ) {
-      let str = `${props.senior.availabilities[props.day].startTimeHour}:${
-        props.senior.availabilities[props.day].startTimeMinute
-      }`;
-      startTime = moment(str, "H:mm");
-      str = `${props.senior.availabilities[props.day].endTimeHour}:${
-        props.senior.availabilities[props.day].endTimeMinute
-      }`;
-      endTime = moment(str, "H:mm");
-    } else {
-      startTime = moment(new Date());
-      endTime = moment(new Date());
-    }
-
     this.state = {
-      dayName: getDayName(props.day, props.language),
-      startTime,
-      endTime,
+        day: props.day,
+        language: props.language,
+        senior: props.senior,
     };
   }
 
+  componentDidMount() {
+    // let startTime, endTime;
+    let {
+      day, 
+      language,
+      senior,
+    } = this.state;
+/*
+    console.log(day)
+    console.log(language)
+    console.log(senior)
+*/
+    let avail = senior.availabilities.find(row => row.weekDay === day);
+    if (!avail) avail = {weekDay: day}
+    if (!avail.startTimeHour)   avail.startTimeHour = 8
+    if (!avail.startTimeMinute) avail.startTimeMinute = 0
+    if (!avail.endTimeHour)     avail.endTimeHour = 20
+    if (!avail.endTimeMinute)   avail.endTimeMinute = 0
+
+    let str = `${avail.startTimeHour}:${avail.startTimeMinute}`;
+    let startTime = moment(str, "H:mm");
+
+    str = `${avail.endTimeHour}:${avail.endTimeMinute}`;
+    let endTime = moment(str, "H:mm");
+
+    this.setState({
+      dayName: getDayName(day, language),
+      startTime,
+      endTime,
+    });
+  }
+
   handleSave = () => {
-    const { handleCloseTime, senior } = this.props;
+    const { day, handleCloseTime, senior } = this.props;
+    let { startTime, endTime } = this.state;
+
     console.log(this.props);
+    console.log(startTime);
+    console.log(endTime);
+    
     handleCloseTime();
-    senior.availabilities[this.props.day] = {};
-    senior.availabilities[this.props.day].weekDay = this.props.day;
-    senior.availabilities[this.props.day].startTimeHour =
-      this.state.startTime.hour();
-    senior.availabilities[this.props.day].startTimeMinute =
-      this.state.startTime.minutes();
-    senior.availabilities[this.props.day].endTimeHour =
-      this.state.endTime.hour();
-    senior.availabilities[this.props.day].endTimeMinute =
-      this.state.endTime.minutes();
+
+    let updated = {}
+    updated.weekDay = day;
+    updated.startTimeHour   = startTime.hour();
+    updated.startTimeMinute = startTime.minutes();
+    updated.endTimeHour     = endTime.hour();
+    updated.endTimeMinute   = endTime.minutes();
+    
+    console.log(day)
+    console.log(senior.availabilities)
+    let idx = senior.availabilities.findIndex(row => {
+      console.log(row.weekDay)
+      return (row.weekDay === day);
+    });
+    console.log(idx)
+    if (idx >= 0)
+      senior.availabilities[idx] = updated;
+    else 
+      senior.availabilities.push(updated);
+
     axios
       .put(`/api/seniors/${senior.senior_id}`, senior)
       .then((response) => {
@@ -140,7 +167,7 @@ class SeniorTimeDialog extends React.Component {
   };
 
   render() {
-    const { language, isOpen, classes, senior } = this.props;
+    const { language, isOpen, classes } = this.props;
     const { dayName, startTime, endTime } = this.state;
     const texts = Texts[language].availabilityTimeModal;
 
