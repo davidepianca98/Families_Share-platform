@@ -162,6 +162,7 @@ class MaterialOfferScreen extends React.Component {
   };
 
   handleBookDelete = (id) => {
+    const { enqueueSnackbar } = this.props;
     let { materialBookings } = this.state;
     materialBookings = materialBookings.filter(
       (elem) => elem.material_booking_id !== id
@@ -169,6 +170,10 @@ class MaterialOfferScreen extends React.Component {
     axios
       .delete(`/api/materials/bookings/${id}`)
       .then((response) => {
+        enqueueSnackbar("Prenotazione cancellata", {
+          // TODO
+          variant: "info",
+        });
         Log.info(response);
         this.setState({ materialBookings });
       })
@@ -398,7 +403,6 @@ class MaterialOfferScreen extends React.Component {
                                   <div className="col-9-10">
                                     <div className="row no-gutters materialInfoDescription">
                                       {texts.from}
-                                      {console.log(book)}
                                       {/* FIXME: problema del backend (presumo) in quanto l'iserid mi fa ricevere più informazioni, però perdo le altre dei permessi più bassi */}
                                       {moment(book.start).format("L")}
                                     </div>

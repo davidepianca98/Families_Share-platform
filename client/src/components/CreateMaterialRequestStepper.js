@@ -183,11 +183,10 @@ class CreateMaterialRequestStepper extends React.Component {
     axios
       .post(`/api/groups/${groupId}/materialRequests`, materialRequest)
       .then((response) => {
-        if (response.data.status === "pending") {
-          enqueueSnackbar(texts.pendingMessage, {
-            variant: "info",
-          });
-        }
+        enqueueSnackbar("Richiesta creata con successo", {
+          // TODO
+          variant: "info",
+        });
         Log.info(response);
         history.goBack();
       })

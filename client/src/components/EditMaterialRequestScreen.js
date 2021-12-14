@@ -10,6 +10,7 @@ import Log from "./Log";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import ConfirmDialog from "./ConfirmDialog";
+import { withSnackbar } from "notistack";
 
 const styles = {
   modifyButton: {
@@ -104,12 +105,16 @@ class EditMaterialRequestScreen extends React.Component {
   };
 
   handleDelete = () => {
-    const { match, history } = this.props;
+    const { match, history, enqueueSnackbar } = this.props;
     const { materialId } = match.params;
     this.setState({ pendingRequest: true });
     axios
       .delete(`/api/materials/requests/${materialId}`)
       .then((response) => {
+        enqueueSnackbar("Richiesta cancellata", {
+          // TODO
+          variant: "info",
+        });
         Log.info(response);
         history.goBack().goBack();
       })
@@ -120,7 +125,7 @@ class EditMaterialRequestScreen extends React.Component {
   };
 
   handleSave = () => {
-    const { match, history } = this.props;
+    const { match, history, enqueueSnackbar } = this.props;
     const { materialId } = match.params;
     const { validated, material_name, color, location, description } =
       this.state;
@@ -135,6 +140,10 @@ class EditMaterialRequestScreen extends React.Component {
       axios
         .put(`/api/materials/requests/${materialId}`, patch)
         .then((response) => {
+          enqueueSnackbar("Richiesta modificata", {
+            // TODO
+            variant: "info",
+          });
           Log.info(response);
           history.goBack();
         })
@@ -291,7 +300,9 @@ class EditMaterialRequestScreen extends React.Component {
   }
 }
 
-export default withStyles(styles)(withLanguage(EditMaterialRequestScreen));
+export default withSnackbar(
+  withStyles(styles)(withLanguage(EditMaterialRequestScreen))
+);
 
 EditMaterialRequestScreen.propTypes = {
   history: PropTypes.object,
