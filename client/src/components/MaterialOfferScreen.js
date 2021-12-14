@@ -397,7 +397,9 @@ class MaterialOfferScreen extends React.Component {
                                   </div>
                                   <div className="col-9-10">
                                     <div className="row no-gutters materialInfoDescription">
-                                      {texts.from}{" "}
+                                      {texts.from}
+                                      {console.log(book)}
+                                      {/* FIXME: problema del backend (presumo) in quanto l'iserid mi fa ricevere più informazioni, però perdo le altre dei permessi più bassi */}
                                       {moment(book.start).format("L")}
                                     </div>
                                     <div className="row no-gutters materialInfoDescription">
@@ -426,51 +428,48 @@ class MaterialOfferScreen extends React.Component {
                         >
                           {texts.bookerDisplay}
                           {materialBookings.map((booking) => {
-                            if (userId === booking.user) {
-                              return (
-                                <div key={booking._id}>
-                                  <div
-                                    className="row no-gutters"
-                                    style={rowStyle}
-                                  >
-                                    <div className="col-1-10">
-                                      <i
-                                        className="far fa-calendar-alt materialInfoIcon"
-                                        style={{ fontSize: "2.5rem" }}
-                                      />
-                                    </div>
-                                    <div className="col-9-10">
-                                      <div className="row no-gutters materialInfoDescription">
-                                        {texts.from}{" "}
-                                        {moment(booking.start).format("L")}
-                                      </div>
-                                      <div className="row no-gutters materialInfoDescription">
-                                        {texts.to}{" "}
-                                        {moment(booking.end).format("L")}
-                                      </div>
-                                    </div>
+                            return (
+                              <div key={booking._id}>
+                                <div
+                                  className="row no-gutters"
+                                  style={rowStyle}
+                                >
+                                  <div className="col-1-10">
+                                    <i
+                                      className="far fa-calendar-alt materialInfoIcon"
+                                      style={{ fontSize: "2.5rem" }}
+                                    />
                                   </div>
-                                  <div className="row no-gutters justify-content-center">
-                                    <div className={classes.actionsContainer}>
-                                      <Button
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={() =>
-                                          this.handleBookDelete(
-                                            booking.material_booking_id
-                                          )
-                                        }
-                                        className={classes.bookDeleteButton}
-                                        size="large"
-                                      >
-                                        {texts.delete}
-                                      </Button>
+                                  <div className="col-9-10">
+                                    <div className="row no-gutters materialInfoDescription">
+                                      {texts.from}{" "}
+                                      {moment(booking.start).format("L")}
+                                    </div>
+                                    <div className="row no-gutters materialInfoDescription">
+                                      {texts.to}{" "}
+                                      {moment(booking.end).format("L")}
                                     </div>
                                   </div>
                                 </div>
-                              );
-                            }
-                            return <div></div>;
+                                <div className="row no-gutters justify-content-center">
+                                  <div className={classes.actionsContainer}>
+                                    <Button
+                                      variant="contained"
+                                      color="primary"
+                                      onClick={() =>
+                                        this.handleBookDelete(
+                                          booking.material_booking_id
+                                        )
+                                      }
+                                      className={classes.bookDeleteButton}
+                                      size="large"
+                                    >
+                                      {texts.delete}
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                            );
                           })}
                         </div>
                       ) : (
