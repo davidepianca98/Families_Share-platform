@@ -189,9 +189,6 @@ class ActivityScreen extends React.Component {
     activity.children = await getActivityChildren(childUniqueIds);
     activity.parents = await getActivityParents(parentUniqueIds);
     activity.seniors = await getActivitySenior(seniorUniqueIds);
-    console.log(activity.children);
-    console.log(activity.parents);
-    console.log(activity.seniors);
     activity.children = activity.children.sort(
       (a, b) =>
         `${a.given_name} ${a.family_name}` - `${b.given_name} ${b.family_name}`
@@ -254,7 +251,6 @@ class ActivityScreen extends React.Component {
     const { classes } = this.props;
     return list.map((profile, index) => (
       <li key={index} style={{ display: "block" }}>
-        {console.log(profile)}
         <div className="row" style={{ margin: "1rem 0" }}>
           <Avatar
             route={this.switchAssignment(type, profile)}
