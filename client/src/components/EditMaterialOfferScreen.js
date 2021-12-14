@@ -123,7 +123,7 @@ class EditMaterialOfferScreen extends React.Component {
       axios
         .put(`/api/materials/offers/${materialId}`, patch)
         .then((response) => {
-          Log.info(response); // TODO: do we need this line?
+          Log.info(response);
           history.goBack();
         })
         .catch((error) => {
@@ -139,7 +139,7 @@ class EditMaterialOfferScreen extends React.Component {
     axios
       .delete(`/api/materials/offers/${materialId}`)
       .then((response) => {
-        //Log.info(response); // TODO: do we need this line?
+        Log.info(response);
         history.push(`/groups/${groupId}/materials/offers`);
       })
       .catch((error) => {

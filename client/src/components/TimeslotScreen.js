@@ -343,7 +343,6 @@ class TimeslotScreen extends React.Component {
   handleParticipantIconClick = (profile, type) => {
     const { history, enqueueSnackbar, language } = this.props;
     const texts = Texts[language].timeslotScreen;
-    // FIXME: insert a case for seniors
     if (type === "children") {
       history.push(`/profiles/groupmember/children/${profile.child_id}`);
     } else if (type !== "externals" && profile.phone !== undefined) {

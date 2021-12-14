@@ -134,7 +134,7 @@ class MaterialBookingScreen extends React.Component {
       axios
         .post(`/api/materials/offers/${materialId}/book`, booking)
         .then((response) => {
-          Log.info(response); // TODO: do we need this line?
+          Log.info(response);
           history.goBack();
         })
         .catch((error) => {

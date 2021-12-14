@@ -1180,21 +1180,19 @@ const en = {
     datesError: "Repetition isn't available when multiple days are selected",
   },
   createMaterialRequestInformation: {
-    //link: "Link (optional)",
-    color: "Color of the material", //TODO
-    description: "Description (optional)", //TODO
-    name: "Name of the material", //TODO
-    location: "Location (optional)", //TODO
+    color: "Color of the material",
+    description: "Description (optional)",
+    name: "Name of the material",
+    location: "Location (optional)",
   },
   createMaterialRequestStepper: {
-    //TODO
     pendingMessage:
       "The material request is pending confirmation from an admin",
     continue: "Continue",
     cancel: "Cancel",
     finish: "Create",
     save: "Save",
-    stepLabels: ["Information", "Dates", "Timeslots"],
+    stepLabels: ["Information"],
   },
   timeslotsContainer: {
     addTimeslot: "ADD TIMESLOT",
@@ -2486,7 +2484,6 @@ const nl = {
     selected: "datums geselecteerd",
   },
   createMaterialRequestDates: {
-    //TODO
     header: "Select one or more days",
     repetition: "Repetition",
     weekly: "Weekly",
@@ -2494,21 +2491,19 @@ const nl = {
     datesError: "Repetition isn't available when multiple days are selected",
   },
   createMaterialRequestInformation: {
-    //link: "Koppeling (optioneel)",
-    color: "Kleur van de activiteit", //TODO
-    description: "Beschrijving (optioneel)", //TODO
-    name: "Naam van de activiteit", //TODO
-    location: "Plaats (optioneel)", //TODO
+    color: "Kleur van de activiteit",
+    description: "Beschrijving (optioneel)",
+    name: "Naam van de activiteit",
+    location: "Plaats (optioneel)",
   },
   createMaterialRequestStepper: {
-    //TODO
     pendingMessage:
       "The material request is pending confirmation from an admin",
     continue: "Continue",
     cancel: "Cancel",
     finish: "Create",
     save: "Save",
-    stepLabels: ["Information", "Dates", "Timeslots"],
+    stepLabels: ["Information"],
   },
   timeslotsContainer: {
     addTimeslot: "Voeg timeslot toe",
@@ -3898,14 +3893,12 @@ const it = {
       "La ripetizione non è disponibile quando sono selezionati più giorni",
   },
   createMaterialRequestInformation: {
-    //link: "Link (optional)",
-    color: "Colore del materiale", //TODO
-    description: "Descrizione (opzionale)", //TODO
-    name: "Nome del materiale", //TODO
-    location: "Posizione (opzionale)", //TODO
+    color: "Colore del materiale",
+    description: "Descrizione (opzionale)",
+    name: "Nome del materiale",
+    location: "Posizione (opzionale)",
   },
   createMaterialRequestStepper: {
-    //TODO
     pendingMessage:
       "La richiesta di materiale è in attesa di conferma da parte di un amministratore",
     continue: "Continua",
@@ -4063,9 +4056,7 @@ const it = {
   framilyListItem: {
     delete: "",
   },
-  /* TODO */
   createMaterialOfferStepper: {
-    pendingMessage: "The activity is pending confirmation from an admin",
     continue: "Continua",
     cancel: "Cancella",
     finish: "Crea",
@@ -4073,10 +4064,10 @@ const it = {
     stepLabels: ["Informazioni"],
   },
   createMaterialOfferInformation: {
-    color: "Colore del materiale", //TODO
-    description: "Descrizione (opzionale)", //TODO
-    name: "Nome del materiale", //TODO
-    location: "Posizione (opzionale)", //TODO
+    color: "Colore del materiale",
+    description: "Descrizione (opzionale)",
+    name: "Nome del materiale",
+    location: "Posizione (opzionale)",
   },
   createMaterialOfferScreen: { backNavTitle: "Crea nuova offerta materiale" },
   createMaterialRequestScreen: {
@@ -5276,7 +5267,6 @@ const el = {
     selected: "ημερομηνίες επιλέχθηκαν",
   },
   createMaterialRequestDates: {
-    //TODO
     header: "Select one or more days",
     repetition: "Repetition",
     weekly: "Weekly",
@@ -5284,14 +5274,12 @@ const el = {
     datesError: "Repetition isn't available when multiple days are selected",
   },
   createMaterialRequestInformation: {
-    //link: "Link (optional)",
-    color: "Color of the material", //TODO
-    description: "Description (optional)", //TODO
-    name: "Name of the material", //TODO
-    location: "Location (optional)", //TODO
+    color: "Color of the material",
+    description: "Description (optional)",
+    name: "Name of the material",
+    location: "Location (optional)",
   },
   createMaterialRequestStepper: {
-    //TODO
     pendingMessage:
       "The material request is pending confirmation from an admin",
     continue: "Continue",
@@ -6634,7 +6622,6 @@ const hu = {
     selected: "dátumok kiválasztása",
   },
   createMaterialRequestDates: {
-    //TODO
     header: "Select one or more days",
     repetition: "Repetition",
     weekly: "Weekly",
@@ -6642,14 +6629,12 @@ const hu = {
     datesError: "Repetition isn't available when multiple days are selected",
   },
   createMaterialRequestInformation: {
-    //link: "Link (optional)",
-    color: "Color of the material", //TODO
-    description: "Description (optional)", //TODO
-    name: "Name of the material", //TODO
-    location: "Location (optional)", //TODO
+    color: "Color of the material",
+    description: "Description (optional)",
+    name: "Name of the material",
+    location: "Location (optional)",
   },
   createMaterialRequestStepper: {
-    //TODO
     pendingMessage:
       "The material request is pending confirmation from an admin",
     continue: "Continue",
@@ -7986,14 +7971,13 @@ const fr = {
     location: "Lieu (facultatif)",
   },
   createMaterialRequestStepper: {
-    //TODO
     pendingMessage:
       "The material request is pending confirmation from an admin",
     continue: "Continue",
     cancel: "Cancel",
     finish: "Create",
     save: "Save",
-    stepLabels: ["Information", "Dates", "Timeslots"],
+    stepLabels: ["Information"],
   },
   createActivityDates: {
     header: "Sélectionnez un ou plusieurs jours",
@@ -8010,7 +7994,6 @@ const fr = {
     selected: "dates sélectionnées",
   },
   createMaterialRequestDates: {
-    //TODO
     header: "Select one or more days",
     repetition: "Repetition",
     weekly: "Weekly",
@@ -8018,11 +8001,10 @@ const fr = {
     datesError: "Repetition isn't available when multiple days are selected",
   },
   createMaterialRequestInformation: {
-    //link: "Link (optional)",
-    color: "Color of the material", //TODO
-    description: "Description (optional)", //TODO
-    name: "Name of the material", //TODO
-    location: "Location (optional)", //TODO
+    color: "Color of the material",
+    description: "Description (optional)",
+    name: "Name of the material",
+    location: "Location (optional)",
   },
   timeslotsContainer: {
     addTimeslot: "AJOUTER UN CRÉNEAU HORAIRE",

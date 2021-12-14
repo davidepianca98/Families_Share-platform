@@ -314,7 +314,7 @@ class ActivityScreen extends React.Component {
         ? parents
         : type === "children"
         ? children
-        : seniors; // FIXME: change ?
+        : seniors;
     return (
       <React.Fragment>
         <div className="row no-gutters" style={rowStyle}>
