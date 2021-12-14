@@ -11,3 +11,7 @@ images/profiles/*
 images/groups/
 !images/groups/group_default_photo.png
 coverage
+
+client/package-lock.json
+
+package-lock.json
