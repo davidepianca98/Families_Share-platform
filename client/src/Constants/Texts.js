@@ -4057,6 +4057,8 @@ const it = {
     delete: "",
   },
   createMaterialOfferStepper: {
+    pendingMessage: "in attesa di conferma",
+    snackbar: "Offerta creata",
     continue: "Continua",
     cancel: "Cancella",
     finish: "Crea",
@@ -4106,6 +4108,18 @@ const it = {
   },
   editMaterialOfferScreen: {
     backNavTitle: "Modifica offerta materiale",
+    color: "Colore del materiale",
+    description: "Descrizione (facoltativo)",
+    name: "Nome del materiale",
+    save: "SALVA",
+    location: "Posizione (facoltativo)",
+    borrowed: "Disponibile",
+    modify: "MODIFICA",
+    delete: "ELIMINA",
+  },
+  editMaterialRequestScreen: {
+    confirmDialogTitle: "Sei sicuro di voler eliminare questa richiesta?",
+    backNavTitle: "Modifica richiseta materiale",
     color: "Colore del materiale",
     description: "Descrizione (facoltativo)",
     name: "Nome del materiale",
