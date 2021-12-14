@@ -158,7 +158,7 @@ class CreateMaterialOfferStepper extends React.Component {
 
   createMaterialOffer = () => {
     const { match, history, enqueueSnackbar, language } = this.props;
-    const texts = Texts[language].createActivityStepper;
+    const texts = Texts[language].createMaterialOfferStepper;
     const { groupId } = match.params;
     const { information } = this.state;
     const userId = JSON.parse(localStorage.getItem("user")).id;
@@ -176,6 +176,9 @@ class CreateMaterialOfferStepper extends React.Component {
             variant: "info",
           });
         }
+        enqueueSnackbar(texts.snackbar, {
+          variant: "info",
+        });
         Log.info(response);
         history.goBack();
       })

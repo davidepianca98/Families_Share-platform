@@ -9,6 +9,7 @@ import withLanguage from "./LanguageContext";
 import Log from "./Log";
 import { Switch, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { withSnackbar } from "notistack";
 
 const styles = (theme) => ({
   modifyButton: {
@@ -108,7 +109,8 @@ class EditMaterialOfferScreen extends React.Component {
   };
 
   handleSave = () => {
-    const { match, history } = this.props;
+    const { match, history, enqueueSnackbar } = this.props;
+    console.log(enqueueSnackbar);
     const { materialId } = match.params;
     const { validated, material_name, color, location, description } =
       this.state;
@@ -123,6 +125,9 @@ class EditMaterialOfferScreen extends React.Component {
       axios
         .put(`/api/materials/offers/${materialId}`, patch)
         .then((response) => {
+          enqueueSnackbar("Offerta modificata", {
+            variant: "info",
+          }); //TODO: sposta in text
           Log.info(response);
           history.goBack();
         })
@@ -314,7 +319,9 @@ class EditMaterialOfferScreen extends React.Component {
   }
 }
 
-export default withStyles(styles)(withLanguage(EditMaterialOfferScreen));
+export default withSnackbar(
+  withStyles(styles)(withLanguage(EditMaterialOfferScreen))
+);
 
 EditMaterialOfferScreen.propTypes = {
   history: PropTypes.object,
