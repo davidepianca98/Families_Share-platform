@@ -2921,6 +2921,8 @@ const it = {
     childUnsubscribeConfirm1: "Sei sicuro di voler rimuovere",
     childUnsubscribeConfirm2: "dall'attività?",
     editConfirm: "Conferma modifiche?",
+    notAvailableSenior:
+      "Controlla le disponibilità degli anziani, sembra tu abbia aggiunto una persona non disponibile nella fascia oraria dell'attività",
     you: "Tu",
     userSubscribeConfirm: "Sei sicuro di voler aggiungerti all'attività?",
     userUnsubscribeConfirm:

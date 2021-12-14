@@ -112,10 +112,11 @@ const getChildrenProfiles = (ids) => {
     });
 };
 
+// not used: admin is not able to look for other user's seniors due to functional requirements
 const getGroupSeniors = async (members) => {
   let respArray = [];
-  await asyncForEach(members, async (id) => {
-    let senior = await getUsersSeniors(id.user_id);
+  await asyncForEach(members, async (member) => {
+    let senior = await getUsersSeniors(member.user_id);
     respArray = respArray.concat(respArray, senior);
   });
   return respArray;
@@ -234,7 +235,7 @@ class TimeslotScreen extends React.Component {
     const admins = members.filter((p) => p.admin).map((m) => m.user_id);
     if (timeslot.userCanEdit) {
       children = await getGroupChildren(groupId);
-      seniors = await getGroupSeniors(members); // FIXME: getGroupSeniors
+      seniors = await getUsersSeniors(userId);
       parents = members.map((m) => m.user_id);
     } else {
       children = await getUsersChildren(userId);
@@ -361,8 +362,9 @@ class TimeslotScreen extends React.Component {
   };
 
   handleSave = () => {
-    const { history } = this.props;
+    const { history, enqueueSnackbar, language } = this.props;
     const { pathname } = history.location;
+    const texts = Texts[language].timeslotScreen;
     const { timeslot, adminChanges } = JSON.parse(JSON.stringify(this.state));
     timeslot.adminChanges = adminChanges;
     timeslot.extendedProperties.shared.children = JSON.stringify(
@@ -377,8 +379,6 @@ class TimeslotScreen extends React.Component {
     timeslot.extendedProperties.shared.externals = JSON.stringify(
       timeslot.extendedProperties.shared.externals
     );
-    console.log(pathname);
-    console.log(timeslot);
 
     axios
       .patch(`/api${pathname}`, {
@@ -389,7 +389,11 @@ class TimeslotScreen extends React.Component {
         this.handleGoBack();
       })
       .catch((error) => {
+        let snackMessage = texts.notAvailableSenior;
         Log.error(error);
+        enqueueSnackbar(snackMessage, {
+          variant: "info",
+        });
       });
   };
 
@@ -570,8 +574,7 @@ class TimeslotScreen extends React.Component {
     if (type === "children") {
       history.push(`/profiles/groupmember/children/${profile.child_id}`);
     } else if (type === "seniors") {
-      // FIXME: ci vorrebbe una route in groupmember/seniors
-      history.push(`/`);
+      return;
     } else if (type !== "externals") {
       history.push(`/profiles/${profile.user_id}/info`);
     }
