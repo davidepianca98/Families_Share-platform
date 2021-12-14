@@ -673,7 +673,9 @@ class TimeslotScreen extends React.Component {
                 <div className="col-2-10">
                   <Avatar
                     className={classes.avatar}
-                    src={profile.image}
+                    src={
+                      type === "seniors" ? profile.image.path : profile.image
+                    }
                     onClick={() => this.handleParticipantClick(type, profile)}
                   />
                 </div>
@@ -684,7 +686,9 @@ class TimeslotScreen extends React.Component {
                     tabIndex={-42}
                     onClick={() => this.handleParticipantClick(type, profile)}
                   >
-                    {profile.given_name + " " + profile.family_name}
+                    {type === "seniors"
+                      ? profile.given_name + " " + profile.family_name
+                      : profile.name}
                   </div>
                 </div>
                 <div className="col-1-10">
@@ -751,7 +755,7 @@ class TimeslotScreen extends React.Component {
         <TimeslotSubcribe
           key={index}
           name={senior.given_name + " " + senior.family_name}
-          image={senior.image}
+          image={senior.image.path}
           subscribed={seniorParticipants.includes(senior.senior_id)}
           id={senior.senior_id}
           type="senior"
