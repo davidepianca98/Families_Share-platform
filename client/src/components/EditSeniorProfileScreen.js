@@ -8,6 +8,7 @@ import withLanguage from "./LanguageContext";
 import Texts from "../Constants/Texts";
 import LoadingSpinner from "./LoadingSpinner";
 import Log from "./Log";
+import { withSnackbar } from "notistack";
 
 const dataURLtoFile = (dataurl, filename) => {
   const arr = dataurl.split(",");
@@ -30,7 +31,7 @@ class EditSeniorProfileScreen extends React.Component {
   state = {
     fetchedSeniorData: false,
     month: moment().month() + 1,
-    year: moment().year()
+    year: moment().year(),
   };
 
   componentDidMount() {
@@ -45,15 +46,16 @@ class EditSeniorProfileScreen extends React.Component {
       localStorage.setItem("seniorId", seniorId);
       axios
         .get(`/api/seniors/${seniorId}`)
-        .then(response => {
+        .then((response) => {
           const senior = response.data;
+          console.log(response.data);
           senior.date = new Date(senior.birthdate).getDate();
           senior.year = new Date(senior.birthdate).getFullYear();
           senior.month = new Date(senior.birthdate).getMonth() + 1;
           delete senior.birthdate;
           this.setState({ fetchedSeniorData: true, ...senior });
         })
-        .catch(error => {
+        .catch((error) => {
           Log.error(error);
           this.setState({
             fetchedSeniorData: true,
@@ -68,7 +70,7 @@ class EditSeniorProfileScreen extends React.Component {
             gender: "unspecified",
             allergies: "",
             other_info: "",
-            special_needs: ""
+            special_needs: "",
           });
         });
     }
@@ -78,13 +80,13 @@ class EditSeniorProfileScreen extends React.Component {
     document.removeEventListener("message", this.handleMessage, false);
   }
 
-  handleMessage = event => {
+  handleMessage = (event) => {
     const data = JSON.parse(event.data);
     if (data.action === "fileUpload") {
       const image = `data:image/png;base64, ${data.value}`;
       this.setState({
         image: { path: image },
-        file: dataURLtoFile(image, "photo.png")
+        file: dataURLtoFile(image, "photo.png"),
       });
     }
   };
@@ -94,7 +96,7 @@ class EditSeniorProfileScreen extends React.Component {
     history.goBack();
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name } = event.target;
     const { value } = event.target;
     this.setState({ [name]: value });
@@ -130,7 +132,7 @@ class EditSeniorProfileScreen extends React.Component {
     return true;
   };
 
-  handleAdd = event => {
+  handleAdd = (event) => {
     const { history } = this.props;
     const { pathname } = history.location;
     event.preventDefault();
@@ -138,18 +140,18 @@ class EditSeniorProfileScreen extends React.Component {
       pathname: `${pathname}/additional`,
       state: {
         ...this.state,
-        editSenior: true
-      }
+        editSenior: true,
+      },
     });
     return false;
   };
 
-  handleColorChange = color => {
+  handleColorChange = (color) => {
     this.setState({ background: color.hex });
   };
 
   submitChanges = () => {
-    const { match, history } = this.props;
+    const { match, history, enqueueSnackbar } = this.props;
     const { seniorId } = match.params;
     const {
       year,
@@ -160,12 +162,51 @@ class EditSeniorProfileScreen extends React.Component {
       given_name,
       background,
       gender,
-      availabilities
+      availabilities,
+      image,
     } = this.state;
 
     const userId = JSON.parse(localStorage.getItem("user")).id;
 
-    let senior = { 
+    const bodyFormData = new FormData();
+    if (file !== undefined) {
+      bodyFormData.append("photo", file);
+    } else {
+      bodyFormData.append("image", image);
+    }
+    const birthdate = moment().set({
+      year,
+      month: month - 1,
+      date,
+    });
+
+    bodyFormData.append("user_id", userId);
+    bodyFormData.append("given_name", given_name);
+    bodyFormData.append("family_name", family_name);
+    bodyFormData.append("gender", gender);
+    bodyFormData.append("background", background);
+    bodyFormData.append("availabilities", JSON.stringify(availabilities));
+    bodyFormData.append("birthdate", birthdate);
+    axios
+      .put(`/api/seniors/${seniorId}`, bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        enqueueSnackbar("Profilo anziano modificato", {
+          // TODO
+          variant: "info",
+        });
+        Log.info(response);
+        history.goBack();
+      })
+      .catch((error) => {
+        Log.error(error);
+        history.goBack();
+      });
+    /* TODO
+    let senior = {
       user_id: userId,
       given_name: given_name,
       family_name: family_name,
@@ -174,26 +215,30 @@ class EditSeniorProfileScreen extends React.Component {
       birthdate: moment().set({
         year,
         month,
-        date
+        date,
       }),
       availabilities: availabilities,
-    }
+    };
     if (file !== undefined) {
       senior.photo = file;
     }
     axios
       .put(`/api/seniors/${seniorId}`, senior)
-      .then(response => {
+      .then((response) => {
         Log.info(response);
+        enqueueSnackbar("Profilo anziano modificato", {
+          // TODO
+          variant: "info",
+        });
         history.goBack();
       })
-      .catch(error => {
+      .catch((error) => {
         Log.error(error);
         history.goBack();
-      });
+      });*/
   };
 
-  handleSave = event => {
+  handleSave = (event) => {
     event.preventDefault();
     if (this.validate()) {
       this.submitChanges();
@@ -201,11 +246,11 @@ class EditSeniorProfileScreen extends React.Component {
     this.setState({ formIsValidated: true });
   };
 
-  handleImageChange = event => {
+  handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       const file = event.target.files[0];
-      reader.onload = e => {
+      reader.onload = (e) => {
         this.setState({ image: { path: e.target.result }, file });
       };
       reader.readAsDataURL(event.target.files[0]);
@@ -230,7 +275,7 @@ class EditSeniorProfileScreen extends React.Component {
       image,
       given_name,
       family_name,
-      background
+      background,
     } = this.state;
     const texts = Texts[language].editSeniorProfileScreen;
     const formClass = [];
@@ -240,10 +285,10 @@ class EditSeniorProfileScreen extends React.Component {
           .month(month - 1)
           .year(year)
           .daysInMonth()
-      ).keys()
-    ].map(x => x + 1);
-    const months = [...Array(12).keys()].map(x => x + 1);
-    const years = [...Array(100).keys()].map(x => x + (moment().year() - 99));
+      ).keys(),
+    ].map((x) => x + 1);
+    const months = [...Array(12).keys()].map((x) => x + 1);
+    const years = [...Array(100).keys()].map((x) => x + (moment().year() - 99));
     if (formIsValidated) {
       formClass.push("was-validated");
     }
@@ -284,7 +329,7 @@ class EditSeniorProfileScreen extends React.Component {
         </div>
         <div id="editSeniorProfileInfoContainer" className="horizontalCenter">
           <form
-            ref={form => {
+            ref={(form) => {
               this.formEl = form;
             }}
             onSubmit={this.handleSave}
@@ -326,7 +371,7 @@ class EditSeniorProfileScreen extends React.Component {
                 <div className="fullInput editSeniorProfileInputField center">
                   <label htmlFor="date">{texts.date}</label>
                   <select value={date} onChange={this.handleChange} name="date">
-                    {dates.map(d => (
+                    {dates.map((d) => (
                       <option key={d} value={d}>
                         {d}
                       </option>
@@ -342,7 +387,7 @@ class EditSeniorProfileScreen extends React.Component {
                     onChange={this.handleChange}
                     name="month"
                   >
-                    {months.map(m => (
+                    {months.map((m) => (
                       <option key={m} value={m}>
                         {m}
                       </option>
@@ -354,7 +399,7 @@ class EditSeniorProfileScreen extends React.Component {
                 <div className="fullInput editSeniorProfileInputField center">
                   <label htmlFor="year">{texts.year}</label>
                   <select value={year} onChange={this.handleChange} name="year">
-                    {years.map(y => (
+                    {years.map((y) => (
                       <option key={y} value={y}>
                         {y}
                       </option>
@@ -450,10 +495,10 @@ class EditSeniorProfileScreen extends React.Component {
   }
 }
 
-export default withLanguage(EditSeniorProfileScreen);
+export default withSnackbar(withLanguage(EditSeniorProfileScreen));
 
 EditSeniorProfileScreen.propTypes = {
   language: PropTypes.string,
   history: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
 };

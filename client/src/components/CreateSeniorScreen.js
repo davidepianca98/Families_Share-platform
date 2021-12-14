@@ -8,6 +8,7 @@ import { HuePicker } from "react-color";
 import Texts from "../Constants/Texts";
 import withLanguage from "./LanguageContext";
 import Log from "./Log";
+import { withSnackbar } from "notistack";
 
 const styles = {
   checkbox: {
@@ -130,7 +131,7 @@ class CreateSeniorScreen extends React.Component {
   };
 
   submitChanges = () => {
-    const { match, history } = this.props;
+    const { match, history, enqueueSnackbar } = this.props;
     const { profileId: userId } = match.params;
 
     const {
@@ -146,6 +147,44 @@ class CreateSeniorScreen extends React.Component {
       file,
     } = this.state;
 
+    const bodyFormData = new FormData();
+    if (file !== undefined) {
+      bodyFormData.append("photo", file);
+    } else {
+      bodyFormData.append("image", image);
+    }
+    const birthdate = moment().set({
+      year,
+      month: month - 1,
+      date,
+    });
+
+    bodyFormData.append("given_name", given_name);
+    bodyFormData.append("family_name", family_name);
+    bodyFormData.append("gender", gender);
+    bodyFormData.append("background", background);
+    bodyFormData.append("availabilities", JSON.stringify(availabilities));
+    bodyFormData.append("birthdate", birthdate);
+    axios
+      .post(`/api/users/${userId}/seniors`, bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        enqueueSnackbar("Anziano creato", {
+          // TODO
+          variant: "info",
+        });
+        Log.info(response);
+        history.push(`/profiles/${userId}/seniors/${response.data.senior_id}`);
+      })
+      .catch((error) => {
+        Log.error(error);
+        history.goBack();
+      });
+  };
+  /*
     let senior = {
       given_name: given_name,
       family_name: family_name,
@@ -174,7 +213,7 @@ class CreateSeniorScreen extends React.Component {
         history.goBack();
       });
   };
-
+*/
   handleSave = (event) => {
     event.preventDefault();
     if (this.validate()) {
@@ -465,7 +504,9 @@ class CreateSeniorScreen extends React.Component {
   }
 }
 
-export default withLanguage(withStyles(styles)(CreateSeniorScreen));
+export default withSnackbar(
+  withLanguage(withStyles(styles)(CreateSeniorScreen))
+);
 
 CreateSeniorScreen.propTypes = {
   history: PropTypes.object,
