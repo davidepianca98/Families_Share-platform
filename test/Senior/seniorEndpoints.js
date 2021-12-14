@@ -12,28 +12,31 @@ describe('/Put/api/seniors/id', () => {
   it('it should update a senior when the user is authenticated and in relationship with the senior', done => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
       Senior.findOne({ given_name: 'Test' }, (err, senior) => {
-        senior.given_name = 'My Grandpa'
-        senior.availabilities = JSON.stringify([
-          {
-            weekDay: 0,
-            startTimeHour: 21,
-            startTimeMinute: 0,
-            endTimeHour: 24,
-            endTimeMinute: 0
-          },
-          {
-            weekDay: 3,
-            startTimeHour: 21,
-            startTimeMinute: 0,
-            endTimeHour: 24,
-            endTimeMinute: 0
-          }
-        ])
+
+        let availabilities = [{
+          weekDay: 0,
+          startTimeHour: 10,
+          startTimeMinute: 30,
+          endTimeHour: 15,
+          endTimeMinute: 45
+        }, {
+          weekDay: 3,
+          startTimeHour: 12,
+          startTimeMinute: 0,
+          endTimeHour: 23,
+          endTimeMinute: 0
+        }]
+
+        // senior it's a const, I need to clone it
+        let newSenior = JSON.parse( JSON.stringify( senior ) )
+        newSenior.given_name = 'My Grandpa'
+        newSenior.availabilities = JSON.stringify(availabilities)
+
         chai
           .request(server)
-          .put(`/api/seniors/${senior.senior_id}`)
+          .put(`/api/seniors/${newSenior.senior_id}`)
           .set('Authorization', user.token)
-          .send(senior)
+          .send(newSenior)
           .end((err, res) => {
             res.should.have.status(200)
             done()
