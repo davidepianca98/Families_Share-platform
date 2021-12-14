@@ -13,7 +13,7 @@ describe('/Put/api/seniors/id', () => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
       Senior.findOne({ given_name: 'Test' }, (err, senior) => {
         senior.given_name = 'My Grandpa'
-        senior.availabilities = [
+        senior.availabilities = JSON.stringify([
           {
             weekDay: 0,
             startTimeHour: 21,
@@ -28,7 +28,7 @@ describe('/Put/api/seniors/id', () => {
             endTimeHour: 24,
             endTimeMinute: 0
           }
-        ]
+        ])
         chai
           .request(server)
           .put(`/api/seniors/${senior.senior_id}`)

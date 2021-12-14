@@ -33,7 +33,7 @@ describe('/Post/api/users/userId/seniors', () => {
         other_info: 'no',
         background: '#00838F',
         image: '/images/profiles/senior_default_photo.jpg',
-        availabilities: [
+        availabilities: JSON.stringify([
           {
             weekDay: 3,
             startTimeHour: 21,
@@ -41,7 +41,7 @@ describe('/Post/api/users/userId/seniors', () => {
             endTimeHour: 24,
             endTimeMinute: 0
           }
-        ]
+        ])
       }
       chai
         .request(server)
@@ -68,7 +68,7 @@ describe('/Post/api/users/userId/seniors', () => {
         other_info: 'no',
         background: '#00838F',
         image: '/images/profiles/senior_default_photo.jpg',
-        availabilities: [
+        availabilities: JSON.stringify([
           {
             weekDay: 5,
             startTimeHour: 21,
@@ -76,7 +76,7 @@ describe('/Post/api/users/userId/seniors', () => {
             endTimeHour: 24,
             endTimeMinute: 0
           }
-        ]
+        ])
       }
       chai
         .request(server)
@@ -103,7 +103,7 @@ describe('/Post/api/users/userId/seniors', () => {
         other_info: 'no',
         background: '#00838F',
         image: '/images/profiles/senior_default_photo.jpg',
-        availabilities: [
+        availabilities: JSON.stringify([
           {
             weekDay: 3,
             startTimeHour: 21,
@@ -111,7 +111,7 @@ describe('/Post/api/users/userId/seniors', () => {
             endTimeHour: 24,
             endTimeMinute: 0
           }
-        ]
+        ])
       }
       chai
         .request(server)
