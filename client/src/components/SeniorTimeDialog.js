@@ -76,30 +76,21 @@ class SeniorTimeDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        day: props.day,
-        language: props.language,
-        senior: props.senior,
+      day: props.day,
+      language: props.language,
+      senior: props.senior,
     };
   }
 
   componentDidMount() {
     // let startTime, endTime;
-    let {
-      day, 
-      language,
-      senior,
-    } = this.state;
-/*
-    console.log(day)
-    console.log(language)
-    console.log(senior)
-*/
-    let avail = senior.availabilities.find(row => row.weekDay === day);
-    if (!avail) avail = {weekDay: day}
-    if (!avail.startTimeHour)   avail.startTimeHour = 8
-    if (!avail.startTimeMinute) avail.startTimeMinute = 0
-    if (!avail.endTimeHour)     avail.endTimeHour = 20
-    if (!avail.endTimeMinute)   avail.endTimeMinute = 0
+    let { day, language, senior } = this.state;
+    let avail = senior.availabilities.find((row) => row.weekDay === day);
+    if (!avail) avail = { weekDay: day };
+    if (!avail.startTimeHour) avail.startTimeHour = 8;
+    if (!avail.startTimeMinute) avail.startTimeMinute = 0;
+    if (!avail.endTimeHour) avail.endTimeHour = 20;
+    if (!avail.endTimeMinute) avail.endTimeMinute = 0;
 
     let str = `${avail.startTimeHour}:${avail.startTimeMinute}`;
     let startTime = moment(str, "H:mm");
@@ -114,43 +105,36 @@ class SeniorTimeDialog extends React.Component {
     });
   }
 
-  handleSave = () => {
+  handleSave = async () => {
     const { day, handleCloseTime, senior } = this.props;
     let { startTime, endTime } = this.state;
 
-    console.log(this.props);
-    console.log(startTime);
-    console.log(endTime);
-    
-    handleCloseTime();
-
-    let updated = {}
+    let updated = {};
     updated.weekDay = day;
-    updated.startTimeHour   = startTime.hour();
+    updated.startTimeHour = startTime.hour();
     updated.startTimeMinute = startTime.minutes();
-    updated.endTimeHour     = endTime.hour();
-    updated.endTimeMinute   = endTime.minutes();
-    
-    console.log(day)
-    console.log(senior.availabilities)
-    let idx = senior.availabilities.findIndex(row => {
-      console.log(row.weekDay)
-      return (row.weekDay === day);
-    });
-    console.log(idx)
-    if (idx >= 0)
-      senior.availabilities[idx] = updated;
-    else 
-      senior.availabilities.push(updated);
+    updated.endTimeHour = endTime.hour();
+    updated.endTimeMinute = endTime.minutes();
 
-    axios
-      .put(`/api/seniors/${senior.senior_id}`, senior)
+    let idx = senior.availabilities.findIndex((row) => {
+      return row.weekDay === day;
+    });
+
+    if (idx >= 0) senior.availabilities[idx] = updated;
+    else senior.availabilities.push(updated);
+
+    senior.availabilities = JSON.stringify(senior.availabilities);
+    await axios
+      .put(`/api/seniors/${senior.senior_id}`, senior, {})
       .then((response) => {
         Log.info(response);
+        handleCloseTime();
       })
       .catch((error) => {
         Log.error(error);
+        handleCloseTime();
       });
+    handleCloseTime();
   };
 
   handleCancel = () => {

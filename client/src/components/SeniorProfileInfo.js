@@ -44,7 +44,6 @@ let getDayName = (index, language) => {
 };
 
 class SeniorProfileInfo extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -61,7 +60,7 @@ class SeniorProfileInfo extends React.Component {
       time6ModalIsOpen: false,
       confirmDialogIsOpen: false,
       deleteIndex: "",
-      senior: senior
+      senior: senior,
     };
   }
 
@@ -102,32 +101,31 @@ class SeniorProfileInfo extends React.Component {
       case 5:
         this.setState({ day: day, time5ModalIsOpen: true });
         break;
-        case 6:
-          this.setState({ day: day, time6ModalIsOpen: true });
-          break;
-        default:
-          break;
-      }
+      case 6:
+        this.setState({ day: day, time6ModalIsOpen: true });
+        break;
+      default:
+        break;
+    }
   };
 
   reloadSenior = async () => {
-
     // reload senior
     let { senior } = this.state;
 
     senior = await axios
-    .get(`/api/seniors/${senior.senior_id}`)
-    .then(response => {
-      let resp = response.data;
-      return resp;
-    })
-    .catch(error => {
-      Log.error(error);
-      return null;
-    });
+      .get(`/api/seniors/${senior.senior_id}`)
+      .then((response) => {
+        let resp = response.data;
+        return resp;
+      })
+      .catch((error) => {
+        Log.error(error);
+        return null;
+      });
 
     this.setState({ senior: senior });
-  }
+  };
 
   handleCloseTime = () => {
     this.setState({
@@ -143,8 +141,11 @@ class SeniorProfileInfo extends React.Component {
 
   render() {
     const { senior } = this.state;
-    let { language, otherInfo, gender, birthdate, showAdditional } =
-      this.props;
+    let { language, otherInfo, gender, birthdate, showAdditional } = this.props;
+
+    if (typeof senior?.availabilities === "string") {
+      senior.availabilities = JSON.parse(senior.availabilities);
+    }
 
     const {
       confirmDialogIsOpen,
@@ -280,7 +281,6 @@ class SeniorProfileInfo extends React.Component {
               </TableHead>
               <TableBody>
                 {senior?.availabilities?.map((row) => {
-                  console.log(row);
                   if (row !== null) {
                     return (
                       <TableRow

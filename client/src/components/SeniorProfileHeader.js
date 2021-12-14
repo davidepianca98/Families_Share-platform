@@ -9,12 +9,13 @@ import Texts from "../Constants/Texts";
 import ConfirmDialog from "./ConfirmDialog";
 import ExpandedImageModal from "./ExpandedImageModal";
 import Log from "./Log";
+import { withSnackbar } from "notistack";
 
 class SeniorProfileHeader extends React.Component {
   state = {
     optionsModalIsOpen: false,
     confirmDialogIsOpen: false,
-    imageModalIsOpen: false
+    imageModalIsOpen: false,
   };
 
   handleImageModalOpen = () => {
@@ -44,15 +45,19 @@ class SeniorProfileHeader extends React.Component {
   };
 
   handleDelete = () => {
-    const { match, history } = this.props;
+    const { match, history, enqueueSnackbar } = this.props;
     const { seniorId } = match.params;
     axios
       .delete(`/api/seniors/${seniorId}`)
-      .then(response => {
+      .then((response) => {
+        enqueueSnackbar("Profilo anziano eliminato", {
+          // TODO
+          variant: "info",
+        });
         Log.info(response);
         history.goBack();
       })
-      .catch(error => {
+      .catch((error) => {
         Log.error(error);
         history.goBack();
       });
@@ -62,7 +67,7 @@ class SeniorProfileHeader extends React.Component {
     this.setState({ optionsModalIsOpen: false, confirmDialogIsOpen: true });
   };
 
-  handleConfirmDialogClose = choice => {
+  handleConfirmDialogClose = (choice) => {
     if (choice === "agree") {
       this.handleDelete();
     }
@@ -72,18 +77,15 @@ class SeniorProfileHeader extends React.Component {
   render() {
     const { language, background, history, match, photo, name } = this.props;
     const { profileId } = match.params;
-    const {
-      imageModalIsOpen,
-      confirmDialogIsOpen,
-      optionsModalIsOpen
-    } = this.state;
+    const { imageModalIsOpen, confirmDialogIsOpen, optionsModalIsOpen } =
+      this.state;
     const texts = Texts[language].seniorProfileHeader;
     const options = [
       {
         label: texts.delete,
         style: "optionsModalButton",
-        handle: this.handleConfirmDialogOpen
-      }
+        handle: this.handleConfirmDialogOpen,
+      },
     ];
     return (
       <React.Fragment>
@@ -158,7 +160,7 @@ SeniorProfileHeader.propTypes = {
   photo: PropTypes.string,
   match: PropTypes.object,
   history: PropTypes.object,
-  language: PropTypes.string
+  language: PropTypes.string,
 };
 
-export default withRouter(withLanguage(SeniorProfileHeader));
+export default withSnackbar(withRouter(withLanguage(SeniorProfileHeader)));

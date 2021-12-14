@@ -24,21 +24,27 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import LoadingSpinner from "./LoadingSpinner";
 
-
 let mygetDayName = (index, language) => {
   const days = Texts[language].availabilityWeekModal;
   switch (index) {
-    case 0:      return days.monday;
-    case 1:      return days.tuesday;
-    case 2:      return days.wednesday;
-    case 3:      return days.thursday;
-    case 4:      return days.friday;
-    case 5:      return days.saturday;
-    case 6:      return days.sunday;
-    default:      return "";
+    case 0:
+      return days.monday;
+    case 1:
+      return days.tuesday;
+    case 2:
+      return days.wednesday;
+    case 3:
+      return days.thursday;
+    case 4:
+      return days.friday;
+    case 5:
+      return days.saturday;
+    case 6:
+      return days.sunday;
+    default:
+      return "";
   }
 };
-
 
 const styles = () => ({
   paper: { height: "60vh" },
@@ -73,7 +79,6 @@ const theme = createMuiTheme({
 });
 
 class SeniorWeekDialog extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -83,29 +88,34 @@ class SeniorWeekDialog extends React.Component {
       fetchedSeniorData: false,
       allDays,
     };
-
   }
 
   componentDidMount() {
-
     const allDays = [];
     let { senior } = this.props;
     let originalAvailabilities = [...senior.availabilities];
     let localAvailabilities = [...senior.availabilities];
     let idx = 0;
-    ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
-      .forEach((day) => {
-        allDays.push({
-          index: idx,
-          dayName: day,
-          available: false,
-          startTimeHour: 0,
-          startTimeMinute: 0,
-          endTimeHour: 0,
-          endTimeMinute: 0,
-        });
-        idx++;
+    [
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
+      "sunday",
+    ].forEach((day) => {
+      allDays.push({
+        index: idx,
+        dayName: day,
+        available: false,
+        startTimeHour: 0,
+        startTimeMinute: 0,
+        endTimeHour: 0,
+        endTimeMinute: 0,
       });
+      idx++;
+    });
 
     localAvailabilities.forEach((availability) => {
       allDays.forEach((day) => {
@@ -118,8 +128,8 @@ class SeniorWeekDialog extends React.Component {
       fetchedSeniorData: true,
       allDays: allDays,
       localAvailabilities: localAvailabilities,
-      originalAvailabilities: originalAvailabilities
-     });
+      originalAvailabilities: originalAvailabilities,
+    });
   }
 
   handleSave = async () => {
@@ -127,33 +137,32 @@ class SeniorWeekDialog extends React.Component {
 
     senior = await axios
       .get(`/api/seniors/${senior.senior_id}`)
-      .then(response => {
+      .then((response) => {
         let res = response.data;
         return res;
       })
-      .catch(error => {
+      .catch((error) => {
         Log.error(error);
         return null;
       });
 
-    console.log(senior);
     let newAvailabilities = [];
 
     allDays.forEach((day) => {
       if (day.available) {
-          let current = senior.availabilities.find(row => row.weekDay === day.index )
-          if (!current) current = {weekDay: day.index}
-          if (!current.startTimeHour) current.startTimeHour = 8
-          if (!current.startTimeMinute) current.startTimeMinute = 0
-          if (!current.endTimeHour) current.endTimeHour = 20
-          if (!current.endTimeMinute) current.endTimeMinute = 0
-          newAvailabilities.push(current);
-        }
+        let current = senior.availabilities.find(
+          (row) => row.weekDay === day.index
+        );
+        if (!current) current = { weekDay: day.index };
+        if (!current.startTimeHour) current.startTimeHour = 8;
+        if (!current.startTimeMinute) current.startTimeMinute = 0;
+        if (!current.endTimeHour) current.endTimeHour = 20;
+        if (!current.endTimeMinute) current.endTimeMinute = 0;
+        newAvailabilities.push(current);
+      }
     });
-    
-    console.log(senior.availabilities);
-    console.log(newAvailabilities);
-    senior.availabilities = newAvailabilities;
+
+    senior.availabilities = JSON.stringify(newAvailabilities);
 
     const { handleCloseWeek } = this.props;
     axios
@@ -166,6 +175,7 @@ class SeniorWeekDialog extends React.Component {
         Log.error(error);
         handleCloseWeek();
       });
+    // TODO senior.availabilities = newAvailabilities;
     handleCloseWeek();
   };
 
@@ -183,7 +193,7 @@ class SeniorWeekDialog extends React.Component {
     this.setState({ day: dayName });
 
     handleOpenTime(day);
-  }
+  };
 
   render() {
     const { allDays, fetchedSeniorData } = this.state;
@@ -254,11 +264,16 @@ class SeniorWeekDialog extends React.Component {
                       />
 
                       <ListItemSecondaryAction>
-                        <IconButton 
-                            edge="end" 
-                            aria-label="comments" 
-                            onClick={() => day.available ? this.handleOpenTime(day.index) : null}>
-                          <AccessTimeIcon/>
+                        <IconButton
+                          edge="end"
+                          aria-label="comments"
+                          onClick={() =>
+                            day.available
+                              ? this.handleOpenTime(day.index)
+                              : null
+                          }
+                        >
+                          <AccessTimeIcon />
                         </IconButton>
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -267,7 +282,11 @@ class SeniorWeekDialog extends React.Component {
               </List>
             </DialogContent>
             <DialogActions>
-              <Button fontSize={20} variant="text" onClick={this.handleCancelWeek}>
+              <Button
+                fontSize={20}
+                variant="text"
+                onClick={this.handleCancelWeek}
+              >
                 {texts.cancel}
               </Button>
               <Button onClick={this.handleSave}>{texts.save}</Button>
@@ -276,7 +295,7 @@ class SeniorWeekDialog extends React.Component {
         </MuiThemeProvider>
       );
     } else {
-      return <LoadingSpinner />
+      return <LoadingSpinner />;
     }
   }
 }
