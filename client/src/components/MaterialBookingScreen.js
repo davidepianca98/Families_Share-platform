@@ -104,7 +104,7 @@ class MaterialBookingScreen extends React.Component {
       bookList.forEach((book) => {
         let i = new Date(book.start);
         const end = new Date(book.end);
-        while (i.getDate() <= end.getDate()) {
+        while (i.getTime() <= end.getTime()) {
           datesArray.push(moment(new Date(i)).format("L"));
           i.setDate(i.getDate() + 1);
         }
