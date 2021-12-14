@@ -69,7 +69,11 @@ const fetchMaterialRequests = (groupId, filter) => {
   return axios
     .get(filteredApiPath)
     .then((response) => {
-      return response.data.filter(materials => materials.satisfied_by === null || materials.satisfied_by === undefined);
+      return response.data.filter(
+        (materials) =>
+          materials.satisfied_by === null ||
+          materials.satisfied_by === undefined
+      );
     })
     .catch((error) => {
       Log.error(error);
@@ -185,51 +189,48 @@ class GroupMaterials extends React.Component {
             <Route
               path={`${materialsPath}/requests`}
               render={(props) => (
-                <React.Fragment>
-                  <div
-                    style={{ marginTop: "11rem" }}
-                    id="groupMaterialsRequestContainer"
-                    className="horizontalCenter"
-                  >
-                    <TextField
-                      id="standard-full-width"
-                      style={{ margin: 8 }}
-                      placeholder={texts.findRequests}
-                      fullWidth
-                      margin="normal"
-                      onChange={this.handleRequestSearch}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <SearchIcon style={{ fontSize: "2.3rem" }} />
-                          </InputAdornment>
-                        ),
-                        classes: {
-                          input: classes.resize,
-                        },
-                      }}
-                    />
-                    {materialRequests.length === 0 ? (
-                      <DisplayText text={texts.noRequests} {...props} />
-                    ) : (
-                      <div>
-                        {/*FIXME: anche con poche richieste appare la barra di scorrimento a sinista, probabile improprio incapsulamento... da verificare*/}
-                        <ul>
-                          {materialRequests.map((material) => (
-                            <li key={material.material_request_id}>
-                              <MaterialRequestListItem
-                                materialRequest={material}
-                                groupId={groupId}
-                                history={history}
-                                language={language}
-                              />
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </React.Fragment>
+                <div
+                  style={{ top: "11rem" }}
+                  id="groupMaterialsRequestContainer"
+                  className="horizontalCenter"
+                >
+                  <TextField
+                    id="standard-full-width"
+                    style={{ margin: 8 }}
+                    placeholder={texts.findRequests}
+                    fullWidth
+                    margin="normal"
+                    onChange={this.handleRequestSearch}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon style={{ fontSize: "2.3rem" }} />
+                        </InputAdornment>
+                      ),
+                      classes: {
+                        input: classes.resize,
+                      },
+                    }}
+                  />
+                  {materialRequests.length === 0 ? (
+                    <DisplayText text={texts.noRequests} {...props} />
+                  ) : (
+                    <div>
+                      <ul>
+                        {materialRequests.map((material) => (
+                          <li key={material.material_request_id}>
+                            <MaterialRequestListItem
+                              materialRequest={material}
+                              groupId={groupId}
+                              history={history}
+                              language={language}
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               )}
             />
             <Route

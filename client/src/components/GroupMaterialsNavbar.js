@@ -39,18 +39,18 @@ class GroupMaterialsNavbar extends React.Component {
       >
         <div className="col-5-10">
           <h1
-            id="requests"
-            className={activeTab === "requests" ? "groupNewsNavTabActive" : ""}
-          >
-            {texts.requests}
-          </h1>
-        </div>
-        <div className="col-5-10">
-          <h1
             id="offers"
             className={activeTab === "offers" ? "groupNewsNavTabActive" : ""}
           >
             {texts.offers}
+          </h1>
+        </div>
+        <div className="col-5-10">
+          <h1
+            id="requests"
+            className={activeTab === "requests" ? "groupNewsNavTabActive" : ""}
+          >
+            {texts.requests}
           </h1>
         </div>
       </div>

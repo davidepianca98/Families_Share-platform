@@ -321,7 +321,7 @@ class GroupActivities extends React.Component {
         )}
         {/* materials offer and request button */}
         <div id="groupMaterialsContainer" className="horizontalCenter">
-          {/* il testo andrebbe scritto nella veriabile texts*/}
+          {/*TODO: il testo andrebbe scritto nella veriabile texts*/}
           <h1 className="">Prestito e offerta materiali</h1>
           <div className="text-center">
             <Button
@@ -331,7 +331,7 @@ class GroupActivities extends React.Component {
                 const {
                   group: { group_id: groupId },
                 } = this.state;
-                const path = `/groups/${groupId}/materials/requests`;
+                const path = `/groups/${groupId}/materials/offers`;
                 history.push(path);
               }}
             >
