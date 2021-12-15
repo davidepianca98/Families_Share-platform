@@ -249,7 +249,6 @@ describe('Test', () => {
   before('Initializing DB', async () => {
     await initializeDB()
   })
-
   importTest('User Endpoints Test', './Users/userEndpoints')
   importTest('Group Endpoints Test', './Groups/groupEndpoints')
   importTest('Users Groups Endpoints Test', './Users/groupEndpoints')

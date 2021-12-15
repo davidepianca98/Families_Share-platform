@@ -112,16 +112,6 @@ const getChildrenProfiles = (ids) => {
     });
 };
 
-// not used: admin is not able to look for other user's seniors due to functional requirements
-const getGroupSeniors = async (members) => {
-  let respArray = [];
-  await asyncForEach(members, async (member) => {
-    let senior = await getUsersSeniors(member.user_id);
-    respArray = respArray.concat(respArray, senior);
-  });
-  return respArray;
-};
-
 const getUsersSeniors = (userId) => {
   return axios
     .get(`/api/users/${userId}/seniors`)

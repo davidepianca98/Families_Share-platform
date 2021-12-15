@@ -195,7 +195,6 @@ class MaterialOfferScreen extends React.Component {
       pendingRequest,
       materialId,
       groupId,
-      userId,
       materialCreator,
       materialBookings,
     } = this.state;

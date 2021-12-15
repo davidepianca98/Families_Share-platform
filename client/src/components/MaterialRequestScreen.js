@@ -110,7 +110,7 @@ class MaterialRequestScreen extends React.Component {
   };
 
   handleOffer = () => {
-    const { match, history, enqueueSnackbar } = this.props;
+    const { match, enqueueSnackbar } = this.props;
     const { materialId } = match.params;
     axios
       .post(`/api/materials/requests/${materialId}/satisfy`)

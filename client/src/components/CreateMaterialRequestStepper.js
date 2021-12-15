@@ -169,8 +169,7 @@ class CreateMaterialRequestStepper extends React.Component {
   };
 
   createMaterialRequest = () => {
-    const { match, history, enqueueSnackbar, language } = this.props;
-    const texts = Texts[language].createMaterialRequestStepper;
+    const { match, history, enqueueSnackbar } = this.props;
     const { groupId } = match.params;
     const { information } = this.state;
     const userId = JSON.parse(localStorage.getItem("user")).id;
