@@ -81,7 +81,7 @@ class MaterialBookingScreen extends React.Component {
     super(props);
     this.state = {
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: new Date(new Date().setHours(23, 59, 59)),
       fetchedData: false,
     };
   }
@@ -115,10 +115,10 @@ class MaterialBookingScreen extends React.Component {
   };
 
   handleStartChange = (date) => {
-    this.setState({ startDate: date });
+    this.setState({ date });
   };
   handleEndChange = (date) => {
-    this.setState({ endDate: date });
+    this.setState({ date });
   };
 
   handleCreation = () => {
