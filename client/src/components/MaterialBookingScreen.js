@@ -115,10 +115,10 @@ class MaterialBookingScreen extends React.Component {
   };
 
   handleStartChange = (date) => {
-    this.setState({ date });
+    this.setState({ startDate: date });
   };
   handleEndChange = (date) => {
-    this.setState({ date });
+    this.setState({ endDate: date });
   };
 
   handleCreation = () => {
