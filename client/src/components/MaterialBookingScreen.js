@@ -80,7 +80,7 @@ class MaterialBookingScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: new Date(),
+      startDate: null,
       endDate: new Date(new Date().setHours(23, 59, 59)),
       fetchedData: false,
     };
@@ -94,7 +94,10 @@ class MaterialBookingScreen extends React.Component {
   }
 
   isValidBooking = (booking) => {
-    return booking.start <= booking.end;
+    const { startDate, endDate } = this.state;
+    return (
+      startDate !== null && endDate !== null && booking.start <= booking.end
+    );
   };
 
   isInvalidDate = (date) => {
