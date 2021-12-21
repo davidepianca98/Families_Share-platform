@@ -208,6 +208,24 @@ const it = {
       header: 'Avvisi del gruppo',
       description: 'ha pubblicato una nuova risposta '
     }
+  ],
+  materials: [ //TODO tradurre nella corretta lingua
+    {
+      header: 'Richiesta materiale soddisfatta',
+      description: ' ha soddisfatto la tua richiesta di materiale: '
+    },
+    {
+      header: 'Offerta materiale cancellata',
+      description: 'La seguente offerta del materiale non è più disponibile: '
+    },
+    {
+      header: 'E\' tempo di restituire il materiale',
+      description: 'La seguente prenotazione del materiale sta per scadere: '
+    },
+    {
+      header: 'Il materiale che hai prenotato non è più disponibile',
+      description: 'Il seguente materiale è ancora in prestito: '
+    }
   ]
 }
 const nl = {
@@ -297,6 +315,24 @@ const nl = {
     {
       header: 'Groepsmededelingen ',
       description: ' heeft een nieuw antwoord geplaatst '
+    }
+  ],
+  materials: [ //TODO tradurre nella corretta lingua
+    {
+      header: 'Material request satisfied',
+      description: ' satisfied your material request: '
+    },
+    {
+      header: 'Material offer deleted',
+      description: 'The following material offer is not available anymore: '
+    },
+    {
+      header: 'It\'s time to give back the material',
+      description: 'The following material booking is about to expire: '
+    },
+    {
+      header: 'The material you booked is not yet available',
+      description: 'The following material is still borrowed: '
     }
   ]
 }
@@ -400,6 +436,24 @@ const el = {
       header: 'Ανακοινώσεις Ομάδας',
       description: '  δημοσίευσε ένα νέο σχόλιο στην ομάδα'
     }
+  ],
+  materials: [ //TODO tradurre nella corretta lingua
+    {
+      header: 'Material request satisfied',
+      description: ' satisfied your material request: '
+    },
+    {
+      header: 'Material offer deleted',
+      description: 'The following material offer is not available anymore: '
+    },
+    {
+      header: 'It\'s time to give back the material',
+      description: 'The following material booking is about to expire: '
+    },
+    {
+      header: 'The material you booked is not yet available',
+      description: 'The following material is still borrowed: '
+    }
   ]
 }
 const hu = {
@@ -501,6 +555,24 @@ const hu = {
       'header': 'Csoport bejelentések',
       'description': ' új választ írt '
     }
+  ],
+  materials: [ //TODO tradurre nella corretta lingua
+    {
+      header: 'Material request satisfied',
+      description: ' satisfied your material request: '
+    },
+    {
+      header: 'Material offer deleted',
+      description: 'The following material offer is not available anymore: '
+    },
+    {
+      header: 'It\'s time to give back the material',
+      description: 'The following material booking is about to expire: '
+    },
+    {
+      header: 'The material you booked is not yet available',
+      description: 'The following material is still borrowed: '
+    }
   ]
 }
 
@@ -597,6 +669,24 @@ const fr = {
     {
       'header': 'Annonces du groupe',
       'description': ' a publié une nouvelle réponse dans le groupe '
+    }
+  ],
+  materials: [ //TODO tradurre nella corretta lingua
+    {
+      header: 'Material request satisfied',
+      description: ' satisfied your material request: '
+    },
+    {
+      header: 'Material offer deleted',
+      description: 'The following material offer is not available anymore: '
+    },
+    {
+      header: 'It\'s time to give back the material',
+      description: 'The following material booking is about to expire: '
+    },
+    {
+      header: 'The material you booked is not yet available',
+      description: 'The following material is still borrowed: '
     }
   ]
 }
