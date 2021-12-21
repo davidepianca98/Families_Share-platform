@@ -58,7 +58,7 @@ const fetchMaterialRequests = (groupId, filter) => {
     });
 };
 
-function MyComponent(props) {
+const MapScreen = (props) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -86,7 +86,7 @@ function MyComponent(props) {
     }
     fetchData();
     setFetchedData(true);
-  }, []);
+  }, [groupId]);
 
   const onLoad = useCallback((map) => {
     setMap(map);
@@ -95,11 +95,6 @@ function MyComponent(props) {
   const onUnmount = useCallback((map) => {
     setMap(null);
   }, []);
-
-  const position = {
-    lat: 45.4673295,
-    lng: 12.2005388,
-  };
 
   return fetchedData ? (
     <React.Fragment>
@@ -127,25 +122,50 @@ function MyComponent(props) {
             onLoad={onLoad}
             onUnmount={onUnmount}
           >
-            <MarkerItem
-              key={1}
-              name={"ciao"}
-              description={"bello"}
-              position={{
-                lat: 45.4873295,
-                lng: 12.2105388,
-              }}
-            />
-
             {groupActivities.map((activity) => {
-              return (
-                <MarkerItem
-                  key={activity.activity_id}
-                  name={activity.name}
-                  description={activity.description}
-                  position={position}
-                />
-              );
+              if (activity.location) {
+                return (
+                  <MarkerItem
+                    key={activity.activity_id}
+                    id={activity.activity_id}
+                    name={activity.name}
+                    description={activity.description}
+                    position={activity.location}
+                    type="activity"
+                    {...props}
+                  />
+                );
+              } else return <div key={activity.activity_id}></div>;
+            })}
+            {materialOffers.map((offer) => {
+              if (offer.location) {
+                return (
+                  <MarkerItem
+                    key={offer.material_offer_id}
+                    id={offer.material_offer_id}
+                    name={offer.material_name}
+                    description={offer.description}
+                    position={offer.location}
+                    type="offer"
+                    {...props}
+                  />
+                );
+              } else return <div key={offer.material_offer_id}></div>;
+            })}
+            {materialRequests.map((request) => {
+              if (request.location) {
+                return (
+                  <MarkerItem
+                    key={request.material_request_id}
+                    id={request.material_request_id}
+                    name={request.material_name}
+                    description={request.description}
+                    position={request.location}
+                    type="request"
+                    {...props}
+                  />
+                );
+              } else return <div key={request.material_request_id}></div>;
             })}
           </GoogleMap>
         ) : (
@@ -156,8 +176,6 @@ function MyComponent(props) {
   ) : (
     <LoadingSpinner />
   );
-}
+};
 
-export default React.memo(withLanguage(MyComponent));
-
-// export default withRouter(withLanguage(withStyles(styles)(GroupMaterials)));
+export default React.memo(withLanguage(MapScreen));

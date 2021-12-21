@@ -322,7 +322,6 @@ class GroupActivities extends React.Component {
         {/* materials offer and request button */}
         <div id="groupMaterialsContainer" className="horizontalCenter">
           {/*TODO: il testo andrebbe scritto nella veriabile texts*/}
-          <h1 className="">Prestito e offerta materiali</h1>
           <div className="row text-center">
             <div className="col" style={{ padding: "1rem" }}>
               <Button
