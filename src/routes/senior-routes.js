@@ -36,7 +36,7 @@ router.get("/:id", (req, res, next) => {
     return res.status(401).send("Unauthorized");
   }
   const id = req.params.id;
-  Senior.findOne({ senior_id: id, user_id: req.user_id })
+  Senior.findOne({ senior_id: id })
     .populate("image")
     .lean()
     .exec()

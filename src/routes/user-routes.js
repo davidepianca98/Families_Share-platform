@@ -599,6 +599,7 @@ router.delete("/:id", async (req, res, next) => {
     await Parent.deleteMany({ parent_id: user_id });
     await Child.deleteMany({ child_id: { $in: childDeleteIds } });
     await Image.deleteMany({ owner_id: { $in: childDeleteIds } });
+
     const userSeniors = (await Senior.find({ user_id: user_id })).map(
       (senior) => senior.senior_id
     );
@@ -656,7 +657,8 @@ router.delete("/:id", async (req, res, next) => {
             );
             if (
               filteredParents.length !== parentParticipants.length ||
-              filteredChildren.length !== childParticipants.length
+              filteredChildren.length !== childParticipants.length ||
+              filteredSeniors.length !== seniorParticipants.length
             ) {
               const timeslotPatch = {
                 extendedProperties: {
