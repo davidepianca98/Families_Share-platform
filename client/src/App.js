@@ -201,6 +201,10 @@ const MaterialBookingScreen = Loadable({
   loader: () => import("./components/MaterialBookingScreen"),
   loading: () => Loading,
 });
+const MapScreen = Loadable({
+  loader: () => import("./components/MapScreen"),
+  loading: () => Loading,
+})
 
 axios.interceptors.request.use(
   (config) => {
@@ -458,6 +462,10 @@ class App extends React.Component {
               <PrivateRoute
                 path="/groups/:groupId/materials"
                 component={GroupMaterials}
+              />
+              <PrivateRoute
+                path="/groups/:groupId/map"
+                component={MapScreen}
               />
               <PrivateRoute
                 exact

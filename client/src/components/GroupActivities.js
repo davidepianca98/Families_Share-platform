@@ -323,20 +323,39 @@ class GroupActivities extends React.Component {
         <div id="groupMaterialsContainer" className="horizontalCenter">
           {/*TODO: il testo andrebbe scritto nella veriabile texts*/}
           <h1 className="">Prestito e offerta materiali</h1>
-          <div className="text-center">
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                const {
-                  group: { group_id: groupId },
-                } = this.state;
-                const path = `/groups/${groupId}/materials/offers`;
-                history.push(path);
-              }}
-            >
-              Offerta e richiesta materiali
-            </Button>
+          <div className="row text-center">
+            <div className="col" style={{ padding: "1rem" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ rightMargin: "2rem" }}
+                onClick={() => {
+                  const {
+                    group: { group_id: groupId },
+                  } = this.state;
+                  const path = `/groups/${groupId}/materials/offers`;
+                  history.push(path);
+                }}
+              >
+                Offerta e richiesta materiali
+              </Button>
+            </div>
+            <div className="col" style={{ padding: "1rem" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ padding: "1rem" }}
+                onClick={() => {
+                  const {
+                    group: { group_id: groupId },
+                  } = this.state;
+                  const path = `/groups/${groupId}/map`;
+                  history.push(path);
+                }}
+              >
+                Mappa del gruppo
+              </Button>
+            </div>
           </div>
         </div>
         {/* END materials offer and request button */}

@@ -1521,20 +1521,18 @@ router.patch(
       // Check if seniors are available during the timeslot
       const seniors = await Senior.find({ senior_id: { $in: seniorsIds } })
       for (let senior of seniors) {
+        let startDateTime = new Date(start.dateTime)
+        let endDateTime = new Date(end.dateTime)
         let found = false
         for (let availability of senior.availabilities) {
-          let startDateTime = new Date(start.dateTime)
-          let endDateTime = new Date(end.dateTime)
-          if (startDateTime.getDay() === availability.weekDay &&
-            startDateTime.getHours() >= availability.startTimeHour &&
-            startDateTime.getMinutes() >= availability.startTimeMinute &&
-            endDateTime.getHours() <= availability.endTimeHour &&
-            endDateTime.getMinutes() <= availability.endTimeMinute) {
+          if (startDateTime.getDay() - 1 === availability.weekDay &&
+            startDateTime.getHours() * 60 + startDateTime.getMinutes() >= availability.startTimeHour * 60 + availability.startTimeMinute &&
+            endDateTime.getHours() * 60 + endDateTime.getMinutes() <= availability.endTimeHour * 60 + availability.endTimeMinute) {
             found = true
           }
         }
         if (!found) {
-          return res.status(400).send('Senior not available during the event time range')
+          return res.status(400).send(`Senior not available during the event time range\n${senior.availabilities}\nStartTime: ${startDateTime}\nEndTime: ${endDateTime}`)
         }
       }
 
