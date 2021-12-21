@@ -69,7 +69,7 @@ class EditMaterialOfferScreen extends React.Component {
           color: "",
           description: "",
           location: "",
-          borrowed: true,
+          borrowed: null,
           validated: false,
         });
       });
@@ -91,7 +91,7 @@ class EditMaterialOfferScreen extends React.Component {
     const { match } = this.props;
     const { materialId } = match.params;
     const state = Object.assign({}, this.state);
-    state.borrowed = !value;
+    state.borrowed = value==null ? Date.now() : null;
     this.setState(state);
     axios
       .post(`/api/materials/offers/${materialId}/booked`, {
@@ -249,7 +249,7 @@ class EditMaterialOfferScreen extends React.Component {
               }}
             >
               <Switch
-                checked={!borrowed}
+                checked={borrowed == null}
                 onClick={() => {
                   this.handleSwitch(borrowed);
                 }}

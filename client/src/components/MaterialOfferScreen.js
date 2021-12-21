@@ -72,7 +72,7 @@ const getMaterialOffer = (materialOfferId) => {
       return {
         material_name: "",
         description: "",
-        borrowed: true,
+        borrowed: null,
         color: "#00838f",
         location: "",
       };
@@ -363,7 +363,6 @@ class MaterialOfferScreen extends React.Component {
                         onClick={this.handleBook}
                         className={classes.bookButton}
                         size="large"
-                        disabled={materialOffer.borrowed}
                       >
                         {texts.book}
                       </Button>

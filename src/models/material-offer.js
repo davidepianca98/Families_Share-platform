@@ -24,9 +24,8 @@ const materialOfferSchema = new mongoose.Schema({
     required: true
   },
   borrowed: {
-    type: Boolean,
-    required: true,
-    default: false
+    type: Date,
+    default: null
   },
   group_id: {
     type: String,
