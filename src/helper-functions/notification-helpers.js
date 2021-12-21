@@ -578,7 +578,7 @@ async function materialOfferExpiringNotifications () {
         { borrowed: { '$gte': booking.start } }
       ] })
 
-    if (offer.borrowed != null) {
+    if (offer != null && offer.borrowed != null) {
       await sendMaterialNotifications(2, booking.user, offer)
     }
   }
@@ -601,7 +601,7 @@ async function materialOfferBorrowedNotifications () {
   for (let booking of bookings) {
     let offer = await MaterialOffer.findOne({ material_offer_id: booking.material_offer_id, borrowed: { '$lte': booking.start } })
 
-    if (offer.borrowed != null) {
+    if (offer != null && offer.borrowed != null) {
       await sendMaterialNotifications(3, booking.user, offer)
     }
   }
