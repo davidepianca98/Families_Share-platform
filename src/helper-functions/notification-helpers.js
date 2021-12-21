@@ -558,7 +558,7 @@ async function sendMaterialNotifications (id, user_id, offer) {
 
 async function materialOfferExpiringNotifications () {
   // Check if the booking is about to expire
-  let now = Date.now()
+  let now = new Date()
   let tomorrow = new Date(now)
   tomorrow.setDate(now.getDate() + 1)
 
@@ -582,8 +582,7 @@ async function materialOfferExpiringNotifications () {
 
 // S-10c
 async function materialOfferBorrowedNotifications () {
-  // TODO check it's correct
-  let now = Date.now()
+  let now = new Date()
   let yesterday = new Date(now)
   yesterday.setDate(now.getDate() - 1)
 

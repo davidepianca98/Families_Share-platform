@@ -26,7 +26,7 @@ const ah = require('../helper-functions/activity-helpers')
 const ph = require('../helper-functions/plan-helpers')
 const schedule = require('node-schedule')
 
-if (process.env.NODE_APP_INSTANCE === 0) {
+if (process.env.NODE_APP_INSTANCE === '0') {
   schedule.scheduleJob(process.env.CRONJOB, () => {
     ah.checkCompletedTimeslots()
     nh.materialOfferExpiringNotifications()
