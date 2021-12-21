@@ -207,6 +207,12 @@ function createPdf (profile, groups, children, seniors, events, cb) {
           }
         ]
       })),
+      {
+        text: 'Seniors',
+        fontSize: 14,
+        bold: true,
+        margin: [0, 0, 0, 20]
+      },
       ...seniors.map(senior => ({
         margin: [0, 0, 0, 20],
         columns: [
