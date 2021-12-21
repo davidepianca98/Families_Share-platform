@@ -128,11 +128,11 @@ router.get('/:id/bookings', (req, res, next) => {
       if (!offer) {
         return res.status(404).send('Offer not found')
       }
-      let userFetch = 1
+      let userFetch = {}
       if (offer.created_by !== req.user_id) {
-        userFetch = 0
+        userFetch = { user: 0 }
       }
-      MaterialBooking.find({ material_offer_id: material_offer_id }, { user: userFetch })
+      MaterialBooking.find({ material_offer_id: material_offer_id }, userFetch)
         .lean()
         .exec()
         .then(bookings => {
