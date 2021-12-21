@@ -558,7 +558,7 @@ async function sendMaterialNotifications (id, user_id, offer) {
 
 async function materialOfferExpiringNotifications () {
   // Check if the booking is about to expire
-  let now = Date.now()
+  let now = new Date()
   let tomorrow = new Date(now)
   tomorrow.setDate(now.getDate() + 1)
 
@@ -573,7 +573,7 @@ async function materialOfferExpiringNotifications () {
   // Get relative offers if the material is still borrowed
   let offers = await MaterialOffer.find({ material_offer_id: { '$in': bookings.map(b => b.material_offer_id) }, borrowed: true })
   for (let booking of bookings) {
-    if (booking.material_offer_id in offers.map(b => b.material_offer_id)) {
+    if (offers.map(b => b.material_offer_id).includes(booking.material_offer_id)) {
       let offer = offers.find(o => o.material_offer_id === booking.material_offer_id)
       await sendMaterialNotifications(2, booking.user, offer)
     }
@@ -582,8 +582,7 @@ async function materialOfferExpiringNotifications () {
 
 // S-10c
 async function materialOfferBorrowedNotifications () {
-  // TODO check it's correct
-  let now = Date.now()
+  let now = new Date()
   let yesterday = new Date(now)
   yesterday.setDate(now.getDate() - 1)
 
@@ -597,7 +596,7 @@ async function materialOfferBorrowedNotifications () {
   // Get relative offers if the material is still borrowed
   let offers = await MaterialOffer.find({ material_offer_id: { '$in': bookings.map(b => b.material_offer_id) }, borrowed: true })
   for (let booking of bookings) {
-    if (booking.material_offer_id in offers.map(b => b.material_offer_id)) {
+    if (offers.map(b => b.material_offer_id).includes(booking.material_offer_id)) {
       let offer = offers.find(o => o.material_offer_id === booking.material_offer_id)
       await sendMaterialNotifications(3, booking.user, offer)
     }

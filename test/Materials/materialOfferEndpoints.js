@@ -187,6 +187,7 @@ describe('/Get/api/materials/offers/id/bookings', () => {
             res.should.have.status(200)
             res.body.should.be.a('array').with.lengthOf(1)
             res.body[0].should.have.property('user')
+            res.body[0].should.have.property('start')
             done()
           })
       })
@@ -206,6 +207,7 @@ describe('/Get/api/materials/offers/id/bookings', () => {
           .end((err, res) => {
             res.should.have.status(200)
             res.body[0].should.not.have.property('user')
+            res.body[0].should.have.property('start')
             done()
           })
       })
