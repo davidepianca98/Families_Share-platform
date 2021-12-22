@@ -982,7 +982,7 @@ const en = {
     framily: "FRAMILY",
     info: "INFO",
     children: "CHILDREN",
-    senior: "SENIOR",
+    seniors: "SENIOR",
   },
   profileInfo: {
     adress: "Address",
@@ -1195,6 +1195,7 @@ const en = {
     finish: "Create",
     save: "Save",
     stepLabels: ["Information"],
+    snackbarMessage: "Richiesta creata con successo",
   },
   timeslotsContainer: {
     addTimeslot: "ADD TIMESLOT",
@@ -1407,29 +1408,14 @@ const en = {
     requiredErr: "Per favore compila questo campo.",
     snackbarMessage: "Anziano creato",
   },
-  createMaterialRequestDates: {
-    header: "Seleziona uno o più giorni",
-    repetition: "Ripetizione",
-    weekly: "Settimanale",
-    monthly: "Mensile",
-    datesError:
-      "La ripetizione non è disponibile quando sono selezionati più giorni",
+  seniorListItem: {
+    man: "Man",
+    woman: "Woman",
+    age: "age",
   },
-  createMaterialRequestInformation: {
-    color: "Colore del materiale",
-    description: "Descrizione (opzionale)",
-    name: "Nome del materiale",
-    location: "Posizione (opzionale)",
-  },
-  createMaterialRequestStepper: {
-    pendingMessage:
-      "La richiesta di materiale è in attesa di conferma da parte di un amministratore",
-    continue: "Continua",
-    cancel: "Cancella",
-    finish: "Crea",
-    save: "Salva",
-    stepLabels: ["Informazioni"],
-    snackbarMessage: "Richiesta creata con successo",
+  profileSeniors: {
+    addSeniorPrompt:
+      "Non hai ancora aggiunto anziani. Fare click sull'icona anziano per aggiungere un nuovo anziano",
   },
   createMaterialOfferStepper: {
     pendingMessage: "in attesa di conferma",
@@ -1489,6 +1475,25 @@ const en = {
   materialOfferScreenNavbar: {
     info: "INFO",
     books: "PRENOTAZIONI",
+  },
+  availabilityTimeModal: {
+    header: "Orario",
+    start: "Inizio",
+    end: "Fine",
+    save: "SALVA",
+    cancel: "ANNULLA",
+  },
+  availabilityWeekModal: {
+    header: "Disponibilità",
+    monday: "Lunedì",
+    tuesday: "Martedì",
+    wednesday: "Mercoledì",
+    thursday: "Giovedì",
+    friday: "Venerdì",
+    saturday: "Sabato",
+    sunday: "Domenica",
+    save: "SALVA",
+    cancel: "ANNULLA",
   },
   editMaterialOfferScreen: {
     backNavTitle: "Modifica offerta materiale",
