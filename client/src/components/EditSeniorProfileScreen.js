@@ -424,23 +424,7 @@ class EditSeniorProfileScreen extends React.Component {
                 </div>
               </div>
             </div>
-            <div id="additionalInformationContainer" className="row no-gutters">
-              <div className="col-7-10">
-                <div className="center">
-                  <h1>{texts.additional}</h1>
-                  <h2>{texts.example}</h2>
-                </div>
-              </div>
-              <div className="col-3-10">
-                <button
-                  className="center"
-                  type="button"
-                  onClick={this.handleAdd}
-                >
-                  {texts.add}
-                </button>
-              </div>
-            </div>
+
             <div className="row no-gutters">
               <div className="col-2-10">
                 <i className="fas fa-camera center" />

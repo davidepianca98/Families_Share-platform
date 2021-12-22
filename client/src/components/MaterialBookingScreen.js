@@ -15,6 +15,7 @@ import {
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import moment from "moment";
+import { withSnackbar } from "notistack";
 
 const materialTheme = createTheme({
   overrides: {
@@ -125,7 +126,7 @@ class MaterialBookingScreen extends React.Component {
   };
 
   handleCreation = () => {
-    const { match, history } = this.props;
+    const { match, history, enqueueSnackbar } = this.props;
     const { materialId } = match.params;
     const { startDate, endDate } = this.state;
     const booking = {
@@ -138,6 +139,10 @@ class MaterialBookingScreen extends React.Component {
         .post(`/api/materials/offers/${materialId}/book`, booking)
         .then((response) => {
           Log.info(response);
+          enqueueSnackbar("Prenotazione effettuata", {
+            // todo text!!!
+            variant: "info",
+          });
           history.goBack();
         })
         .catch((error) => {
@@ -261,7 +266,9 @@ class MaterialBookingScreen extends React.Component {
   }
 }
 
-export default withStyles(styles)(withLanguage(MaterialBookingScreen));
+export default withSnackbar(
+  withStyles(styles)(withLanguage(MaterialBookingScreen))
+);
 
 MaterialBookingScreen.propTypes = {
   history: PropTypes.object,

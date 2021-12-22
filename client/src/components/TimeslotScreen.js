@@ -138,7 +138,7 @@ const getOneSeniorProfile = (id) => {
 
 const getSeniorProfiles = async (ids) => {
   const profileArray = [];
-  asyncForEach(ids, async (id) => {
+  await asyncForEach(ids, async (id) => {
     let profile = await getOneSeniorProfile(id);
     profileArray.push(profile);
   });
@@ -217,7 +217,6 @@ class TimeslotScreen extends React.Component {
     shared.seniors = JSON.parse(shared.seniors);
     let parentIds = [...shared.parents];
     let childrenIds = [...shared.children];
-    let seniorsIds = [...shared.seniors];
     let children;
     let parents;
     let seniors;
@@ -239,9 +238,8 @@ class TimeslotScreen extends React.Component {
     }
     childrenIds = childrenIds.concat(children);
     parentIds = parentIds.concat(parents);
-    seniorsIds = seniorsIds.concat(seniors);
 
-    const seniorProfiles = await getSeniorProfiles([...new Set(seniorsIds)]);
+    const seniorProfiles = await getSeniorProfiles(seniors);
     const parentProfiles = await getParentProfiles([...new Set(parentIds)]);
     const childrenProfiles = await getChildrenProfiles([
       ...new Set(childrenIds),
@@ -733,14 +731,7 @@ class TimeslotScreen extends React.Component {
   };
 
   getSeniorSubscribes = () => {
-    const {
-      seniorProfiles: unfilteredSeniorProfiles,
-      seniors,
-      timeslot,
-    } = this.state;
-    const seniorProfiles = unfilteredSeniorProfiles.filter((profile) =>
-      seniors.includes(profile.senior_id)
-    );
+    const { seniorProfiles, timeslot } = this.state;
     const seniorParticipants = timeslot.extendedProperties.shared.seniors;
     return seniorProfiles.map((senior, index) => {
       return (

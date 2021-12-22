@@ -100,7 +100,7 @@ class SeniorProfileHeader extends React.Component {
               <button
                 type="button"
                 className="transparentButton center"
-                onClick={() => history.goBack()}
+                onClick={() => history.push(`/profiles/${profileId}/seniors`)}
               >
                 <i className="fas fa-arrow-left" />
               </button>
