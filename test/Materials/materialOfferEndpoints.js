@@ -136,7 +136,7 @@ describe('/Post/api/materials/offers/id/booked', () => {
     User.findOne({ email: 'test@email.com' }, (error, user) => {
       MaterialOffer.findOne({ material_name: 'PlayStation 2' }, (err, offer) => {
         const bookingState = {
-          borrowed: true
+          borrowed: Date.now()
         }
         chai
           .request(server)
@@ -158,7 +158,7 @@ describe('/Post/api/materials/offers/id/booked', () => {
     User.findOne({ email: 'test3@email.com' }, (error, user) => {
       MaterialOffer.findOne({ material_name: 'PlayStation 2' }, (err, offer) => {
         const bookingState = {
-          borrowed: true
+          borrowed: Date.now()
         }
         chai
           .request(server)

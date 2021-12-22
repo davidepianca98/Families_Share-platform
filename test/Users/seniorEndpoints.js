@@ -105,7 +105,7 @@ describe('/Post/api/users/userId/seniors', () => {
         image: '/images/profiles/senior_default_photo.jpg',
         availabilities: JSON.stringify([
           {
-            weekDay: 3,
+            weekDay: 2,
             startTimeHour: 21,
             startTimeMinute: 0,
             endTimeHour: 24,

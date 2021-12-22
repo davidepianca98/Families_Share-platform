@@ -562,7 +562,7 @@ async function materialOfferExpiringNotifications () {
   let tomorrow = new Date(now)
   tomorrow.setDate(now.getDate() + 1)
 
-  // Get bookings still in act and withing a day of expiration
+  // Get bookings still in act and within a day of expiration
   let bookings = await MaterialBooking.find({
     $and: [
       { start: { '$lte': now } },
@@ -590,7 +590,7 @@ async function materialOfferBorrowedNotifications () {
   let yesterday = new Date(now)
   yesterday.setDate(now.getDate() - 1)
 
-  // Get bookings still in act and withing a day of expiration
+  // Get bookings still in act and within a day of expiration
   let bookings = await MaterialBooking.find({
     $and: [
       { start: { '$lte': now } },
