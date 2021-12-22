@@ -13,7 +13,7 @@ const fetchGeoLocation = (location) => {
   let encodedLocation = encodeURI(location);
 
   return fetch(
-    `https://api.geoapify.com/v1/geocode/search?text=${encodedLocation}&apiKey=2d5c78f87a9f4f3fa38eb4b52898987e`
+    `https://api.geoapify.com/v1/geocode/search?text=${encodedLocation}&apiKey=${process.env.REACT_APP_OSM_GEOCODER_API_KEY}`
   )
     .then((response) => {
       return response.json();
