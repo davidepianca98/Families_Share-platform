@@ -131,8 +131,10 @@ class CreateSeniorScreen extends React.Component {
   };
 
   submitChanges = () => {
-    const { match, history, enqueueSnackbar } = this.props;
+    const { match, history, enqueueSnackbar, language } = this.props;
     const { profileId: userId } = match.params;
+
+    const texts = Texts[language].createSeniorScreen;
 
     const {
       name: given_name,
@@ -172,8 +174,7 @@ class CreateSeniorScreen extends React.Component {
         },
       })
       .then((response) => {
-        enqueueSnackbar("Anziano creato", {
-          // TODO
+        enqueueSnackbar(texts.snackbarMessage, {
           variant: "info",
         });
         Log.info(response);

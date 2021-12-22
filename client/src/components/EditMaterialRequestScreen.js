@@ -105,14 +105,14 @@ class EditMaterialRequestScreen extends React.Component {
   };
 
   handleDelete = () => {
-    const { match, history, enqueueSnackbar } = this.props;
+    const { match, history, enqueueSnackbar, language } = this.props;
     const { materialId } = match.params;
+    const texts = Texts[language].editMaterialRequestScreen;
     this.setState({ pendingRequest: true });
     axios
       .delete(`/api/materials/requests/${materialId}`)
       .then((response) => {
-        enqueueSnackbar("Richiesta cancellata", {
-          // TODO
+        enqueueSnackbar(texts.snackbarDelete, {
           variant: "info",
         });
         Log.info(response);
@@ -125,8 +125,9 @@ class EditMaterialRequestScreen extends React.Component {
   };
 
   handleSave = () => {
-    const { match, history, enqueueSnackbar } = this.props;
+    const { match, history, enqueueSnackbar, language } = this.props;
     const { materialId } = match.params;
+    const texts = Texts[language].editMaterialRequestScreen;
     const { validated, material_name, color, location, description } =
       this.state;
     if (validated) {
@@ -140,8 +141,7 @@ class EditMaterialRequestScreen extends React.Component {
       axios
         .put(`/api/materials/requests/${materialId}`, patch)
         .then((response) => {
-          enqueueSnackbar("Richiesta modificata", {
-            // TODO
+          enqueueSnackbar(texts.snackbarModify, {
             variant: "info",
           });
           Log.info(response);

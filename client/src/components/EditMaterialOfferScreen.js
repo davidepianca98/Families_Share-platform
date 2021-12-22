@@ -91,7 +91,7 @@ class EditMaterialOfferScreen extends React.Component {
     const { match } = this.props;
     const { materialId } = match.params;
     const state = Object.assign({}, this.state);
-    state.borrowed = value==null ? Date.now() : null;
+    state.borrowed = value == null ? Date.now() : null;
     this.setState(state);
     axios
       .post(`/api/materials/offers/${materialId}/booked`, {
@@ -109,9 +109,9 @@ class EditMaterialOfferScreen extends React.Component {
   };
 
   handleSave = () => {
-    const { match, history, enqueueSnackbar } = this.props;
-    console.log(enqueueSnackbar);
+    const { match, history, enqueueSnackbar, language } = this.props;
     const { materialId } = match.params;
+    const texts = Texts[language].editMaterialOfferScreen;
     const { validated, material_name, color, location, description } =
       this.state;
     if (validated) {
@@ -125,9 +125,9 @@ class EditMaterialOfferScreen extends React.Component {
       axios
         .put(`/api/materials/offers/${materialId}`, patch)
         .then((response) => {
-          enqueueSnackbar("Offerta modificata", {
+          enqueueSnackbar(texts.snackbarModify, {
             variant: "info",
-          }); //TODO: sposta in text
+          });
           Log.info(response);
           history.goBack();
         })
@@ -139,12 +139,16 @@ class EditMaterialOfferScreen extends React.Component {
   };
 
   handleDelete = () => {
-    const { match, history } = this.props;
+    const { match, history, enqueueSnackbar, language } = this.props;
+    const texts = Texts[language].editMaterialOfferScreen;
     const { materialId, groupId } = match.params;
     axios
       .delete(`/api/materials/offers/${materialId}`)
       .then((response) => {
         Log.info(response);
+        enqueueSnackbar(texts.snackbarDelete, {
+          variant: "info",
+        });
         history.push(`/groups/${groupId}/materials/offers`);
       })
       .catch((error) => {

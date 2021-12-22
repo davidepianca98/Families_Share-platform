@@ -175,7 +175,7 @@ class SeniorWeekDialog extends React.Component {
         Log.error(error);
         handleCloseWeek();
       });
-    // TODO senior.availabilities = newAvailabilities;
+
     handleCloseWeek();
   };
 

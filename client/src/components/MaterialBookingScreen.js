@@ -126,8 +126,9 @@ class MaterialBookingScreen extends React.Component {
   };
 
   handleCreation = () => {
-    const { match, history, enqueueSnackbar } = this.props;
+    const { match, history, enqueueSnackbar, language } = this.props;
     const { materialId } = match.params;
+    const texts = Texts[language].MaterialBookingScreen;
     const { startDate, endDate } = this.state;
     const booking = {
       start: startDate,
@@ -139,8 +140,7 @@ class MaterialBookingScreen extends React.Component {
         .post(`/api/materials/offers/${materialId}/book`, booking)
         .then((response) => {
           Log.info(response);
-          enqueueSnackbar("Prenotazione effettuata", {
-            // todo text!!!
+          enqueueSnackbar(texts.snackbarMessage, {
             variant: "info",
           });
           history.goBack();

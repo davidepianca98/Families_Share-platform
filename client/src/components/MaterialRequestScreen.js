@@ -48,7 +48,7 @@ const getMaterialRequest = (materialRequestId) => {
     });
 };
 
-const getMyProfile = (userId) => {
+const getUserProfile = (userId) => {
   return axios
     .get(`/api/users/${userId}/profile`)
     .then((response) => {
@@ -91,7 +91,7 @@ class MaterialRequestScreen extends React.Component {
     const { groupId, materialId } = this.state;
     const userId = JSON.parse(localStorage.getItem("user")).id;
     const materialRequest = await getMaterialRequest(materialId, groupId);
-    const userCreator = await getMyProfile(userId);
+    const userCreator = await getUserProfile(materialRequest.created_by);
     const userIsCreator = userId === materialRequest.created_by;
     const userCanEdit = userIsCreator;
     this.setState({
@@ -110,18 +110,17 @@ class MaterialRequestScreen extends React.Component {
   };
 
   handleOffer = () => {
-    const { match, enqueueSnackbar } = this.props;
+    const { match, enqueueSnackbar, language } = this.props;
     const { materialId } = match.params;
+    const texts = Texts[language].materialRequestScreen;
     axios
       .post(`/api/materials/requests/${materialId}/satisfy`)
       .then((response) => {
-        enqueueSnackbar("Richiesta soddisfatta", {
-          // TODO
+        enqueueSnackbar(texts.snackbarMessage, {
           variant: "info",
         });
         this.setState({ disableOfferButton: true });
         Log.info(response);
-        //history.goBack(); TODO
       })
       .catch((error) => {
         Log.error(error);
@@ -142,7 +141,7 @@ class MaterialRequestScreen extends React.Component {
       userCreator,
       disableOfferButton,
     } = this.state;
-    const texts = Texts[language].activityScreen;
+    const texts = Texts[language].materialRequestScreen;
     const name = userCreator.given_name + " " + userCreator.family_name;
     const rowStyle = { minHeight: "5rem" };
     return fetchedMaterialRequestData ? (
@@ -196,9 +195,7 @@ class MaterialRequestScreen extends React.Component {
               </div>
             )}
             <div className="row no-gutters" style={rowStyle}>
-              <div className="activityInfoHeader">
-                {"Data Creazione" /*TODO text.blablabla*/}
-              </div>
+              <div className="activityInfoHeader">{texts.creationDate}</div>
             </div>
             <div className="row no-gutters" style={rowStyle}>
               <div className="col-1-10">
@@ -213,9 +210,7 @@ class MaterialRequestScreen extends React.Component {
             {!userCanEdit && (
               <div>
                 <div className="row no-gutters" style={rowStyle}>
-                  <div className="activityInfoHeader">
-                    Utente {/*TODO text.blablabla*/}
-                  </div>
+                  <div className="activityInfoHeader">{texts.user}</div>
                 </div>
                 <div className="row no-gutters" style={rowStyle}>
                   <div className="col-1-10">
@@ -240,7 +235,7 @@ class MaterialRequestScreen extends React.Component {
               : false
           }
         >
-          {userCanEdit ? "MODIFICA" : "OFFRI" /*TODO sposta in testo*/}
+          {userCanEdit ? texts.modify : texts.offer}
         </Button>
       </React.Fragment>
     ) : (

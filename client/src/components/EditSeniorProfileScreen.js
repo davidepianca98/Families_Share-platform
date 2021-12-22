@@ -151,7 +151,7 @@ class EditSeniorProfileScreen extends React.Component {
   };
 
   submitChanges = () => {
-    const { match, history, enqueueSnackbar } = this.props;
+    const { match, history, enqueueSnackbar, language } = this.props;
     const { seniorId } = match.params;
     const {
       year,
@@ -165,6 +165,8 @@ class EditSeniorProfileScreen extends React.Component {
       availabilities,
       image,
     } = this.state;
+
+    const texts = Texts[language].editSenioProfileScreen;
 
     const userId = JSON.parse(localStorage.getItem("user")).id;
 
@@ -194,8 +196,7 @@ class EditSeniorProfileScreen extends React.Component {
         },
       })
       .then((response) => {
-        enqueueSnackbar("Profilo anziano modificato", {
-          // TODO
+        enqueueSnackbar(texts.snackbarMessage, {
           variant: "info",
         });
         Log.info(response);
@@ -205,37 +206,6 @@ class EditSeniorProfileScreen extends React.Component {
         Log.error(error);
         history.goBack();
       });
-    /* TODO
-    let senior = {
-      user_id: userId,
-      given_name: given_name,
-      family_name: family_name,
-      gender: gender,
-      background: background,
-      birthdate: moment().set({
-        year,
-        month,
-        date,
-      }),
-      availabilities: availabilities,
-    };
-    if (file !== undefined) {
-      senior.photo = file;
-    }
-    axios
-      .put(`/api/seniors/${seniorId}`, senior)
-      .then((response) => {
-        Log.info(response);
-        enqueueSnackbar("Profilo anziano modificato", {
-          // TODO
-          variant: "info",
-        });
-        history.goBack();
-      })
-      .catch((error) => {
-        Log.error(error);
-        history.goBack();
-      });*/
   };
 
   handleSave = (event) => {

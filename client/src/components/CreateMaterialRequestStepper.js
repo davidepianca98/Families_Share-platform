@@ -169,9 +169,10 @@ class CreateMaterialRequestStepper extends React.Component {
   };
 
   createMaterialRequest = () => {
-    const { match, history, enqueueSnackbar } = this.props;
+    const { match, history, enqueueSnackbar, language } = this.props;
     const { groupId } = match.params;
     const { information } = this.state;
+    const texts = Texts[language].createMaterialRequestStepper;
     const userId = JSON.parse(localStorage.getItem("user")).id;
     const materialRequest = this.formatDataToMaterialRequest(
       information,
@@ -182,8 +183,7 @@ class CreateMaterialRequestStepper extends React.Component {
     axios
       .post(`/api/groups/${groupId}/materialRequests`, materialRequest)
       .then((response) => {
-        enqueueSnackbar("Richiesta creata con successo", {
-          // TODO
+        enqueueSnackbar(texts.snackbarMessage, {
           variant: "info",
         });
         Log.info(response);

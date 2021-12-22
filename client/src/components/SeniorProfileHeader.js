@@ -45,13 +45,13 @@ class SeniorProfileHeader extends React.Component {
   };
 
   handleDelete = () => {
-    const { match, history, enqueueSnackbar } = this.props;
+    const { match, history, enqueueSnackbar, language } = this.props;
     const { seniorId } = match.params;
+    const texts = Texts[language].seniorProfileHeader;
     axios
       .delete(`/api/seniors/${seniorId}`)
       .then((response) => {
-        enqueueSnackbar("Profilo anziano eliminato", {
-          // TODO
+        enqueueSnackbar(texts.snackbarMessage, {
           variant: "info",
         });
         Log.info(response);

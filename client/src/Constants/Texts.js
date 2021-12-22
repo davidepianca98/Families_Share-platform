@@ -3473,6 +3473,8 @@ const it = {
     export: "Esporta l'agenda",
     newPlan: "Pianificazione avanzata",
     newActivity: "Nuova attività",
+    offersAndRequests: "Offerta e richiesta materiali",
+    groupMap: "Mappa del gruppo",
   },
   activityListItem: {
     every: "Ogni",
@@ -3642,6 +3644,9 @@ const it = {
   profileScreen: {
     privateProfile: "Il profilo è privato",
   },
+  editSenioProfileScreen: {
+    snackbarMessage: "Profilo anziano modificato",
+  },
   editProfileScreen: {
     whatsappOption: "WhatsApp",
     viberOption: "Viber",
@@ -3790,6 +3795,7 @@ const it = {
     delete: "Cancella profilo anziano/a",
     confirmDialogTitle:
       "Confermi di voler eliminare il profilo di questo anziano/a?",
+    snackbarMessage: "Profilo anziano eliminato",
   },
   seniorProfileInfo: {
     confirmDialogTitle: "Sei sicuro di voler eliminare questo genitore?",
@@ -3840,6 +3846,7 @@ const it = {
       "Si prega di accettare i termini d'uso e l'informativa sulla provacy per procedere",
     unspecified: "Non specificato",
     requiredErr: "Per favore compila questo campo.",
+    snackbarMessage: "Anziano creato",
   },
   additionalInfoScreen: {
     backNavTitle: "Informazioni",
@@ -3906,6 +3913,7 @@ const it = {
     finish: "Crea",
     save: "Salva",
     stepLabels: ["Informazioni"],
+    snackbarMessage: "Richiesta creata con successo",
   },
   timeslotsContainer: {
     addTimeslot: "AGGIUNGI ORARI",
@@ -4086,6 +4094,14 @@ const it = {
     findRequests: "Cerca tra le richieste",
     findOffers: "Cerca tra le offerte",
   },
+  materialRequestScreen: {
+    infoHeader: "Dettagli materiale",
+    creationDate: "Data Creazione",
+    user: "Utente",
+    modify: "MODIFICA",
+    offer: "OFFRI",
+    snackbarMessage: "Richiesta soddisfatta",
+  },
   materialOfferScreen: {
     infoHeader: "Informazioni",
     disponible: "Disponibile",
@@ -4101,6 +4117,7 @@ const it = {
     offerOwnerBookingNotDisplay: "Il tuo oggetto non è ancora stato prenotato",
     bookerDisplay: "Hai prenotato questo oggetto nei seguenti periodi:",
     bookerNotDisplay: "Non hai prenotato quest'oggetto",
+    snackbarHandleDelete: "Prenotazione cancellata",
   },
   materialOfferScreenNavbar: {
     info: "INFO",
@@ -4116,6 +4133,8 @@ const it = {
     borrowed: "Disponibile",
     modify: "MODIFICA",
     delete: "ELIMINA",
+    snackbarModify: "Offerta modificata",
+    snackbarDelete: "Offerta eliminata",
   },
   editMaterialRequestScreen: {
     confirmDialogTitle: "Sei sicuro di voler eliminare questa richiesta?",
@@ -4128,6 +4147,8 @@ const it = {
     borrowed: "Disponibile",
     modify: "MODIFICA",
     delete: "ELIMINA",
+    snackbarDelete: "Richiesta cancellata",
+    snackbarModify: "Richiesta modificata",
   },
   MaterialBookingScreen: {
     backNavTitle: "Crea prenotazione",
@@ -4135,6 +4156,10 @@ const it = {
     date: "Data",
     startDateLabel: "Inizio prenotazione",
     endDateLabel: "Fine prenotazione",
+    snackbarMessage: "Prenotazione effettuata",
+  },
+  markerItem: {
+    info: "Visualiza dettagli",
   },
 };
 

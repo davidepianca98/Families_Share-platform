@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import Log from "./Log";
+import Texts from "../Constants/Texts";
 
 const divStyle = {
   background: `white`,
@@ -28,7 +29,8 @@ const fetchGeoLocation = (location) => {
 };
 
 const MarkerItem = (props) => {
-  const { name, description, position, type, id } = props;
+  const { name, description, position, type, id, language } = props;
+  const texts = Texts[language].markerItem;
 
   const [show, setShow] = useState(false);
   const [fetchedData, setFetchedData] = useState(false);
@@ -73,8 +75,7 @@ const MarkerItem = (props) => {
             <h1>{name}</h1>
             <p>{description}</p>
             <p>
-              <Link to={destination}>Visualiza dettagli</Link>
-              {/* TODO: sposta il testo */}
+              <Link to={destination}>{texts.info}</Link>
             </p>
           </div>
         </InfoWindow>
