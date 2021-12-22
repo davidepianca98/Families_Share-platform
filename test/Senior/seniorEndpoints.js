@@ -28,7 +28,7 @@ describe('/Put/api/seniors/id', () => {
         }]
 
         // senior it's a const, I need to clone it
-        let newSenior = JSON.parse( JSON.stringify( senior ) )
+        let newSenior = JSON.parse(JSON.stringify(senior))
         newSenior.given_name = 'My Grandpa'
         newSenior.availabilities = JSON.stringify(availabilities)
 
