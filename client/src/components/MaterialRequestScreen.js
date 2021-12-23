@@ -230,9 +230,7 @@ class MaterialRequestScreen extends React.Component {
           onClick={userCanEdit ? this.handleEdit : this.handleOffer}
           className={classes.createButton}
           disabled={
-            (materialRequest.satisfied_by && !userCanEdit) || disableOfferButton
-              ? true
-              : false
+            materialRequest.satisfied_by || disableOfferButton ? true : false
           }
         >
           {userCanEdit ? texts.modify : texts.offer}

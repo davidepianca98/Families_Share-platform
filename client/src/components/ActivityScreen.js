@@ -262,9 +262,10 @@ class ActivityScreen extends React.Component {
             role="button"
             tabIndex={-42}
             className="participantsText"
-            onClick={() =>
-              this.handleRedirect(profile.suspended, profile.child_id)
-            }
+            onClick={() => {
+              if (type !== "seniors")
+                this.handleRedirect(profile.suspended, profile.child_id);
+            }}
           >
             {`${profile.given_name} ${profile.family_name}`}
           </div>

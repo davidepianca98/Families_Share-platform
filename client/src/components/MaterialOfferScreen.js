@@ -87,7 +87,7 @@ const getMaterialBookings = (materialOfferId) => {
     })
     .catch((error) => {
       Log.error(error);
-      return {};
+      return [];
     });
 };
 
@@ -126,6 +126,7 @@ class MaterialOfferScreen extends React.Component {
       action: "",
       groupId,
       materialId,
+      materialBookings: [],
     };
   }
 
@@ -201,6 +202,10 @@ class MaterialOfferScreen extends React.Component {
     const materialOfferPath = `/groups/${groupId}/materials/offers/${materialId}`;
     const texts = Texts[language].materialOfferScreen;
     const rowStyle = { minHeight: "5rem" };
+    const currentUserId = JSON.parse(localStorage.getItem("user")).id;
+    const filteredBookings = materialBookings.filter(
+      (book) => book.user === currentUserId
+    );
     return fetchedMaterialOfferData ? (
       <React.Fragment>
         {pendingRequest && <LoadingSpinner />}
@@ -422,13 +427,13 @@ class MaterialOfferScreen extends React.Component {
                     </React.Fragment>
                   ) : (
                     <div className="row no-gutters" style={rowStyle}>
-                      {Object.keys(materialBookings).length > 0 ? (
+                      {Object.keys(filteredBookings).length > 0 ? (
                         <div
                           style={{ marginTop: "1.5rem" }}
                           className="materialInfoDescription"
                         >
                           {texts.bookerDisplay}
-                          {materialBookings.map((booking) => {
+                          {filteredBookings.map((booking) => {
                             return (
                               <div key={booking._id}>
                                 <div
