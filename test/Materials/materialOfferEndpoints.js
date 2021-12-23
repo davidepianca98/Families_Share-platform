@@ -206,7 +206,7 @@ describe('/Get/api/materials/offers/id/bookings', () => {
           .set('Authorization', user.token)
           .end((err, res) => {
             res.should.have.status(200)
-            res.body[0].should.not.have.property('user')
+            res.body[0].should.have.property('user')
             res.body[0].should.have.property('start')
             done()
           })
