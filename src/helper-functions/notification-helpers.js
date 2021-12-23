@@ -1,352 +1,352 @@
-const Profile = require("../models/profile");
-const Notification = require("../models/notification");
-const Settings = require("../models/group-settings");
-const Member = require("../models/member");
-const Group = require("../models/group");
-const Device = require("../models/device");
-const User = require("../models/user");
-const MaterialBooking = require("../models/material-booking");
-const MaterialOffer = require("../models/material-offer");
-const texts = require("../constants/notification-texts");
+const Profile = require('../models/profile')
+const Notification = require('../models/notification')
+const Settings = require('../models/group-settings')
+const Member = require('../models/member')
+const Group = require('../models/group')
+const Device = require('../models/device')
+const User = require('../models/user')
+const MaterialBooking = require('../models/material-booking')
+const MaterialOffer = require('../models/material-offer')
+const texts = require('../constants/notification-texts')
 
-const { Expo } = require("expo-server-sdk");
-let expo = new Expo();
+const { Expo } = require('expo-server-sdk')
+let expo = new Expo()
 
-async function newMemberNotification(group_id, user_id) {
-  const group = await Group.findOne({ group_id });
-  const profile = await Profile.findOne({ user_id });
+async function newMemberNotification (group_id, user_id) {
+  const group = await Group.findOne({ group_id })
+  const profile = await Profile.findOne({ user_id })
   const members = await Member.find({
     group_id,
     group_accepted: true,
-    user_accepted: true,
-  });
+    user_accepted: true
+  })
   if (profile && group) {
-    const notifications = [];
+    const notifications = []
     members.forEach((member) => {
       const notification = {
-        owner_type: "user",
+        owner_type: 'user',
         owner_id: member.user_id,
-        type: "members",
-        read: false,
-      };
-      if (member.user_id !== user_id) {
-        notification.code = 0;
-        notification.subject = `${profile.given_name} ${profile.family_name}`;
-        notification.object = group.name;
-      } else {
-        notification.code = 1;
-        notification.object = group.name;
+        type: 'members',
+        read: false
       }
-      notifications.push(notification);
-    });
-    await Notification.create(notifications);
-    console.log("New member notification created");
+      if (member.user_id !== user_id) {
+        notification.code = 0
+        notification.subject = `${profile.given_name} ${profile.family_name}`
+        notification.object = group.name
+      } else {
+        notification.code = 1
+        notification.object = group.name
+      }
+      notifications.push(notification)
+    })
+    await Notification.create(notifications)
+    console.log('New member notification created')
   }
 }
 
-async function newActivityNotification(group_id, user_id) {
-  const object = await Group.findOne({ group_id });
-  const subject = await Profile.findOne({ user_id });
+async function newActivityNotification (group_id, user_id) {
+  const object = await Group.findOne({ group_id })
+  const subject = await Profile.findOne({ user_id })
   const members = await Member.find({
     group_id,
     user_id: { $ne: user_id },
     group_accepted: true,
-    user_accepted: true,
-  }).distinct("user_id");
-  const users = await User.find({ user_id: { $in: members } });
-  const devices = await Device.find({ user_id: { $in: members } });
+    user_accepted: true
+  }).distinct('user_id')
+  const users = await User.find({ user_id: { $in: members } })
+  const devices = await Device.find({ user_id: { $in: members } })
   if (subject && object) {
-    const notifications = [];
+    const notifications = []
     members.forEach((member) => {
       notifications.push({
-        owner_type: "user",
+        owner_type: 'user',
         owner_id: member,
-        type: "activities",
+        type: 'activities',
         code: 0,
         read: false,
         subject: `${subject.given_name} ${subject.family_name}`,
-        object: `${object.name}`,
-      });
-    });
-    await Notification.create(notifications);
-    const messages = [];
+        object: `${object.name}`
+      })
+    })
+    await Notification.create(notifications)
+    const messages = []
     devices.forEach((device) => {
       const language = users.filter(
         (user) => user.user_id === device.user_id
-      )[0].language;
+      )[0].language
       messages.push({
         to: device.device_id,
-        sound: "default",
-        title: texts[language]["activities"][0]["header"],
-        body: `${subject.given_name} ${subject.family_name} ${texts[language]["activities"][0]["description"]} ${object.name}`,
+        sound: 'default',
+        title: texts[language]['activities'][0]['header'],
+        body: `${subject.given_name} ${subject.family_name} ${texts[language]['activities'][0]['description']} ${object.name}`,
         data: {
-          url: `${process.env.CITYLAB_URI}/groups/${group_id}/activities`,
-        },
-      });
-    });
-    await sendPushNotifications(messages);
+          url: `${process.env.CITYLAB_URI}/groups/${group_id}/activities`
+        }
+      })
+    })
+    await sendPushNotifications(messages)
   }
 }
 
-async function newAnnouncementNotification(group_id, user_id) {
-  const object = await Group.findOne({ group_id });
-  const subject = await Profile.findOne({ user_id });
+async function newAnnouncementNotification (group_id, user_id) {
+  const object = await Group.findOne({ group_id })
+  const subject = await Profile.findOne({ user_id })
   const members = await Member.find({
     group_id,
     user_id: { $ne: user_id },
     group_accepted: true,
-    user_accepted: true,
-  }).distinct("user_id");
-  const users = await User.find({ user_id: { $in: members } });
-  const devices = await Device.find({ user_id: { $in: members } });
+    user_accepted: true
+  }).distinct('user_id')
+  const users = await User.find({ user_id: { $in: members } })
+  const devices = await Device.find({ user_id: { $in: members } })
   if (subject && object) {
-    const notifications = [];
+    const notifications = []
     members.forEach((member) => {
       notifications.push({
-        owner_type: "user",
+        owner_type: 'user',
         owner_id: member,
-        type: "announcements",
+        type: 'announcements',
         code: 0,
         read: false,
         subject: `${subject.given_name} ${subject.family_name}`,
-        object: `${object.name}`,
-      });
-    });
-    await Notification.create(notifications);
-    const messages = [];
+        object: `${object.name}`
+      })
+    })
+    await Notification.create(notifications)
+    const messages = []
     devices.forEach((device) => {
       const language = users.filter(
         (user) => user.user_id === device.user_id
-      )[0].language;
+      )[0].language
       messages.push({
         to: device.device_id,
-        sound: "default",
-        title: texts[language]["announcements"][0]["header"],
-        body: `${subject.given_name} ${subject.family_name} ${texts[language]["announcements"][0]["description"]} ${object.name}`,
-        data: { url: `${process.env.CITYLAB_URI}/groups/${group_id}/chat` },
-      });
-    });
-    await sendPushNotifications(messages);
+        sound: 'default',
+        title: texts[language]['announcements'][0]['header'],
+        body: `${subject.given_name} ${subject.family_name} ${texts[language]['announcements'][0]['description']} ${object.name}`,
+        data: { url: `${process.env.CITYLAB_URI}/groups/${group_id}/chat` }
+      })
+    })
+    await sendPushNotifications(messages)
   }
 }
 
-async function newReplyNotification(group_id, user_id) {
-  const object = await Group.findOne({ group_id });
-  const subject = await Profile.findOne({ user_id });
+async function newReplyNotification (group_id, user_id) {
+  const object = await Group.findOne({ group_id })
+  const subject = await Profile.findOne({ user_id })
   const members = await Member.find({
     group_id,
     user_id: { $ne: user_id },
     group_accepted: true,
-    user_accepted: true,
-  }).distinct("user_id");
-  const users = await User.find({ user_id: { $in: members } });
-  const devices = await Device.find({ user_id: { $in: members } });
+    user_accepted: true
+  }).distinct('user_id')
+  const users = await User.find({ user_id: { $in: members } })
+  const devices = await Device.find({ user_id: { $in: members } })
   if (subject && object) {
-    const notifications = [];
+    const notifications = []
     members.forEach((member) => {
       notifications.push({
-        owner_type: "user",
+        owner_type: 'user',
         owner_id: member,
-        type: "announcements",
+        type: 'announcements',
         code: 1,
         read: false,
         subject: `${subject.given_name} ${subject.family_name}`,
-        object: `${object.name}`,
-      });
-    });
-    await Notification.create(notifications);
-    const messages = [];
+        object: `${object.name}`
+      })
+    })
+    await Notification.create(notifications)
+    const messages = []
     devices.forEach((device) => {
       const language = users.filter(
         (user) => user.user_id === device.user_id
-      )[0].language;
+      )[0].language
       messages.push({
         to: device.device_id,
-        sound: "default",
-        title: texts[language]["announcements"][1]["header"],
-        body: `${subject.given_name} ${subject.family_name} ${texts[language]["announcements"][1]["description"]} ${object.name}`,
-        data: { url: `${process.env.CITYLAB_URI}/groups/${group_id}/chat` },
-      });
-    });
-    await sendPushNotifications(messages);
+        sound: 'default',
+        title: texts[language]['announcements'][1]['header'],
+        body: `${subject.given_name} ${subject.family_name} ${texts[language]['announcements'][1]['description']} ${object.name}`,
+        data: { url: `${process.env.CITYLAB_URI}/groups/${group_id}/chat` }
+      })
+    })
+    await sendPushNotifications(messages)
   }
 }
 
-async function editGroupNotification(group_id, user_id, changes) {
-  const group = await Group.findOne({ group_id });
-  const settings = await Settings.findOne({ group_id });
-  const profile = await Profile.findOne({ user_id });
+async function editGroupNotification (group_id, user_id, changes) {
+  const group = await Group.findOne({ group_id })
+  const settings = await Settings.findOne({ group_id })
+  const profile = await Profile.findOne({ user_id })
   if (profile && group) {
-    const notifications = [];
+    const notifications = []
     if (changes.file) {
       notifications.push({
-        owner_type: "group",
+        owner_type: 'group',
         owner_id: group_id,
-        type: "group",
+        type: 'group',
         code: 0,
         read: false,
-        subject: `${profile.given_name} ${profile.family_name}`,
-      });
+        subject: `${profile.given_name} ${profile.family_name}`
+      })
     }
     if (changes.name !== group.name) {
       notifications.push({
-        owner_type: "group",
+        owner_type: 'group',
         owner_id: group_id,
-        type: "group",
+        type: 'group',
         code: 1,
         read: false,
-        subject: `${profile.given_name} ${profile.family_name}`,
-      });
+        subject: `${profile.given_name} ${profile.family_name}`
+      })
     }
-    changes.visible = changes.visible === "true";
+    changes.visible = changes.visible === 'true'
     if (changes.visible !== settings.visible) {
       if (changes.visible) {
         notifications.push({
-          owner_type: "group",
+          owner_type: 'group',
           owner_id: group_id,
-          type: "group",
+          type: 'group',
           code: 3,
           read: false,
-          subject: `${profile.given_name} ${profile.family_name}`,
-        });
+          subject: `${profile.given_name} ${profile.family_name}`
+        })
       } else {
         notifications.push({
-          owner_type: "group",
+          owner_type: 'group',
           owner_id: group_id,
-          type: "group",
+          type: 'group',
           code: 2,
           read: false,
-          subject: `${profile.given_name} ${profile.family_name}`,
-        });
+          subject: `${profile.given_name} ${profile.family_name}`
+        })
       }
     }
     if (changes.description !== settings.description) {
       notifications.push({
-        owner_type: "group",
+        owner_type: 'group',
         owner_id: group_id,
-        type: "group",
+        type: 'group',
         code: 4,
         read: false,
-        subject: `${profile.given_name} ${profile.family_name}`,
-      });
+        subject: `${profile.given_name} ${profile.family_name}`
+      })
     }
-    await Notification.create(notifications);
-    console.log("Edit Group Notification created");
+    await Notification.create(notifications)
+    console.log('Edit Group Notification created')
   }
 }
 
-async function removeMemberNotification(member_id, group_id) {
-  const subject = await Profile.findOne({ user_id: member_id });
-  const object = await Group.findOne({ group_id });
+async function removeMemberNotification (member_id, group_id) {
+  const subject = await Profile.findOne({ user_id: member_id })
+  const object = await Group.findOne({ group_id })
   const members = await Member.find({
     group_id,
     group_accepted: true,
-    user_accepted: true,
-  });
+    user_accepted: true
+  })
   if (subject && object) {
     const notifications = [
       {
-        owner_type: "user",
+        owner_type: 'user',
         owner_id: member_id,
-        type: "members",
+        type: 'members',
         code: 3,
         read: false,
-        object: `${object.name}`,
-      },
-    ];
+        object: `${object.name}`
+      }
+    ]
     members.forEach((member) => {
       notifications.push({
-        owner_type: "user",
+        owner_type: 'user',
         owner_id: member.user_id,
-        type: "members",
+        type: 'members',
         code: 2,
         read: false,
         subject: `${subject.given_name} ${subject.family_name}`,
-        object: `${object.name}`,
-      });
-    });
-    await Notification.create(notifications);
+        object: `${object.name}`
+      })
+    })
+    await Notification.create(notifications)
   }
-  console.log("Remove member Notification created");
+  console.log('Remove member Notification created')
 }
 
-async function timeslotRequirementsNotification(
+async function timeslotRequirementsNotification (
   timeslotName,
   participants,
   groupId,
   activityId,
   timeslotId
 ) {
-  const devices = await Device.find({ user_id: { $in: participants } });
-  const users = await User.find({ user_id: { $in: participants } });
-  const notifications = [];
+  const devices = await Device.find({ user_id: { $in: participants } })
+  const users = await User.find({ user_id: { $in: participants } })
+  const notifications = []
   users.forEach((user) => {
     notifications.push({
-      owner_type: "user",
+      owner_type: 'user',
       owner_id: user.user_id,
-      type: "activities",
+      type: 'activities',
       code: 1,
       read: false,
-      subject: `${timeslotName}`,
-    });
-  });
-  await Notification.create(notifications);
-  const messages = [];
+      subject: `${timeslotName}`
+    })
+  })
+  await Notification.create(notifications)
+  const messages = []
   devices.forEach((device) => {
     const language = users.filter((user) => user.user_id === device.user_id)[0]
-      .language;
+      .language
     messages.push({
       to: device.device_id,
-      sound: "default",
-      title: texts[language]["activities"][1]["header"],
-      body: `${timeslotName} ${texts[language]["activities"][1]["description"]}`,
+      sound: 'default',
+      title: texts[language]['activities'][1]['header'],
+      body: `${timeslotName} ${texts[language]['activities'][1]['description']}`,
       data: {
-        url: `${process.env.CITYLAB_URI}/groups/${groupId}/activities/${activityId}/timeslots/${timeslotId}`,
-      },
-    });
-  });
-  await sendPushNotifications(messages);
+        url: `${process.env.CITYLAB_URI}/groups/${groupId}/activities/${activityId}/timeslots/${timeslotId}`
+      }
+    })
+  })
+  await sendPushNotifications(messages)
 }
 
-async function timeslotMajorChangeNotification(
+async function timeslotMajorChangeNotification (
   timeslotName,
   participants,
   groupId,
   activityId,
   timeslotId
 ) {
-  const devices = await Device.find({ user_id: { $in: participants } });
-  const users = await User.find({ user_id: { $in: participants } });
-  const notifications = [];
+  const devices = await Device.find({ user_id: { $in: participants } })
+  const users = await User.find({ user_id: { $in: participants } })
+  const notifications = []
   users.forEach((user) => {
     notifications.push({
-      owner_type: "user",
+      owner_type: 'user',
       owner_id: user.user_id,
-      type: "activities",
+      type: 'activities',
       code: 2,
       read: false,
-      subject: `${timeslotName}`,
-    });
-  });
-  await Notification.create(notifications);
-  const messages = [];
+      subject: `${timeslotName}`
+    })
+  })
+  await Notification.create(notifications)
+  const messages = []
   devices.forEach((device) => {
     const language = users.filter((user) => user.user_id === device.user_id)[0]
-      .language;
+      .language
     messages.push({
       to: device.device_id,
-      sound: "default",
-      title: texts[language]["activities"][2]["header"],
-      body: `${timeslotName} ${texts[language]["activities"][2]["description"]}`,
+      sound: 'default',
+      title: texts[language]['activities'][2]['header'],
+      body: `${timeslotName} ${texts[language]['activities'][2]['description']}`,
       data: {
-        url: `$${process.env.CITYLAB_URI}/groups/${groupId}/activities/${activityId}/timeslots/${timeslotId}`,
-      },
-    });
-  });
-  await sendPushNotifications(messages);
+        url: `$${process.env.CITYLAB_URI}/groups/${groupId}/activities/${activityId}/timeslots/${timeslotId}`
+      }
+    })
+  })
+  await sendPushNotifications(messages)
 }
 
-async function timeslotAdminChangesNotification(
+async function timeslotAdminChangesNotification (
   timeslotName,
   changes,
   userId,
@@ -354,43 +354,43 @@ async function timeslotAdminChangesNotification(
   activityId,
   timeslotId
 ) {
-  const participants = Object.keys(changes);
-  const devices = await Device.find({ user_id: { $in: participants } });
-  const users = await User.find({ user_id: { $in: participants } });
-  const profile = await Profile.findOne({ user_id: userId });
+  const participants = Object.keys(changes)
+  const devices = await Device.find({ user_id: { $in: participants } })
+  const users = await User.find({ user_id: { $in: participants } })
+  const profile = await Profile.findOne({ user_id: userId })
   const notifications = users.map((user) => ({
-    owner_type: "user",
+    owner_type: 'user',
     owner_id: user.user_id,
-    type: "activities",
-    code: changes[user.user_id] === "add" ? 6 : 7,
+    type: 'activities',
+    code: changes[user.user_id] === 'add' ? 6 : 7,
     read: false,
     subject: `${profile.given_name} ${profile.family_name}`,
-    object: timeslotName,
-  }));
-  await Notification.create(notifications);
-  const messages = [];
+    object: timeslotName
+  }))
+  await Notification.create(notifications)
+  const messages = []
   devices.forEach((device) => {
     const language = users.find(
       (user) => user.user_id === device.user_id
-    ).language;
+    ).language
     messages.push({
       to: device.device_id,
-      sound: "default",
-      title: texts[language]["activities"][6]["header"],
+      sound: 'default',
+      title: texts[language]['activities'][6]['header'],
       body: `${profile.given_name} ${profile.family_name} ${
-        texts[language]["activities"][
-          changes[device.user_id] === "add" ? 6 : 7
-        ]["description"]
+        texts[language]['activities'][
+          changes[device.user_id] === 'add' ? 6 : 7
+        ]['description']
       } ${timeslotName}`,
       data: {
-        url: `$${process.env.CITYLAB_URI}/groups/${groupId}/activities/${activityId}/timeslots/${timeslotId}`,
-      },
-    });
-  });
-  await sendPushNotifications(messages);
+        url: `$${process.env.CITYLAB_URI}/groups/${groupId}/activities/${activityId}/timeslots/${timeslotId}`
+      }
+    })
+  })
+  await sendPushNotifications(messages)
 }
 
-async function timeslotStatusChangeNotification(
+async function timeslotStatusChangeNotification (
   timeslotName,
   status,
   participants,
@@ -398,442 +398,442 @@ async function timeslotStatusChangeNotification(
   activityId,
   timeslotId
 ) {
-  const devices = await Device.find({ user_id: { $in: participants } });
-  const users = await User.find({ user_id: { $in: participants } });
+  const devices = await Device.find({ user_id: { $in: participants } })
+  const users = await User.find({ user_id: { $in: participants } })
   const notifications = users.map((user) => ({
-    owner_type: "user",
+    owner_type: 'user',
     owner_id: user.user_id,
-    type: "activities",
+    type: 'activities',
     code: 5,
     read: false,
     subject: timeslotName,
-    object: status,
-  }));
-  await Notification.create(notifications);
-  const messages = [];
+    object: status
+  }))
+  await Notification.create(notifications)
+  const messages = []
   devices.forEach((device) => {
     const language = users.filter((user) => user.user_id === device.user_id)[0]
-      .language;
+      .language
     messages.push({
       to: device.device_id,
-      sound: "default",
-      title: texts[language]["activities"][5]["header"],
-      body: `${timeslotName} ${texts[language]["activities"][5]["description"]} ${status}`,
+      sound: 'default',
+      title: texts[language]['activities'][5]['header'],
+      body: `${timeslotName} ${texts[language]['activities'][5]['description']} ${status}`,
       data: {
-        url: `$${process.env.CITYLAB_URI}/groups/${groupId}/activities/${activityId}/timeslots/${timeslotId}`,
-      },
-    });
-  });
-  await sendPushNotifications(messages);
+        url: `$${process.env.CITYLAB_URI}/groups/${groupId}/activities/${activityId}/timeslots/${timeslotId}`
+      }
+    })
+  })
+  await sendPushNotifications(messages)
 }
 
-async function deleteActivityNotification(user_id, activityName, timeslots) {
-  const subject = await Profile.findOne({ user_id });
-  let userIds = [];
+async function deleteActivityNotification (user_id, activityName, timeslots) {
+  const subject = await Profile.findOne({ user_id })
+  let userIds = []
   timeslots.map(async (event) => {
     userIds = userIds.concat(
       JSON.parse(event.extendedProperties.shared.parents)
-    );
-  });
-  userIds = [...new Set(userIds)].filter((id) => id !== user_id);
-  const users = await User.find({ user_id: { $in: userIds } });
-  const devices = await Device.find({ user_id: { $in: userIds } });
-  const notifications = [];
+    )
+  })
+  userIds = [...new Set(userIds)].filter((id) => id !== user_id)
+  const users = await User.find({ user_id: { $in: userIds } })
+  const devices = await Device.find({ user_id: { $in: userIds } })
+  const notifications = []
   users.forEach((user) => {
     notifications.push({
-      owner_type: "user",
+      owner_type: 'user',
       owner_id: user.user_id,
-      type: "activities",
+      type: 'activities',
       code: 3,
       read: false,
       subject: `${subject.given_name} ${subject.family_name}`,
-      object: `${activityName}`,
-    });
-  });
-  await Notification.create(notifications);
-  const messages = [];
+      object: `${activityName}`
+    })
+  })
+  await Notification.create(notifications)
+  const messages = []
   devices.forEach((device) => {
     const language = users.filter((user) => user.user_id === device.user_id)[0]
-      .language;
+      .language
     messages.push({
       to: device.device_id,
-      sound: "default",
-      title: texts[language]["activities"][3]["header"],
-      body: `${subject.given_name} ${subject.family_name} ${texts[language]["activities"][3]["description"]} ${activityName}`,
-    });
-  });
-  await sendPushNotifications(messages);
+      sound: 'default',
+      title: texts[language]['activities'][3]['header'],
+      body: `${subject.given_name} ${subject.family_name} ${texts[language]['activities'][3]['description']} ${activityName}`
+    })
+  })
+  await sendPushNotifications(messages)
 }
 
-async function deleteTimeslotNotification(user_id, timeslot) {
-  const subject = await Profile.findOne({ user_id });
-  const userIds = timeslot.parents.filter((id) => id !== user_id);
-  const users = await User.find({ user_id: { $in: userIds } });
-  const devices = await Device.find({ user_id: { $in: userIds } });
-  const notifications = [];
+async function deleteTimeslotNotification (user_id, timeslot) {
+  const subject = await Profile.findOne({ user_id })
+  const userIds = timeslot.parents.filter((id) => id !== user_id)
+  const users = await User.find({ user_id: { $in: userIds } })
+  const devices = await Device.find({ user_id: { $in: userIds } })
+  const notifications = []
   users.forEach((user) => {
     notifications.push({
-      owner_type: "user",
+      owner_type: 'user',
       owner_id: user.user_id,
-      type: "activities",
+      type: 'activities',
       code: 4,
       read: false,
       subject: `${subject.given_name} ${subject.family_name}`,
-      object: `${timeslot.summary}`,
-    });
-  });
-  await Notification.create(notifications);
-  const messages = [];
+      object: `${timeslot.summary}`
+    })
+  })
+  await Notification.create(notifications)
+  const messages = []
   devices.forEach((device) => {
     const language = users.filter((user) => user.user_id === device.user_id)[0]
-      .language;
+      .language
     messages.push({
       to: device.device_id,
-      sound: "default",
-      title: texts[language]["activities"][4]["header"],
-      body: `${subject.given_name} ${subject.family_name} ${texts[language]["activities"][4]["description"]} ${timeslot.summary}`,
-    });
-  });
-  await sendPushNotifications(messages);
+      sound: 'default',
+      title: texts[language]['activities'][4]['header'],
+      body: `${subject.given_name} ${subject.family_name} ${texts[language]['activities'][4]['description']} ${timeslot.summary}`
+    })
+  })
+  await sendPushNotifications(messages)
 }
 
-async function newRequestNotification(user_id, group_id) {
+async function newRequestNotification (user_id, group_id) {
   const admins = await Member.find({
     group_id,
     user_accepted: true,
     group_accepted: true,
-    admin: true,
-  }).distinct("user_id");
-  const users = await User.find({ user_id: { $in: admins } });
-  const user = await Profile.findOne({ user_id });
-  const group = await Group.findOne({ group_id });
-  const devices = await Device.find({ user_id: { $in: admins } });
+    admin: true
+  }).distinct('user_id')
+  const users = await User.find({ user_id: { $in: admins } })
+  const user = await Profile.findOne({ user_id })
+  const group = await Group.findOne({ group_id })
+  const devices = await Device.find({ user_id: { $in: admins } })
   const notifications = users.map((admin) => ({
-    owner_type: "user",
+    owner_type: 'user',
     owner_id: admin.user_id,
-    type: "members",
+    type: 'members',
     code: 4,
     read: false,
     subject: `${user.given_name} ${user.family_name}`,
-    object: `${group.name}`,
-  }));
-  await Notification.create(notifications);
-  const messages = [];
+    object: `${group.name}`
+  }))
+  await Notification.create(notifications)
+  const messages = []
   devices.forEach((device) => {
     const language = users.filter((user) => user.user_id === device.user_id)[0]
-      .language;
+      .language
     messages.push({
       to: device.device_id,
-      sound: "default",
-      title: texts[language]["members"][4]["header"],
-      body: `${user.given_name} ${user.family_name} ${texts[language]["members"][4]["description"]} ${group.name}`,
+      sound: 'default',
+      title: texts[language]['members'][4]['header'],
+      body: `${user.given_name} ${user.family_name} ${texts[language]['members'][4]['description']} ${group.name}`,
       data: {
-        url: `${process.env.CITYLAB_URI}/groups/${group_id}/members/pending`,
-      },
-    });
-  });
-  await sendPushNotifications(messages);
+        url: `${process.env.CITYLAB_URI}/groups/${group_id}/members/pending`
+      }
+    })
+  })
+  await sendPushNotifications(messages)
 }
 
-async function planStateNotification(
+async function planStateNotification (
   planName,
   participants,
   state,
   groupId,
   planId
 ) {
-  const devices = await Device.find({ user_id: { $in: participants } });
-  const users = await User.find({ user_id: { $in: participants } });
+  const devices = await Device.find({ user_id: { $in: participants } })
+  const users = await User.find({ user_id: { $in: participants } })
   const notifications = users.map((user) => ({
-    owner_type: "user",
+    owner_type: 'user',
     owner_id: user.user_id,
-    type: "plans",
+    type: 'plans',
     code: 0,
     read: false,
     subject: planName,
-    object: state,
-  }));
-  await Notification.create(notifications);
-  const messages = [];
+    object: state
+  }))
+  await Notification.create(notifications)
+  const messages = []
   devices.forEach((device) => {
     const language = users.find(
       (user) => user.user_id === device.user_id
-    ).language;
+    ).language
     messages.push({
       to: device.device_id,
-      sound: "default",
-      title: texts[language]["activities"][5]["header"],
-      body: `${planName} ${texts[language]["plans"][0]["description"]} ${state}`,
+      sound: 'default',
+      title: texts[language]['activities'][5]['header'],
+      body: `${planName} ${texts[language]['plans'][0]['description']} ${state}`,
       data: {
-        url: `$${process.env.CITYLAB_URI}/groups/${groupId}/plans/${planId}`,
-      },
-    });
-  });
-  await sendPushNotifications(messages);
+        url: `$${process.env.CITYLAB_URI}/groups/${groupId}/plans/${planId}`
+      }
+    })
+  })
+  await sendPushNotifications(messages)
 }
 
-async function materialRequestSatisfiedNotification(
+async function materialRequestSatisfiedNotification (
   created_by,
   satisfied_by,
   request
 ) {
-  const subject = await Profile.findOne({ user_id: satisfied_by });
-  const user = await User.findOne({ user_id: satisfied_by });
-  const device = await Device.findOne({ user_id: created_by });
+  const subject = await Profile.findOne({ user_id: satisfied_by })
+  const user = await User.findOne({ user_id: satisfied_by })
+  const device = await Device.findOne({ user_id: created_by })
 
   const notifications = [
     {
-      owner_type: "user",
+      owner_type: 'user',
       owner_id: created_by,
-      type: "materials",
+      type: 'materials',
       code: 0,
       read: false,
       subject: `${subject.given_name} ${subject.family_name}`,
-      object: `${request.material_name}`,
-    },
-  ];
-  await Notification.create(notifications);
-  const language = user.language;
+      object: `${request.material_name}`
+    }
+  ]
+  await Notification.create(notifications)
+  const language = user.language
   if (device) {
     await sendPushNotifications([
       {
         to: device.device_id,
-        sound: "default",
-        title: texts[language]["materials"][0]["header"],
-        body: `${subject.given_name} ${subject.family_name} ${texts[language]["materials"][0]["description"]} ${request.material_name}`,
-      },
-    ]);
+        sound: 'default',
+        title: texts[language]['materials'][0]['header'],
+        body: `${subject.given_name} ${subject.family_name} ${texts[language]['materials'][0]['description']} ${request.material_name}`
+      }
+    ])
   }
 }
 
-async function materialOfferDeletedNotification(offer, bookings) {
-  let user_ids = bookings.map((b) => b.user);
-  const devices = await Device.find({ user_id: { $in: user_ids } });
-  const users = await User.find({ user_id: { $in: user_ids } });
+async function materialOfferDeletedNotification (offer, bookings) {
+  let user_ids = bookings.map((b) => b.user)
+  const devices = await Device.find({ user_id: { $in: user_ids } })
+  const users = await User.find({ user_id: { $in: user_ids } })
   const notifications = users.map((user) => ({
-    owner_type: "user",
+    owner_type: 'user',
     owner_id: user.user_id,
-    type: "materials",
+    type: 'materials',
     code: 1,
     read: false,
-    subject: offer.material_name,
-  }));
-  await Notification.create(notifications);
-  const messages = [];
+    subject: offer.material_name
+  }))
+  await Notification.create(notifications)
+  const messages = []
   devices.forEach((device) => {
     const language = users.find(
       (user) => user.user_id === device.user_id
-    ).language;
+    ).language
     messages.push({
       to: device.device_id,
-      sound: "default",
-      title: texts[language]["materials"][1]["header"],
-      body: `${texts[language]["materials"][1]["description"]} ${offer.material_name}`,
-    });
-  });
-  await sendPushNotifications(messages);
+      sound: 'default',
+      title: texts[language]['materials'][1]['header'],
+      body: `${texts[language]['materials'][1]['description']} ${offer.material_name}`
+    })
+  })
+  await sendPushNotifications(messages)
 }
 
-async function sendMaterialNotifications(id, user_id, offer) {
-  const subject = await Profile.findOne({ user_id: user_id });
-  const user = await User.findOne({ user_id: user_id });
-  const device = await Device.findOne({ user_id: user_id });
+async function sendMaterialNotifications (id, user_id, offer) {
+  const subject = await Profile.findOne({ user_id: user_id })
+  const user = await User.findOne({ user_id: user_id })
+  const device = await Device.findOne({ user_id: user_id })
 
   const notifications = [
     {
-      owner_type: "user",
+      owner_type: 'user',
       owner_id: user_id,
-      type: "materials",
+      type: 'materials',
       code: id,
       read: false,
       subject: `${subject.given_name} ${subject.family_name}`,
-      object: `${offer.material_name}`,
-    },
-  ];
-  await Notification.create(notifications);
-  const language = user.language;
+      object: `${offer.material_name}`
+    }
+  ]
+  await Notification.create(notifications)
+  const language = user.language
   if (device) {
     await sendPushNotifications([
       {
         to: device.device_id,
-        sound: "default",
-        title: texts[language]["materials"][id]["header"],
-        body: `${texts[language]["materials"][id]["description"]} ${offer.material_name}`,
-      },
-    ]);
+        sound: 'default',
+        title: texts[language]['materials'][id]['header'],
+        body: `${texts[language]['materials'][id]['description']} ${offer.material_name}`
+      }
+    ])
   }
 }
 
-async function materialOfferExpiringNotifications() {
+async function materialOfferExpiringNotifications () {
   // Check if the booking is about to expire
-  let now = new Date();
-  let tomorrow = new Date(now);
-  tomorrow.setDate(now.getDate() + 1);
+  let now = new Date()
+  let tomorrow = new Date(now)
+  tomorrow.setDate(now.getDate() + 1)
 
   // Get bookings still in act and within a day of expiration
   let bookings = await MaterialBooking.find({
     $and: [
       { start: { $lte: now } },
       { end: { $gte: now } },
-      { end: { $lte: tomorrow } },
-    ],
-  });
+      { end: { $lte: tomorrow } }
+    ]
+  })
   // Get relative offers if the material is still borrowed
   for (let booking of bookings) {
     let offer = await MaterialOffer.findOne({
       $and: [
         { material_offer_id: booking.material_offer_id },
         { borrowed: { $lte: booking.end } },
-        { borrowed: { $gte: booking.start } },
-      ],
-    });
+        { borrowed: { $gte: booking.start } }
+      ]
+    })
 
     if (offer != null && offer.borrowed != null) {
-      await sendMaterialNotifications(2, booking.user, offer);
+      await sendMaterialNotifications(2, booking.user, offer)
     }
   }
 }
 
 // S-10c
-async function materialOfferBorrowedNotifications() {
-  let now = new Date();
-  let yesterday = new Date(now);
-  yesterday.setDate(now.getDate() - 1);
+async function materialOfferBorrowedNotifications () {
+  let now = new Date()
+  let yesterday = new Date(now)
+  yesterday.setDate(now.getDate() - 1)
 
   // Get bookings still in act and within a day of expiration
   let bookings = await MaterialBooking.find({
-    $and: [{ start: { $lte: now } }, { start: { $gte: yesterday } }],
-  });
+    $and: [{ start: { $lte: now } }, { start: { $gte: yesterday } }]
+  })
   // Get relative offers if the material is still borrowed
   for (let booking of bookings) {
     let offer = await MaterialOffer.findOne({
       material_offer_id: booking.material_offer_id,
-      borrowed: { $lte: booking.start },
-    });
+      borrowed: { $lte: booking.start }
+    })
 
     if (offer != null && offer.borrowed != null) {
-      await sendMaterialNotifications(3, booking.user, offer);
+      await sendMaterialNotifications(3, booking.user, offer)
     }
   }
 }
 
-function getNotificationDescription(notification, language) {
-  const { type, code, subject, object } = notification;
-  const description = texts[language][type][code].description;
+function getNotificationDescription (notification, language) {
+  const { type, code, subject, object } = notification
+  const description = texts[language][type][code].description
 
   switch (type) {
-    case "group":
+    case 'group':
       switch (code) {
         case 0:
-          return `${subject} ${description}`;
+          return `${subject} ${description}`
         case 1:
-          return `${subject} ${description}`;
+          return `${subject} ${description}`
         case 2:
-          return `${subject} ${description}`;
+          return `${subject} ${description}`
         case 3:
-          return `${subject} ${description}`;
+          return `${subject} ${description}`
         case 4:
-          return `${subject} ${description}`;
+          return `${subject} ${description}`
         default:
-          return "";
+          return ''
       }
-    case "members":
+    case 'members':
       switch (code) {
         case 0:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         case 1:
-          return `${description} ${object}`;
+          return `${description} ${object}`
         case 2:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         case 3:
-          return `${description} ${object}.`;
+          return `${description} ${object}.`
         case 4:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         default:
-          return "";
+          return ''
       }
-    case "activities":
+    case 'activities':
       switch (code) {
         case 0:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         case 1:
-          return `${subject} ${description}`;
+          return `${subject} ${description}`
         case 2:
-          return `${subject} ${description}`;
+          return `${subject} ${description}`
         case 3:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         case 4:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         case 5:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         case 6:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         case 7:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         default:
-          return "";
+          return ''
       }
-    case "plans":
+    case 'plans':
       switch (code) {
         case 0:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         default:
-          return "";
+          return ''
       }
-    case "announcements":
+    case 'announcements':
       switch (code) {
         case 0:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         case 1:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         default:
-          return "";
+          return ''
       }
-    case "materials":
+    case 'materials':
       switch (code) {
         case 0:
-          return `${subject} ${description} ${object}.`;
+          return `${subject} ${description} ${object}.`
         case 1:
-          return `${description}`;
+          return `${description}`
         case 2:
-          return `${description} ${object}.`;
+          return `${description} ${object}.`
         case 3:
-          return `${description} ${object}.`;
+          return `${description} ${object}.`
         default:
-          return "";
+          return ''
       }
     default:
-      return "";
+      return ''
   }
 }
 
-async function sendPushNotifications(messages) {
+async function sendPushNotifications (messages) {
   try {
-    const invalidTokens = [];
-    const notifications = [];
+    const invalidTokens = []
+    const notifications = []
     messages.forEach((message) => {
       if (Expo.isExpoPushToken(message.to)) {
-        notifications.push(message);
+        notifications.push(message)
       } else {
-        invalidTokens.push(message.to);
+        invalidTokens.push(message.to)
       }
-    });
-    let chunks = expo.chunkPushNotifications(messages);
-    let tickets = [];
+    })
+    let chunks = expo.chunkPushNotifications(messages)
+    let tickets = []
     for (let chunk of chunks) {
-      let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
-      tickets.push(...ticketChunk);
+      let ticketChunk = await expo.sendPushNotificationsAsync(chunk)
+      tickets.push(...ticketChunk)
     }
-    await Device.deleteMany({ device_id: { $in: invalidTokens } });
+    await Device.deleteMany({ device_id: { $in: invalidTokens } })
   } catch (e) {
-    if (e.code === "PUSH_TOO_MANY_EXPERIENCE_IDS") {
+    if (e.code === 'PUSH_TOO_MANY_EXPERIENCE_IDS') {
       const legacyTokens =
         e.details[
           `@lamouchefatale/families_share_${process.env.CITYLAB.toLowerCase()}`
-        ] || [];
-      await Device.deleteMany({ device_id: { $in: legacyTokens } });
+        ] || []
+      await Device.deleteMany({ device_id: { $in: legacyTokens } })
     }
-    console.error(e);
+    console.error(e)
   }
 }
 
@@ -856,5 +856,5 @@ module.exports = {
   materialRequestSatisfiedNotification,
   materialOfferDeletedNotification,
   materialOfferExpiringNotifications,
-  materialOfferBorrowedNotifications,
-};
+  materialOfferBorrowedNotifications
+}
