@@ -87,6 +87,43 @@ const unsubcribeChildFromGroupEvents = (calendar_id, child_id) =>
     }
   })
 
+const unsubcribeSeniorFromGroupEvents = (calendar_id, senior_id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const resp = await calendar.events.list({ calendarId: calendar_id })
+      const events = resp.data.items.filter(
+        event => event.extendedProperties.shared.status !== 'completed'
+      )
+      events.forEach(event => {
+        const seniorIds = JSON.parse(
+          event.extendedProperties.shared.seniors
+        )
+        event.extendedProperties.shared.seniors = JSON.stringify(
+          seniorIds.filter(id => id !== senior_id)
+        )
+      })
+      await Promise.all(
+        events.map(event => {
+          const timeslotPatch = {
+            extendedProperties: {
+              shared: {
+                seniors: event.extendedProperties.shared.seniors
+              }
+            }
+          }
+          calendar.events.patch({
+            calendarId: calendar_id,
+            eventId: event.id,
+            resource: timeslotPatch
+          })
+        })
+      )
+      resolve('done')
+    } catch (error) {
+      reject(error)
+    }
+  })
+
 function newExportEmail (given_name) {
   return (`<div
     style="height:100%;display:table;margin-left:auto;margin-right:auto"
@@ -259,6 +296,7 @@ function createPdf (profile, groups, children, seniors, events, cb) {
 
 module.exports = {
   unsubcribeChildFromGroupEvents,
+  unsubcribeSeniorFromGroupEvents,
   getUsersGroupEvents,
   newExportEmail: newExportEmail,
   createPdf: createPdf

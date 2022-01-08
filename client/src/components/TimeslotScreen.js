@@ -240,6 +240,7 @@ class TimeslotScreen extends React.Component {
     parentIds = parentIds.concat(parents);
 
     const seniorProfiles = await getSeniorProfiles(seniors);
+    const seniorProfilesParticipants = await getSeniorProfiles(timeslot.extendedProperties.shared.seniors);
     const parentProfiles = await getParentProfiles([...new Set(parentIds)]);
     const childrenProfiles = await getChildrenProfiles([
       ...new Set(childrenIds),
@@ -250,6 +251,7 @@ class TimeslotScreen extends React.Component {
       parentProfiles,
       childrenProfiles,
       seniorProfiles,
+      seniorProfilesParticipants,
       children,
       parents,
       seniors,
@@ -573,6 +575,7 @@ class TimeslotScreen extends React.Component {
       timeslot,
       parentProfiles,
       seniorProfiles,
+      seniorProfilesParticipants,
       showParents,
       childrenProfiles,
       showChildren,
@@ -613,11 +616,7 @@ class TimeslotScreen extends React.Component {
         participantsHeader = texts.children;
         break;
       case "seniors":
-        participants = timeslot.extendedProperties.shared.seniors;
-
-        profiles = seniorProfiles.filter((profile) =>
-          participants.includes(profile.senior_id)
-        );
+        profiles = seniorProfilesParticipants;
         showing = showSeniors;
         participantsHeader = texts.seniors;
         break;

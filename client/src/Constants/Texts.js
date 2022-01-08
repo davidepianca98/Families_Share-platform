@@ -1458,7 +1458,7 @@ const en = {
   materialOfferScreen: {
     infoHeader: "Informazioni",
     disponible: "Disponibile",
-    notDisponible: "Non disponibile",
+    notDisponible: "In prestito",
     creationDate: "Data di creazione",
     disponibilityStatus: "Stato prenotazione",
     book: "Prenota",
@@ -4299,7 +4299,7 @@ const it = {
   materialOfferScreen: {
     infoHeader: "Informazioni",
     disponible: "Disponibile",
-    notDisponible: "Non disponibile",
+    notDisponible: "In prestito",
     creationDate: "Data di creazione",
     disponibilityStatus: "Stato prenotazione",
     book: "Prenota",

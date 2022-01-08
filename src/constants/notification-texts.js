@@ -102,7 +102,7 @@ const en = {
     },
     {
       header: 'Material offer deleted',
-      description: 'The following material offer is not available anymore: '
+      description: 'The material offer is not available anymore '
     },
     {
       header: "It's time to give back the material",
@@ -208,14 +208,14 @@ const it = {
     },
     {
       header: 'Offerta materiale cancellata',
-      description: 'La seguente offerta del materiale non è più disponibile: '
+      description: 'L\'offerta del materiale non è più disponibile '
     },
     {
       header: "E' tempo di restituire il materiale",
       description: 'La seguente prenotazione del materiale sta per scadere: '
     },
     {
-      header: 'Il materiale che hai prenotato non è più disponibile',
+      header: 'Il materiale che hai prenotato non è ancora disponibile',
       description: 'Il seguente materiale è ancora in prestito: '
     }
   ]
@@ -311,7 +311,7 @@ const nl = {
     },
     {
       header: 'Material offer deleted',
-      description: 'The following material offer is not available anymore: '
+      description: 'The material offer is not available anymore '
     },
     {
       header: "It's time to give back the material",
@@ -426,7 +426,7 @@ const el = {
     },
     {
       header: 'Material offer deleted',
-      description: 'The following material offer is not available anymore: '
+      description: 'The material offer is not available anymore '
     },
     {
       header: "It's time to give back the material",
@@ -541,7 +541,7 @@ const hu = {
     },
     {
       header: 'Material offer deleted',
-      description: 'The following material offer is not available anymore: '
+      description: 'The material offer is not available anymore '
     },
     {
       header: "It's time to give back the material",
@@ -657,7 +657,7 @@ const fr = {
     },
     {
       header: 'Material offer deleted',
-      description: 'The following material offer is not available anymore: '
+      description: 'The material offer is not available anymore '
     },
     {
       header: "It's time to give back the material",

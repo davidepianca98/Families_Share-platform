@@ -7,6 +7,9 @@ const Image = require('../models/image')
 const router = new express.Router()
 
 const Senior = require('../models/senior')
+const uh = require('../helper-functions/user-helpers')
+const Group = require('../models/group')
+const Member = require('../models/member')
 
 const seniorProfileStorage = multer.diskStorage({
   destination (req, file, cb) {
@@ -119,16 +122,25 @@ router.put(
 )
 
 // S-23b
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   if (!req.user_id) {
     return res.status(401).send('Unauthorized')
   }
   const id = req.params.id
+
   Senior.deleteOne({ senior_id: id, user_id: req.user_id })
-    .then((result) => {
+    .then(async (result) => {
       if (!result.deletedCount) {
         return res.status(404).send("Senior doesn't exist")
       }
+      const memberships = await Member.find({ user_id: req.user_id })
+      const groupIds = memberships.map((membership) => membership.group_id)
+      const userGroups = await Group.find({ group_id: { $in: groupIds } })
+      await Promise.all(
+        userGroups.map((group) => {
+          uh.unsubcribeSeniorFromGroupEvents(group.calendar_id, id)
+        })
+      )
       res.json(true)
     })
     .catch(next)
