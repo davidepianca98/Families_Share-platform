@@ -574,7 +574,6 @@ class TimeslotScreen extends React.Component {
     const {
       timeslot,
       parentProfiles,
-      seniorProfiles,
       seniorProfilesParticipants,
       showParents,
       childrenProfiles,

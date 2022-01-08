@@ -68,6 +68,7 @@ const MapScreen = (props) => {
   const texts = Texts[language].groupMaterials;
   const { groupId } = match.params;
 
+  // eslint-disable-next-line no-unused-vars
   const [map, setMap] = useState(null);
   const [fetchedData, setFetchedData] = useState(false);
   const [materialOffers, setMaterialOffers] = useState([]);
